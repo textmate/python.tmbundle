@@ -15,22 +15,24 @@
         ( "(", ")" ), ( "[", "]" ), ( "{", "}" )
     );
 
+	// Somebody has a Halloween fetish.
+
     foregroundColor = "#bbbbbb";
     backgroundColor = "#000000";
 
     patterns = (
-        { name = "Keyword"; match = "\\<(and|as|assert|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|not|or|pass|print|raise|return|try|while|yield)\\>"; foregroundColor = "#ffffff"; },
-        { name = "Special identifier"; match = "\\<(True|False|None|Ellipsis|self)\\>"; "foregroundColor[1]" = "#00ffff"; },
-        { name = "Built-ins"; match = "\\<(__debug__|__import__|__name__|abs|apply|basestring|bool|buffer|callable|chr|classmethod|cmp|coerce|compile|complex|copyright|delattr|dict|dir|divmod|enumerate|eval|execfile|exit|file|filter|float|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|license|list|locals|long|map|max|min|object|oct|open|ord|pow|property|range|raw_input|reduce|reload|repr|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unichr|unicode|vars|xrange|zip)\\>"; "foregroundColor[1]" = "#ffffff"; },
-        { name = "Built-in Exceptions"; match = "\\<(ArithmeticError|AssertionError|AttributeError|DeprecationWarning|EOFError|EnvironmentError|Exception|FloatingPointError|FutureWarning|IOError|ImportError|IndentationError|IndexError|KeyError|KeyboardInterrupt|LookupError|MemoryError|NameError|NotImplemented|NotImplementedError|OSError|OverflowError|OverflowWarning|PendingDeprecationWarning|ReferenceError|RuntimeError|RuntimeWarning|StandardError|StopIteration|SyntaxError|SyntaxWarning|SystemError|SystemExit|TabError|TypeError|UnboundLocalError|UnicodeDecodeError|UnicodeEncodeError|UnicodeError|UnicodeTranslateError|UserWarning|ValueError|Warning|ZeroDivisionError)\\>"; "foregroundColor[1]" = "#ffffff"; },
-        { name = "Numeric Constant"; match = "\\<((0(x|X)[0-9a-fA-F]*)|(([0-9]+[.]?[0-9]*)|([.][0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f)?[jJ]?\\>"; foregroundColor = "#cc66ff"; },     
-        { name = "Function/Method/Decorator"; match = "^\\s*(def[ ]|@)\\s*([.a-zA-Z_?!]+)"; "foregroundColor[1]" = "#CC7833"; },
-        { name = "Class"; match = "^\\s*(class)[ ]\\s*([.a-zA-Z_: <]+)"; "foregroundColor[1]" = "#CC7833"; "fontStyle[2]" = ( underline ); },
-        { name = "Comment"; match = "#(.*)"; "fontStyle" = ( italic ); foregroundColor = "#9933CC"; },        
-        { name = "String Conversion"; begin = "`"; end = "`"; swallow = "\\\\."; "fontStyle" = ( italic ); },
+        { name = "keywords.py"; match = "\\<(and|as|assert|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|not|or|pass|print|raise|return|try|while|yield)\\>"; foregroundColor = "#ffffff"; },
+        { name = "keywords.identifiers.built-in.py"; match = "\\<(True|False|None|Ellipsis|self)\\>"; "foregroundColor[1]" = "#00ffff"; },
+        { name = "keywords.methods.built-in.py"; match = "\\<(__debug__|__import__|__name__|abs|apply|basestring|bool|buffer|callable|chr|classmethod|cmp|coerce|compile|complex|copyright|delattr|dict|dir|divmod|enumerate|eval|execfile|exit|file|filter|float|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|license|list|locals|long|map|max|min|object|oct|open|ord|pow|property|range|raw_input|reduce|reload|repr|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unichr|unicode|vars|xrange|zip)\\>"; "foregroundColor[1]" = "#ffffff"; },
+        { name = "keywords.exceptions.built-in.py"; match = "\\<(ArithmeticError|AssertionError|AttributeError|DeprecationWarning|EOFError|EnvironmentError|Exception|FloatingPointError|FutureWarning|IOError|ImportError|IndentationError|IndexError|KeyError|KeyboardInterrupt|LookupError|MemoryError|NameError|NotImplemented|NotImplementedError|OSError|OverflowError|OverflowWarning|PendingDeprecationWarning|ReferenceError|RuntimeError|RuntimeWarning|StandardError|StopIteration|SyntaxError|SyntaxWarning|SystemError|SystemExit|TabError|TypeError|UnboundLocalError|UnicodeDecodeError|UnicodeEncodeError|UnicodeError|UnicodeTranslateError|UserWarning|ValueError|Warning|ZeroDivisionError)\\>"; "foregroundColor[1]" = "#ffffff"; },
+        { name = "constants.numeric.py"; match = "\\<((0(x|X)[0-9a-fA-F]*)|(([0-9]+[.]?[0-9]*)|([.][0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f)?[jJ]?\\>"; foregroundColor = "#cc66ff"; },     
+        { name = "keywords.functions.py"; match = "^\\s*(def[ ]|@)\\s*([.a-zA-Z_?!]+)"; "foregroundColor[1]" = "#CC7833"; },
+        { name = "keywords.classes.py"; match = "^\\s*(class)[ ]\\s*([.a-zA-Z_: <]+)"; "foregroundColor[1]" = "#CC7833"; "fontStyle[2]" = ( underline ); },
+        { name = "comments.line.py"; match = "#(.*)"; "fontStyle" = ( italic ); foregroundColor = "#9933CC"; },        
+        { name = "strings.backticked.py"; begin = "`"; end = "`"; swallow = "\\\\."; "fontStyle" = ( italic ); },
         
         {
-        name = "Triple single quote String";
+        name = "strings.py.triple-single-quoted";
         begin = "(r|u|ur|R|U|UR|Ur|uR){0,1}\'\'\'[^']*";
         end = "\'\'\'";
         swallow = "('[^']|''[^'])[^']*";
@@ -38,7 +40,7 @@
         patterns = 
             (
             	{ 
-            	name = "String Substitution";
+            	name = "strings.interpolation.py";
             	foregroundColor = "#333333";
             	match = "%(\\([a-zA-Z_]+\\)){0,1}(0|\\-|\\+){0,1}([0-9\\.]*){0,1}[diuoxXfeEgGsrc]";
             	}
@@ -46,7 +48,7 @@
         },
         
         {
-        name = "Triple double quote String";
+        name = "strings.py.triple-double-quoted";
         begin = "(r|u|ur|R|U|UR|Ur|uR){0,1}\"\"\"[^\"]*";
         end = "\"\"\"";
         swallow = "(\"[^\"]|\"\"[^\"])[^\"]*";
@@ -54,7 +56,7 @@
         patterns = 
             (
             	{ 
-            	name = "String Substitution";
+            	name = "strings.interpolation.py";
             	foregroundColor = "#333333";
             	match = "%(\\([a-zA-Z_]+\\)){0,1}(0|\\-|\\+){0,1}([0-9\\.]*){0,1}[diuoxXfeEgGsrc]";
             	}
@@ -62,7 +64,7 @@
         },
 
         {
-        name = "Single quote String";
+        name = "strings.single-quoted.py";
         begin = "(r|u|ur|R|U|UR|Ur|uR){0,1}\'";
         end = "\'";
         swallow = "[^\'\n]|\\\\.";
@@ -70,7 +72,7 @@
         patterns = 
             (
             	{ 
-            	name = "String Substitution";
+            	name = "strings.interpolation.py";
             	foregroundColor = "#FF3300";
             	match = "%(\\([a-zA-Z_]+\\)){0,1}(0|\\-|\\+){0,1}([0-9\\.]*){0,1}[diuoxXfeEgGsrc]";
             	}
@@ -78,7 +80,7 @@
         },
         
         {
-        name = "Double quote String";
+        name = "strings.single-quoted.py";
         begin = "(r|u|ur|R|U|UR|Ur|uR){0,1}\"";
         end = "\"";
         swallow = "[^\"\n]|\\\\.";
@@ -86,7 +88,7 @@
         patterns = 
             (
             	{ 
-            	name = "String Substitution";
+            	name = "strings.interpolation.py";
             	foregroundColor = "#FF3300";
             	match = "%(\\([a-zA-Z_]+\\)){0,1}(0|\\-|\\+){0,1}([0-9\\.]*){0,1}[diuoxXfeEgGsrc]";
             	}

@@ -15,10 +15,10 @@ expand -3 | source-highlight -spython -fhtml</string>
 	<key>keyEquivalent</key>
 	<string>^~h</string>
 	<key>name</key>
-	<string>view pytohtml</string>
+	<string>pytohtml new buffer</string>
 	<key>output</key>
-	<string>showAsHTML</string>
+	<string>openAsNewDocument</string>
 	<key>uuid</key>
-	<string>88FEF123-77CA-11D9-AC33-000D93B6E43C</string>
+	<string>3DBAEC85-7D09-11D9-A1F6-000D93B6E43C</string>
 </dict>
 </plist>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>osascript &lt;&lt;END
+tell application "iTerm"
+activate
+set myterm to (make new terminal)
+tell myterm
+set mysession to (make new session at the end of sessions)
+tell mysession
+exec command "/bin/bash -c \"/usr/bin/python -i '$TM_FILEPATH' \" " 
+end tell
+end tell
+end tell
+END
+</string>
+	<key>input</key>
+	<string>none</string>
+	<key>keyEquivalent</key>
+	<string>@P</string>
+	<key>name</key>
+	<string>run in iTerm</string>
+	<key>output</key>
+	<string>discard</string>
+	<key>uuid</key>
+	<string>504278F6-89F4-11D9-9326-000D93B6E43C</string>
+</dict>
+</plist>

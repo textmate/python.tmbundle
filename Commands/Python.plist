@@ -8,7 +8,8 @@
 	<string># Run python on the current buffer
 # 
 
-python</string>
+cd `dirname "$TM_FILEPATH"`
+python "$TM_FILENAME"</string>
 	<key>input</key>
 	<string>document</string>
 	<key>keyEquivalent</key>

@@ -4,6 +4,18 @@
 <dict>
 	<key>name</key>
 	<string>Python</string>
+	<key>ordering</key>
+	<array>
+		<string>88FEF123-77CA-11D9-AC33-000D93B6E43C</string>
+		<string>3DBAEC85-7D09-11D9-A1F6-000D93B6E43C</string>
+		<string>846B4669-7BAC-11D9-8E83-000D93B6E43C</string>
+		<string>5BBD932E-7BB0-11D9-8E83-000D93B6E43C</string>
+		<string>6499BB56-7BB5-11D9-8E83-000D93B6E43C</string>
+		<string>E44DB897-6B1C-11D9-ABF4-000D93589AF6</string>
+		<string>F23DB5B2-7D08-11D9-A709-000D93B6E43C</string>
+		<string>BE99DE86-7BAA-11D9-9C9F-000D93B6E43C</string>
+		<string>2660AB58-7BAB-11D9-9C9F-000D93B6E43C</string>
+	</array>
 	<key>uuid</key>
 	<string>E3BADC20-6B0E-11D9-9DC9-000D93589AF6</string>
 </dict>

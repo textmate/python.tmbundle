@@ -1,0 +1,99 @@
+{
+    name = "Python Light";
+    mode = "Python";
+    fileTypes = ( py, rpy );
+
+    foldingStartMarker = "^\\s*(def|class)\\s+([.a-zA-Z0-9_ <]+)\\s*(\\((.*)\\))?\\s*:|\\{\\s*$|\\(\\s*$|\\[\\s*$";
+    foldingStopMarker = "^\\s*$|^\\s*\\}|^\\s*\\]|^\\s*\\)";
+
+    increaseIndentPattern = "^\\s*(class|def|elif|else|except|for|if|try|while)\\>.*:\\s*(#.*)?$";
+
+    smartTypingPairs = (
+        ( "(", ")" ), ( "[", "]" ), ( "{", "}" ),
+        ( "\"", "\"" ), ( "'", "'" ), ( "`", "`" )
+    );
+    highlightPairs = (
+        ( "(", ")" ), ( "[", "]" ), ( "{", "}" )
+    );
+
+
+    foregroundColor = "#000000";
+    backgroundColor = "#eeeeee";
+
+    patterns = (
+        { name = "keywords.py"; match = "\\<(and|as|assert|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|not|or|pass|print|raise|return|try|while|yield)\\>"; fontStyle = ( bold ); foregroundColor = "#000099"; },
+        { name = "keywords.identifiers.built-in.py"; match = "\\<(True|False|None|Ellipsis|self)\\>"; fontStyle = ( italic ); "foregroundColor[1]" = "#9700cc"; },
+        { name = "keywords.methods.built-in.py"; match = "\\<(__debug__|__import__|__name__|abs|apply|basestring|bool|buffer|callable|chr|classmethod|cmp|coerce|compile|complex|copyright|delattr|dict|dir|divmod|enumerate|eval|execfile|exit|file|filter|float|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|license|list|locals|long|map|max|min|object|oct|open|ord|pow|property|range|raw_input|reduce|reload|repr|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unichr|unicode|vars|xrange|zip)\\>"; "foregroundColor[1]" = "#000099"; },
+        { name = "keywords.exceptions.built-in.py"; match = "\\<(ArithmeticError|AssertionError|AttributeError|DeprecationWarning|EOFError|EnvironmentError|Exception|FloatingPointError|FutureWarning|IOError|ImportError|IndentationError|IndexError|KeyError|KeyboardInterrupt|LookupError|MemoryError|NameError|NotImplemented|NotImplementedError|OSError|OverflowError|OverflowWarning|PendingDeprecationWarning|ReferenceError|RuntimeError|RuntimeWarning|StandardError|StopIteration|SyntaxError|SyntaxWarning|SystemError|SystemExit|TabError|TypeError|UnboundLocalError|UnicodeDecodeError|UnicodeEncodeError|UnicodeError|UnicodeTranslateError|UserWarning|ValueError|Warning|ZeroDivisionError)\\>"; "foregroundColor[1]" = "#990000"; },
+        { name = "constants.numeric.py"; match = "\\<((0(x|X)[0-9a-fA-F]*)|(([0-9]+[.]?[0-9]*)|([.][0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f)?[jJ]?\\>"; foregroundColor = "#000099"; },     
+        { name = "keywords.functions.py"; match = "^\\s*(def[ ]|@)\\s*([.a-zA-Z_?!]+)"; "foregroundColor[1]" = "#ba5319"; "fontStyle[1]" = ( bold );},
+        { name = "keywords.classes.py"; match = "^\\s*(class)[ ]\\s*([.a-zA-Z_: <]+)"; "foregroundColor[1]" = "#ba5319"; "fontStyle[1]" = ( bold ); "fontStyle[2]" = ( underline ); },
+        { name = "comments.line.py"; match = "#(.*)"; "fontStyle" = ( italic ); foregroundColor = "#444444"; },        
+        { name = "strings.backticked.py"; begin = "`"; end = "`"; swallow = "\\\\."; "fontStyle" = ( italic ); },
+        
+        {
+        name = "strings.py.triple-single-quoted";
+        begin = "(r|u|ur|R|U|UR|Ur|uR){0,1}\'\'\'[^']*";
+        end = "\'\'\'";
+        swallow = "('[^']|''[^'])[^']*";
+        foregroundColor = "#009933";
+        patterns = 
+            (
+            	{ 
+            	name = "strings.interpolation.py";
+            	foregroundColor = "#009933";
+            	match = "%(\\([a-zA-Z_]+\\)){0,1}(0|\\-|\\+){0,1}([0-9\\.]*){0,1}[diuoxXfeEgGsrc]";
+            	}
+            );
+        },
+        
+        {
+        name = "strings.py.triple-double-quoted";
+        begin = "(r|u|ur|R|U|UR|Ur|uR){0,1}\"\"\"[^\"]*";
+        end = "\"\"\"";
+        swallow = "(\"[^\"]|\"\"[^\"])[^\"]*";
+        foregroundColor = "#009933";
+        patterns = 
+            (
+            	{ 
+            	name = "strings.interpolation.py";
+            	foregroundColor = "#009933";
+            	match = "%(\\([a-zA-Z_]+\\)){0,1}(0|\\-|\\+){0,1}([0-9\\.]*){0,1}[diuoxXfeEgGsrc]";
+            	}
+            );
+        },
+
+        {
+        name = "strings.single-quoted.py";
+        begin = "(r|u|ur|R|U|UR|Ur|uR){0,1}\'";
+        end = "\'";
+        swallow = "[^\'\n]|\\\\.";
+        foregroundColor = "#009933";
+        patterns = 
+            (
+            	{ 
+            	name = "strings.interpolation.py";
+            	foregroundColor = "#009933";
+            	match = "%(\\([a-zA-Z_]+\\)){0,1}(0|\\-|\\+){0,1}([0-9\\.]*){0,1}[diuoxXfeEgGsrc]";
+            	}
+            );
+        },
+        
+        {
+        name = "strings.single-quoted.py";
+        begin = "(r|u|ur|R|U|UR|Ur|uR){0,1}\"";
+        end = "\"";
+        swallow = "[^\"\n]|\\\\.";
+        foregroundColor = "#009933";
+        patterns = 
+            (
+            	{ 
+            	name = "strings.interpolation.py";
+            	foregroundColor = "#009933";
+            	match = "%(\\([a-zA-Z_]+\\)){0,1}(0|\\-|\\+){0,1}([0-9\\.]*){0,1}[diuoxXfeEgGsrc]";
+            	}
+            );
+        },
+    );
+	uuid = "E44DB897-6B1C-11D9-ABF4-000D93589AF6";
+}

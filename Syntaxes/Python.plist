@@ -1,5 +1,6 @@
 {
-    name = "Python";
+    name = "Python Dark";
+    mode = "Python";
     fileTypes = ( py, rpy );
 
     foldingStartMarker = "^\\s*(def|class)\\s+([.a-zA-Z0-9_ <]+)\\s*(\\((.*)\\))?\\s*:|\\{\\s*$|\\(\\s*$|\\[\\s*$";

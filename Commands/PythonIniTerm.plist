@@ -21,9 +21,9 @@ END
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>
-	<string>@P</string>
+	<string></string>
 	<key>name</key>
-	<string>run in iTerm</string>
+	<string>Run Python in iTerm</string>
 	<key>output</key>
 	<string>discard</string>
 	<key>uuid</key>

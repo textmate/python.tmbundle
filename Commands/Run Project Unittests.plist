@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>captureFormatString</key>
+	<string>Line $2 in $1</string>
+	<key>capturePattern</key>
+	<string>^\s*File "(.+)", line (\d+)</string>
+	<key>command</key>
+	<string>#!/usr/bin/env bash
+cd `dirname "$TM_FILEPATH"`
+
+for x in `ls -1 | grep Test.*\.py$`
+do
+    python $x
+done</string>
+	<key>fileCaptureRegister</key>
+	<string>1</string>
+	<key>input</key>
+	<string>none</string>
+	<key>keyEquivalent</key>
+	<string>@U</string>
+	<key>lineCaptureRegister</key>
+	<string>2</string>
+	<key>name</key>
+	<string>Run Project Unittests</string>
+	<key>output</key>
+	<string>separateWindow</string>
+	<key>uuid</key>
+	<string>1FAC4AE2-B00C-11D9-91F2-000D93347A42</string>
+</dict>
+</plist>

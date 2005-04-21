@@ -21,11 +21,13 @@ END
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>
-	<string></string>
+	<string>@D</string>
 	<key>name</key>
 	<string>Run Python in iTerm</string>
 	<key>output</key>
 	<string>discard</string>
+	<key>scope</key>
+	<string>source.python</string>
 	<key>uuid</key>
 	<string>504278F6-89F4-11D9-9326-000D93B6E43C</string>
 </dict>

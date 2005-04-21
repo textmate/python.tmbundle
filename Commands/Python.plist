@@ -18,6 +18,8 @@ python "$TM_FILENAME"</string>
 	<string>Python</string>
 	<key>output</key>
 	<string>separateWindow</string>
+	<key>scope</key>
+	<string>source.python</string>
 	<key>uuid</key>
 	<string>846B4669-7BAC-11D9-8E83-000D93B6E43C</string>
 </dict>

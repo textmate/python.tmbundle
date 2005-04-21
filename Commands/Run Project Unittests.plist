@@ -28,6 +28,8 @@ done</string>
 	<string>Run Project Unittests</string>
 	<key>output</key>
 	<string>separateWindow</string>
+	<key>scope</key>
+	<string>source.python</string>
 	<key>uuid</key>
 	<string>1FAC4AE2-B00C-11D9-91F2-000D93347A42</string>
 </dict>

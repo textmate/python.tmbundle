@@ -18,6 +18,8 @@ expand -3 | source-highlight -spython -fhtml</string>
 	<string>pytohtml new buffer</string>
 	<key>output</key>
 	<string>openAsNewDocument</string>
+	<key>scope</key>
+	<string>source.python</string>
 	<key>uuid</key>
 	<string>3DBAEC85-7D09-11D9-A1F6-000D93B6E43C</string>
 </dict>

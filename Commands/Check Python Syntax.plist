@@ -25,6 +25,8 @@ python checksyntax.py "$TM_FILEPATH"
 	<string>Check Python Syntax</string>
 	<key>output</key>
 	<string>separateWindow</string>
+	<key>scope</key>
+	<string>source.python</string>
 	<key>uuid</key>
 	<string>44C9C59C-89F9-11D9-9326-000D93B6E43C</string>
 </dict>

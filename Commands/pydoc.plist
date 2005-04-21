@@ -23,11 +23,13 @@ rm "$TM_SELECTED_TEXT".html</string>
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>
-	<string></string>
+	<string></string>
 	<key>name</key>
 	<string>pydoc</string>
 	<key>output</key>
 	<string>showAsHTML</string>
+	<key>scope</key>
+	<string>source.python</string>
 	<key>uuid</key>
 	<string>5BBD932E-7BB0-11D9-8E83-000D93B6E43C</string>
 </dict>

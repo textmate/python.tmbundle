@@ -1,101 +1,105 @@
 {
-    name = "Python Dark";
-    scopeName = "source.python.dark";
-    mode = "Python";
+    name = "Python";
+    scopeName = "source.python";
     fileTypes = ( py, rpy );
+    firstLineMatch = "^#!/.*\\<python\\>";
 
     foldingStartMarker = "^\\s*(def|class)\\s+([.a-zA-Z0-9_ <]+)\\s*(\\((.*)\\))?\\s*:|\\{\\s*$|\\(\\s*$|\\[\\s*$";
     foldingStopMarker = "^\\s*$|^\\s*\\}|^\\s*\\]|^\\s*\\)";
 
     increaseIndentPattern = "^\\s*(class|def|elif|else|except|for|if|try|while)\\>.*:\\s*(#.*)?$";
 
-    smartTypingPairs = (
-        ( "(", ")" ), ( "[", "]" ), ( "{", "}" ),
-        ( "\"", "\"" ), ( "'", "'" ), ( "`", "`" )
-    );
-    highlightPairs = (
-        ( "(", ")" ), ( "[", "]" ), ( "{", "}" )
-    );
-
-	// Somebody has a Halloween fetish.
-
-    foregroundColor = "#bbbbbb";
-    backgroundColor = "#000000";
+    smartTypingPairs = ( ( "(", ")" ), ( "[", "]" ), ( "{", "}" ), ( "\"", "\"" ), ( "'", "'" ));
+    highlightPairs = ( ( "(", ")" ), ( "[", "]" ), ( "{", "}" ), ( "\"", "\"" ), ( "'", "'" ));
 
     patterns = (
-        { name = "keywords.py"; match = "\\<(and|as|assert|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|not|or|pass|print|raise|return|try|while|yield)\\>"; foregroundColor = "#ffffff"; },
-        { name = "keywords.identifiers.built-in.py"; match = "\\<(True|False|None|Ellipsis|self)\\>"; "foregroundColor[1]" = "#00ffff"; },
-        { name = "keywords.methods.built-in.py"; match = "\\<(__debug__|__import__|__name__|abs|apply|basestring|bool|buffer|callable|chr|classmethod|cmp|coerce|compile|complex|copyright|delattr|dict|dir|divmod|enumerate|eval|execfile|exit|file|filter|float|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|license|list|locals|long|map|max|min|object|oct|open|ord|pow|property|range|raw_input|reduce|reload|repr|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unichr|unicode|vars|xrange|zip)\\>"; "foregroundColor[1]" = "#ffffff"; },
-        { name = "keywords.exceptions.built-in.py"; match = "\\<(ArithmeticError|AssertionError|AttributeError|DeprecationWarning|EOFError|EnvironmentError|Exception|FloatingPointError|FutureWarning|IOError|ImportError|IndentationError|IndexError|KeyError|KeyboardInterrupt|LookupError|MemoryError|NameError|NotImplemented|NotImplementedError|OSError|OverflowError|OverflowWarning|PendingDeprecationWarning|ReferenceError|RuntimeError|RuntimeWarning|StandardError|StopIteration|SyntaxError|SyntaxWarning|SystemError|SystemExit|TabError|TypeError|UnboundLocalError|UnicodeDecodeError|UnicodeEncodeError|UnicodeError|UnicodeTranslateError|UserWarning|ValueError|Warning|ZeroDivisionError)\\>"; "foregroundColor[1]" = "#ffffff"; },
-        { name = "constants.numeric.py"; match = "\\<((0(x|X)[0-9a-fA-F]*)|(([0-9]+[.]?[0-9]*)|([.][0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f)?[jJ]?\\>"; foregroundColor = "#cc66ff"; },     
-        { name = "keywords.functions.py"; match = "^\\s*(def[ ]|@)\\s*([.a-zA-Z0-9_?!]+)"; "foregroundColor[1]" = "#CC7833"; },
-        { name = "keywords.classes.py"; match = "^\\s*(class)[ ]\\s*([.a-zA-Z0-9_: <]+)"; "foregroundColor[1]" = "#CC7833"; "fontStyle[2]" = ( underline ); },
-        { name = "comments.line.py"; match = "#(.*)"; "fontStyle" = ( normal ); foregroundColor = "#9933CC"; },        
-        { name = "strings.backticked.py"; begin = "`"; end = "`"; swallow = "\\\\."; "fontStyle" = ( italic ); },
-        
-        {
-        name = "strings.py.triple-single-quoted";
-        begin = "(r|u|ur|R|U|UR|Ur|uR){0,1}\'\'\'[^']*";
-        end = "\'\'\'";
-        swallow = "('[^']|''[^'])[^']*";
-        foregroundColor = "#666666";
-        patterns = 
-            (
-            	{ 
-            	name = "strings.interpolation.py";
-            	foregroundColor = "#333333";
-            	match = "%(\\([a-zA-Z_]+\\)){0,1}(0|\\-|\\+){0,1}([0-9\\.]*){0,1}[diuoxXfeEgGsrc]";
-            	}
-            );
+        { name = "keywords.built-in.py";
+          match = "\\<(and|as|assert|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|not|or|pass|print|raise|return|try|while|yield)\\>";
         },
-        
-        {
-        name = "strings.py.triple-double-quoted";
-        begin = "(r|u|ur|R|U|UR|Ur|uR){0,1}\"\"\"[^\"]*";
-        end = "\"\"\"";
-        swallow = "(\"[^\"]|\"\"[^\"])[^\"]*";
-        foregroundColor = "#666666";
-        patterns = 
-            (
-            	{ 
-            	name = "strings.interpolation.py";
-            	foregroundColor = "#333333";
-            	match = "%(\\([a-zA-Z_]+\\)){0,1}(0|\\-|\\+){0,1}([0-9\\.]*){0,1}[diuoxXfeEgGsrc]";
-            	}
-            );
+        { name = "keywords.identifiers.built-in.py";
+          match = "\\<(True|False|None|Ellipsis|self)\\>";
+        },
+        { name = "keywords.exceptions.built-in.py";
+          match = "\\<(ArithmeticError|AssertionError|AttributeError|DeprecationWarning|EOFError|EnvironmentError|Exception|FloatingPointError|FutureWarning|IOError|ImportError|IndentationError|IndexError|KeyError|KeyboardInterrupt|LookupError|MemoryError|NameError|NotImplemented|NotImplementedError|OSError|OverflowError|OverflowWarning|PendingDeprecationWarning|ReferenceError|RuntimeError|RuntimeWarning|StandardError|StopIteration|SyntaxError|SyntaxWarning|SystemError|SystemExit|TabError|TypeError|UnboundLocalError|UnicodeDecodeError|UnicodeEncodeError|UnicodeError|UnicodeTranslateError|UserWarning|ValueError|Warning|ZeroDivisionError)\\>";
+        },
+        { name = "keywords.functions.built-in.py";
+          match = "\\<(__debug__|__import__|__name__|abs|apply|basestring|bool|buffer|callable|chr|classmethod|cmp|coerce|compile|complex|copyright|delattr|dict|dir|divmod|enumerate|eval|execfile|exit|file|filter|float|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|license|list|locals|long|map|max|min|object|oct|open|ord|pow|property|range|raw_input|reduce|reload|repr|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unichr|unicode|vars|xrange|zip)\\>";
+        },
+        { name = "constants.numeric.py";
+          match = "\\<((0(x|X)[0-9a-fA-F]*)|(([0-9]+[.]?[0-9]*)|([.][0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f)?[jJ]?\\>";
+        },
+        { name = "declaration.decorators.py";
+          match ="^\\s*@([a-zA-Z_][a-zA-Z_0-9]*)(\\(.*\\))?";
+        },
+        { name = "declaration.functions.operators.py";
+          match = "^\\s*(def)\\s*(__[a-zA-Z][a-zA-Z_0-9]*__)\\s*(\\((.*)\\))?";
+          captures = {
+              1 = { name = "keywords.built-in.py";};
+              2 = { name = "function-name";};
+              4 = { name = "function-arguments";};
+          };
+         },
+        { name = "declaration.functions.py";
+          match = "^\\s*(def)\\s*([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\((.*)\\))?";
+          captures = {
+            1 = { name = "keywords.built-in.py";};
+            2 = { name = "function-name";};
+            4 = { name = "function-arguments";};
+          };
+        },
+        { name = "declaration.classes.py";
+          match = "^\\s*(class)\\s*([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\((.*)\\))?";
+          captures = {
+            1 = { name = "keywords.built-in.py";};
+            2 = { name = "class-name";};
+            4 = { name = "class-inheritance";};
+          };
+        },
+        /* comments */
+        { name = "comments.line.py";
+          match = "#(.*)";
+        },
+        { name = "strings.multiline.single-quoted.py";
+          begin = "(r|u|ur|R|U|UR|Ur|uR){0,1}\'\'\'[^']*";
+          end = "\'\'\'";
+          swallow = "('[^']|''[^'])[^']*";
+          patterns = (
+            { name = "strings.interpolation.py";
+              match = "%(\\([a-zA-Z_]+\\)){0,1}(0|\\-|\\+){0,1}([0-9\\.]*){0,1}[diuoxXfeEgGsrc]";
+            }
+          );
+        },
+        { name = "strings.multiline.double-quoted.py";
+          begin = "(r|u|ur|R|U|UR|Ur|uR){0,1}\"\"\"[^\"]*";
+          end = "\"\"\"";
+          swallow = "(\"[^\"]|\"\"[^\"])[^\"]*";
+          patterns = (
+            {  name = "strings.interpolation.py";
+               match = "%(\\([a-zA-Z_]+\\)){0,1}(0|\\-|\\+){0,1}([0-9\\.]*){0,1}[diuoxXfeEgGsrc]";
+            }
+          );
+        },
+        { name = "strings.single-quoted.py";
+          begin = "(r|u|ur|R|U|UR|Ur|uR){0,1}\'";
+          end = "\'";
+          swallow = "[^\'\n]|\\\\.";
+          patterns = (
+              {  name = "strings.interpolation.py";
+                 match = "%(\\([a-zA-Z_]+\\)){0,1}(0|\\-|\\+){0,1}([0-9\\.]*){0,1}[diuoxXfeEgGsrc]";
+              }
+          );
         },
 
-        {
-        name = "strings.single-quoted.py";
-        begin = "(r|u|ur|R|U|UR|Ur|uR){0,1}\'";
-        end = "\'";
-        swallow = "[^\'\n]|\\\\.";
-        foregroundColor = "#FF9900";
-        patterns = 
-            (
-            	{ 
-            	name = "strings.interpolation.py";
-            	foregroundColor = "#FF3300";
-            	match = "%(\\([a-zA-Z_]+\\)){0,1}(0|\\-|\\+){0,1}([0-9\\.]*){0,1}[diuoxXfeEgGsrc]";
-            	}
-            );
-        },
-        
-        {
-        name = "strings.single-quoted.py";
-        begin = "(r|u|ur|R|U|UR|Ur|uR){0,1}\"";
-        end = "\"";
-        swallow = "[^\"\n]|\\\\.";
-        foregroundColor = "#FF9900";
-        patterns = 
-            (
-            	{ 
-            	name = "strings.interpolation.py";
-            	foregroundColor = "#FF3300";
-            	match = "%(\\([a-zA-Z_]+\\)){0,1}(0|\\-|\\+){0,1}([0-9\\.]*){0,1}[diuoxXfeEgGsrc]";
-            	}
-            );
+        { name = "strings.double-quoted.py";
+          begin = "(r|u|ur|R|U|UR|Ur|uR){0,1}\"";
+          end = "\"";
+          swallow = "[^\"\n]|\\\\.";
+          patterns = (
+            { name = "strings.interpolation.py";
+              match = "%(\\([a-zA-Z_]+\\)){0,1}(0|\\-|\\+){0,1}([0-9\\.]*){0,1}[diuoxXfeEgGsrc]";
+            }
+          );
         },
     );
-	uuid = "E44DB897-6B1C-11D9-ABF4-000D93589AF6";
+    uuid = "F23DB5B2-7D08-11D9-A709-000D93B6E43C";
 }

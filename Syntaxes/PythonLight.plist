@@ -1,5 +1,6 @@
 {
     name = "Python Light";
+    scopeName = "source.python.light";
     mode = "Python";
     fileTypes = ( py, rpy );
 

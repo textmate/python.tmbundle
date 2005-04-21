@@ -1,5 +1,6 @@
 {
     name = "Python Dark";
+    scopeName = "source.python.dark";
     mode = "Python";
     fileTypes = ( py, rpy );
 

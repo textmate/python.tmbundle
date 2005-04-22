@@ -13,6 +13,9 @@
     highlightPairs = ( ( "(", ")" ), ( "[", "]" ), ( "{", "}" ), ( "\"", "\"" ), ( "'", "'" ));
 
     patterns = (
+        { name = "invalid.trailing-whitespace";
+          match = "( |\t)+$";
+        },
         { name = "keywords.built-in.py";
           match = "\\<(and|as|assert|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|not|or|pass|print|raise|return|try|while|yield)\\>";
         },
@@ -35,23 +38,23 @@
           match = "^\\s*(def)\\s*(__[a-zA-Z][a-zA-Z_0-9]*__)\\s*(\\((.*)\\))?";
           captures = {
               1 = { name = "keywords.built-in.py";};
-              2 = { name = "function-name";};
-              4 = { name = "function-arguments";};
+              2 = { name = "name";};
+              4 = { name = "function-argument";};
           };
          },
         { name = "declaration.functions.py";
           match = "^\\s*(def)\\s*([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\((.*)\\))?";
           captures = {
             1 = { name = "keywords.built-in.py";};
-            2 = { name = "function-name";};
-            4 = { name = "function-arguments";};
+            2 = { name = "name";};
+            4 = { name = "function-argument";};
           };
         },
         { name = "declaration.classes.py";
           match = "^\\s*(class)\\s*([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\((.*)\\))?";
           captures = {
             1 = { name = "keywords.built-in.py";};
-            2 = { name = "class-name";};
+            2 = { name = "name";};
             4 = { name = "class-inheritance";};
           };
         },

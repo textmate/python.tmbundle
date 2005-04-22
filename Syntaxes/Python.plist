@@ -16,19 +16,19 @@
         { name = "invalid.trailing-whitespace";
           match = "( |\t)+$";
         },
-        { name = "keywords.built-in.py";
+        { name = "keyword.built-in.py";
           match = "\\<(and|as|assert|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|not|or|pass|print|raise|return|try|while|yield)\\>";
         },
-        { name = "keywords.identifiers.built-in.py";
+        { name = "keyword.identifier.built-in.py";
           match = "\\<(True|False|None|Ellipsis|self)\\>";
         },
-        { name = "keywords.exceptions.built-in.py";
+        { name = "keyword.exceptions.built-in.py";
           match = "\\<(ArithmeticError|AssertionError|AttributeError|DeprecationWarning|EOFError|EnvironmentError|Exception|FloatingPointError|FutureWarning|IOError|ImportError|IndentationError|IndexError|KeyError|KeyboardInterrupt|LookupError|MemoryError|NameError|NotImplemented|NotImplementedError|OSError|OverflowError|OverflowWarning|PendingDeprecationWarning|ReferenceError|RuntimeError|RuntimeWarning|StandardError|StopIteration|SyntaxError|SyntaxWarning|SystemError|SystemExit|TabError|TypeError|UnboundLocalError|UnicodeDecodeError|UnicodeEncodeError|UnicodeError|UnicodeTranslateError|UserWarning|ValueError|Warning|ZeroDivisionError)\\>";
         },
-        { name = "keywords.functions.built-in.py";
+        { name = "keyword.function.built-in.py";
           match = "\\<(__debug__|__import__|__name__|abs|apply|basestring|bool|buffer|callable|chr|classmethod|cmp|coerce|compile|complex|copyright|delattr|dict|dir|divmod|enumerate|eval|execfile|exit|file|filter|float|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|license|list|locals|long|map|max|min|object|oct|open|ord|pow|property|range|raw_input|reduce|reload|repr|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unichr|unicode|vars|xrange|zip)\\>";
         },
-        { name = "constants.numeric.py";
+        { name = "constant.numeric.py";
           match = "\\<((0(x|X)[0-9a-fA-F]*)|(([0-9]+[.]?[0-9]*)|([.][0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f)?[jJ]?\\>";
         },
         { name = "declaration.decorators.py";
@@ -37,7 +37,7 @@
         { name = "declaration.functions.operators.py";
           match = "^\\s*(def)\\s*(__[a-zA-Z][a-zA-Z_0-9]*__)\\s*(\\((.*)\\))?";
           captures = {
-              1 = { name = "keywords.built-in.py";};
+              1 = { name = "keyword.built-in.py";};
               2 = { name = "function-name";};
               4 = { name = "function-argument";};
           };
@@ -45,7 +45,7 @@
         { name = "declaration.functions.py";
           match = "^\\s*(def)\\s*([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\((.*)\\))?";
           captures = {
-            1 = { name = "keywords.built-in.py";};
+            1 = { name = "keyword.built-in.py";};
             2 = { name = "function-name";};
             4 = { name = "function-argument";};
           };
@@ -53,52 +53,52 @@
         { name = "declaration.classes.py";
           match = "^\\s*(class)\\s*([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\((.*)\\))?";
           captures = {
-            1 = { name = "keywords.built-in.py";};
+            1 = { name = "keyword.built-in.py";};
             2 = { name = "class-name";};
             4 = { name = "class-inheritance";};
           };
         },
         /* comments */
-        { name = "comments.line.py";
+        { name = "comment.line.py";
           match = "#(.*)";
         },
-        { name = "strings.multiline.single-quoted.py";
+        { name = "string.multiline.single-quoted.py";
           begin = "(r|u|ur|R|U|UR|Ur|uR){0,1}\'\'\'[^']*";
           end = "\'\'\'";
           swallow = "('[^']|''[^'])[^']*";
           patterns = (
-            { name = "strings.interpolation.py";
+            { name = "string.interpolation.py";
               match = "%(\\([a-zA-Z_]+\\)){0,1}(0|\\-|\\+){0,1}([0-9\\.]*){0,1}[diuoxXfeEgGsrc]";
             }
           );
         },
-        { name = "strings.multiline.double-quoted.py";
+        { name = "string.multiline.double-quoted.py";
           begin = "(r|u|ur|R|U|UR|Ur|uR){0,1}\"\"\"[^\"]*";
           end = "\"\"\"";
           swallow = "(\"[^\"]|\"\"[^\"])[^\"]*";
           patterns = (
-            {  name = "strings.interpolation.py";
+            {  name = "string.interpolation.py";
                match = "%(\\([a-zA-Z_]+\\)){0,1}(0|\\-|\\+){0,1}([0-9\\.]*){0,1}[diuoxXfeEgGsrc]";
             }
           );
         },
-        { name = "strings.single-quoted.py";
+        { name = "string.single-quoted.py";
           begin = "(r|u|ur|R|U|UR|Ur|uR){0,1}\'";
           end = "\'";
           swallow = "[^\'\n]|\\\\.";
           patterns = (
-              {  name = "strings.interpolation.py";
+              {  name = "string.interpolation.py";
                  match = "%(\\([a-zA-Z_]+\\)){0,1}(0|\\-|\\+){0,1}([0-9\\.]*){0,1}[diuoxXfeEgGsrc]";
               }
           );
         },
 
-        { name = "strings.double-quoted.py";
+        { name = "string.double-quoted.py";
           begin = "(r|u|ur|R|U|UR|Ur|uR){0,1}\"";
           end = "\"";
           swallow = "[^\"\n]|\\\\.";
           patterns = (
-            { name = "strings.interpolation.py";
+            { name = "string.interpolation.py";
               match = "%(\\([a-zA-Z_]+\\)){0,1}(0|\\-|\\+){0,1}([0-9\\.]*){0,1}[diuoxXfeEgGsrc]";
             }
           );

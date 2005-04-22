@@ -22,7 +22,7 @@
         { name = "keyword.identifier.built-in.py";
           match = "\\<(True|False|None|Ellipsis|self)\\>";
         },
-        { name = "keyword.exceptions.built-in.py";
+        { name = "keyword.exception.built-in.py";
           match = "\\<(ArithmeticError|AssertionError|AttributeError|DeprecationWarning|EOFError|EnvironmentError|Exception|FloatingPointError|FutureWarning|IOError|ImportError|IndentationError|IndexError|KeyError|KeyboardInterrupt|LookupError|MemoryError|NameError|NotImplemented|NotImplementedError|OSError|OverflowError|OverflowWarning|PendingDeprecationWarning|ReferenceError|RuntimeError|RuntimeWarning|StandardError|StopIteration|SyntaxError|SyntaxWarning|SystemError|SystemExit|TabError|TypeError|UnboundLocalError|UnicodeDecodeError|UnicodeEncodeError|UnicodeError|UnicodeTranslateError|UserWarning|ValueError|Warning|ZeroDivisionError)\\>";
         },
         { name = "keyword.function.built-in.py";
@@ -31,10 +31,10 @@
         { name = "constant.numeric.py";
           match = "\\<((0(x|X)[0-9a-fA-F]*)|(([0-9]+[.]?[0-9]*)|([.][0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f)?[jJ]?\\>";
         },
-        { name = "declaration.decorators.py";
+        { name = "declaration.decorator.py";
           match ="^\\s*@([a-zA-Z_][a-zA-Z_0-9]*)(\\(.*\\))?";
         },
-        { name = "declaration.functions.operators.py";
+        { name = "declaration.function.operator.py";
           match = "^\\s*(def)\\s*(__[a-zA-Z][a-zA-Z_0-9]*__)\\s*(\\((.*)\\))?";
           captures = {
               1 = { name = "keyword.built-in.py";};
@@ -42,7 +42,7 @@
               4 = { name = "function-argument";};
           };
          },
-        { name = "declaration.functions.py";
+        { name = "declaration.function.py";
           match = "^\\s*(def)\\s*([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\((.*)\\))?";
           captures = {
             1 = { name = "keyword.built-in.py";};
@@ -50,7 +50,7 @@
             4 = { name = "function-argument";};
           };
         },
-        { name = "declaration.classes.py";
+        { name = "declaration.class.py";
           match = "^\\s*(class)\\s*([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\((.*)\\))?";
           captures = {
             1 = { name = "keyword.built-in.py";};
@@ -58,7 +58,6 @@
             4 = { name = "class-inheritance";};
           };
         },
-        /* comments */
         { name = "comment.line.py";
           match = "#(.*)";
         },

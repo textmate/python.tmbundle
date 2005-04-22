@@ -38,7 +38,7 @@
           match = "^\\s*(def)\\s*(__[a-zA-Z][a-zA-Z_0-9]*__)\\s*(\\((.*)\\))?";
           captures = {
               1 = { name = "keywords.built-in.py";};
-              2 = { name = "name";};
+              2 = { name = "function-name";};
               4 = { name = "function-argument";};
           };
          },
@@ -46,7 +46,7 @@
           match = "^\\s*(def)\\s*([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\((.*)\\))?";
           captures = {
             1 = { name = "keywords.built-in.py";};
-            2 = { name = "name";};
+            2 = { name = "function-name";};
             4 = { name = "function-argument";};
           };
         },
@@ -54,7 +54,7 @@
           match = "^\\s*(class)\\s*([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\((.*)\\))?";
           captures = {
             1 = { name = "keywords.built-in.py";};
-            2 = { name = "name";};
+            2 = { name = "class-name";};
             4 = { name = "class-inheritance";};
           };
         },

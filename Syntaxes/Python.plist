@@ -1,7 +1,7 @@
 {
     name = "Python";
     scopeName = "source.python";
-    fileTypes = ( py, rpy );
+    fileTypes = ( py, rpy, cpy );
     firstLineMatch = "^#!/.*\\<python\\>";
 
     foldingStartMarker = "^\\s*(def|class)\\s+([.a-zA-Z0-9_ <]+)\\s*(\\((.*)\\))?\\s*:|\\{\\s*$|\\(\\s*$|\\[\\s*$";
@@ -36,7 +36,7 @@
         },
         /* TODO change these to match the predefined operator functions in python */
         { name = "declaration.function.operator.py";
-          match = "^\\s*(def)\\s*(__[a-zA-Z][a-zA-Z_0-9]*__)\\s*(\\((.*)\\))?";
+          match = "^\\s*(def)\\s*(__[a-zA-Z][a-zA-Z_0-9]*__)\\s*(\\((.*)\\))?:";
           captures = {
               1 = { name = "keyword.built-in.py";};
               2 = { name = "function-name";};
@@ -44,7 +44,7 @@
           };
          },
         { name = "declaration.function.py";
-          match = "^\\s*(def)\\s*([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\((.*)\\))?";
+          match = "^\\s*(def)\\s*([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\((.*)\\))?:";
           captures = {
             1 = { name = "keyword.built-in.py";};
             2 = { name = "function-name";};
@@ -52,7 +52,7 @@
           };
         },
         { name = "declaration.class.py";
-          match = "^\\s*(class)\\s*([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\((.*)\\))?";
+          match = "^\\s*(class)\\s*([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\((.*)\\))?:";
           captures = {
             1 = { name = "keyword.built-in.py";};
             2 = { name = "class-name";};

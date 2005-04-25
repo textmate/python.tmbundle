@@ -34,6 +34,7 @@
         { name = "declaration.decorator.py";
           match ="^\\s*@([a-zA-Z_][a-zA-Z_0-9]*)(\\(.*\\))?";
         },
+        /* TODO change these to match the predefined operator functions in python */
         { name = "declaration.function.operator.py";
           match = "^\\s*(def)\\s*(__[a-zA-Z][a-zA-Z_0-9]*__)\\s*(\\((.*)\\))?";
           captures = {

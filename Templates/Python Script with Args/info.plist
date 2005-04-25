@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>command</key>
+	<string>if test \! -e "$TM_NEW_FILE"; then
+   sed -e /\$\{TM_NEW_FILE_BASENAME\}/s//${TM_NEW_FILE_BASENAME}/ \
+       -e /\$\{TM_USERNAME\}/s//`niutil -readprop / /users/\$USER realname`/ \
+       -e /\$\{TM_YEAR\}/s//`date +%Y`/ \
+       -e /\$\{TM_DATE\}/s//`date +%Y-%m-%d`/ \
+       -e /\$\{TM_ORGANIZATION_NAME\}/s//${TM_ORGANIZATION_NAME}/ \
+       NewPythonScript.py > $TM_NEW_FILE    
+fi</string>
+	<key>extension</key>
+	<string>txt</string>
+	<key>name</key>
+	<string>Python Script w/ args</string>
+	<key>uuid</key>
+	<string>28CAF5FF-B587-11D9-BA5F-000D93347A42</string>
+</dict>
+</plist>

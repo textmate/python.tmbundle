@@ -11,7 +11,7 @@
       &lt; template_in.txt &gt; "$TM_NEW_FILE"
 fi</string>
 	<key>extension</key>
-	<string>txt</string>
+	<string>py</string>
 	<key>name</key>
 	<string>Python Class (unittest)</string>
 	<key>uuid</key>

@@ -7,11 +7,6 @@
     foldingStartMarker = "^\\s*(def|class)\\s+([.a-zA-Z0-9_ <]+)\\s*(\\((.*)\\))?\\s*:|\\{\\s*$|\\(\\s*$|\\[\\s*$";
     foldingStopMarker = "^\\s*$|^\\s*\\}|^\\s*\\]|^\\s*\\)";
 
-    increaseIndentPattern = "^\\s*(class|def|elif|else|except|for|if|try|while)\\>.*:\\s*(#.*)?$";
-
-    smartTypingPairs = ( ( "(", ")" ), ( "[", "]" ), ( "{", "}" ), ( "\"", "\"" ), ( "'", "'" ));
-    highlightPairs = ( ( "(", ")" ), ( "[", "]" ), ( "{", "}" ), ( "\"", "\"" ), ( "'", "'" ));
-
     patterns = (
         { name = "invalid.trailing-whitespace";
           match = "( |\t)+$";
@@ -34,12 +29,30 @@
         { name = "declaration.decorator.py";
           match ="^\\s*@([a-zA-Z_][a-zA-Z_0-9]*)(\\(.*\\))?";
         },
+        { name = "declaration.function.operator.instance.py";
+          match = "^\\s*(def)\\s*(\\<__add__|__aepack__|__and__|__call__|__cmp__|__coerce__|__complex__|__contains__|__copy__|__deepcopy__|__delattr__|__delete__|__delitem__|__delslice__|__del__|__divmod__|__div__|__eq__|__float__|__floordiv__|__getattribute__|__getattr__|__getinitargs__|__getitem__|__getnewargs__|__getslice__|__getstate__|__get__|__ge__|__GNUC__|__gt__|__hash__|__iadd__|__iand__|__idiv__|__ifloordiv__|__ilshift__|__imod__|__imul__|__init__|__int__|__ior__|__ipow__|__irshift__|__isub__|__iter__|__itruediv__|__ixor__|__len__|__le__|__long__|__lshift__|__lt__|__main__|__mod__|__mul__|__newobj__|__new__|__ne__|__nonzero__|__or__|__pow__|__radd__|__rand__|__rdivmod__|__rdiv__|__reduce__|__repr__|__rfloordiv__|__rlshift__|__rmod__|__rmul__|__ror__|__rpow__|__rrshift__|__rshift__|__rsub__|__rtruediv__|__rxor__|__setattr__|__setitem__|__setslice__|__setstate__|__setup__|__set__|__str__|__sub__|__truediv__|__unicode__|__xor__\\>)\\s*(\\(((self).*)\\))?:";
+          captures = {
+              1 = { name = "keyword.built-in.py";};
+              2 = { name = "function-name";};
+              4 = { name = "function-argument";};
+              5 = { name = "keyword.identifier.built-in.py";};
+          };
+        },
         { name = "declaration.function.operator.py";
           match = "^\\s*(def)\\s*(\\<__add__|__aepack__|__and__|__call__|__cmp__|__coerce__|__complex__|__contains__|__copy__|__deepcopy__|__delattr__|__delete__|__delitem__|__delslice__|__del__|__divmod__|__div__|__eq__|__float__|__floordiv__|__getattribute__|__getattr__|__getinitargs__|__getitem__|__getnewargs__|__getslice__|__getstate__|__get__|__ge__|__GNUC__|__gt__|__hash__|__iadd__|__iand__|__idiv__|__ifloordiv__|__ilshift__|__imod__|__imul__|__init__|__int__|__ior__|__ipow__|__irshift__|__isub__|__iter__|__itruediv__|__ixor__|__len__|__le__|__long__|__lshift__|__lt__|__main__|__mod__|__mul__|__newobj__|__new__|__ne__|__nonzero__|__or__|__pow__|__radd__|__rand__|__rdivmod__|__rdiv__|__reduce__|__repr__|__rfloordiv__|__rlshift__|__rmod__|__rmul__|__ror__|__rpow__|__rrshift__|__rshift__|__rsub__|__rtruediv__|__rxor__|__setattr__|__setitem__|__setslice__|__setstate__|__setup__|__set__|__str__|__sub__|__truediv__|__unicode__|__xor__\\>)\\s*(\\((.*)\\))?:";
           captures = {
               1 = { name = "keyword.built-in.py";};
               2 = { name = "function-name";};
               4 = { name = "function-argument";};
+          };
+        },
+        { name = "declaration.function.instance.py";
+          match = "^\\s*(def)\\s*([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\(((self).*)\\))?:";
+          captures = {
+            1 = { name = "keyword.built-in.py";};
+            2 = { name = "function-name";};
+            4 = { name = "function-argument";};
+            5 = { name = "keyword.identifier.built-in.py";};
           };
         },
         { name = "declaration.function.py";
@@ -50,6 +63,7 @@
             4 = { name = "function-argument";};
           };
         },
+
         { name = "declaration.class.py";
           match = "^\\s*(class)\\s*([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\((.*)\\))?:";
           captures = {

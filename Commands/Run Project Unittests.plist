@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>beforeRunningCommand</key>
-	<string>nop</string>
+	<string>saveModifiedFiles</string>
 	<key>captureFormatString</key>
 	<string>Line $2 in $1</string>
 	<key>capturePattern</key>

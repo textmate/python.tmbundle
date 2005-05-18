@@ -12,7 +12,7 @@ set myterm to (make new terminal)
 tell myterm
 set mysession to (make new session at the end of sessions)
 tell mysession
-exec command "/bin/bash -c \"/usr/bin/python -i '$TM_FILEPATH' \" " 
+exec command "/bin/bash -c \"/usr/bin/python -m pdb '$TM_FILEPATH' \" " 
 end tell
 end tell
 end tell
@@ -23,7 +23,7 @@ END
 	<key>keyEquivalent</key>
 	<string>@D</string>
 	<key>name</key>
-	<string>Run Python in iTerm</string>
+	<string>Debug Python in iTerm</string>
 	<key>output</key>
 	<string>discard</string>
 	<key>scope</key>

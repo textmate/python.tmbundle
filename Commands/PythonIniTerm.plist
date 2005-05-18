@@ -5,25 +5,39 @@
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
 	<key>command</key>
-	<string>osascript &lt;&lt;END
-tell application "iTerm"
-activate
-set myterm to (make new terminal)
-tell myterm
-set mysession to (make new session at the end of sessions)
-tell mysession
-exec command "/bin/bash -c \"/usr/bin/python -m pdb '$TM_FILEPATH' \" " 
-end tell
-end tell
-end tell
+	<string># start up Python in debug mode using either Terminal.app or iTerm.app
+# according to the user's value for TM_TERM_PROG
+# Default to Terminal.app since that is standard.
+TP=${TM_TERM_PROG:=Terminal}
+
+if [ "$TP" == iTerm ]; then
+    osascript &lt;&lt;END
+        tell application "iTerm"
+            activate
+            set myterm to (the first terminal)
+            tell myterm            
+                set mysession to (make new session at the end of sessions)
+                tell mysession
+                    exec command "/bin/bash -c \"/usr/bin/python -m pdb '$TM_FILEPATH' \" " 
+                end tell
+            end tell
+        end tell
 END
+else
+    osascript  &lt;&lt;END2
+        tell application "Terminal"
+            activate
+            do script with command "python -m pdb $TM_FILEPATH"
+        end tell
+END2
+fi
 </string>
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>
 	<string>@D</string>
 	<key>name</key>
-	<string>Debug Python in iTerm</string>
+	<string>Debug Python in terminal</string>
 	<key>output</key>
 	<string>discard</string>
 	<key>scope</key>

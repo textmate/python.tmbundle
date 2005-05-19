@@ -3,14 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>def get$1(self): return self._$1</string>
+	<string>"""$1"""</string>
 	<key>name</key>
-	<string>getter (get)</string>
+	<string>triple-quote (tr)</string>
 	<key>scope</key>
 	<string>source.python</string>
 	<key>tabTrigger</key>
-	<string>get</string>
+	<string>tr</string>
 	<key>uuid</key>
-	<string>D1D53498-B33A-11D9-89C9-000D93347A42</string>
+	<string>FE2584F6-C77C-11D9-8958-000D93347A42</string>
 </dict>
 </plist>

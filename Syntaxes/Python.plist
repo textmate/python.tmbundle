@@ -9,9 +9,9 @@
 		<string>cpy</string>
 	</array>
 	<key>firstLineMatch</key>
-	<string>^#!/.*\&lt;python\&gt;</string>
+	<string>^#!/.*\bpython\b</string>
 	<key>foldingStartMarker</key>
-	<string>^\s*(def|class)\s+([.a-zA-Z0-9_ &lt;]+)\s*(\((.*)\))?\s*:|\{\s*$|\(\s*$|\[\s*$</string>
+	<string>^\s*(def|class)\s+([.a-zA-Z0-9_ b]+)\s*(\((.*)\))?\s*:|\{\s*$|\(\s*$|\[\s*$</string>
 	<key>foldingStopMarker</key>
 	<string>^\s*$|^\s*\}|^\s*\]|^\s*\)</string>
 	<key>keyEquivalent</key>
@@ -28,31 +28,31 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\&lt;(and|as|assert|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|not|or|pass|print|raise|return|try|while|yield)\&gt;</string>
+			<string>\b(and|as|assert|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|not|or|pass|print|raise|return|try|while|yield)\b</string>
 			<key>name</key>
 			<string>keyword.built-in.py</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\&lt;(True|False|None|Ellipsis|self)\&gt;</string>
+			<string>\b(True|False|None|Ellipsis|self)\b</string>
 			<key>name</key>
 			<string>keyword.identifier.built-in.py</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\&lt;(ArithmeticError|AssertionError|AttributeError|DeprecationWarning|EOFError|EnvironmentError|Exception|FloatingPointError|FutureWarning|IOError|ImportError|IndentationError|IndexError|KeyError|KeyboardInterrupt|LookupError|MemoryError|NameError|NotImplemented|NotImplementedError|OSError|OverflowError|OverflowWarning|PendingDeprecationWarning|ReferenceError|RuntimeError|RuntimeWarning|StandardError|StopIteration|SyntaxError|SyntaxWarning|SystemError|SystemExit|TabError|TypeError|UnboundLocalError|UnicodeDecodeError|UnicodeEncodeError|UnicodeError|UnicodeTranslateError|UserWarning|ValueError|Warning|ZeroDivisionError)\&gt;</string>
+			<string>\b(ArithmeticError|AssertionError|AttributeError|DeprecationWarning|EOFError|EnvironmentError|Exception|FloatingPointError|FutureWarning|IOError|ImportError|IndentationError|IndexError|KeyError|KeyboardInterrupt|LookupError|MemoryError|NameError|NotImplemented|NotImplementedError|OSError|OverflowError|OverflowWarning|PendingDeprecationWarning|ReferenceError|RuntimeError|RuntimeWarning|StandardError|StopIteration|SyntaxError|SyntaxWarning|SystemError|SystemExit|TabError|TypeError|UnboundLocalError|UnicodeDecodeError|UnicodeEncodeError|UnicodeError|UnicodeTranslateError|UserWarning|ValueError|Warning|ZeroDivisionError)\b</string>
 			<key>name</key>
 			<string>keyword.exception.built-in.py</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\&lt;(__debug__|__import__|__name__|abs|apply|basestring|bool|buffer|callable|chr|classmethod|cmp|coerce|compile|complex|copyright|delattr|dict|dir|divmod|enumerate|eval|execfile|exit|file|filter|float|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|license|list|locals|long|map|max|min|object|oct|open|ord|pow|property|range|raw_input|reduce|reload|repr|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unichr|unicode|vars|xrange|zip)\&gt;</string>
+			<string>\b(__debug__|__import__|__name__|abs|apply|basestring|bool|buffer|callable|chr|classmethod|cmp|coerce|compile|complex|copyright|delattr|dict|dir|divmod|enumerate|eval|execfile|exit|file|filter|float|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|license|list|locals|long|map|max|min|object|oct|open|ord|pow|property|range|raw_input|reduce|reload|repr|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unichr|unicode|vars|xrange|zip)\b</string>
 			<key>name</key>
 			<string>keyword.function.built-in.py</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\&lt;((0(x|X)[0-9a-fA-F]*)|(([0-9]+[.]?[0-9]*)|([.][0-9]+))((e|E)(\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f)?[jJ]?\&gt;</string>
+			<string>\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+[.]?[0-9]*)|([.][0-9]+))((e|E)(\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f)?[jJ]?\b</string>
 			<key>name</key>
 			<string>constant.numeric.py</string>
 		</dict>
@@ -87,7 +87,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>^\s*(def)\s*(\&lt;__add__|__aepack__|__and__|__call__|__cmp__|__coerce__|__complex__|__contains__|__copy__|__deepcopy__|__delattr__|__delete__|__delitem__|__delslice__|__del__|__divmod__|__div__|__eq__|__float__|__floordiv__|__getattribute__|__getattr__|__getinitargs__|__getitem__|__getnewargs__|__getslice__|__getstate__|__get__|__ge__|__GNUC__|__gt__|__hash__|__iadd__|__iand__|__idiv__|__ifloordiv__|__ilshift__|__imod__|__imul__|__init__|__int__|__ior__|__ipow__|__irshift__|__isub__|__iter__|__itruediv__|__ixor__|__len__|__le__|__long__|__lshift__|__lt__|__main__|__mod__|__mul__|__newobj__|__new__|__ne__|__nonzero__|__or__|__pow__|__radd__|__rand__|__rdivmod__|__rdiv__|__reduce__|__repr__|__rfloordiv__|__rlshift__|__rmod__|__rmul__|__ror__|__rpow__|__rrshift__|__rshift__|__rsub__|__rtruediv__|__rxor__|__setattr__|__setitem__|__setslice__|__setstate__|__setup__|__set__|__str__|__sub__|__truediv__|__unicode__|__xor__\&gt;)\s*(\(((self).*)\))?:</string>
+			<string>^\s*(def)\s*(\b__add__|__aepack__|__and__|__call__|__cmp__|__coerce__|__complex__|__contains__|__copy__|__deepcopy__|__delattr__|__delete__|__delitem__|__delslice__|__del__|__divmod__|__div__|__eq__|__float__|__floordiv__|__getattribute__|__getattr__|__getinitargs__|__getitem__|__getnewargs__|__getslice__|__getstate__|__get__|__ge__|__GNUC__|__gt__|__hash__|__iadd__|__iand__|__idiv__|__ifloordiv__|__ilshift__|__imod__|__imul__|__init__|__int__|__ior__|__ipow__|__irshift__|__isub__|__iter__|__itruediv__|__ixor__|__len__|__le__|__long__|__lshift__|__lt__|__main__|__mod__|__mul__|__newobj__|__new__|__ne__|__nonzero__|__or__|__pow__|__radd__|__rand__|__rdivmod__|__rdiv__|__reduce__|__repr__|__rfloordiv__|__rlshift__|__rmod__|__rmul__|__ror__|__rpow__|__rrshift__|__rshift__|__rsub__|__rtruediv__|__rxor__|__setattr__|__setitem__|__setslice__|__setstate__|__setup__|__set__|__str__|__sub__|__truediv__|__unicode__|__xor__\b)\s*(\(((self).*)\))?:</string>
 			<key>name</key>
 			<string>declaration.function.operator.instance.py</string>
 		</dict>
@@ -111,7 +111,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>^\s*(def)\s*(\&lt;__add__|__aepack__|__and__|__call__|__cmp__|__coerce__|__complex__|__contains__|__copy__|__deepcopy__|__delattr__|__delete__|__delitem__|__delslice__|__del__|__divmod__|__div__|__eq__|__float__|__floordiv__|__getattribute__|__getattr__|__getinitargs__|__getitem__|__getnewargs__|__getslice__|__getstate__|__get__|__ge__|__GNUC__|__gt__|__hash__|__iadd__|__iand__|__idiv__|__ifloordiv__|__ilshift__|__imod__|__imul__|__init__|__int__|__ior__|__ipow__|__irshift__|__isub__|__iter__|__itruediv__|__ixor__|__len__|__le__|__long__|__lshift__|__lt__|__main__|__mod__|__mul__|__newobj__|__new__|__ne__|__nonzero__|__or__|__pow__|__radd__|__rand__|__rdivmod__|__rdiv__|__reduce__|__repr__|__rfloordiv__|__rlshift__|__rmod__|__rmul__|__ror__|__rpow__|__rrshift__|__rshift__|__rsub__|__rtruediv__|__rxor__|__setattr__|__setitem__|__setslice__|__setstate__|__setup__|__set__|__str__|__sub__|__truediv__|__unicode__|__xor__\&gt;)\s*(\((.*)\))?:</string>
+			<string>^\s*(def)\s*(\b__add__|__aepack__|__and__|__call__|__cmp__|__coerce__|__complex__|__contains__|__copy__|__deepcopy__|__delattr__|__delete__|__delitem__|__delslice__|__del__|__divmod__|__div__|__eq__|__float__|__floordiv__|__getattribute__|__getattr__|__getinitargs__|__getitem__|__getnewargs__|__getslice__|__getstate__|__get__|__ge__|__GNUC__|__gt__|__hash__|__iadd__|__iand__|__idiv__|__ifloordiv__|__ilshift__|__imod__|__imul__|__init__|__int__|__ior__|__ipow__|__irshift__|__isub__|__iter__|__itruediv__|__ixor__|__len__|__le__|__long__|__lshift__|__lt__|__main__|__mod__|__mul__|__newobj__|__new__|__ne__|__nonzero__|__or__|__pow__|__radd__|__rand__|__rdivmod__|__rdiv__|__reduce__|__repr__|__rfloordiv__|__rlshift__|__rmod__|__rmul__|__ror__|__rpow__|__rrshift__|__rshift__|__rsub__|__rtruediv__|__rxor__|__setattr__|__setitem__|__setslice__|__setstate__|__setup__|__set__|__str__|__sub__|__truediv__|__unicode__|__xor__\b)\s*(\((.*)\))?:</string>
 			<key>name</key>
 			<string>declaration.function.operator.py</string>
 		</dict>

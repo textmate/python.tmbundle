@@ -70,7 +70,7 @@
                 4 = {name = "entity.parameter.parent.class"; }; 
             }; 
         }, 
-        {   name = "comment.line.py";
+        {   name = "comment.line.number-sign.py";
             match = "#(.*)";
         }, 
         {   name = "string.multiline.single-quoted.py"; 

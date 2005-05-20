@@ -13,7 +13,7 @@ python "$TM_FILENAME"</string>
 	<key>input</key>
 	<string>document</string>
 	<key>keyEquivalent</key>
-	<string>@P</string>
+	<string>@r</string>
 	<key>name</key>
 	<string>Python</string>
 	<key>output</key>

@@ -74,42 +74,42 @@
             match = "#(.*)";
         }, 
         {   name = "string.multiline.single-quoted.py"; 
-            begin = "(r|u|ur|R|U|UR|Ur|uR){0,1}'''[^']*"; 
+            begin = "(r|u|ur|R|U|UR|Ur|uR)?'''[^']*"; 
             end = "'''"; 
-            swallow = "('[^']|''[^'])[^']*"; 
+            swallow = "\\\\."; 
             patterns = (
                 {   name = "string.interpolation.py"; 
-                    match = "%(\\([a-zA-Z_]+\\)){0,1}(0|\\-|\\+){0,1}([0-9\\.]*){0,1}[diuoxXfeEgGsrc]"; 
+                    match = "%(\\([a-zA-Z_]+\\))?(0|\\-|\\+)?([0-9\\.]*)?[diuoxXfeEgGsrc]"; 
                 }
             ); 
         }, 
         {   name = "string.multiline.double-quoted.py"; 
-            begin = "(r|u|ur|R|U|UR|Ur|uR){0,1}\"\"\"[^\"]*"; 
+            begin = "(r|u|ur|R|U|UR|Ur|uR)?\"\"\"[^\"]*"; 
             end = "\"\"\""; 
-            swallow = "(\"[^\"]|\"\"[^\"])[^\"]*"; 
+            swallow = "\\\\.";
             patterns = (
                 {   name = "string.interpolation.py"; 
-                    match = "%(\\([a-zA-Z_]+\\)){0,1}(0|\\-|\\+){0,1}([0-9\\.]*){0,1}[diuoxXfeEgGsrc]"; 
+                    match = "%(\\([a-zA-Z_]+\\))?(0|\\-|\\+)?([0-9\\.]*)?[diuoxXfeEgGsrc]"; 
                 }
             ); 
         }, 
         {   name = "string.single-quoted.py"; 
-            begin = "(r|u|ur|R|U|UR|Ur|uR){0,1}'"; 
+            begin = "(r|u|ur|R|U|UR|Ur|uR)?'"; 
             end = "'"; 
-            swallow = "[^'\n]|\\\\."; 
+            swallow = "\\\\."; 
             patterns = (
                 {   name = "string.interpolation.py"; 
-                    match = "%(\\([a-zA-Z_]+\\)){0,1}(0|\\-|\\+){0,1}([0-9\\.]*){0,1}[diuoxXfeEgGsrc]"; 
+                    match = "%(\\([a-zA-Z_]+\\))?(0|\\-|\\+)?([0-9\\.]*)?[diuoxXfeEgGsrc]"; 
                 }
             ); 
         }, 
         {   name = "string.double-quoted.py"; 
-            begin = "(r|u|ur|R|U|UR|Ur|uR){0,1}\""; 
+            begin = "(r|u|ur|R|U|UR|Ur|uR)?\""; 
             end = "\""; 
-            swallow = "[^\"\n]|\\\\."; 
+            swallow = "\\\\."; 
             patterns = (
                 {   name = "string.interpolation.py"; 
-                    match = "%(\\([a-zA-Z_]+\\)){0,1}(0|\\-|\\+){0,1}([0-9\\.]*){0,1}[diuoxXfeEgGsrc]"; 
+                    match = "%(\\([a-zA-Z_]+\\))?(0|\\-|\\+)?([0-9\\.]*)?[diuoxXfeEgGsrc]"; 
                 }
             ); 
         }

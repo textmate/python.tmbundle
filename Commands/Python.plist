@@ -8,7 +8,6 @@
 	<string># Run python on the current file
 # 
 
-cd `dirname "$TM_FILEPATH"`
 python "$TM_FILENAME"</string>
 	<key>input</key>
 	<string>none</string>

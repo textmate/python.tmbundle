@@ -1,5 +1,5 @@
 {
-    name = "Python-new"; 
+    name = "Python"; 
     scopeName = "source.python"; 
     firstLineMatch = "^#!/.*\\bpython\\b"; 
     fileTypes = (py, rpy, cpy); 

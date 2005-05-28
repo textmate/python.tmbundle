@@ -23,7 +23,7 @@ rm "$TM_SELECTED_TEXT".html</string>
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>
-	<string></string>
+	<string></string>
 	<key>name</key>
 	<string>pydoc</string>
 	<key>output</key>

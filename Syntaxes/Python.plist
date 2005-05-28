@@ -44,7 +44,7 @@
             match = "^\\s*@([a-zA-Z_][a-zA-Z_0-9]*)(\\(.*\\))?"; 
         },
         {   name = "declaration.function.operator.py"; 
-            match = "^\\s*(def)\\s+(__(add|aepack|and|call|cmp|coerce|complex|contains|copy|deepcopy|delattr|delete|delitem|delslice|del|divmod|div|eq|float|floordiv|getattribute|getattr|getinitargs|getitem|getnewargs|getslice|getstate|get|ge|GNUC|gt|hash|iadd|iand|idiv|ifloordiv|ilshift|imod|imul|init|int|ior|ipow|irshift|isub|iter|itruediv|ixor|len|le|long|lshift|lt|main|mod|mul|newobj|new|ne|nonzero|or|pow|radd|rand|rdivmod|rdiv|reduce|repr|rfloordiv|rlshift|rmod|rmul|ror|rpow|rrshift|rshift|rsub|rtruediv|rxor|setattr|setitem|setslice|setstate|setup|set|str|sub|truediv|unicode|xor)__)\\s*(\\((self)?.*\\)):"; 
+            match = "^\\s*(def)\\s+(__(add|aepack|and|call|cmp|coerce|complex|contains|copy|deepcopy|delattr|delete|delitem|delslice|del|divmod|div|eq|float|floordiv|getattribute|getattr|getinitargs|getitem|getnewargs|getslice|getstate|get|ge|GNUC|gt|hash|iadd|iand|idiv|ifloordiv|ilshift|imod|imul|init|int|ior|ipow|irshift|isub|iter|itruediv|ixor|len|le|long|lshift|lt|main|mod|mul|newobj|new|ne|nonzero|or|pow|radd|rand|rdivmod|rdiv|reduce|repr|rfloordiv|rlshift|rmod|rmul|ror|rpow|rrshift|rshift|rsub|rtruediv|rxor|setattr|setitem|setslice|setstate|setup|set|str|sub|truediv|unicode|xor)__)\\s*(\\((self)?(.*)\\)):"; 
             captures = {
                 1 = {name = "storage.type.py"; }; 
                 2 = {name = "entity.name.function.py"; }; 
@@ -54,7 +54,7 @@
             }; 
         }, 
         {   name = "declaration.function.py"; 
-            match = "^\\s*(def)\\s+([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\((self)?(,\\s*(.*))*\\)):"; 
+            match = "^\\s*(def)\\s+([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\((self)?(.*)\\)):"; 
             captures = {
                 1 = {name = "storage.type.py"; }; 
                 2 = {name = "entity.name.function.py"; }; 

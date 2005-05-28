@@ -1,5 +1,5 @@
 {
-    name = "Python"; 
+    name = "Python-new"; 
     scopeName = "source.python"; 
     firstLineMatch = "^#!/.*\\bpython\\b"; 
     fileTypes = (py, rpy, cpy); 
@@ -10,64 +10,65 @@
         {   name = "invalid.trailing-whitespace"; 
             match = "( |\t)+$";
         },
-        {   name = "keyword.built-in.py"; 
-            match = "\\b(and|as|assert|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|not|or|pass|print|raise|return|try|while|yield)\\b"; 
+        {   name = "keyword.flow.py"; 
+            match = "\\b(break|continue|elif|else|except|finally|for|if|pass|raise|return|try|while|yield)\\b"; 
         }, 
-        {   name = "keyword.identifier.built-in.py"; 
+        {   name = "keyword.operator.py"; 
+            match = "\\b(and|as|assert|del|exec|global|lambda|in|is|not|or|print)\\b"; 
+        },
+        {   name = "keyword.other.include.import";
+            match = "\\bimport\\b";
+        },
+        {   name = "keyword.other.include.from";
+            match = "\\bfrom\\b";
+        },
+        {   name = "constant.language.py"; 
             match = "\\b(True|False|None|Ellipsis|self)\\b"; 
-        }, 
-        {   name = "keyword.exception.built-in.py"; 
-            match = "\\b(ArithmeticError|AssertionError|AttributeError|DeprecationWarning|EOFError|EnvironmentError|Exception|FloatingPointError|FutureWarning|IOError|ImportError|IndentationError|IndexError|KeyError|KeyboardInterrupt|LookupError|MemoryError|NameError|NotImplemented|NotImplementedError|OSError|OverflowError|OverflowWarning|PendingDeprecationWarning|ReferenceError|RuntimeError|RuntimeWarning|StandardError|StopIteration|SyntaxError|SyntaxWarning|SystemError|SystemExit|TabError|TypeError|UnboundLocalError|UnicodeDecodeError|UnicodeEncodeError|UnicodeError|UnicodeTranslateError|UserWarning|ValueError|Warning|ZeroDivisionError)\\b"; 
-        }, 
-        {   name = "keyword.function.built-in.py"; 
-            match = "\\b(__debug__|__import__|__name__|abs|apply|basestring|bool|buffer|callable|chr|classmethod|cmp|coerce|compile|complex|copyright|delattr|dict|dir|divmod|enumerate|eval|execfile|exit|file|filter|float|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|license|list|locals|long|map|max|min|object|oct|open|ord|pow|property|range|raw_input|reduce|reload|repr|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unichr|unicode|vars|xrange|zip)\\b"; 
         }, 
         {   name = "constant.numeric.py"; 
             match = "\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+[.]?[0-9]*)|([.][0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f)?[jJ]?\\b"; 
         }, 
-        {   name = "declaration.decorator.py"; 
+        {   name = "support.type.py";
+            match ="\\b(bool|dict|float|hex|int|list|long|oct|str|tuple)\\b";
+        },
+        {   name = "support.function.py"; 
+            match = "\\b(__debug__|__import__|__name__|abs|apply|basestring|bool|buffer|callable|chr|classmethod|cmp|coerce|compile|complex|copyright|delattr|dict|dir|divmod|enumerate|eval|execfile|exit|file|filter|float|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|license|list|locals|long|map|max|min|object|oct|open|ord|pow|property|range|raw_input|reduce|reload|repr|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unichr|unicode|vars|xrange|zip)\\b\\(.*\\)"; 
+        },
+        {   name = "support.constant.py";
+            match = "\\b__(bases|dict|doc|file|name|path|self)__\\b";
+        },
+        {   name = "support.class.exception.py"; 
+            match = "\\b(ArithmeticError|AssertionError|AttributeError|DeprecationWarning|EOFError|EnvironmentError|Exception|FloatingPointError|FutureWarning|IOError|ImportError|IndentationError|IndexError|KeyError|KeyboardInterrupt|LookupError|MemoryError|NameError|NotImplemented|NotImplementedError|OSError|OverflowError|OverflowWarning|PendingDeprecationWarning|ReferenceError|RuntimeError|RuntimeWarning|StandardError|StopIteration|SyntaxError|SyntaxWarning|SystemError|SystemExit|TabError|TypeError|UnboundLocalError|UnicodeDecodeError|UnicodeEncodeError|UnicodeError|UnicodeTranslateError|UserWarning|ValueError|Warning|ZeroDivisionError)\\b"; 
+        },
+        {   name = "declaration.function.decorator.py"; 
             match = "^\\s*@([a-zA-Z_][a-zA-Z_0-9]*)(\\(.*\\))?"; 
-        }, 
-        {   name = "declaration.function.operator.instance.py"; 
-            match = "^\\s*(def)\\s*(\\b__add__|__aepack__|__and__|__call__|__cmp__|__coerce__|__complex__|__contains__|__copy__|__deepcopy__|__delattr__|__delete__|__delitem__|__delslice__|__del__|__divmod__|__div__|__eq__|__float__|__floordiv__|__getattribute__|__getattr__|__getinitargs__|__getitem__|__getnewargs__|__getslice__|__getstate__|__get__|__ge__|__GNUC__|__gt__|__hash__|__iadd__|__iand__|__idiv__|__ifloordiv__|__ilshift__|__imod__|__imul__|__init__|__int__|__ior__|__ipow__|__irshift__|__isub__|__iter__|__itruediv__|__ixor__|__len__|__le__|__long__|__lshift__|__lt__|__main__|__mod__|__mul__|__newobj__|__new__|__ne__|__nonzero__|__or__|__pow__|__radd__|__rand__|__rdivmod__|__rdiv__|__reduce__|__repr__|__rfloordiv__|__rlshift__|__rmod__|__rmul__|__ror__|__rpow__|__rrshift__|__rshift__|__rsub__|__rtruediv__|__rxor__|__setattr__|__setitem__|__setslice__|__setstate__|__setup__|__set__|__str__|__sub__|__truediv__|__unicode__|__xor__\\b)\\s*(\\(((self).*)\\))?:"; 
-            captures = {
-                1 = {name = "keyword.built-in.py"; }; 
-                2 = {name = "entity.name.function"; }; 
-                4 = {name = "entity.parameter.variable.function"; }; 
-                5 = {name = "keyword.identifier.built-in.py"; }; 
-            }; 
-        }, 
+        },
         {   name = "declaration.function.operator.py"; 
-            match = "^\\s*(def)\\s*(\\b__add__|__aepack__|__and__|__call__|__cmp__|__coerce__|__complex__|__contains__|__copy__|__deepcopy__|__delattr__|__delete__|__delitem__|__delslice__|__del__|__divmod__|__div__|__eq__|__float__|__floordiv__|__getattribute__|__getattr__|__getinitargs__|__getitem__|__getnewargs__|__getslice__|__getstate__|__get__|__ge__|__GNUC__|__gt__|__hash__|__iadd__|__iand__|__idiv__|__ifloordiv__|__ilshift__|__imod__|__imul__|__init__|__int__|__ior__|__ipow__|__irshift__|__isub__|__iter__|__itruediv__|__ixor__|__len__|__le__|__long__|__lshift__|__lt__|__main__|__mod__|__mul__|__newobj__|__new__|__ne__|__nonzero__|__or__|__pow__|__radd__|__rand__|__rdivmod__|__rdiv__|__reduce__|__repr__|__rfloordiv__|__rlshift__|__rmod__|__rmul__|__ror__|__rpow__|__rrshift__|__rshift__|__rsub__|__rtruediv__|__rxor__|__setattr__|__setitem__|__setslice__|__setstate__|__setup__|__set__|__str__|__sub__|__truediv__|__unicode__|__xor__\\b)\\s*(\\((.*)\\))?:"; 
+            match = "^\\s*(def)\\s+(__(add|aepack|and|call|cmp|coerce|complex|contains|copy|deepcopy|delattr|delete|delitem|delslice|del|divmod|div|eq|float|floordiv|getattribute|getattr|getinitargs|getitem|getnewargs|getslice|getstate|get|ge|GNUC|gt|hash|iadd|iand|idiv|ifloordiv|ilshift|imod|imul|init|int|ior|ipow|irshift|isub|iter|itruediv|ixor|len|le|long|lshift|lt|main|mod|mul|newobj|new|ne|nonzero|or|pow|radd|rand|rdivmod|rdiv|reduce|repr|rfloordiv|rlshift|rmod|rmul|ror|rpow|rrshift|rshift|rsub|rtruediv|rxor|setattr|setitem|setslice|setstate|setup|set|str|sub|truediv|unicode|xor)__)\\s*(\\((self)?.*\\)):"; 
             captures = {
-                1 = {name = "keyword.built-in.py"; }; 
-                2 = {name = "entity.name.function"; }; 
-                4 = {name = "entity.parameter.variable.function"; }; 
-            }; 
-        }, 
-        {   name = "declaration.function.instance.py"; 
-            match = "^\\s*(def)\\s*([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\(((self).*)\\))?:"; 
-            captures = {
-                1 = {name = "keyword.built-in.py"; }; 
-                2 = {name = "entity.name.function"; }; 
-                4 = {name = "entity.parameter.variable.function"; }; 
-                5 = {name = "keyword.identifier.built-in.py"; }; 
+                1 = {name = "storage.type.py"; }; 
+                2 = {name = "entity.name.function.py"; }; 
+                4 = {name = "declaration.parameter.py"; }; 
+                5 = {name = "constant.language.py"; }; 
+                7 = {name = "variable.parameter.py"; }; 
             }; 
         }, 
         {   name = "declaration.function.py"; 
-            match = "^\\s*(def)\\s*([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\((.*)\\))?:"; 
+            match = "^\\s*(def)\\s+([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\((self)?(,\\s*(.*))*\\)):"; 
             captures = {
-                1 = {name = "keyword.built-in.py"; }; 
-                2 = {name = "entity.name.function"; }; 
-                4 = {name = "entity.parameter.variable.function"; }; 
+                1 = {name = "storage.type.py"; }; 
+                2 = {name = "entity.name.function.py"; }; 
+                3 = {name = "declaration.parameter.py"; }; 
+                4 = {name = "constant.language.py"; }; 
+                6 = {name = "variable.parameter.py"; }; 
             }; 
         }, 
         {   name = "declaration.class.py"; 
-            match = "^\\s*(class)\\s*([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\((.*)\\))?:"; 
+            match = "^\\s*(class)\\s+([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\((.*)\\))?:"; 
             captures = {
-                1 = {name = "keyword.built-in.py"; }; 
-                2 = {name = "entity.name.class"; }; 
-                4 = {name = "entity.parameter.parent.class"; }; 
+                1 = {name = "storage.type.py"; }; 
+                2 = {name = "entity.name.class.py"; }; 
+                4 = {name = "entity.other.inherited-class.py"; }; 
             }; 
         }, 
         {   name = "comment.line.number-sign.py";
@@ -78,7 +79,7 @@
             end = "'''"; 
             swallow = "\\\\."; 
             patterns = (
-                {   name = "string.interpolation.py"; 
+                {   name = "string.interpolated.py"; 
                     match = "%(\\([a-zA-Z_]+\\))?(0|\\-|\\+)?([0-9\\.]*)?[diuoxXfeEgGsrc]"; 
                 }
             ); 
@@ -88,7 +89,7 @@
             end = "\"\"\""; 
             swallow = "\\\\.";
             patterns = (
-                {   name = "string.interpolation.py"; 
+                {   name = "string.interpolated.py"; 
                     match = "%(\\([a-zA-Z_]+\\))?(0|\\-|\\+)?([0-9\\.]*)?[diuoxXfeEgGsrc]"; 
                 }
             ); 
@@ -98,7 +99,7 @@
             end = "'"; 
             swallow = "\\\\."; 
             patterns = (
-                {   name = "string.interpolation.py"; 
+                {   name = "string.interpolated.py"; 
                     match = "%(\\([a-zA-Z_]+\\))?(0|\\-|\\+)?([0-9\\.]*)?[diuoxXfeEgGsrc]"; 
                 }
             ); 
@@ -108,7 +109,7 @@
             end = "\""; 
             swallow = "\\\\."; 
             patterns = (
-                {   name = "string.interpolation.py"; 
+                {   name = "string.interpolated.py"; 
                     match = "%(\\([a-zA-Z_]+\\))?(0|\\-|\\+)?([0-9\\.]*)?[diuoxXfeEgGsrc]"; 
                 }
             ); 

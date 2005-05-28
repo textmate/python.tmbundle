@@ -3,15 +3,15 @@
 <plist version="1.0">
 <dict>
 	<key>beforeRunningCommand</key>
-	<string>nop</string>
+	<string>saveActiveFile</string>
 	<key>command</key>
-	<string># Run python on the current buffer
+	<string># Run python on the current file
 # 
 
 cd `dirname "$TM_FILEPATH"`
 python "$TM_FILENAME"</string>
 	<key>input</key>
-	<string>document</string>
+	<string>none</string>
 	<key>keyEquivalent</key>
 	<string>@r</string>
 	<key>name</key>

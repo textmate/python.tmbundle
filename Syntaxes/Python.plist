@@ -6,6 +6,10 @@
     keyEquivalent = "^~P"; 
     foldingStartMarker = "^\\s*(def|class)\\s+([.a-zA-Z0-9_ b]+)\\s*(\\((.*)\\))?\\s*:|\\{\\s*$|\\(\\s*$|\\[\\s*$"; 
     foldingStopMarker = "^\\s*$|^\\s*\\}|^\\s*\\]|^\\s*\\)"; 
+    shellVariables = (
+       { name = "TM_COMMENT_START"; value = "# "; }, 
+       { name = "TM_COMMENT_MODE";  value = "line"; }
+    ); 
     patterns = (
         {   name = "invalid.trailing-whitespace"; 
             match = "( |\t)+$";
@@ -95,7 +99,7 @@
             ); 
         }, 
         {   name = "string.single-quoted.py"; 
-            begin = "(r|u|ur|R|U|UR|Ur|uR)?'"; 
+            begin = "(r|u|ur|R|U|UR|Ur|uR)?'(?=.*([\\\\$]|\'))"; 
             end = "'"; 
             swallow = "\\\\."; 
             patterns = (
@@ -105,7 +109,7 @@
             ); 
         }, 
         {   name = "string.double-quoted.py"; 
-            begin = "(r|u|ur|R|U|UR|Ur|uR)?\""; 
+            begin = "(r|u|ur|R|U|UR|Ur|uR)?\"(?=.*([\\\\$]|\"))"; 
             end = "\""; 
             swallow = "\\\\."; 
             patterns = (

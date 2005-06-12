@@ -7,10 +7,10 @@
     foldingStartMarker = "^\\s*(def|class)\\s+([.a-zA-Z0-9_ b]+)\\s*(\\((.*)\\))?\\s*:|\\{\\s*$|\\(\\s*$|\\[\\s*$"; 
     foldingStopMarker = "^\\s*$|^\\s*\\}|^\\s*\\]|^\\s*\\)"; 
     patterns = (
-        {   name = "invalid.trailing-whitespace"; 
+        {   name = "invalid.deprecated.trailing-whitespace"; 
             match = "( |\t)+$";
         },
-        {   name = "keyword.flow.py"; 
+        {   name = "keyword.control.py"; 
             match = "\\b(break|continue|elif|else|except|finally|for|if|pass|raise|return|try|while|yield)\\b"; 
         }, 
         {   name = "keyword.operator.py"; 
@@ -74,7 +74,7 @@
         {   name = "comment.line.number-sign.py";
             match = "#(.*)";
         }, 
-        {   name = "string.multiline.single-quoted.py"; 
+        {   name = "string.quoted.single.multiline.py"; 
             begin = "(r|u|ur|R|U|UR|Ur|uR)?'''[^']*"; 
             end = "'''"; 
             swallow = "\\\\."; 
@@ -84,7 +84,7 @@
                 }
             ); 
         }, 
-        {   name = "string.multiline.double-quoted.py"; 
+        {   name = "string.quoted.double.multiline.py"; 
             begin = "(r|u|ur|R|U|UR|Ur|uR)?\"\"\"[^\"]*"; 
             end = "\"\"\""; 
             swallow = "\\\\.";
@@ -94,7 +94,7 @@
                 }
             ); 
         }, 
-        {   name = "string.single-quoted.py"; 
+        {   name = "string.quoted.single.py"; 
             begin = "(r|u|ur|R|U|UR|Ur|uR)?'(?=.*([\\\\$]|\'))"; 
             end = "'|(?<!\\\\)(?:\\\\\\\\)*(\\n)";
             endCaptures = {
@@ -107,7 +107,7 @@
                 }
             ); 
         }, 
-        {   name = "string.double-quoted.py"; 
+        {   name = "string.quoted.double.py"; 
             begin = "(r|u|ur|R|U|UR|Ur|uR)?\""; 
             end = "\"|(?<!\\\\)(?:\\\\\\\\)*(\\n)"; 
             endCaptures = {

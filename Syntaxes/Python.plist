@@ -1,125 +1,306 @@
-{
-    name = "Python"; 
-    scopeName = "source.python"; 
-    firstLineMatch = "^#!/.*\\bpython\\b"; 
-    fileTypes = (py, rpy, cpy); 
-    keyEquivalent = "^~P"; 
-    foldingStartMarker = "^\\s*(def|class)\\s+([.a-zA-Z0-9_ b]+)\\s*(\\((.*)\\))?\\s*:|\\{\\s*$|\\(\\s*$|\\[\\s*$"; 
-    foldingStopMarker = "^\\s*$|^\\s*\\}|^\\s*\\]|^\\s*\\)"; 
-    patterns = (
-        {   name = "invalid.deprecated.trailing-whitespace"; 
-            match = "( |\t)+$";
-        },
-        {   name = "keyword.control.py"; 
-            match = "\\b(break|continue|elif|else|except|finally|for|if|pass|raise|return|try|while|yield)\\b"; 
-        }, 
-        {   name = "keyword.operator.py"; 
-            match = "\\b(and|as|assert|del|exec|global|lambda|in|is|not|or|print)\\b"; 
-        },
-        {   name = "keyword.other.include.import";
-            match = "\\bimport\\b";
-        },
-        {   name = "keyword.other.include.from";
-            match = "\\bfrom\\b";
-        },
-        {   name = "constant.language.py"; 
-            match = "\\b(True|False|None|Ellipsis|self)\\b"; 
-        }, 
-        {   name = "constant.numeric.py"; 
-            match = "\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+[.]?[0-9]*)|([.][0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f)?[jJ]?\\b"; 
-        }, 
-        {   name = "support.type.py";
-            match ="\\b(bool|dict|float|hex|int|list|long|oct|str|tuple)\\b";
-        },
-        {   name = "support.function.py"; 
-            match = "\\b(__debug__|__import__|__name__|abs|apply|basestring|bool|buffer|callable|chr|classmethod|cmp|coerce|compile|complex|copyright|delattr|dict|dir|divmod|enumerate|eval|execfile|exit|file|filter|float|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|license|list|locals|long|map|max|min|object|oct|open|ord|pow|property|range|raw_input|reduce|reload|repr|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unichr|unicode|vars|xrange|zip)\\b(?=\\(.*\\))"; 
-        },
-        {   name = "support.constant.py";
-            match = "\\b__(bases|dict|doc|file|name|path|self)__\\b";
-        },
-        {   name = "support.class.exception.py"; 
-            match = "\\b(ArithmeticError|AssertionError|AttributeError|DeprecationWarning|EOFError|EnvironmentError|Exception|FloatingPointError|FutureWarning|IOError|ImportError|IndentationError|IndexError|KeyError|KeyboardInterrupt|LookupError|MemoryError|NameError|NotImplemented|NotImplementedError|OSError|OverflowError|OverflowWarning|PendingDeprecationWarning|ReferenceError|RuntimeError|RuntimeWarning|StandardError|StopIteration|SyntaxError|SyntaxWarning|SystemError|SystemExit|TabError|TypeError|UnboundLocalError|UnicodeDecodeError|UnicodeEncodeError|UnicodeError|UnicodeTranslateError|UserWarning|ValueError|Warning|ZeroDivisionError)\\b"; 
-        },
-        {   name = "declaration.function.decorator.py"; 
-            match = "^\\s*@([a-zA-Z_][a-zA-Z_0-9]*)(\\(.*\\))?"; 
-        },
-        {   name = "declaration.function.operator.py"; 
-            match = "^\\s*(def)\\s+(__(add|aepack|and|call|cmp|coerce|complex|contains|copy|deepcopy|delattr|delete|delitem|delslice|del|divmod|div|eq|float|floordiv|getattribute|getattr|getinitargs|getitem|getnewargs|getslice|getstate|get|ge|GNUC|gt|hash|iadd|iand|idiv|ifloordiv|ilshift|imod|imul|init|int|ior|ipow|irshift|isub|iter|itruediv|ixor|len|le|long|lshift|lt|main|mod|mul|newobj|new|ne|nonzero|or|pow|radd|rand|rdivmod|rdiv|reduce|repr|rfloordiv|rlshift|rmod|rmul|ror|rpow|rrshift|rshift|rsub|rtruediv|rxor|setattr|setitem|setslice|setstate|setup|set|str|sub|truediv|unicode|xor)__)\\s*(\\((self)?(.*)\\)):"; 
-            captures = {
-                1 = {name = "storage.type.py"; }; 
-                2 = {name = "entity.name.function.py"; }; 
-                4 = {name = "declaration.parameter.py"; }; 
-                5 = {name = "constant.language.py"; }; 
-                7 = {name = "variable.parameter.py"; }; 
-            }; 
-        }, 
-        {   name = "declaration.function.py"; 
-            match = "^\\s*(def)\\s+([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\((self)?(.*)\\)):"; 
-            captures = {
-                1 = {name = "storage.type.py"; }; 
-                2 = {name = "entity.name.function.py"; }; 
-                3 = {name = "declaration.parameter.py"; }; 
-                4 = {name = "constant.language.py"; }; 
-                6 = {name = "variable.parameter.py"; }; 
-            }; 
-        }, 
-        {   name = "declaration.class.py"; 
-            match = "^\\s*(class)\\s+([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\((.*)\\))?:"; 
-            captures = {
-                1 = {name = "storage.type.py"; }; 
-                2 = {name = "entity.name.class.py"; }; 
-                4 = {name = "entity.other.inherited-class.py"; }; 
-            }; 
-        }, 
-        {   name = "comment.line.number-sign.py";
-            match = "#(.*)";
-        }, 
-        {   name = "string.quoted.single.multiline.py"; 
-            begin = "(r|u|ur|R|U|UR|Ur|uR)?'''[^']*"; 
-            end = "'''"; 
-            swallow = "\\\\."; 
-            patterns = (
-                {   name = "string.interpolated.py"; 
-                    match = "%(\\([a-zA-Z_]+\\))?(0|\\-|\\+)?([0-9\\.]*)?[diuoxXfeEgGsrc]"; 
-                }
-            ); 
-        }, 
-        {   name = "string.quoted.double.multiline.py"; 
-            begin = "(r|u|ur|R|U|UR|Ur|uR)?\"\"\"[^\"]*"; 
-            end = "\"\"\""; 
-            swallow = "\\\\.";
-            patterns = (
-                {   name = "string.interpolated.py"; 
-                    match = "%(\\([a-zA-Z_]+\\))?(0|\\-|\\+)?([0-9\\.]*)?[diuoxXfeEgGsrc]"; 
-                }
-            ); 
-        }, 
-        {   name = "string.quoted.single.py"; 
-            begin = "(r|u|ur|R|U|UR|Ur|uR)?'(?=.*([\\\\$]|\'))"; 
-            end = "'|(?<!\\\\)(?:\\\\\\\\)*(\\n)";
-            endCaptures = {
-               1 = { name = "invalid.illegal.open-string.py"; };
-            }; 
-            swallow = "\\\\."; 
-            patterns = (
-                {   name = "string.interpolated.py"; 
-                    match = "%(\\([a-zA-Z_]+\\))?(0|\\-|\\+)?([0-9\\.]*)?[diuoxXfeEgGsrc]"; 
-                }
-            ); 
-        }, 
-        {   name = "string.quoted.double.py"; 
-            begin = "(r|u|ur|R|U|UR|Ur|uR)?\""; 
-            end = "\"|(?<!\\\\)(?:\\\\\\\\)*(\\n)"; 
-            endCaptures = {
-               1 = { name = "invalid.illegal.open-string.py"; };
-            }; 
-            swallow = "\\\\."; 
-            patterns = (
-                {   name = "string.interpolated.py"; 
-                    match = "%(\\([a-zA-Z_]+\\))?(0|\\-|\\+)?([0-9\\.]*)?[diuoxXfeEgGsrc]"; 
-                }
-            ); 
-        }
-    ); 
-    uuid = "F23DB5B2-7D08-11D9-A709-000D93B6E43C"; 
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>fileTypes</key>
+	<array>
+		<string>py</string>
+		<string>rpy</string>
+		<string>cpy</string>
+	</array>
+	<key>firstLineMatch</key>
+	<string>^#!/.*\bpython\b</string>
+	<key>foldingStartMarker</key>
+	<string>^\s*(def|class)\s+([.a-zA-Z0-9_ b]+)\s*(\((.*)\))?\s*:|\{\s*$|\(\s*$|\[\s*$</string>
+	<key>foldingStopMarker</key>
+	<string>^\s*$|^\s*\}|^\s*\]|^\s*\)</string>
+	<key>keyEquivalent</key>
+	<string>^~P</string>
+	<key>name</key>
+	<string>Python</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>match</key>
+			<string>( |	)+$</string>
+			<key>name</key>
+			<string>invalid.deprecated.trailing-whitespace</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\b(break|continue|elif|else|except|finally|for|if|pass|raise|return|try|while|yield)\b</string>
+			<key>name</key>
+			<string>keyword.control.py</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\b(and|as|assert|del|exec|global|lambda|in|is|not|or|print)\b</string>
+			<key>name</key>
+			<string>keyword.operator.py</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\bimport\b</string>
+			<key>name</key>
+			<string>keyword.other.include.import</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\bfrom\b</string>
+			<key>name</key>
+			<string>keyword.other.include.from</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\b(True|False|None|Ellipsis|self)\b</string>
+			<key>name</key>
+			<string>constant.language.py</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+[.]?[0-9]*)|([.][0-9]+))((e|E)(\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f)?[jJ]?\b</string>
+			<key>name</key>
+			<string>constant.numeric.py</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\b(bool|dict|float|hex|int|list|long|oct|str|tuple)\b</string>
+			<key>name</key>
+			<string>support.type.py</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\b(__debug__|__import__|__name__|abs|apply|basestring|bool|buffer|callable|chr|classmethod|cmp|coerce|compile|complex|copyright|delattr|dict|dir|divmod|enumerate|eval|execfile|exit|file|filter|float|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|license|list|locals|long|map|max|min|object|oct|open|ord|pow|property|range|raw_input|reduce|reload|repr|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unichr|unicode|vars|xrange|zip)\b(?=\(.*\))</string>
+			<key>name</key>
+			<string>support.function.py</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\b__(bases|dict|doc|file|name|path|self)__\b</string>
+			<key>name</key>
+			<string>support.constant.py</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\b(ArithmeticError|AssertionError|AttributeError|DeprecationWarning|EOFError|EnvironmentError|Exception|FloatingPointError|FutureWarning|IOError|ImportError|IndentationError|IndexError|KeyError|KeyboardInterrupt|LookupError|MemoryError|NameError|NotImplemented|NotImplementedError|OSError|OverflowError|OverflowWarning|PendingDeprecationWarning|ReferenceError|RuntimeError|RuntimeWarning|StandardError|StopIteration|SyntaxError|SyntaxWarning|SystemError|SystemExit|TabError|TypeError|UnboundLocalError|UnicodeDecodeError|UnicodeEncodeError|UnicodeError|UnicodeTranslateError|UserWarning|ValueError|Warning|ZeroDivisionError)\b</string>
+			<key>name</key>
+			<string>support.class.exception.py</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>^\s*@([a-zA-Z_][a-zA-Z_0-9]*)(\(.*\))?</string>
+			<key>name</key>
+			<string>declaration.function.decorator.py</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.py</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function.py</string>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>declaration.parameter.py</string>
+				</dict>
+				<key>5</key>
+				<dict>
+					<key>name</key>
+					<string>constant.language.py</string>
+				</dict>
+				<key>7</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter.py</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>^\s*(def)\s+(__(add|aepack|and|call|cmp|coerce|complex|contains|copy|deepcopy|delattr|delete|delitem|delslice|del|divmod|div|eq|float|floordiv|getattribute|getattr|getinitargs|getitem|getnewargs|getslice|getstate|get|ge|GNUC|gt|hash|iadd|iand|idiv|ifloordiv|ilshift|imod|imul|init|int|ior|ipow|irshift|isub|iter|itruediv|ixor|len|le|long|lshift|lt|main|mod|mul|newobj|new|ne|nonzero|or|pow|radd|rand|rdivmod|rdiv|reduce|repr|rfloordiv|rlshift|rmod|rmul|ror|rpow|rrshift|rshift|rsub|rtruediv|rxor|setattr|setitem|setslice|setstate|setup|set|str|sub|truediv|unicode|xor)__)\s*(\((self)?(.*)\)):</string>
+			<key>name</key>
+			<string>declaration.function.operator.py</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>^\s*(def)\s+([a-zA-Z_][a-zA-Z_0-9]*)\s*\(</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.py</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function.py</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>\):</string>
+			<key>name</key>
+			<string>declaration.function.py</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>constant.language.py</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>variable.parameter.py</string>
+						</dict>
+					</dict>
+					<key>match</key>
+					<string>(self)?([^\)]*)</string>
+					<key>name</key>
+					<string>declaration.parameter.py</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>^\s*(class)\s+([a-zA-Z_][a-zA-Z_0-9]*)\s*(\()?</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.py</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.class.py</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>(\))?:</string>
+			<key>name</key>
+			<string>declaration.class.py</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>[^\)]*</string>
+					<key>name</key>
+					<string>entity.other.inherited-class.py</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>#(.*)</string>
+			<key>name</key>
+			<string>comment.line.number-sign.py</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>(r|u|ur|R|U|UR|Ur|uR)?'''[^']*</string>
+			<key>end</key>
+			<string>'''</string>
+			<key>name</key>
+			<string>string.quoted.single.multiline.py</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>%(\([a-zA-Z_]+\))?(0|\-|\+)?([0-9\.]*)?[diuoxXfeEgGsrc]</string>
+					<key>name</key>
+					<string>string.interpolated.py</string>
+				</dict>
+			</array>
+			<key>swallow</key>
+			<string>\\.</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>(r|u|ur|R|U|UR|Ur|uR)?"""[^"]*</string>
+			<key>end</key>
+			<string>"""</string>
+			<key>name</key>
+			<string>string.quoted.double.multiline.py</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>%(\([a-zA-Z_]+\))?(0|\-|\+)?([0-9\.]*)?[diuoxXfeEgGsrc]</string>
+					<key>name</key>
+					<string>string.interpolated.py</string>
+				</dict>
+			</array>
+			<key>swallow</key>
+			<string>\\.</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>(r|u|ur|R|U|UR|Ur|uR)?'(?=.*([\\$]|'))</string>
+			<key>end</key>
+			<string>'|(?&lt;!\\)(?:\\\\)*(\n)</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>invalid.illegal.open-string.py</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>string.quoted.single.py</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>%(\([a-zA-Z_]+\))?(0|\-|\+)?([0-9\.]*)?[diuoxXfeEgGsrc]</string>
+					<key>name</key>
+					<string>string.interpolated.py</string>
+				</dict>
+			</array>
+			<key>swallow</key>
+			<string>\\.</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>(r|u|ur|R|U|UR|Ur|uR)?"</string>
+			<key>end</key>
+			<string>"|(?&lt;!\\)(?:\\\\)*(\n)</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>invalid.illegal.open-string.py</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>string.quoted.double.py</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>%(\([a-zA-Z_]+\))?(0|\-|\+)?([0-9\.]*)?[diuoxXfeEgGsrc]</string>
+					<key>name</key>
+					<string>string.interpolated.py</string>
+				</dict>
+			</array>
+			<key>swallow</key>
+			<string>\\.</string>
+		</dict>
+	</array>
+	<key>scopeName</key>
+	<string>source.python</string>
+	<key>uuid</key>
+	<string>F23DB5B2-7D08-11D9-A709-000D93B6E43C</string>
+</dict>
+</plist>

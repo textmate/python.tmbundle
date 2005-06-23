@@ -7,8 +7,8 @@
 	<key>command</key>
 	<string># Run python on the current file
 # 
-
-python "$TM_FILENAME"</string>
+cd `dirname "$TM_FILEPATH"`
+python "$TM_FILEPATH"</string>
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>

@@ -11,10 +11,11 @@
 	<key>command</key>
 	<string>#!/usr/bin/env bash
 cd `dirname "$TM_FILEPATH"`
+TPY=${TM_PYTHON:=python}
 
 for x in `ls -1 | grep Test.*\.py$`
 do
-    python $x
+    $TPY $x
 done</string>
 	<key>fileCaptureRegister</key>
 	<string>1</string>

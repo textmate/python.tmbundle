@@ -9,6 +9,7 @@
 # according to the user's value for TM_TERM_PROG
 # Default to Terminal.app since that is standard.
 TP=${TM_TERM_PROG:=Terminal}
+TPY=${TM_PYTHON:=python}
 
 if [ "$TP" == iTerm ]; then
     osascript &lt;&lt;END
@@ -18,7 +19,7 @@ if [ "$TP" == iTerm ]; then
             tell myterm            
                 set mysession to (make new session at the end of sessions)
                 tell mysession
-                    exec command "/bin/bash -c \"/usr/bin/python -m pdb '$TM_FILEPATH' \" " 
+                    exec command "/bin/bash -c \"$TPY -m pdb '$TM_FILEPATH' \" " 
                 end tell
             end tell
         end tell
@@ -27,7 +28,7 @@ else
     osascript  &lt;&lt;END2
         tell application "Terminal"
             activate
-            do script with command "python -m pdb $TM_FILEPATH"
+            do script with command "$TPY -m pdb $TM_FILEPATH"
         end tell
 END2
 fi

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>Completion</string>
+	<key>scope</key>
+	<string>source.python</string>
+	<key>settings</key>
+	<dict>
+		<key>disabled_completionCommand</key>
+		<string>"${TM_SUPPORT_PATH}/bin/pythonCompletion.py" -w "$TM_CURRENT_WORD" -l "$TM_CURRENT_LINE" -c $TM_COLUMN_NUMBER -f "$TM_FILEPATH"</string>
+		<key>disabled_disableDefaultCompletion</key>
+		<string>1</string>
+	</dict>
+	<key>uuid</key>
+	<string>6FE0069A-CDD5-4975-8CC1-1E137C390965</string>
+</dict>
+</plist>

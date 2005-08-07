@@ -3,18 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>beforeRunningCommand</key>
-	<string>nop</string>
+	<string>saveActiveFile</string>
 	<key>command</key>
-	<string># just to remind you of some useful environment variables
-# see Help / Shell Variables for the full list
-#echo File: "$TM_FILEPATH"
-#echo Word: "$TM_CURRENT_WORD"
-#echo Selection: "$TM_SELECTED_TEXT"
-
-TPY=${TM_PYTHON:=pythonw}
-cd `dirname "$TM_FILEPATH"`
-$TPY "$TM_BUNDLE_PATH"/Tools/pymate.py "$TM_FILEPATH"
-</string>
+	<string>TPY=${TM_PYTHON:=pythonw}
+cd "`dirname "$TM_FILEPATH"`"
+"$TPY" "$TM_BUNDLE_PATH/Tools/pymate.py" "$TM_FILEPATH"</string>
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>

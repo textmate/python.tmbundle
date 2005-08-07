@@ -13,7 +13,7 @@ $TPY "$TM_FILEPATH"</string>
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>
-	<string>@r</string>
+	<string></string>
 	<key>name</key>
 	<string>Python</string>
 	<key>output</key>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string># just to remind you of some useful environment variables
+# see Help / Shell Variables for the full list
+#echo File: "$TM_FILEPATH"
+#echo Word: "$TM_CURRENT_WORD"
+#echo Selection: "$TM_SELECTED_TEXT"
+
+TPY=${TM_PYTHON:=pythonw}
+cd `dirname "$TM_FILEPATH"`
+$TPY "$TM_BUNDLE_PATH"/Tools/pymate.py "$TM_FILEPATH"
+</string>
+	<key>input</key>
+	<string>none</string>
+	<key>keyEquivalent</key>
+	<string>@r</string>
+	<key>name</key>
+	<string>Python (HTML Output)</string>
+	<key>output</key>
+	<string>showAsHTML</string>
+	<key>scope</key>
+	<string>source.python</string>
+	<key>uuid</key>
+	<string>D1C3D420-2DC5-4C61-9586-00E76A6C054B</string>
+</dict>
+</plist>

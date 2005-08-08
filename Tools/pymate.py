@@ -6,6 +6,7 @@
 #
 
 import sys
+import os
 import pymate_output as pmout
 
 from EasyDialogs import AskString
@@ -100,7 +101,7 @@ def main(script_name):
         return
     
     py_version = 'PyMate running on Python %d.%d.%d %s' % sys.version_info[:-1]
-    script_name_short = script_name.rsplit('/', 1)[1]
+    script_name_short = os.path.basename(script_name)
     print pmout.preface % (py_version, script_name_short)
     
     # script should act like it's running in the __main__ namespace;
@@ -110,7 +111,7 @@ def main(script_name):
     # script should be able to load modules from its directory
     # we overwrite our path since we won't load any other modules
     # and we don't want script to look for modules from our directory!
-    sys.path[0] = script_name.rsplit('/', 1)[0]
+    sys.path[0] = os.path.dirname(script_name)
     
     # we sanitize stdout and stderr, replacing them with two instances of
     # our 'html-safe' streams
@@ -157,7 +158,7 @@ def main(script_name):
             if function_name == '?':
                 function_name = '<em>module body</em>'
             filename = tb.tb_frame.f_code.co_filename
-            short_filename = filename.rsplit('/', 1)[1]
+            short_filename = os.path.basename(filename)
             lineno = tb.tb_lineno
             
             print pmout.traceback_item % (filename, lineno, function_name,

@@ -147,6 +147,12 @@ def main(script_name):
             print pmout.normal_end
             return
         
+        if e_class is SyntaxError:
+            print pmout.syntax_preface % (e_name,e_args)
+            print pmout.syntax_item % (e_obj.filename, e_obj.lineno,os.path.basename(e_obj.filename),e_obj.lineno,e_obj.text)
+            print pmout.syntax_end
+            return
+        
         print pmout.exception_preface % (e_name, e_args)
         
         # we discard the first traceback element, since it refers to us

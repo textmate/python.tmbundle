@@ -105,6 +105,27 @@ exception_end = '''</table>
 </body>
 </html>
 '''
+syntax_preface = '''</pre></div>
+<div id="exception_report">
+<p id="exception"><strong>%s</strong> %s</p>
+<p id="traceback">Error:</p>
+<blockquote><table border="0" cellspacing="0" cellpadding="0">
+''' # % (exception_name, exception_arguments)
+
+syntax_item = '''
+    <tr>
+        <td width="40%%">SyntaxError
+            <a href="txmt://open?url=file://%s&line=%d">%s</a></td>
+        <td width="70%%">at line %d line: <strong>%s</strong></td>
+    </tr>
+''' # % (filename, lineno, func_name, lineno, short_filename)
+
+syntax_end = '''</table>
+</blockquote>
+</div>
+</body>
+</html>
+'''
 
 normal_end = '''</pre>
 </div>

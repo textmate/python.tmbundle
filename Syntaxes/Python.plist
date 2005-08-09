@@ -21,6 +21,8 @@
 	<key>patterns</key>
 	<array>
 		<dict>
+			<key>disabled</key>
+			<string>1</string>
 			<key>match</key>
 			<string>( |	)+$</string>
 			<key>name</key>

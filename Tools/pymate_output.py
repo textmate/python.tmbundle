@@ -1,6 +1,7 @@
 # encoding: latin-1
 
 # copyright (c) Domenico Carbotta, 2005
+# with enhancements by Brad Miller
 # this script is released under the GNU General Public License
 
 
@@ -14,7 +15,7 @@ preface = '''
     body {
     	font-family: "Lucida Grande";
     	font-size: 10pt;
-    	background-color: #EBEEF2;
+    	background-color: rgb(170, 200, 255);
     	margin: 0;
     	height: 100%%;
     }
@@ -35,7 +36,7 @@ preface = '''
     	padding: 10px
     }
     div#script_output {
-    	background-color: #D1E5FF;
+    	background-color: rgb(230, 240, 255);
     }
     pre {
     	padding: 0;
@@ -55,7 +56,7 @@ preface = '''
     	color: #FF5600;
     }
     div#exception_report {
-    	background-color: #C9D2DE;
+    	background-color: rgb(210, 220, 255);
     }
     p#exception strong {
     	color: #FF5600;
@@ -72,7 +73,7 @@ preface = '''
     	padding: 2px 2px 2px 5px;
     	font-size: 10pt;
     }
-    td a {
+    a {
     	color: #FF5600;
     }
     -->
@@ -86,7 +87,7 @@ preface = '''
 
 exception_preface = '''</pre></div>
 <div id="exception_report">
-<p id="exception"><strong>%s</strong> %s</p>
+<p id="exception"><strong>%s</strong>%s</p>
 <p id="traceback">Traceback:</p>
 <blockquote><table border="0" cellspacing="0" cellpadding="0">
 ''' # % (exception_name, exception_arguments)
@@ -95,9 +96,9 @@ traceback_item = '''
     <tr>
         <td width="30%%">function
             <a href="txmt://open?url=file://%s&line=%d">%s</a></td>
-        <td width="70%%">at line %d in <strong>%s</strong></td>
+        <td width="70%%">in <strong>%s</strong> at line %d</td>
     </tr>
-''' # % (filename, lineno, func_name, lineno, short_filename)
+''' # % (filename, lineno, func_name, short_filename, lineno)
 
 exception_end = '''</table>
 </blockquote>
@@ -105,11 +106,10 @@ exception_end = '''</table>
 </body>
 </html>
 '''
+
 syntax_preface = '''</pre></div>
 <div id="exception_report">
-<p id="exception"><strong>%s</strong> %s</p>
-<p id="traceback">Error:</p>
-<blockquote><table border="0" cellspacing="0" cellpadding="0">
+<p id="exception"><strong>%s</strong>%s</p>
 ''' # % (exception_name, exception_arguments)
 
 syntax_item = '''
@@ -120,8 +120,7 @@ syntax_item = '''
     </tr>
 ''' # % (filename, lineno, func_name, lineno, short_filename)
 
-syntax_end = '''</table>
-</blockquote>
+syntax_end = '''
 </div>
 </body>
 </html>

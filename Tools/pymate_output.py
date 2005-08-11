@@ -1,14 +1,14 @@
 # encoding: latin-1
 
 # copyright (c) Domenico Carbotta, 2005
-# with enhancements by Brad Miller
+# with enhancements and precious input by Brad Miller and Jeroen van der Ham
 # this script is released under the GNU General Public License
 
 
 preface = '''
     <html>
     <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>PyMate</title>
     <style type="text/css">
     <!--
@@ -73,8 +73,11 @@ preface = '''
     	padding: 2px 2px 2px 5px;
     	font-size: 10pt;
     }
-    a {
+    a, a.near {
     	color: #FF5600;
+    }
+    a.far {
+        color: #B73D00;
     }
     -->
     </style>
@@ -94,11 +97,12 @@ exception_preface = '''</pre></div>
 
 traceback_item = '''
     <tr>
-        <td width="30%%">function
-            <a href="txmt://open?url=file://%s&line=%d">%s</a></td>
-        <td width="70%%">in <strong>%s</strong> at line %d</td>
+        <td>function
+            <a class="%s" title="in %s" href="txmt://open?url=file://%s&line=%d"
+                >%s</a></td>
+        <td>in <strong>%s</strong> at line %d</td>
     </tr>
-''' # % (filename, lineno, func_name, short_filename, lineno)
+''' # % (class, filename, filename, lineno, func_name, short_filename, lineno)
 
 exception_end = '''</table>
 </blockquote>
@@ -107,24 +111,13 @@ exception_end = '''</table>
 </html>
 '''
 
-syntax_preface = '''</pre></div>
+syntax = '''</pre></div>
 <div id="exception_report">
 <p id="exception"><strong>%s</strong>%s</p>
-''' # % (exception_name, exception_arguments)
-
-syntax_item = '''
-    <tr>
-        <td width="40%%">SyntaxError
-            <a href="txmt://open?url=file://%s&line=%d">%s</a></td>
-        <td width="70%%">at line %d line: <strong>%s</strong></td>
-    </tr>
-''' # % (filename, lineno, func_name, lineno, short_filename)
-
-syntax_end = '''
 </div>
 </body>
 </html>
-'''
+''' # % (exception_name, exception_arguments)
 
 normal_end = '''</pre>
 </div>

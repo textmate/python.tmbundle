@@ -3,14 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>"$0"</string>
+	<string>'$0'</string>
 	<key>keyEquivalent</key>
-	<string>"</string>
+	<string>'</string>
 	<key>name</key>
-	<string>quote-pair in strings double</string>
+	<string>quote-pair in strings single</string>
 	<key>scope</key>
 	<string>source.python string</string>
 	<key>uuid</key>
-	<string>44F64180-F86E-4980-895A-2994B0EEDB5D</string>
+	<string>1BAD838C-8B2A-45FD-9AD2-7F3DCA2DD388</string>
 </dict>
 </plist>

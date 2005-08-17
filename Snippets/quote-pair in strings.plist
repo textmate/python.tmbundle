@@ -3,13 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>"$0"</string>
+	<string>"${0:`printenv TM_SELECTED_TEXT|sed 's/[$\\]/\\&amp;/g'`}"</string>
 	<key>keyEquivalent</key>
 	<string>"</string>
 	<key>name</key>
 	<string>quote-pair in strings double</string>
 	<key>scope</key>
-	<string>source.python string</string>
+	<string>source.python meta.empty-string.python</string>
 	<key>uuid</key>
 	<string>44F64180-F86E-4980-895A-2994B0EEDB5D</string>
 </dict>

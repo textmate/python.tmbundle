@@ -21,6 +21,20 @@
 	<key>patterns</key>
 	<array>
 		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>meta.empty-string.python</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>(?&lt;!")(")"(?!")</string>
+			<key>name</key>
+			<string>string.quoted.double.python</string>
+		</dict>
+		<dict>
 			<key>disabled</key>
 			<string>1</string>
 			<key>match</key>

@@ -9,7 +9,7 @@
 	<key>name</key>
 	<string>quote-pair in strings single</string>
 	<key>scope</key>
-	<string>source.python string.quoted.single</string>
+	<string>source.python meta.empty-string.single.py</string>
 	<key>uuid</key>
 	<string>1BAD838C-8B2A-45FD-9AD2-7F3DCA2DD388</string>
 </dict>

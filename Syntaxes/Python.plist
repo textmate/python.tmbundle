@@ -26,13 +26,27 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>meta.empty-string.python</string>
+					<string>meta.empty-string.double.py</string>
 				</dict>
 			</dict>
 			<key>match</key>
 			<string>(?&lt;!")(")"(?!")</string>
 			<key>name</key>
-			<string>string.quoted.double.python</string>
+			<string>string.quoted.double.py</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>meta.empty-string.single.py</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>(?&lt;!')(')'(?!')</string>
+			<key>name</key>
+			<string>string.quoted.single.py</string>
 		</dict>
 		<dict>
 			<key>disabled</key>
@@ -225,7 +239,15 @@
 			<key>begin</key>
 			<string>(r|u|ur|R|U|UR|Ur|uR)?'''[^']*</string>
 			<key>end</key>
-			<string>'''</string>
+			<string>('')'</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>meta.close.string.quoted.single.py</string>
+				</dict>
+			</dict>
 			<key>name</key>
 			<string>string.quoted.single.multiline.py</string>
 			<key>patterns</key>
@@ -244,7 +266,15 @@
 			<key>begin</key>
 			<string>(r|u|ur|R|U|UR|Ur|uR)?"""[^"]*</string>
 			<key>end</key>
-			<string>"""</string>
+			<string>("")"</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>meta.close.string.quoted.double.py</string>
+				</dict>
+			</dict>
 			<key>name</key>
 			<string>string.quoted.double.multiline.py</string>
 			<key>patterns</key>

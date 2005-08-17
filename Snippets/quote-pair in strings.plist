@@ -9,7 +9,7 @@
 	<key>name</key>
 	<string>quote-pair in strings double</string>
 	<key>scope</key>
-	<string>source.python meta.empty-string.python</string>
+	<string>source.python meta.empty-string.double.py</string>
 	<key>uuid</key>
 	<string>44F64180-F86E-4980-895A-2994B0EEDB5D</string>
 </dict>

@@ -73,6 +73,10 @@ preface = '''
     	padding: 2px 2px 2px 5px;
     	font-size: 10pt;
     }
+    td abbr {
+        border-bottom: 1px dotted;
+        font-weight: bold;
+    }
     a, a.near {
     	color: #FF5600;
     }
@@ -95,14 +99,49 @@ exception_preface = '''</pre></div>
 <blockquote><table border="0" cellspacing="0" cellpadding="0">
 ''' # % (exception_name, exception_arguments)
 
-traceback_item = '''
+tbitem_near = '''
     <tr>
         <td>function
-            <a class="%s" title="in %s" href="txmt://open?url=file://%s&line=%d"
-                >%s</a></td>
-        <td>in <strong>%s</strong> at line %d</td>
+            <a class="near" title="in %(filename)s"
+                href="txmt://open?url=file://%(filename)s&line=%(lineno)d">
+                %(func_name)s
+            </a>
+        </td>
+        <td>
+            in <abbr title="%(filename)s">%(short_filename)s</abbr>
+            at line %(lineno)d
+        </td>
     </tr>
-''' # % (class, filename, filename, lineno, func_name, short_filename, lineno)
+''' # % {func_name, filename, short_filename, lineno}
+
+tbitem_far = '''
+    <tr>
+        <td>function
+            <a class="far"
+                href="txmt://open?url=file://%(filename)s&line=%(lineno)d">
+                %(func_name)s
+                \xe2\x8e\x8b
+            </a>
+        </td>
+        <td>
+            in <abbr title="%(filename)s">%(short_filename)s</abbr>
+            at line %(lineno)d
+        </td>
+    </tr>
+''' # % {func_name, filename, short_filename, lineno}
+
+tbitem_binary = '''
+    <tr>
+        <td>
+            function %(func_name)s
+        </td>
+        <td>
+            in <abbr title="%(filename)s">
+                %(short_filename)s</abbr>
+            at line %(lineno)d (file does not exist)
+        </td>
+    </tr>
+''' # % {func_name, short_filename}
 
 exception_end = '''</table>
 </blockquote>

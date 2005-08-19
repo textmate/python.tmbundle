@@ -6,7 +6,7 @@
 # this script is released under the GNU General Public License
 
 
-__version__ = (0, 0, 5)
+__version__ = (0, 1, 0, 'beta')
 
 
 import sys
@@ -15,6 +15,7 @@ import threading
 import EasyDialogs
 import MacOS
 import pymate_output as pmout
+import tmproj
 
 
 subs = [('&', '&amp;'),
@@ -92,7 +93,7 @@ def disabled_input_replacement(prompt=''):
             'Use eval(raw_input()) instead.')
 
 
-class SanitizedStream:
+class HTMLSafeStream:
     
     close_what = None
     output = ''
@@ -104,45 +105,45 @@ class SanitizedStream:
         self.limit = limit
     
     def write(self, string):
-        SanitizedStream.TheLock.acquire()
+        HTMLSafeStream.TheLock.acquire()
         
-        if SanitizedStream.close_what is None:
+        if HTMLSafeStream.close_what is None:
             # it's the first write ever.
             # open our context
-            SanitizedStream.output += self.before
+            HTMLSafeStream.output += self.before
             # register our context closing string
-            SanitizedStream.close_what = self.after
+            HTMLSafeStream.close_what = self.after
         
-        elif SanitizedStream.close_what != self.after:
+        elif HTMLSafeStream.close_what != self.after:
             # another context is already open.
             # close previous context by writing what's specified in the
-            # other SanitizedStream's after field
-            if SanitizedStream.output[-1] != '\n':
-                SanitizedStream.output += '\n'
-            SanitizedStream.output += SanitizedStream.close_what
+            # other HTMLSafeStream's after field
+            if HTMLSafeStream.output[-1] != '\n':
+                HTMLSafeStream.output += '\n'
+            HTMLSafeStream.output += HTMLSafeStream.close_what
             # open our context
-            SanitizedStream.output += self.before
+            HTMLSafeStream.output += self.before
             # register our context closing string
-            SanitizedStream.close_what = self.after
+            HTMLSafeStream.close_what = self.after
         
-        SanitizedStream.output += sanitize(string)
+        HTMLSafeStream.output += sanitize(string)
         
-        SanitizedStream.TheLock.release()
+        HTMLSafeStream.TheLock.release()
     
     # @staticmethod
     def flush(limit=80):
-        SanitizedStream.TheLock.acquire()
+        HTMLSafeStream.TheLock.acquire()
         
         # close the current context
-        if SanitizedStream.close_what is not None:
-            SanitizedStream.output += SanitizedStream.close_what
-            SanitizedStream.close_what = ''
+        if HTMLSafeStream.close_what is not None:
+            HTMLSafeStream.output += HTMLSafeStream.close_what
+            HTMLSafeStream.close_what = ''
         
         # split and wrap lines, then print them
-        print >> sys.__stdout__, wrap(SanitizedStream.output, limit)
-        SanitizedStream.output = ''
+        print >> sys.__stdout__, wrap(HTMLSafeStream.output, limit)
+        HTMLSafeStream.output = ''
         
-        SanitizedStream.TheLock.release()
+        HTMLSafeStream.TheLock.release()
     
     flush = staticmethod(flush)
 
@@ -159,8 +160,8 @@ def main(script_name):
         print '<strong>IOError:</strong>', msg
         return
         
-    py_version = 'PyMate %d.%d.%d running on Python %d.%d.%d %s' % (
-            __version__ + sys.version_info[:4])
+    py_version = 'Python %s (PyMate %d.%d.%d %s)' % (
+            (sys.version,) + __version__)
     py_version += '''
 <small>Please remember that PyMate is still in an early beta stage...
 Send all your bug reports to <a
@@ -186,15 +187,18 @@ href="mailto:domenico.carbotta@gmail.com">the author</a> :)</small>
     # script should be able to load modules from its directory
     # we overwrite our path since we won't load any other modules
     # and we don't want script to look for modules from our directory!
-    sys.path[0] = os.path.split(script_name)[0]
-    
+    sys.path[0] = os.path.dirname(script_name)
+        
     # we clean traces of our presence from sys.argv[]
     sys.argv.pop(0)
     
+    # let's cd the scripts' directory
+    os.chdir(os.path.dirname(script_name))
+    
     # we sanitize stdout and stderr, replacing them with two instances of
     # our 'html-safe' streams
-    sys.stdout = SanitizedStream(limit=80)
-    sys.stderr = SanitizedStream('<em>', '</em>', limit=80)
+    sys.stdout = HTMLSafeStream(limit=80)
+    sys.stderr = HTMLSafeStream('<em>', '</em>', limit=80)
     
     try:
         
@@ -203,7 +207,7 @@ href="mailto:domenico.carbotta@gmail.com">the author</a> :)</small>
         
     except:
         # flush script's output
-        SanitizedStream.flush()
+        HTMLSafeStream.flush()
         
         # we don't want html sanitization on our own output!
         sys.stdout = sys.__stdout__
@@ -232,23 +236,24 @@ href="mailto:domenico.carbotta@gmail.com">the author</a> :)</small>
             e_args = ': ' + ', '.join(map(str, e_obj.args))
         else:
             e_args = '.'
-        
+
+        # if the exception was SystemExit, it's a normal condition        
         if e_class is SystemExit:
-            # if the exception was SystemExit, it's a normal condition
             print '<strong>Script terminated raising SystemExit%s</strong>' \
                     % e_args
             print pmout.normal_end
             return
-        elif e_class is SyntaxError and tb_len == 0:
-            # when we get a syntax error in a regular script,
-            # the traceback is not interesting but we want to format
-            # differently the exception parameters
+
+        # when we get a syntax error in a regular script,
+        # the traceback is not interesting but we want to format
+        # differently the exception parameters            
+        if e_class is SyntaxError and tb_len == 0:
             e_args = (' in <a href="txmt://open?url=file://%s&line=%d">' +
                     '%s</a> at line %d')
             
-            if e_obj.filename in (None, ''):
+            if e_obj.filename in (None, '<string>'):
                 filename = '/tmp/Unknown location'
-                short_filename = '<em>an exec statement</em>'
+                short_filename = '<em>unknown location</em>'
             else:
                 filename = e_obj.filename
                 short_filename = os.path.basename(e_obj.filename)
@@ -263,38 +268,54 @@ href="mailto:domenico.carbotta@gmail.com">the author</a> :)</small>
         # we discard the first traceback element, since it refers to us
         tb = tb.tb_next
         
-        while (tb is not None):
-            # extract info from the current traceback object
-            function_name = tb.tb_frame.f_code.co_name
-            if function_name == '?':
-                function_name = '<em>module body</em>'
-            
-            # as required bt Jeroen:
-            # mark entries regarding files that are in a subdirectory or a
-            # parent directory of the script being run as belonging to class
-            # "near" and the others as belonging to class 'far'.
-            # we could even open the project file and mess with it.
-            
+        # try to build a TMProj object representing the current project
+        # defaulting to None
+        try:
+            current_project = tmproj.TMProj()
+        except tmproj.Error:
+            current_project = None
+            script_dir = os.path.dirname(script_name)
+        
+        while tb is not None:
+
+            # extract the file name from the current traceback
             filename = tb.tb_frame.f_code.co_filename
             short_filename = os.path.basename(filename)
+                            
+            # extract the function name from the current traceback
+            func_name = tb.tb_frame.f_code.co_name
+            if func_name == '?':
+                func_name = '<em>module body</em>'            
             
-            script_dir = os.path.split(os.path.realpath(script_name))[0]
-            file_dir = os.path.split(os.path.realpath(filename))[0]
+            if not os.path.exists(filename):
+                print pmout.tbitem_binary % locals()
             
-            # if the script doesn't reside in the same directory, a subdirectory
-            # or a parent directory of the script being run it's "far"
-            if (script_dir == file_dir or
-                    script_dir in file_dir or
-                    file_dir in script_dir):
-                link_class = 'near'
-            else:
-                link_class = 'far'
-                function_name += ' \xe2\x8e\x8b' # broken circle with an arrow 
+            else:         
+                # as suggested by Jeroen: mark files which don't belong to the
+                # current project.
             
-            lineno = tb.tb_lineno
+                if current_project is None:
+                    # the script is being run from a "standalone" window (i.e.
+                    # there's no open project).
+                    # if the script doesn't reside in the same directory,
+                    # a  or a parent directory of the script being run
+                    # it's "far"
+                    file_dir = os.path.dirname(filename)
+                    is_near = (script_dir == file_dir or
+                            script_dir.startswith(file_dir) or
+                            file_dir.startswith(script_dir))
+                else:
+                    # there's an open project. see tmproj module for info.
+                    is_near = filename in current_project
             
-            print pmout.traceback_item % (link_class, filename, filename,
-                    lineno, function_name, short_filename, lineno)
+                if is_near:
+                    template = pmout.tbitem_near
+                else:
+                    template = pmout.tbitem_far
+            
+                lineno = tb.tb_lineno
+            
+                print template % locals()
             
             # advance to the next traceback object
             tb = tb.tb_next
@@ -303,7 +324,7 @@ href="mailto:domenico.carbotta@gmail.com">the author</a> :)</small>
     
     else:
         # flush script's output
-        SanitizedStream.flush()
+        HTMLSafeStream.flush()
         
         # we don't want html sanitization on our own output!
         sys.stdout = sys.__stdout__
@@ -315,6 +336,6 @@ href="mailto:domenico.carbotta@gmail.com">the author</a> :)</small>
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
-        print 'PyMate should be only used under TextMate.'
+        print 'Usage: python pymate.py <script>'
     else:
         main(sys.argv[1])

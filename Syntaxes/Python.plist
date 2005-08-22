@@ -256,7 +256,7 @@
 					<key>match</key>
 					<string>%(\([a-zA-Z_]+\))?(0|\-|\+)?([0-9\.]*)?[diuoxXfeEgGsrc]</string>
 					<key>name</key>
-					<string>string.interpolated.py</string>
+					<string>constant.other.placeholder.py</string>
 				</dict>
 			</array>
 			<key>swallow</key>
@@ -283,7 +283,7 @@
 					<key>match</key>
 					<string>%(\([a-zA-Z_]+\))?(0|\-|\+)?([0-9\.]*)?[diuoxXfeEgGsrc]</string>
 					<key>name</key>
-					<string>string.interpolated.py</string>
+					<string>constant.other.placeholder.py</string>
 				</dict>
 			</array>
 			<key>swallow</key>
@@ -310,7 +310,7 @@
 					<key>match</key>
 					<string>%(\([a-zA-Z_]+\))?(0|\-|\+)?([0-9\.]*)?[diuoxXfeEgGsrc]</string>
 					<key>name</key>
-					<string>string.interpolated.py</string>
+					<string>constant.other.placeholder.py</string>
 				</dict>
 			</array>
 			<key>swallow</key>
@@ -337,7 +337,7 @@
 					<key>match</key>
 					<string>%(\([a-zA-Z_]+\))?(0|\-|\+)?([0-9\.]*)?[diuoxXfeEgGsrc]</string>
 					<key>name</key>
-					<string>string.interpolated.py</string>
+					<string>constant.other.placeholder.py</string>
 				</dict>
 			</array>
 			<key>swallow</key>

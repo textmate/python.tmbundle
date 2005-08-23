@@ -128,11 +128,17 @@ def get_docstrings(word):
                 break
         
     # try to look for a method in a builtin type
-    slot_name = word.split('.')[-1]
-    type_names = [__builtins__, str, list, tuple, set, frozenset, unicode, int,
-            long, float, complex, type]
+    slot_name = word.split('.')[-1]    
+    type_names = ['__builtins__', 'str', 'list', 'tuple', 'set', 'frozenset', 'unicode', 'int',
+            'long', 'float', 'complex', 'type']
     
-    for builtin_type in type_names:
+    for type_name in type_names:
+        # be nice to older Python 2.3.5 (OS X default)
+        try:
+            builtin_type = globals()[type_name]
+        except KeyError:
+            builtin_type = None
+            
         if hasattr(builtin_type, slot_name):
             if builtin_type is not __builtins__:
                 completion = builtin_type.__name__ + '.' + slot_name

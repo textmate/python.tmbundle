@@ -9,8 +9,9 @@
 
 # change to /tmp to avoid possibly overwriting
 # an html file in the working directory.
-
-docmate.py
+# 
+TPY=${TM_PYTHON:=python}
+"$TPY" "${TM_BUNDLE_PATH}"/bin/docmate.py
 </string>
 	<key>input</key>
 	<string>none</string>

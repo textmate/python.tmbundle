@@ -232,7 +232,7 @@ href="mailto:domenico.carbotta@gmail.com">the author</a> :)</small>
         del tbx
         
         # exception arguments
-        if len(e_obj.args) != 0:
+        if hasattr(e_obj,"args"):
             e_args = ': ' + ', '.join(map(str, e_obj.args))
         else:
             e_args = '.'

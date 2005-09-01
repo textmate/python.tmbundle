@@ -7,13 +7,14 @@
 	<key>command</key>
 	<string># Run python on the current file
 # 
+
 TPY=${TM_PYTHON:=python}
-cd `dirname "$TM_FILEPATH"`
+cd "`dirname "$TM_FILEPATH"`"
 $TPY "$TM_FILEPATH"</string>
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>
-	<string></string>
+	<string>@R</string>
 	<key>name</key>
 	<string>Python</string>
 	<key>output</key>

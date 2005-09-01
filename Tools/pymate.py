@@ -166,6 +166,8 @@ def main(script_name):
 <small>Please remember that PyMate is still in an early beta stage...
 Send all your bug reports to <a
 href="mailto:domenico.carbotta@gmail.com">the author</a> :)</small>
+
+Please note that the regular Python interpreter can be run using &#x2318;&#x21E7;R.
 '''
     script_name_short = os.path.basename(script_name)
     print pmout.preface % (py_version, script_name_short)

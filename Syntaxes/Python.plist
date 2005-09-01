@@ -193,7 +193,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(self)?([^\)]*)</string>
+					<string>(self)?([^\)]+)</string>
 					<key>name</key>
 					<string>declaration.parameter.py</string>
 				</dict>
@@ -223,7 +223,7 @@
 			<array>
 				<dict>
 					<key>match</key>
-					<string>[^\):]*</string>
+					<string>[^\):]+</string>
 					<key>name</key>
 					<string>entity.other.inherited-class.py</string>
 				</dict>

@@ -1,12 +1,11 @@
-# encoding: latin-1
+# encoding: utf-8
 
 # copyright (c) Domenico Carbotta, 2005
 # with enhancements and precious input by Brad Miller and Jeroen van der Ham
-# wrap function shamelessly taken from the ASPN Python Cookbook
 # this script is released under the GNU General Public License
 
 
-__version__ = (0, 1, 0, 'beta')
+__version__ = (0, 1, 0, 'beta', 3)
 
 
 import sys
@@ -14,60 +13,34 @@ import os
 import threading
 import EasyDialogs
 import MacOS
+import textwrap
+
 import pymate_output as pmout
 import tmproj
 
 
-subs = [('&', '&amp;'),
-        ('<', '&lt;'),
-        ('>', '&gt;'),
-            # by default, tabs are rendered as 8 spaces
-            # I _really_ do like four spaces instead
-        ('\t', ' ' * 4)]
-
-
-def wrap(text, width):
-    '''
-        A word-wrap function that preserves existing line breaks
-        and most spaces in the text. Expects that existing line
-        breaks are posix newlines (\n).
-        Written by Mike Brown for the ASPN Python Cookbook
-    '''
-    return reduce(lambda line, word, width=width: '%s%s%s' %
-            (line,
-                ' \n'[(len(line)-line.rfind('\n')-1
-                     + len(word.split('\n',1)[0]
-                          ) >= width)],
-            word), text.split(' '))
-
-
-def sanitize(string):
-    '''
-        Substitutes HTML entities for &, < and > (thus assuring us that no
-        output from the script is interpreted as HTML tags or entities).
-    '''
-    
-    for sub_from, sub_to in subs:
-        string = string.replace(sub_from, sub_to)
-    
-    return string
+html_substitutions = [('&', '&amp;'), ('<', '&lt;'), ('>', '&gt;'),
+    ('\t', ' '*4)]
 
 
 def raw_input_replacement(prompt=''):
     '''
         A replacement for raw_input() which displays a graphical input dialog.
     '''
-    try:
-        rv = EasyDialogs.AskString(prompt)
-    except MacOS.Error:
-        # python is not allowed to interact with user.
-        # raise EOFError like every noninteractive shell does.
-        raise EOFError
-    if rv == '\x04':
-        # user typed ^D, which by all means is an EOF ;)
-        raise EOFError
-    else:
-        return rv
+    while True:
+        try:
+            rv = EasyDialogs.AskString(prompt)
+        except MacOS.Error:
+            # python is not allowed to interact with user.
+            # raise EOFError like every noninteractive shell does.
+            raise EOFError
+        if rv is None:
+            continue
+        if rv == '\x04':
+            # user typed ^D, which by all means is an EOF ;)
+            raise EOFError
+        else:
+            return rv
 
 
 def input_replacement(prompt=''):
@@ -79,8 +52,10 @@ def input_replacement(prompt=''):
     if prompt != '':
         prompt += '\n\n'
     prompt += 'Please note that in the current version PyMate cannot gain '
-    prompt += 'access to the scripts environment; you can only enter '
-    prompt += 'expressions involving literals.'
+    prompt += 'access to the script\'s environment; you can only enter '
+    prompt += 'expressions involving literals.\n'
+    prompt += 'For total compatibility use eval(raw_input()) instead of \
+        input().'
     rv = raw_input_replacement(wrap(prompt, 100))
     return eval(rv, globals(), locals())
 
@@ -96,7 +71,7 @@ def disabled_input_replacement(prompt=''):
 class HTMLSafeStream:
     
     close_what = None
-    output = ''
+    output = u''
     TheLock = threading.Lock()
     
     def __init__(self, before='', after='', limit=0):
@@ -105,45 +80,63 @@ class HTMLSafeStream:
         self.limit = limit
     
     def write(self, string):
-        HTMLSafeStream.TheLock.acquire()
+        try:
+            HTMLSafeStream.TheLock.acquire()
         
-        if HTMLSafeStream.close_what is None:
-            # it's the first write ever.
-            # open our context
-            HTMLSafeStream.output += self.before
-            # register our context closing string
-            HTMLSafeStream.close_what = self.after
+            if HTMLSafeStream.close_what is None:
+                # it's the first write ever.
+                # open our context
+                HTMLSafeStream.output += self.before
+                # register our context closing string
+                HTMLSafeStream.close_what = self.after
         
-        elif HTMLSafeStream.close_what != self.after:
-            # another context is already open.
-            # close previous context by writing what's specified in the
-            # other HTMLSafeStream's after field
-            if HTMLSafeStream.output[-1] != '\n':
-                HTMLSafeStream.output += '\n'
-            HTMLSafeStream.output += HTMLSafeStream.close_what
-            # open our context
-            HTMLSafeStream.output += self.before
-            # register our context closing string
-            HTMLSafeStream.close_what = self.after
+            elif HTMLSafeStream.close_what != self.after:
+                # another context is already open.
+                # close previous context by writing what's specified in the
+                # other HTMLSafeStream's after field
+                if HTMLSafeStream.output[-1] != '\n':
+                    HTMLSafeStream.output += '\n'
+                HTMLSafeStream.output += HTMLSafeStream.close_what
+                # open our context
+                HTMLSafeStream.output += self.before
+                # register our context closing string
+                HTMLSafeStream.close_what = self.after
         
-        HTMLSafeStream.output += sanitize(string)
+            # 20050906 inlined from sanitize()
+            for sub_from, sub_to in html_substitutions:
+                string = string.replace(sub_from, sub_to)
+                        
+            file_codec = 'latin-1'
+            string = string.decode(file_codec)
+            HTMLSafeStream.output = HTMLSafeStream.output + string
         
-        HTMLSafeStream.TheLock.release()
+        finally:
+            HTMLSafeStream.TheLock.release()
     
     # @staticmethod
-    def flush(limit=80):
-        HTMLSafeStream.TheLock.acquire()
+    def flush(limit=78):
+        # sanitizing should have been turned off before!!!
+        assert not isinstance(sys.stdout, HTMLSafeStream)
         
-        # close the current context
-        if HTMLSafeStream.close_what is not None:
-            HTMLSafeStream.output += HTMLSafeStream.close_what
-            HTMLSafeStream.close_what = ''
+        if HTMLSafeStream.output == '':
+            return
         
-        # split and wrap lines, then print them
-        print >> sys.__stdout__, wrap(HTMLSafeStream.output, limit)
-        HTMLSafeStream.output = ''
+        try:
+            HTMLSafeStream.TheLock.acquire()
+            
+            # close the current context
+            if HTMLSafeStream.close_what is not None:
+                HTMLSafeStream.output += HTMLSafeStream.close_what
+                HTMLSafeStream.close_what = ''
+            
+            # split and wrap lines, then print them
+            for line in HTMLSafeStream.output.split('\n'):
+                print textwrap.fill(line, limit, 
+                        subsequent_indent=' ' * 8).encode('utf-8')
+            HTMLSafeStream.output = u''
         
-        HTMLSafeStream.TheLock.release()
+        finally:
+            HTMLSafeStream.TheLock.release()
     
     flush = staticmethod(flush)
 
@@ -159,16 +152,13 @@ def main(script_name):
         print '<title>PyMate</title>'
         print '<strong>IOError:</strong>', msg
         return
-        
-    py_version = 'Python %s (PyMate %d.%d.%d %s)' % (
-            (sys.version,) + __version__)
-    py_version += '''
-<small>Please remember that PyMate is still in an early beta stage...
-Send all your bug reports to <a
-href="mailto:domenico.carbotta@gmail.com">the author</a> :)</small>
-
-Please note that the regular Python interpreter can be run using &#x2318;&#x21E7;R.
-'''
+    
+    if sys.version_info[3] == 'final':
+        py_version = 'Python %d.%d.%d' % sys.version_info[:3]
+    else:
+        py_version = 'Python %d.%d.%d %s %d'
+    py_version += ' &#8212; PyMate %d.%d.%d %s %d' % (__version__)
+    
     script_name_short = os.path.basename(script_name)
     print pmout.preface % (py_version, script_name_short)
     
@@ -199,8 +189,13 @@ Please note that the regular Python interpreter can be run using &#x2318;&#x21E7
     
     # we sanitize stdout and stderr, replacing them with two instances of
     # our 'html-safe' streams
-    sys.stdout = HTMLSafeStream(limit=80)
-    sys.stderr = HTMLSafeStream('<em>', '</em>', limit=80)
+    
+    try:
+        limit = int(os.environ['TM_PYMATE_LINE_WIDTH'])
+    except (KeyError, ValueError):
+        limit = 80
+    sys.stdout = HTMLSafeStream(limit=limit)
+    sys.stderr = HTMLSafeStream('<em>', '</em>', limit=limit)
     
     try:
         
@@ -208,12 +203,12 @@ Please note that the regular Python interpreter can be run using &#x2318;&#x21E7
         exec script in script_env
         
     except:
-        # flush script's output
-        HTMLSafeStream.flush()
-        
         # we don't want html sanitization on our own output!
         sys.stdout = sys.__stdout__
         sys.stderr = sys.__stderr__
+        
+        # flush script's output
+        HTMLSafeStream.flush()
         
         # retrieving exception data...
         e_class, e_obj, tb = sys.exc_info()
@@ -289,6 +284,8 @@ Please note that the regular Python interpreter can be run using &#x2318;&#x21E7
             if func_name == '?':
                 func_name = '<em>module body</em>'            
             
+            lineno = tb.tb_lineno
+            
             if not os.path.exists(filename):
                 print pmout.tbitem_binary % locals()
             
@@ -315,8 +312,6 @@ Please note that the regular Python interpreter can be run using &#x2318;&#x21E7
                 else:
                     template = pmout.tbitem_far
             
-                lineno = tb.tb_lineno
-            
                 print template % locals()
             
             # advance to the next traceback object
@@ -325,12 +320,12 @@ Please note that the regular Python interpreter can be run using &#x2318;&#x21E7
         print pmout.exception_end
     
     else:
-        # flush script's output
-        HTMLSafeStream.flush()
-        
         # we don't want html sanitization on our own output!
         sys.stdout = sys.__stdout__
         sys.stderr = sys.__stderr__
+        
+        # flush script's output
+        HTMLSafeStream.flush()
         
         print '<strong>Script terminated with success.</strong>'
         print pmout.normal_end

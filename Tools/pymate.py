@@ -23,6 +23,17 @@ html_substitutions = [('&', '&amp;'), ('<', '&lt;'), ('>', '&gt;'),
     ('\t', ' '*4)]
 
 
+def get_file_encoding(filename):
+    filename = filename.replace('"', '\"')
+    try:
+        support_dir = os.environ['TM_BUNDLE_SUPPORT']
+    except KeyError:
+        support_dir = '.'
+    encoding = os.popen('sh "%s/getpyencoding.sh" "%s"' %
+            (support_dir, filename)).read().strip()
+    return encoding
+
+
 def raw_input_replacement(prompt=''):
     '''
         A replacement for raw_input() which displays a graphical input dialog.
@@ -74,10 +85,11 @@ class HTMLSafeStream:
     output = u''
     TheLock = threading.Lock()
     
-    def __init__(self, before='', after='', limit=0):
+    def __init__(self, before='', after='', limit=0, encoding='utf-8'):
         self.before = str(before)
         self.after = str(after)
         self.limit = limit
+        self.encoding = encoding
     
     def write(self, string):
         try:
@@ -105,9 +117,8 @@ class HTMLSafeStream:
             # 20050906 inlined from sanitize()
             for sub_from, sub_to in html_substitutions:
                 string = string.replace(sub_from, sub_to)
-                        
-            file_codec = 'latin-1'
-            string = string.decode(file_codec)
+                                    
+            string = string.decode(self.encoding)
             HTMLSafeStream.output = HTMLSafeStream.output + string
         
         finally:
@@ -194,8 +205,13 @@ def main(script_name):
         limit = int(os.environ['TM_PYMATE_LINE_WIDTH'])
     except (KeyError, ValueError):
         limit = 80
-    sys.stdout = HTMLSafeStream(limit=limit)
-    sys.stderr = HTMLSafeStream('<em>', '</em>', limit=limit)
+    
+    # let's get the the default output encoding used by the script.
+    encoding = get_file_encoding(script_name)
+    
+    sys.stdout = HTMLSafeStream(limit=limit, encoding=encoding)
+    sys.stderr = HTMLSafeStream('<em>', '</em>', limit=limit,
+            encoding=encoding)
     
     try:
         
@@ -229,7 +245,7 @@ def main(script_name):
         del tbx
         
         # exception arguments
-        if hasattr(e_obj,"args"):
+        if hasattr(e_obj, 'args'):
             e_args = ': ' + ', '.join(map(str, e_obj.args))
         else:
             e_args = '.'

@@ -6,8 +6,8 @@
 	<string>saveActiveFile</string>
 	<key>command</key>
 	<string>TPY=${TM_PYTHON:=pythonw}
-cd "`dirname "$TM_FILEPATH"`"
-"$TPY" "$TM_BUNDLE_PATH/Tools/pymate.py" "$TM_FILEPATH"</string>
+
+"$TPY" "$TM_BUNDLE_SUPPORT/pymate.py" "$TM_FILEPATH"</string>
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>

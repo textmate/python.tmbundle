@@ -9,9 +9,9 @@
 	<key>columnCaptureRegister</key>
 	<string>3</string>
 	<key>command</key>
-	<string>cd "${TM_BUNDLE_PATH}"/Tools
-TPY=${TM_PYTHON:=python}
-"$TPY" checksyntax.py "$TM_FILEPATH"
+	<string>TPY=${TM_PYTHON:=python}
+
+"$TPY" "${TM_BUNDLE_SUPPORT}/checksyntax.py" "$TM_FILEPATH"
 </string>
 	<key>fileCaptureRegister</key>
 	<string>1</string>

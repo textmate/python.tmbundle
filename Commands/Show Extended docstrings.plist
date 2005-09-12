@@ -5,13 +5,9 @@
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
 	<key>command</key>
-	<string># This command takes the currently selected word and displays the python documentation for the module corresponding to said word.
+	<string>TPY=${TM_PYTHON:=python}
 
-# change to /tmp to avoid possibly overwriting
-# an html file in the working directory.
-
-TPY=${TM_PYTHON:=python}
-"$TPY" "${TM_BUNDLE_PATH}"/bin/docmate.py --extended</string>
+"$TPY" "${TM_BUNDLE_SUPPORT}/docmate.py" --extended</string>
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>

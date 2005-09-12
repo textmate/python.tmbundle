@@ -30,7 +30,7 @@ def get_file_encoding(filename):
         support_dir = os.environ['TM_BUNDLE_SUPPORT']
     except KeyError:
         support_dir = '.'
-    encoding = os.popen('"%s/getpyencoding.pl" "%s"' %
+    encoding = os.popen('perl "%s/getpyencoding.pl" "%s"' %
             (support_dir, filename)).read().strip()
     try:
         if encoding == '':

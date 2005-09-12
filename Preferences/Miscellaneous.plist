@@ -9,7 +9,7 @@
 	<key>settings</key>
 	<dict>
 		<key>increaseIndentPattern</key>
-		<string>^\s*(class|def|elif|else|except|for|if|try|while)\b.*:</string>
+		<string>^\s*(class|def|elif|else|except|finally|for|if|try|while)\b.*:</string>
 		<key>shellVariables</key>
 		<array>
 			<dict>

@@ -30,8 +30,8 @@ def get_file_encoding(filename):
         support_dir = os.environ['TM_BUNDLE_SUPPORT']
     except KeyError:
         support_dir = '.'
-    encoding = os.popen('head -2 "%s" | "%s/getpyencoding.py"' %
-            (filename, support_dir)).read().strip()
+    encoding = os.popen('"%s/getpyencoding.pl" "%s"' %
+            (support_dir, filename)).read().strip()
     try:
         if encoding == '':
             encoding = os.environ['TM_PYMATE_DEFAULT_ENCODING']
@@ -74,7 +74,7 @@ def input_replacement(prompt=''):
     prompt += 'expressions involving literals.\n'
     prompt += 'For total compatibility use eval(raw_input()) instead of \
         input().'
-    rv = raw_input_replacement(prompt)
+    rv = raw_input_replacement(textwrap.fill(prompt, 60))
     return eval(rv, globals(), locals())
 
 

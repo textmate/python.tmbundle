@@ -14,6 +14,7 @@ import threading
 import EasyDialogs
 import MacOS
 import textwrap
+import codecs
 
 import pymate_output as pmout
 import tmproj
@@ -29,8 +30,14 @@ def get_file_encoding(filename):
         support_dir = os.environ['TM_BUNDLE_SUPPORT']
     except KeyError:
         support_dir = '.'
-    encoding = os.popen('sh "%s/getpyencoding.sh" "%s"' %
-            (support_dir, filename)).read().strip()
+    encoding = os.popen('head -2 "%s" | "%s/getpyencoding.py"' %
+            (filename, support_dir)).read().strip()
+    try:
+        if encoding == '':
+            encoding = os.environ['TM_PYMATE_DEFAULT_ENCODING']
+        codecs.lookup(encoding)
+    except (KeyError, LookupError):
+        encoding = 'utf-8'
     return encoding
 
 

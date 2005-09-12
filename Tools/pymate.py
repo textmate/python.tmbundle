@@ -74,7 +74,7 @@ def input_replacement(prompt=''):
     prompt += 'expressions involving literals.\n'
     prompt += 'For total compatibility use eval(raw_input()) instead of \
         input().'
-    rv = raw_input_replacement(wrap(prompt, 100))
+    rv = raw_input_replacement(prompt)
     return eval(rv, globals(), locals())
 
 

@@ -1,4 +1,5 @@
 #!/usr/bin/python 
+# encoding: utf-8
 
 import os
 import sys
@@ -23,7 +24,8 @@ def checkSyntax(filename):
             if not errorfilename:
                 err.args = msg, (filename, lineno, offset, line)
                 err.filename = filename
-            print os.path.basename(errorfilename), "line:", lineno, "col:", offset, msg
+            print os.path.basename(errorfilename),
+            print "line:", lineno, "col:", offset, msg
         except:
             msg = "*** " + str(err)
         return False

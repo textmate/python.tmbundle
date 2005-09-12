@@ -1,4 +1,4 @@
-# encoding: latin-1
+# encoding: utf-8
 
 # copyright (c) Domenico Carbotta, 2005
 # with enhancements and precious input by Brad Miller and Jeroen van der Ham

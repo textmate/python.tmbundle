@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# encoding: latin-1
+# encoding: utf-8
 
 # copyright (c) Domenico Carbotta, 2005
 # wrap function shamelessly taken from the ASPN Python Cookbook

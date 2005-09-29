@@ -92,10 +92,9 @@ class HTMLSafeStream:
     output = u''
     TheLock = threading.Lock()
     
-    def __init__(self, before='', after='', limit=0, encoding='utf-8'):
+    def __init__(self, before='', after='', encoding='utf-8'):
         self.before = str(before)
         self.after = str(after)
-        self.limit = limit
         self.encoding = encoding
     
     def write(self, string):
@@ -216,9 +215,8 @@ def main(script_name):
     # let's get the the default output encoding used by the script.
     encoding = get_file_encoding(script_name)
     
-    sys.stdout = HTMLSafeStream(limit=limit, encoding=encoding)
-    sys.stderr = HTMLSafeStream('<em>', '</em>', limit=limit,
-            encoding=encoding)
+    sys.stdout = HTMLSafeStream(encoding=encoding)
+    sys.stderr = HTMLSafeStream('<em>', '</em>', encoding=encoding)
     
     try:
         
@@ -231,7 +229,7 @@ def main(script_name):
         sys.stderr = sys.__stderr__
         
         # flush script's output
-        HTMLSafeStream.flush()
+        HTMLSafeStream.flush(limit)
         
         # retrieving exception data...
         e_class, e_obj, tb = sys.exc_info()
@@ -348,7 +346,7 @@ def main(script_name):
         sys.stderr = sys.__stderr__
         
         # flush script's output
-        HTMLSafeStream.flush()
+        HTMLSafeStream.flush(limit)
         
         print '<strong>Script terminated with success.</strong>'
         print pmout.normal_end

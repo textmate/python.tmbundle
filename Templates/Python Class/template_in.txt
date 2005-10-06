@@ -10,7 +10,7 @@ import os
 import unittest
 
 class ${TM_NEW_FILE_BASENAME}:
-    def __init__():
+    def __init__(self):
         pass
         
 

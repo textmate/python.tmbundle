@@ -4,17 +4,19 @@
 # with enhancements and precious input by Brad Miller and Jeroen van der Ham
 # this script is released under the GNU General Public License
 
+# Brad Miller replaced the Call to EasyDialogs with a call to CocoaDialog 10/6/05
+#
 
-__version__ = (0, 1, 0, 'beta', 3)
+__version__ = (0, 1, 0, 'beta', 4)
 
 
 import sys
 import os
 import threading
-import EasyDialogs
 import MacOS
 import textwrap
 import codecs
+import commands
 
 import pymate_output as pmout
 import tmproj
@@ -47,7 +49,12 @@ def raw_input_replacement(prompt=''):
     '''
     while True:
         try:
-            rv = EasyDialogs.AskString(prompt)
+            cmd = "CocoaDialog inputbox --title Input --informative-text '" + prompt + "' --button1 OK --button2 'Cancel'"
+            res = os.popen(cmd)
+            status = res.readline()
+            if int(status) == 2:
+               raise IOError
+            rv = res.read()[:-1]
         except MacOS.Error:
             # python is not allowed to interact with user.
             # raise EOFError like every noninteractive shell does.
@@ -68,12 +75,11 @@ def input_replacement(prompt=''):
     # XXX doesn't work -- cannot find a way to gain access to the current
     # environment of the script
     if prompt != '':
-        prompt += '\n\n'
-    prompt += 'Please note that in the current version PyMate cannot gain '
-    prompt += 'access to the script\'s environment; you can only enter '
-    prompt += 'expressions involving literals.\n'
-    prompt += 'For total compatibility use eval(raw_input()) instead of \
-        input().'
+        prompt += '  :\n'
+#    prompt += 'Please note that in the current version PyMate cannot gain '
+#    prompt += 'access to the environment; you can only enter '
+#    prompt += 'expressions involving literals.\n'
+    prompt += 'For total compatibility use eval(raw_input()) instead of input().'
     rv = raw_input_replacement(textwrap.fill(prompt, 60))
     return eval(rv, globals(), locals())
 

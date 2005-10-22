@@ -9,24 +9,25 @@
 	<key>capturePattern</key>
 	<string>^\s*File "(.+)", line (\d+)</string>
 	<key>command</key>
-	<string>#!/usr/bin/env bash
-cd `dirname "$TM_FILEPATH"`
-TPY=${TM_PYTHON:=python}
+	<string>TPY=${TM_PYTHON:-python}
 
-for x in `ls -1 | grep Test.*\.py$`
-do
-    $TPY $x
-done</string>
+for x in `ls -1 | grep Test.*\.py$`; do
+	"$TPY" "$x"
+done
+
+# suggestion for rewrite:
+# find . -name "Test*.py" -exec \
+#   "${TM_PYTHON:-python}" '{}' \;</string>
 	<key>fileCaptureRegister</key>
 	<string>1</string>
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>
-	<string>@U</string>
+	<string>@R</string>
 	<key>lineCaptureRegister</key>
 	<string>2</string>
 	<key>name</key>
-	<string>Run Project Unittests</string>
+	<string>Run Project Unit Tests</string>
 	<key>output</key>
 	<string>separateWindow</string>
 	<key>scope</key>

@@ -9,7 +9,7 @@
 	<key>capturePattern</key>
 	<string>^(\d+):(.*)$</string>
 	<key>command</key>
-	<string>grep  -n "^[[:space:]]*\(def\|class\)"</string>
+	<string>grep -n "^[[:space:]]*\(def\|class\)"</string>
 	<key>input</key>
 	<string>document</string>
 	<key>keyEquivalent</key>
@@ -17,7 +17,7 @@
 	<key>lineCaptureRegister</key>
 	<string>1</string>
 	<key>name</key>
-	<string>List defs</string>
+	<string>Show Methods and Classes</string>
 	<key>output</key>
 	<string>separateWindow</string>
 	<key>uuid</key>

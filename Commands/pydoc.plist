@@ -5,27 +5,31 @@
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
 	<key>command</key>
-	<string># This command takes the currently selected word and displays the python documentation for the module corresponding to said word.
+	<string># This command takes the currently selected word and
+# displays the python documentation for the module
+# corresponding to said word.
+#
+# It falls back on the current word.
 
 # change to /tmp to avoid possibly overwriting
 # an html file in the working directory.
-
-# if no selected text, try the current word
-if test ${#TM_SELECTED_TEXT} -eq 0; then
-   TM_SELECTED_TEXT=${TM_CURRENT_WORD};
-   export TM_SELECTED_TEXT;
-fi
-
 cd /tmp
-pydoc -w "$TM_SELECTED_TEXT"
-cat "$TM_SELECTED_TEXT".html
-rm "$TM_SELECTED_TEXT".html</string>
+
+: ${TM_SELECTED_TEXT:=$TM_CURRENT_WORD}
+pydoc -w "$TM_SELECTED_TEXT" &gt;/dev/null
+if [[ -f "$TM_SELECTED_TEXT.html" ]]; then
+	cat "$TM_SELECTED_TEXT.html"
+	rm -f "$TM_SELECTED_TEXT.html"
+else
+	echo "&lt;p&gt;No documentation found for:&lt;pre&gt;$TM_SELECTED_TEXT&lt;/pre&gt;&lt;p&gt;This command only looks for Python modules."
+fi
+</string>
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>
 	<string></string>
 	<key>name</key>
-	<string>pydoc</string>
+	<string>Documentation for Module</string>
 	<key>output</key>
 	<string>showAsHTML</string>
 	<key>scope</key>

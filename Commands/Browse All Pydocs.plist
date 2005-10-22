@@ -5,14 +5,15 @@
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
 	<key>command</key>
-	<string>TPY=${TM_PYTHON:=python}
+	<string>TPY=${TM_PYTHON:-python}
+
 "$TPY" "${TM_BUNDLE_SUPPORT}/browse_pydocs.py"</string>
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>
 	<string>^h</string>
 	<key>name</key>
-	<string>Browse pydocs in browser</string>
+	<string>Documentation in Browser</string>
 	<key>output</key>
 	<string>showAsTooltip</string>
 	<key>scope</key>

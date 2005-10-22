@@ -5,7 +5,7 @@
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
 	<key>command</key>
-	<string>TPY=${TM_PYTHON:=python}
+	<string>TPY=${TM_PYTHON:-python}
 
 "$TPY" "${TM_BUNDLE_SUPPORT}/docmate.py" --extended</string>
 	<key>input</key>
@@ -13,7 +13,7 @@
 	<key>keyEquivalent</key>
 	<string>@H</string>
 	<key>name</key>
-	<string>Show Extended docstrings</string>
+	<string>Show Extended Docstrings</string>
 	<key>output</key>
 	<string>showAsHTML</string>
 	<key>scope</key>

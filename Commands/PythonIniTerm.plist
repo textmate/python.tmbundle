@@ -38,7 +38,7 @@ fi
 	<key>keyEquivalent</key>
 	<string>@D</string>
 	<key>name</key>
-	<string>Debug Python in terminal</string>
+	<string>Debug Script in Terminal</string>
 	<key>output</key>
 	<string>discard</string>
 	<key>scope</key>

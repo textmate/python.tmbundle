@@ -9,7 +9,7 @@
 	<key>columnCaptureRegister</key>
 	<string>3</string>
 	<key>command</key>
-	<string>TPY=${TM_PYTHON:=python}
+	<string>TPY=${TM_PYTHON:-python}
 
 "$TPY" "${TM_BUNDLE_SUPPORT}/checksyntax.py" "$TM_FILEPATH"
 </string>

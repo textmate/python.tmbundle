@@ -7,6 +7,10 @@
 		<string>py</string>
 		<string>rpy</string>
 		<string>cpy</string>
+		<string>SConstruct</string>
+		<string>Sconstruct</string>
+		<string>sconstruct</string>
+		<string>SConscript</string>
 	</array>
 	<key>firstLineMatch</key>
 	<string>^#!/.*\bpython\b</string>

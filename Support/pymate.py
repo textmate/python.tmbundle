@@ -190,6 +190,8 @@ def main(script_name):
         
     # the script should run in the __main__ namespace
     script_env['__name__'] = '__main__'
+    # We set the filename to the filename of the script:
+    script_env['__file__'] = script_name_short
     # we signal our presence
     script_env['__pymate'] = True
     # override raw_input() and input() in order to display a graphical prompt

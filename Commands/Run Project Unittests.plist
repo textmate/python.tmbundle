@@ -9,15 +9,10 @@
 	<key>capturePattern</key>
 	<string>^\s*File "(.+)", line (\d+)</string>
 	<key>command</key>
-	<string>TPY=${TM_PYTHON:-python}
+	<string># Find all files that end with "Test.py" and run 
+# them.
 
-for x in `ls -1 | grep Test.*\.py$`; do
-	"$TPY" "$x"
-done
-
-# suggestion for rewrite:
-# find . -name "Test*.py" -exec \
-#   "${TM_PYTHON:-python}" '{}' \;</string>
+find . -name "*Test.py" -exec "${TM_PYTHON:-python}" '{}' \;</string>
 	<key>fileCaptureRegister</key>
 	<string>1</string>
 	<key>input</key>

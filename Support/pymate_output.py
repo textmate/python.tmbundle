@@ -5,95 +5,160 @@
 # this script is released under the GNU General Public License
 
 
-preface = '''
-    <html>
-    <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>PyMate</title>
-    <style type="text/css">
-    <!--
-    body {
-    	background-color: #D8E2F1;
-    	margin: 0;
-    }
-    div {
-    	border-style: dotted;
-    	border-width: 1px 0;
-    	border-color: #666;
-    	margin: 10px 0;
-    	padding: 10px;
-    }
-    p { margin: 0; padding: 2px 0; }
-    
-    div#script_output {
-    	background-color: #C9D9F0;
-    }
-    
-    p#preface strong { font-size: 11pt; }
-    p#preface small { font-size: 9pt; }
-    
-    pre#output {
-    	padding: 0;
-    	margin: 0;
-    	line-height: 1.5;
-    	font-family: Monaco;
-    	font-size: 8pt;
-    }
+preface = '''<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>PyMate</title>
+<style type="text/css">
+<!--
+/* the script that shows/hides stderr relies upon the ordering
+   of the first three rules. */
 
-    pre#output strong {
-    	/* used for messages */
-    	font-weight: normal;
-    	color: #28569C;
-    }
-    pre#output em {
+/* <don't touch> */
+
+    span.stderr {
     	/* used for stderr */
-    	font-style: normal;
-    	color: #FF5600;
+        display: inline;
+    	color: #F50;
     }
 
-    div#exception_report {
-        background-color: #B8CFF0;
+    span.stderr_notice {
+    	/* used for stderr */
+        display: none;
+    	color: #F50;
     }
-    
-    p#exception { font-size: 9pt; }
-    p#exception strong { color: rgb(220,0,0); }
-    p#traceback { font-size: 8pt; }
-    
-    table { margin: 0 40px; padding: 0; }
-    
-    td {
-    	margin: 0;
-    	padding: 2px;
-    	font-size: 9pt;
+
+    pre#output hr {
+        display: block;
+        border: 0;
+        border-top: 1px dotted #F50;
     }
-    
-    abbr { border-bottom: 1px dotted; font-weight: bold; }
-    a, a.near { color: rgb(30,90,135); }
-    a.far { color: #B73D00; }
-    
-    -->
-    </style>
-    </head>
-    <body>
-    <div id="script_output">
-    
-    <p id="preface">
-        <strong>%s</strong><br><br>
-        <small>
-            Please remember that PyMate is still in an early beta stage...
-            Send all your bug reports to <a
-            href="mailto:domenico.carbotta@gmail.com">the author</a> :)
-            <br>
-            The regular Python interpreter can be invoked using
-                &#x2318;&#x21E7;R.
-        </small>
-        <br><br>
-    </p>
-    <pre id="output"><strong>&gt;&gt;&gt %s</strong>
+
+/* </don't touch> */
+
+body {
+	background-color: #D8E2F1;
+	margin: 0;
+}
+
+div#menu {
+    font-size: 7pt;
+    font-weight: bold;
+    border-bottom: 1px dotted #F50;
+    float: right;
+    padding: 0px;
+    margin: 2px;
+    text-align: right;
+    cursor: hand;
+}
+
+div#script_output, div#exception_report {
+	border-style: dotted;
+	border-width: 1px 0;
+	border-color: #666;
+	margin: 10px 0;
+	padding: 10px;
+}
+
+div#script_output {
+	background-color: #C9D9F0;
+}
+
+p { margin: 0; padding: 2px 0; }
+p#preface strong { font-size: 11pt; }
+p#preface small { font-size: 9pt; }
+
+pre#output {
+	padding: 0;
+	margin: 0;
+	line-height: 1.5;
+	font-family: Monaco;
+	font-size: 8pt;
+}
+
+pre#output strong {
+	/* used for messages */
+	font-weight: normal;
+	color: #28569C;
+}
+
+
+div#exception_report {
+    background-color: #B8CFF0;
+}
+
+p#exception { font-size: 9pt; }
+p#exception strong { color: rgb(220,0,0); }
+p#traceback { font-size: 8pt; }
+
+table { margin: 0 40px; padding: 0; }
+
+td {
+	margin: 0;
+	padding: 2px;
+	font-size: 9pt;
+}
+
+abbr { border-bottom: 1px dotted; font-weight: bold; }
+a, a.near { color: rgb(30,90,135); }
+a.far { color: #B73D00; }
+
+-->
+</style>
+<script type="text/javascript">
+<!--
+
+var STDERR = 0;
+var NOTICE = 1;
+var HR = 2;
+
+function setStyle(selector, property_name, property_value) {
+    rule = document.styleSheets[0].rules.item(selector);
+    rule.style.setProperty(property_name, property_value, '!important');
+}
+
+function showStdErr() {
+    alert('hi');
+    setStyle(STDERR, 'display', 'inline');
+    setStyle(NOTICE, 'display', 'none');
+    setStyle(HR, 'display', 'block');
+}
+
+function hideStdErr() {
+    alert('hi');
+    setStyle(STDERR, 'display', 'none');
+    setStyle(NOTICE, 'display', 'inline');
+    setStyle(HR, 'display', 'none');
+}
+
+// -->
+</script>
+</head>
+<body>
+<div id="script_output">
+
+<p id="preface">
+    <div id="menu">
+        <span class="stderr" onclick="hideStdErr();">HIDE STDERR</span>
+        <span class="stderr_notice" onclick="showStdErr();">SHOW STDERR</span>
+    </div>
+    <strong>%s</strong><br><br>
+    <small>
+        Please remember that PyMate is still in an early beta stage...
+        Send all your bug reports to <a
+        href="mailto:domenico.carbotta@gmail.com">the author</a> :)
+        <br>
+        The regular Python interpreter can be invoked using
+            &#x2325;&#x2318;&#x21E7;R.
+    </small>
+    <br><br>
+</p>
+<pre id="output"><strong>&gt;&gt;&gt; %s</strong>
 '''
 # % (version, short_filename)
 
-exception_preface = '''</pre></div>
+exception_preface = '''<span style="display:  none;"><span
+class="stderr">forcing redraw!!!</span> don't remove</span></pre></div>
 <div id="exception_report">
 <p id="exception"><strong>%s</strong>%s</p>
 <p id="traceback">Traceback:</p>
@@ -150,7 +215,8 @@ exception_end = '''</table>
 </html>
 '''
 
-syntax = '''</pre></div>
+syntax = '''<span style="display:  none;"><span
+class="stderr">forcing redraw!!!</span> don't remove</span></pre></div>
 <div id="exception_report">
 <p id="exception"><strong>%s</strong>%s</p>
 </div>
@@ -158,7 +224,8 @@ syntax = '''</pre></div>
 </html>
 ''' # % (exception_name, exception_arguments)
 
-normal_end = '''</pre>
+normal_end = '''<span style="display:  none;"><span
+class="stderr">forcing redraw!!!</span> don't remove</span></pre>
 </div>
 </body>
 </html>

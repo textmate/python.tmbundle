@@ -1,13 +1,15 @@
 # encoding: utf-8
 
-# copyright (c) Domenico Carbotta, 2005
-# with enhancements and precious input by Brad Miller and Jeroen van der Ham
-# this script is released under the GNU General Public License
+# PyMate, a Python output beautifier for TextMate.
+# Copyright (c) Domenico Carbotta, 2005.
+# With enhancements and precious input by Brad Miller, Jeroen van der Ham.
+# Wrap function by Mike Brown from the ASPN Python Cookbook.
+# This script is released under the GNU General Public License.
 
-# Brad Miller replaced the Call to EasyDialogs with a call to CocoaDialog 10/6/05
-#
+# Note to contributors: please stick to lines of 80 characters or less :) DC
 
-__version__ = (0, 1, 0, 'beta', 4)
+
+__version__ = 106
 
 
 import sys
@@ -17,13 +19,14 @@ import MacOS
 import textwrap
 import codecs
 import commands
+import unittest
 
 import pymate_output as pmout
 import tmproj
 
 
 html_substitutions = [('&', '&amp;'), ('<', '&lt;'), ('>', '&gt;'),
-    ('\t', ' '*4)]
+    ('\t', ' '*4), ('\n', '<br>')]
 
 
 def get_file_encoding(filename):
@@ -47,25 +50,20 @@ def raw_input_replacement(prompt=''):
     '''
         A replacement for raw_input() which displays a graphical input dialog.
     '''
-    while True:
-        try:
-            cmd = "CocoaDialog inputbox --title Input --informative-text '" + prompt + "' --button1 OK --button2 'Cancel'"
-            res = os.popen(cmd)
-            status = res.readline()
-            if int(status) == 2:
-               raise IOError
-            rv = res.read()[:-1]
-        except MacOS.Error:
-            # python is not allowed to interact with user.
-            # raise EOFError like every noninteractive shell does.
-            raise EOFError
-        if rv is None:
-            continue
-        if rv == '\x04':
-            # user typed ^D, which by all means is an EOF ;)
-            raise EOFError
-        else:
-            return rv
+    sys.__stdout__.flush()
+
+    cmd = ('CocoaDialog inputbox --title Input --informative-text "' +
+            prompt.replace('"', '\\"') +
+            '" --button1 OK --button2 Cancel --button3 EOF')
+    res = os.popen(cmd)
+    status = res.readline()
+    if int(status) == 2:
+       raise IOError('User dismissed the input dialog box.')
+    elif int(status) == 3:
+        raise EOFError('User pressed the EOF button.')
+    rv = res.read()[:-1]
+    res.close()
+    return rv
 
 
 def input_replacement(prompt=''):
@@ -75,11 +73,9 @@ def input_replacement(prompt=''):
     # XXX doesn't work -- cannot find a way to gain access to the current
     # environment of the script
     if prompt != '':
-        prompt += '  :\n'
-#    prompt += 'Please note that in the current version PyMate cannot gain '
-#    prompt += 'access to the environment; you can only enter '
-#    prompt += 'expressions involving literals.\n'
-    prompt += 'For total compatibility use eval(raw_input()) instead of input().'
+        prompt += '\n'
+    prompt += 'For total compatibility use eval(raw_input()) '
+    prompt += 'instead of input().'
     rv = raw_input_replacement(textwrap.fill(prompt, 60))
     return eval(rv, globals(), locals())
 
@@ -92,76 +88,62 @@ def disabled_input_replacement(prompt=''):
             'Use eval(raw_input()) instead.')
 
 
-class HTMLSafeStream:
+class SafeStream:
     
     close_what = None
     output = u''
     TheLock = threading.Lock()
+    last = None
     
-    def __init__(self, before='', after='', encoding='utf-8'):
+    def __init__(self, before, after, encoding):
         self.before = str(before)
         self.after = str(after)
         self.encoding = encoding
+        
+        try:
+            limit = int(os.environ['TM_PYMATE_LINE_WIDTH'])
+            if limit < 50 and limit != 0:
+                self.limit = 50
+            else:
+                self.limit = limit
+        except (KeyError, ValueError):
+            self.limit = 80
+    
+    def wrap(self, text):
+            '''
+            A word-wrap function that preserves existing line breaks
+            and most spaces in the text. Expects that existing line
+            breaks are posix newlines (\n).
+            '''
+            return reduce(lambda line, word, width=self.limit: '%s%s%s' %
+                          (line,
+                           ' \n'[(len(line)-line.rfind('\n')-1
+                                 + len(word.split('\n',1)[0]
+                                      ) >= width)],
+                           word),
+                          text.split(' ')
+                         )
     
     def write(self, string):
         try:
-            HTMLSafeStream.TheLock.acquire()
+            SafeStream.TheLock.acquire()
         
-            if HTMLSafeStream.close_what is None:
-                # it's the first write ever.
-                # open our context
-                HTMLSafeStream.output += self.before
-                # register our context closing string
-                HTMLSafeStream.close_what = self.after
-        
-            elif HTMLSafeStream.close_what != self.after:
-                # another context is already open.
-                # close previous context by writing what's specified in the
-                # other HTMLSafeStream's after field
-                if HTMLSafeStream.output[-1] != '\n':
-                    HTMLSafeStream.output += '\n'
-                HTMLSafeStream.output += HTMLSafeStream.close_what
-                # open our context
-                HTMLSafeStream.output += self.before
-                # register our context closing string
-                HTMLSafeStream.close_what = self.after
-        
-            # 20050906 inlined from sanitize()
+            if SafeStream.last not in (self, None):
+                 sys.__stdout__.write('<hr>')
+            
+            SafeStream.last = self
+            
+            string = self.wrap(string)
+            
             for sub_from, sub_to in html_substitutions:
                 string = string.replace(sub_from, sub_to)
-                                    
+            
             string = string.decode(self.encoding)
-            HTMLSafeStream.output = HTMLSafeStream.output + string
+            
+            sys.__stdout__.write(self.before + string + self.after)
         
         finally:
-            HTMLSafeStream.TheLock.release()
-    
-    # @staticmethod
-    def flush(limit=78):
-        # sanitizing should have been turned off before!!!
-        assert not isinstance(sys.stdout, HTMLSafeStream)
-        
-        if HTMLSafeStream.output == '':
-            return
-        
-        try:
-            HTMLSafeStream.TheLock.acquire()
-            
-            # close the current context
-            if HTMLSafeStream.close_what is not None:
-                HTMLSafeStream.output += HTMLSafeStream.close_what
-                HTMLSafeStream.close_what = ''
-            
-            # split and wrap lines, then print them
-            for line in HTMLSafeStream.output.split('\n'):
-                print textwrap.fill(line, limit, 
-                        subsequent_indent=' ' * 8).encode('utf-8')
-            HTMLSafeStream.output = u''
-        
-        finally:
-            HTMLSafeStream.TheLock.release()
-    
-    flush = staticmethod(flush)
+            SafeStream.TheLock.release()
 
 
 def main(script_name):
@@ -179,8 +161,8 @@ def main(script_name):
     if sys.version_info[3] == 'final':
         py_version = 'Python %d.%d.%d' % sys.version_info[:3]
     else:
-        py_version = 'Python %d.%d.%d %s %d'
-    py_version += ' &#8212; PyMate %d.%d.%d %s %d' % (__version__)
+        py_version = 'Python %d.%d.%d %s %d' % sys.version_info
+    py_version += ' &#8212; PyMate r%d' % __version__
     
     script_name_short = os.path.basename(script_name)
     print pmout.preface % (py_version, script_name_short)
@@ -211,20 +193,14 @@ def main(script_name):
     
     # let's cd the scripts' directory
     os.chdir(os.path.dirname(script_name))
-    
-    # we sanitize stdout and stderr, replacing them with two instances of
-    # our 'html-safe' streams
-    
-    try:
-        limit = int(os.environ['TM_PYMATE_LINE_WIDTH'])
-    except (KeyError, ValueError):
-        limit = 80
-    
+        
     # let's get the the default output encoding used by the script.
     encoding = get_file_encoding(script_name)
     
-    sys.stdout = HTMLSafeStream(encoding=encoding)
-    sys.stderr = HTMLSafeStream('<em>', '</em>', encoding=encoding)
+    # we sanitize stdout and stderr, replacing them with two instances of
+    # our 'html-safe' streams
+    sys.stdout = SafeStream('', '', encoding)
+    sys.stderr = SafeStream('<span class="stderr">', '</span>', encoding)
     
     try:
         
@@ -235,9 +211,7 @@ def main(script_name):
         # we don't want html sanitization on our own output!
         sys.stdout = sys.__stdout__
         sys.stderr = sys.__stderr__
-        
-        # flush script's output
-        HTMLSafeStream.flush(limit)
+        print
         
         # retrieving exception data...
         e_class, e_obj, tb = sys.exc_info()
@@ -352,16 +326,22 @@ def main(script_name):
         # we don't want html sanitization on our own output!
         sys.stdout = sys.__stdout__
         sys.stderr = sys.__stderr__
-        
-        # flush script's output
-        HTMLSafeStream.flush(limit)
-        
+        print
+                
         print '<strong>Script terminated with success.</strong>'
         print pmout.normal_end
 
 
+class pymateTests(unittest.TestCase):
+        
+    def testUseCmdShiftR(self):
+        print >> sys.__stdout__, ('In order to run Unit Tests, ' +
+                'use &#x2325;&#x2318;&#x21E7;R instead.')
+
+
 if __name__ == '__main__':
+    
     if len(sys.argv) < 2:
-        print 'Usage: python pymate.py <script>'
+        print 'PyMate is designed for use under TextMate.'
     else:
         main(sys.argv[1])

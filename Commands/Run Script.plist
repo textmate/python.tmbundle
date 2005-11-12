@@ -13,7 +13,7 @@
 	<key>keyEquivalent</key>
 	<string>@r</string>
 	<key>name</key>
-	<string>Run Script</string>
+	<string>Run Script (PyMate)</string>
 	<key>output</key>
 	<string>showAsHTML</string>
 	<key>scope</key>

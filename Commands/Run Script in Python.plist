@@ -14,7 +14,7 @@ cd "${TM_DIRECTORY}"
 	<key>keyEquivalent</key>
 	<string>@R</string>
 	<key>name</key>
-	<string>Run Script in Python</string>
+	<string>Run Script (Plain)</string>
 	<key>output</key>
 	<string>openAsNewDocument</string>
 	<key>scope</key>

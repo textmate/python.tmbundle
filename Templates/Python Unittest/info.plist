@@ -13,7 +13,7 @@ fi</string>
 	<key>extension</key>
 	<string>py</string>
 	<key>name</key>
-	<string>Python Unittest</string>
+	<string>Python Unit Test</string>
 	<key>uuid</key>
 	<string>7B41B340-B7D1-11D9-AB92-000D93347A42</string>
 </dict>

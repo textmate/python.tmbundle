@@ -13,7 +13,7 @@ fi</string>
 	<key>extension</key>
 	<string>py</string>
 	<key>name</key>
-	<string>Python Class (unittest)</string>
+	<string>Python Class With Unit Test</string>
 	<key>uuid</key>
 	<string>2660AB58-7BAB-11D9-9C9F-000D93B6E43C</string>
 </dict>

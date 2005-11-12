@@ -12,7 +12,7 @@
 	<key>keyEquivalent</key>
 	<string>'</string>
 	<key>name</key>
-	<string>closing single quote in strings</string>
+	<string>Inside String: Overtype Closing '</string>
 	<key>scope</key>
 	<string>source.python meta.close.string.quoted.single.py</string>
 	<key>scopeType</key>

@@ -12,7 +12,7 @@ cd "${TM_DIRECTORY}"
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>
-	<string>~@R</string>
+	<string>@R</string>
 	<key>name</key>
 	<string>Run Script in Python</string>
 	<key>output</key>

@@ -103,6 +103,17 @@ abbr { border-bottom: 1px dotted; font-weight: bold; }
 a, a.near { color: rgb(30,90,135); }
 a.far { color: #B73D00; }
 
+.suppress { display: none; }
+
+div#unittest_warning {
+    background-color: #F50;
+    color: white;
+    border: 1px dotted white;
+    font-family: sans-serif;
+    width: 50%%;
+    padding: 10px;
+}
+
 -->
 </style>
 <script type="text/javascript">
@@ -149,15 +160,16 @@ function hideStdErr() {
         href="mailto:domenico.carbotta@gmail.com">the author</a> :)
         <br>
         The regular Python interpreter can be invoked using
-            &#x2325;&#x2318;&#x21E7;R.
+            &#x2318;&#x21E7;R.
     </small>
     <br><br>
 </p>
 <pre id="output"><strong>&gt;&gt;&gt; %s</strong>
-'''
+
+<div class="suppress">'''
 # % (version, short_filename)
 
-exception_preface = '''<span style="display:  none;"><span
+exception_preface = '''<span style="visibility: hidden;"><span
 class="stderr">forcing redraw!!!</span> don't remove</span></pre></div>
 <div id="exception_report">
 <p id="exception"><strong>%s</strong>%s</p>
@@ -215,7 +227,7 @@ exception_end = '''</table>
 </html>
 '''
 
-syntax = '''<span style="display:  none;"><span
+syntax = '''<span style="visibility: hidden;"><span
 class="stderr">forcing redraw!!!</span> don't remove</span></pre></div>
 <div id="exception_report">
 <p id="exception"><strong>%s</strong>%s</p>
@@ -224,7 +236,7 @@ class="stderr">forcing redraw!!!</span> don't remove</span></pre></div>
 </html>
 ''' # % (exception_name, exception_arguments)
 
-normal_end = '''<span style="display:  none;"><span
+normal_end = '''<span style="visibility: hidden;"><span
 class="stderr">forcing redraw!!!</span> don't remove</span></pre>
 </div>
 </body>

@@ -18,7 +18,7 @@ find . -name "*Test.py" -exec "${TM_PYTHON:-python}" '{}' \;</string>
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>
-	<string>@R</string>
+	<string>~@R</string>
 	<key>lineCaptureRegister</key>
 	<string>2</string>
 	<key>name</key>

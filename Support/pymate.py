@@ -50,8 +50,6 @@ def raw_input_replacement(prompt=''):
     '''
         A replacement for raw_input() which displays a graphical input dialog.
     '''
-    sys.__stdout__.flush()
-
     cmd = ('CocoaDialog inputbox --title Input --informative-text "' +
             prompt.replace('"', '\\"') +
             '" --button1 OK --button2 Cancel --button3 EOF')
@@ -88,6 +86,26 @@ def disabled_input_replacement(prompt=''):
             'Use eval(raw_input()) instead.')
 
 
+try:
+    _limit = int(os.environ['TM_PYMATE_LINE_WIDTH'])
+    if _limit < 50 and limit != 0:
+        _limit = 50
+except (KeyError, ValueError):
+    _limit = 80
+
+def wrap(text):
+    '''
+        A word-wrap function that preserves existing line breaks
+        and most spaces in the text. Expects that existing line
+        breaks are posix newlines (\n).
+    '''
+    return reduce(lambda line, word: '%s%s%s' %
+            (line,
+            ' \n'[(len(line) - line.rfind('\n') - 1 + len(word.split('\n',1)[0])
+                    >= _limit)],
+            word), text.split(' '))
+
+
 class SafeStream:
     
     close_what = None
@@ -100,40 +118,20 @@ class SafeStream:
         self.after = str(after)
         self.encoding = encoding
         
-        try:
-            limit = int(os.environ['TM_PYMATE_LINE_WIDTH'])
-            if limit < 50 and limit != 0:
-                self.limit = 50
-            else:
-                self.limit = limit
-        except (KeyError, ValueError):
-            self.limit = 80
-    
-    def wrap(self, text):
-            '''
-            A word-wrap function that preserves existing line breaks
-            and most spaces in the text. Expects that existing line
-            breaks are posix newlines (\n).
-            '''
-            return reduce(lambda line, word, width=self.limit: '%s%s%s' %
-                          (line,
-                           ' \n'[(len(line)-line.rfind('\n')-1
-                                 + len(word.split('\n',1)[0]
-                                      ) >= width)],
-                           word),
-                          text.split(' ')
-                         )
-    
+        
     def write(self, string):
         try:
             SafeStream.TheLock.acquire()
-        
-            if SafeStream.last not in (self, None):
-                 sys.__stdout__.write('<hr>')
+            
+            if SafeStream.last is None:
+                # close the "suppress unittest output" hack
+                sys.__stdout__.write('</div>')
+            elif SafeStream.last is not self:
+                sys.__stdout__.write('<hr>')
             
             SafeStream.last = self
             
-            string = self.wrap(string)
+            string = wrap(string)
             
             for sub_from, sub_to in html_substitutions:
                 string = string.replace(sub_from, sub_to)
@@ -141,9 +139,30 @@ class SafeStream:
             string = string.decode(self.encoding)
             
             sys.__stdout__.write(self.before + string + self.after)
-        
+            sys.__stdout__.flush()
+                
         finally:
             SafeStream.TheLock.release()
+
+
+def sanitize(encoding):
+    assert sys.stdout is sys.__stdout__
+    assert sys.stderr is sys.__stderr__
+    sys.__stdout__.flush()
+    sys.__stderr__.flush()
+    sys.stdout = SafeStream('', '', encoding)
+    sys.stderr = SafeStream('<span class="stderr">', '</span>', encoding)
+
+
+def remove_sanitization():
+    assert isinstance(sys.stdout, SafeStream)
+    assert isinstance(sys.stderr, SafeStream)
+    sys.stdout = sys.__stdout__
+    sys.stderr = sys.__stderr__
+    if SafeStream.last is None:
+        # no-one removed the "unwanted output" barrier
+        sys.stdout.write('</div>')
+        sys.stdout.flush()
 
 
 def main(script_name):
@@ -199,8 +218,7 @@ def main(script_name):
     
     # we sanitize stdout and stderr, replacing them with two instances of
     # our 'html-safe' streams
-    sys.stdout = SafeStream('', '', encoding)
-    sys.stderr = SafeStream('<span class="stderr">', '</span>', encoding)
+    sanitize(encoding)
     
     try:
         
@@ -209,8 +227,7 @@ def main(script_name):
         
     except:
         # we don't want html sanitization on our own output!
-        sys.stdout = sys.__stdout__
-        sys.stderr = sys.__stderr__
+        remove_sanitization()
         print
         
         # retrieving exception data...
@@ -324,8 +341,7 @@ def main(script_name):
     
     else:
         # we don't want html sanitization on our own output!
-        sys.stdout = sys.__stdout__
-        sys.stderr = sys.__stderr__
+        remove_sanitization()
         print
                 
         print '<strong>Script terminated with success.</strong>'
@@ -334,14 +350,19 @@ def main(script_name):
 
 class pymateTests(unittest.TestCase):
         
-    def testUseCmdShiftR(self):
-        print >> sys.__stdout__, ('In order to run Unit Tests, ' +
-                'use &#x2325;&#x2318;&#x21E7;R instead.')
+    def testUseAltCmdShiftR(self):
+        print >> sys.__stdout__, '''</div><div id="unittest_warning"
+>Use &#x2318;&#x21E7;R to run the Unit Tests contained in this file.
+Use &#x2325;&#x2318;&#x21E7;R to run all the Unit Tests in the current project.
+</div>''',
+        SafeStream.last = self
+        
 
 
 if __name__ == '__main__':
     
     if len(sys.argv) < 2:
-        print 'PyMate is designed for use under TextMate.'
+        main('/Users/Domenico/Desktop/testme.py')
+        # print 'PyMate is designed for use under TextMate.'
     else:
         main(sys.argv[1])

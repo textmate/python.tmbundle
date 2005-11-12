@@ -5,7 +5,7 @@
 	<key>content</key>
 	<string>def set$1(self, ${2:newValue}): self._$1 = ${2:newValue}</string>
 	<key>name</key>
-	<string>Set Method (set)</string>
+	<string>New Set Method (set)</string>
 	<key>scope</key>
 	<string>source.python</string>
 	<key>tabTrigger</key>

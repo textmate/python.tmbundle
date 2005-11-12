@@ -7,7 +7,7 @@
 	<key>keyEquivalent</key>
 	<string>'</string>
 	<key>name</key>
-	<string>Inside String: Insert '…' for '</string>
+	<string>Inside String: Insert '…'</string>
 	<key>scope</key>
 	<string>source.python meta.empty-string.single.py</string>
 	<key>uuid</key>

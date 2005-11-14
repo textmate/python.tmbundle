@@ -66,8 +66,8 @@ dd:after {
 %s
 </dl>""" % "\n".join([
     dd('url', '<a href="%(url)s">%(url)s</a>' % {'url':URL}),
-    dd('log', '<a href="file://%(url)s">%(url)s</a>' % {'url':OUT_LOG.name}),
-    dd('error log', '<a href="file://%(url)s">%(url)s</a>' % {'url':ERR_LOG.name})])
+    dd('log', '<a href="tm-file://%(url)s">%(url)s</a>' % {'url':OUT_LOG.name}),
+    dd('error log', '<a href="tm-file://%(url)s">%(url)s</a>' % {'url':ERR_LOG.name})])
 
 def wait_for_server(finished):
     timeout, interval, elapsed = 10,1,0

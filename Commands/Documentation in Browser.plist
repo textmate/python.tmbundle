@@ -7,7 +7,9 @@
 	<key>command</key>
 	<string>TPY=${TM_PYTHON:-python}
 
-"$TPY" "${TM_BUNDLE_SUPPORT}/browse_pydocs.py"</string>
+echo '&lt;html&gt;&lt;body&gt;'
+"$TPY" "${TM_BUNDLE_SUPPORT}/browse_pydocs.py"
+echo '&lt;/body&gt;&lt;/html&gt;'</string>
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>
@@ -15,7 +17,7 @@
 	<key>name</key>
 	<string>Documentation in Browser</string>
 	<key>output</key>
-	<string>showAsTooltip</string>
+	<string>showAsHTML</string>
 	<key>scope</key>
 	<string>source.python</string>
 	<key>uuid</key>

@@ -4,7 +4,7 @@
 <dict>
 	<key>content</key>
 	<string>def ${1:fname}(${2:self}):
-    ${3:pass}</string>
+	${3:pass}</string>
 	<key>name</key>
 	<string>New Function (def)</string>
 	<key>scope</key>

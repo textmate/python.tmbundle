@@ -5,13 +5,13 @@
 	<key>name</key>
 	<string>Symbol List: Method</string>
 	<key>scope</key>
-	<string>source.python declaration.function</string>
+	<string>source.python declaration</string>
 	<key>settings</key>
 	<dict>
 		<key>showInSymbolList</key>
 		<integer>1</integer>
 		<key>symbolTransformation</key>
-		<string>s/^\s*def\s+(.*):$/ $1/</string>
+		<string>s/^(\s*)def\s+(.*):$/$1 $2/; s/ *=.*?(,|\))/$1/g; s/^(.*\(.{30}).*?(.{30}\))/$1...$2/</string>
 	</dict>
 	<key>uuid</key>
 	<string>0B54D7DC-3FC9-41F5-A415-25FFDBB83817</string>

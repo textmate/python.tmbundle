@@ -155,9 +155,8 @@ function hideStdErr() {
     </div>
     <strong>%s</strong><br><br>
     <small>
-        Please remember that PyMate is still in an early beta stage...
-        Send all your bug reports to <a
-        href="mailto:domenico.carbotta@gmail.com">the author</a> :)
+        For comments write <a
+        href="mailto:domenico.carbotta@gmail.com?subject=%s">the author</a>.
         <br>
         The regular Python interpreter can be invoked using
             &#x2318;&#x21E7;R.
@@ -167,7 +166,7 @@ function hideStdErr() {
 <pre id="output"><strong>&gt;&gt;&gt; %s</strong>
 
 <div class="suppress">'''
-# % (version, short_filename)
+# % (version, version, short_filename)
 
 exception_preface = '''<span style="visibility: hidden;"><span
 class="stderr">forcing redraw!!!</span> don't remove</span></pre></div>

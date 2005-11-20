@@ -8,9 +8,8 @@
 
 # Note to contributors: please stick to lines of 80 characters or less :) DC
 
-
+__svn_revision__ = "$Revision$"
 __version__ = 106
-
 
 import sys
 import os
@@ -184,7 +183,7 @@ def main(script_name):
     py_version += ' &#8212; PyMate r%d' % __version__
     
     script_name_short = os.path.basename(script_name)
-    print pmout.preface % (py_version, script_name_short)
+    print pmout.preface % (py_version, py_version, script_name_short)
     
     # the environment in which the script will run
     script_env = {}

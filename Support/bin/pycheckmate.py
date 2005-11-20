@@ -6,7 +6,7 @@
 #
 # License: Artistic.
 
-__version__ = "$Revision: 1447 $"
+__version__ = "$Revision$"
 
 import sys
 import os

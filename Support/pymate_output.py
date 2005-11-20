@@ -159,7 +159,7 @@ function hideStdErr() {
         href="mailto:domenico.carbotta@gmail.com?subject=%s">the author</a>.
         <br>
         The regular Python interpreter can be invoked using
-            &#x2318;&#x21E7;R.
+            &#x21E7;&#x2318;R.
     </small>
     <br><br>
 </p>

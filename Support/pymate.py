@@ -8,8 +8,7 @@
 
 # Note to contributors: please stick to lines of 80 characters or less :) DC
 
-__svn_revision__ = "$Revision$"
-__version__ = 106
+__version__ = "$Revision$"
 
 import sys
 import os
@@ -180,7 +179,8 @@ def main(script_name):
         py_version = 'Python %d.%d.%d' % sys.version_info[:3]
     else:
         py_version = 'Python %d.%d.%d %s %d' % sys.version_info
-    py_version += ' &#8212; PyMate r%d' % __version__
+    svn_revision = __version__.split()[1]
+    py_version += ' &#8212; PyMate r%s' % svn_revision
     
     script_name_short = os.path.basename(script_name)
     print pmout.preface % (py_version, py_version, script_name_short)

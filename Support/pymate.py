@@ -52,7 +52,7 @@ def raw_input_replacement(prompt=''):
     '''
     cmd = ('CocoaDialog inputbox --title Input --informative-text "' +
             prompt.replace('"', '\\"') +
-            '" --button1 OK --button2 Cancel --button3 EOF')
+            '" --button1 "Send Text" --button2 Cancel --button3 "Send EOF (^D)"')
     res = os.popen(cmd)
     status = res.readline()
     if int(status) == 2:

@@ -9,7 +9,7 @@
 	<key>columnCaptureRegister</key>
 	<string>3</string>
 	<key>command</key>
-	<string>"${TM_PYTHON:-python}" "${TM_BUNDLE_SUPPORT}/checksyntax.py" "$TM_FILEPATH"
+	<string>pycheckmate.py "$TM_FILEPATH"
 </string>
 	<key>fileCaptureRegister</key>
 	<string>1</string>
@@ -20,9 +20,9 @@
 	<key>lineCaptureRegister</key>
 	<string>2</string>
 	<key>name</key>
-	<string>Check Python Syntax</string>
+	<string>Check Syntax (PyCheckMate)</string>
 	<key>output</key>
-	<string>separateWindow</string>
+	<string>showAsHTML</string>
 	<key>scope</key>
 	<string>source.python</string>
 	<key>uuid</key>

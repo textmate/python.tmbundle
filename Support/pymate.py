@@ -48,7 +48,7 @@ def raw_input_replacement(prompt=''):
     '''
         A replacement for raw_input() which displays a graphical input dialog.
     '''
-    cmd = ('CocoaDialog inputbox --title Input --informative-text "' +
+    cmd = ('CocoaDialog inputbox --title "Input Requested" --informative-text "' +
             prompt.replace('"', '\\"') +
             '" --button1 "Send Text" --button2 Cancel --button3 "Send EOF (^D)"')
     res = os.popen(cmd)

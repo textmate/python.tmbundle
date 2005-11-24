@@ -17,13 +17,11 @@ preface = '''<html>
 /* <don't touch> */
 
     span.stderr {
-    	/* used for stderr */
         display: inline;
     	color: #F50;
     }
 
     span.stderr_notice {
-    	/* used for stderr */
         display: none;
     	color: #F50;
     }
@@ -52,7 +50,7 @@ div#menu {
     cursor: hand;
 }
 
-div#script_output, div#exception_report {
+div#script_output, div#report {
 	border-style: dotted;
 	border-width: 1px 0;
 	border-color: #666;
@@ -71,6 +69,7 @@ p#preface small { font-size: 9pt; }
 pre#output {
 	padding: 0;
 	margin: 0;
+	margin-bottom: -12pt;
 	line-height: 1.5;
 	font-family: Monaco;
 	font-size: 8pt;
@@ -83,12 +82,13 @@ pre#output strong {
 }
 
 
-div#exception_report {
+div#report {
     background-color: #B8CFF0;
 }
 
-p#exception { font-size: 9pt; }
-p#exception strong { color: rgb(220,0,0); }
+p#header { font-size: 9pt; }
+p#header strong { color: rgb(220,0,0); }
+p#header em { color: #28569C; font-weight: bold; font-style: normal; }
 p#traceback { font-size: 8pt; }
 
 table { margin: 0 40px; padding: 0; }
@@ -105,13 +105,13 @@ a.far { color: #B73D00; }
 
 .suppress { display: none; }
 
-div#unittest_warning {
+div.solid_banner {
     background-color: #F50;
     color: white;
     border: 1px dotted white;
     font-family: sans-serif;
     width: 50%%;
-    padding: 10px;
+    padding: 5px;
 }
 
 -->
@@ -129,14 +129,12 @@ function setStyle(selector, property_name, property_value) {
 }
 
 function showStdErr() {
-    alert('hi');
     setStyle(STDERR, 'display', 'inline');
     setStyle(NOTICE, 'display', 'none');
     setStyle(HR, 'display', 'block');
 }
 
 function hideStdErr() {
-    alert('hi');
     setStyle(STDERR, 'display', 'none');
     setStyle(NOTICE, 'display', 'inline');
     setStyle(HR, 'display', 'none');
@@ -155,23 +153,28 @@ function hideStdErr() {
     </div>
     <strong>%s</strong><br><br>
     <small>
-        For comments write <a
-        href="mailto:domenico.carbotta@gmail.com?subject=%s">the author</a>.
+        For comments contact <a
+        href="mailto:domenico.carbotta@gmail.com?subject=%s"
+        >the author</a>.
         <br>
         The regular Python interpreter can be invoked using
-            &#x21E7;&#x2318;R.
+            &#x2318;&#x21E7;R.
     </small>
     <br><br>
 </p>
 <pre id="output"><strong>&gt;&gt;&gt; %s</strong>
 
 <div class="suppress">'''
-# % (version, version, short_filename)
+# % (version_string, __version__, short_filename)
 
-exception_preface = '''<span style="visibility: hidden;"><span
-class="stderr">forcing redraw!!!</span> don't remove</span></pre></div>
-<div id="exception_report">
-<p id="exception"><strong>%s</strong>%s</p>
+std_preface = '''
+<div id="report">
+<p id="header"><em>%s</em> %s</p>
+''' # % (status, message)
+
+exception_preface = '''
+<div id="report">
+<p id="header"><strong>%s</strong>%s</p>
 <p id="traceback">Traceback:</p>
 <table border="0" cellspacing="0" cellpadding="0">
 ''' # % (exception_name, exception_arguments)
@@ -226,18 +229,13 @@ exception_end = '''</table>
 </html>
 '''
 
-syntax = '''<span style="visibility: hidden;"><span
-class="stderr">forcing redraw!!!</span> don't remove</span></pre></div>
-<div id="exception_report">
-<p id="exception"><strong>%s</strong>%s</p>
+syntax = '''
+<div id="report">
+<p id="header"><strong>%s</strong>%s</p>
 </div>
 </body>
 </html>
 ''' # % (exception_name, exception_arguments)
 
-normal_end = '''<span style="visibility: hidden;"><span
-class="stderr">forcing redraw!!!</span> don't remove</span></pre>
-</div>
-</body>
-</html>
-'''
+redraw_trick = '''<span style="visibility: hidden;"><span
+class="stderr">forcing redraw!!!</span> don't remove</span>'''

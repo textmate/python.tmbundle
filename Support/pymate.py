@@ -8,7 +8,12 @@
 
 # Note to contributors: please stick to lines of 80 characters or less :) DC
 
-__version__ = "$Revision$"
+
+# fetch PyMate version from SVN revision string
+__svn_revision__ = "$Revision$"
+__version__ = int(__svn_revision__.split()[1])
+del __svn_revision__
+
 
 import sys
 import os
@@ -48,7 +53,7 @@ def raw_input_replacement(prompt=''):
     '''
         A replacement for raw_input() which displays a graphical input dialog.
     '''
-    cmd = ('CocoaDialog inputbox --title "Input Requested" --informative-text "' +
+    cmd = ('CocoaDialog inputbox --title Input --informative-text "' +
             prompt.replace('"', '\\"') +
             '" --button1 "Send Text" --button2 Cancel --button3 "Send EOF (^D)"')
     res = os.popen(cmd)
@@ -106,14 +111,12 @@ def wrap(text):
 
 class SafeStream:
     
-    close_what = None
-    output = u''
     TheLock = threading.Lock()
     last = None
     
     def __init__(self, before, after, encoding):
-        self.before = str(before)
-        self.after = str(after)
+        self.before = unicode(before)
+        self.after = unicode(after)
         self.encoding = encoding
         
         
@@ -134,13 +137,29 @@ class SafeStream:
             for sub_from, sub_to in html_substitutions:
                 string = string.replace(sub_from, sub_to)
             
-            string = string.decode(self.encoding)
-            
-            sys.__stdout__.write(self.before + string + self.after)
+            try:
+                decoded_string = string.decode(self.encoding)
+            except UnicodeDecodeError, e:
+                decoded_string = '<strong>Unicode Decode Error.</strong>'
+                # Presumably, we tried to decide the string as utf-8.
+                # Let's switch to latin-1, we just guessed wrong.
+                try:
+                    decoded_string = string.decode('latin-1')
+                except UnicodeDecodeError, x:
+                    # t3h b0rken stream (is it even possible?)
+                    pass
+                else:
+                    # 
+                    self.encoding = 'latin-1'
+            string = (self.before + decoded_string + self.after).encode('utf-8')
+            sys.__stdout__.write(string)
             sys.__stdout__.flush()
                 
         finally:
             SafeStream.TheLock.release()
+        
+    def flush(self):
+        pass
 
 
 def sanitize(encoding):
@@ -153,14 +172,14 @@ def sanitize(encoding):
 
 
 def remove_sanitization():
-    assert isinstance(sys.stdout, SafeStream)
-    assert isinstance(sys.stderr, SafeStream)
     sys.stdout = sys.__stdout__
     sys.stderr = sys.__stderr__
     if SafeStream.last is None:
         # no-one removed the "unwanted output" barrier
         sys.stdout.write('</div>')
-        sys.stdout.flush()
+    sys.stdout.write(pmout.redraw_trick)
+    sys.stdout.write('</pre></div>')
+    sys.stdout.flush()
 
 
 def main(script_name):
@@ -179,11 +198,11 @@ def main(script_name):
         py_version = 'Python %d.%d.%d' % sys.version_info[:3]
     else:
         py_version = 'Python %d.%d.%d %s %d' % sys.version_info
-    svn_revision = __version__.split()[1]
-    py_version += ' &#8212; PyMate r%s' % svn_revision
+    py_version += ' - PyMate r%d' % __version__
     
     script_name_short = os.path.basename(script_name)
-    print pmout.preface % (py_version, py_version, script_name_short)
+    sys.__stdout__.write(pmout.preface %
+            (py_version, py_version, script_name_short))
     
     # the environment in which the script will run
     script_env = {}
@@ -223,11 +242,41 @@ def main(script_name):
         
         # run python run!
         exec script in script_env
+    
+    except SystemExit, e_obj:
+        remove_sanitization()
+        
+        # retrieving exit code...
+        if len(e_obj.args) == 1:
+            e_repr = repr(e_obj.args[0])
+        else:
+            e_repr = repr(e_obj.args)
+        
+        print pmout.std_preface % ('Script terminated raising SystemExit,', 
+                e_repr)
+    
+    except (SyntaxError, IndentationError), e_obj:
+        remove_sanitization()
+        
+        # retrieving exception data...
+        e_name = str(e_obj.__class__).replace('exceptions.', '')
+        e_args = (' in <a href="txmt://open?url=file://%s&line=%d&column=%d">' +
+                '%s</a> at line %d')
+        
+        if e_obj.filename in (None, '<string>'):
+            filename = '/tmp/Unknown location'
+            short_filename = '<em>unknown location</em>'
+        else:
+            filename = e_obj.filename
+            short_filename = os.path.basename(e_obj.filename)
+                
+        e_args = e_args % (filename, e_obj.lineno, e_obj.offset,
+                short_filename, e_obj.lineno)
+        print pmout.syntax % (e_name, e_args)
+        return
         
     except:
-        # we don't want html sanitization on our own output!
         remove_sanitization()
-        print
         
         # retrieving exception data...
         e_class, e_obj, tb = sys.exc_info()
@@ -249,35 +298,9 @@ def main(script_name):
         
         # exception arguments
         if hasattr(e_obj, 'args'):
-            e_args = ': ' + ', '.join(map(str, e_obj.args))
+            e_args = ': ' + repr(e_obj.args)
         else:
             e_args = '.'
-
-        # if the exception was SystemExit, it's a normal condition        
-        if e_class is SystemExit:
-            print '<strong>Script terminated raising SystemExit%s</strong>' \
-                    % e_args
-            print pmout.normal_end
-            return
-
-        # when we get a syntax error in a regular script,
-        # the traceback is not interesting but we want to format
-        # differently the exception parameters            
-        if e_class is SyntaxError and tb_len == 0:
-            e_args = (' in <a href="txmt://open?url=file://%s&line=%d">' +
-                    '%s</a> at line %d')
-            
-            if e_obj.filename in (None, '<string>'):
-                filename = '/tmp/Unknown location'
-                short_filename = '<em>unknown location</em>'
-            else:
-                filename = e_obj.filename
-                short_filename = os.path.basename(e_obj.filename)
-                    
-            e_args = e_args % (filename, e_obj.lineno,
-                    short_filename, e_obj.lineno)
-            print pmout.syntax % (e_name, e_args)
-            return
         
         print pmout.exception_preface % (e_name, e_args)
         
@@ -297,12 +320,19 @@ def main(script_name):
             # extract the file name from the current traceback
             filename = tb.tb_frame.f_code.co_filename
             short_filename = os.path.basename(filename)
-                            
+            
             # extract the function name from the current traceback
             func_name = tb.tb_frame.f_code.co_name
             if func_name == '?':
                 func_name = '<em>module body</em>'            
             
+            # when we reach a traceback item that refers to pymate,
+            # it's an internal error.
+            # suppress it... (or not?)
+            # i.e. if there's an encoding error, pymate shows in the traceback
+            # but it's not our fault!
+            if filename.endswith('pymate.py'):            
+                break
             lineno = tb.tb_lineno
             
             if not os.path.exists(filename):
@@ -338,22 +368,20 @@ def main(script_name):
         
         print pmout.exception_end
     
-    else:
-        # we don't want html sanitization on our own output!
+    else: # normal termination
         remove_sanitization()
-        print
-                
-        print '<strong>Script terminated with success.</strong>'
-        print pmout.normal_end
+        print pmout.std_preface % ('Script terminated with success.', '')
 
 
 class pymateTests(unittest.TestCase):
         
     def testUseAltCmdShiftR(self):
-        print >> sys.__stdout__, '''</div><div id="unittest_warning"
->Use &#x2318;&#x21E7;R to run the Unit Tests contained in this file.
+        if SafeStream.last is None:
+            sys.__stdout__.write('</div>')
+        sys.__stdout__.write(
+'''Use &#x2318;&#x21E7;R to run the Unit Tests contained in this file.
 Use &#x2325;&#x2318;&#x21E7;R to run all the Unit Tests in the current project.
-</div>''',
+''')
         SafeStream.last = self
         
 
@@ -361,7 +389,7 @@ Use &#x2325;&#x2318;&#x21E7;R to run all the Unit Tests in the current project.
 if __name__ == '__main__':
     
     if len(sys.argv) < 2:
-        main('/Users/Domenico/Desktop/testme.py')
-        # print 'PyMate is designed for use under TextMate.'
+        # main('/Users/Domenico/Desktop/testme.py')
+        print 'PyMate is designed for use under TextMate.'
     else:
         main(sys.argv[1])

@@ -4,12 +4,11 @@
 <dict>
 	<key>command</key>
 	<string>if test \! -e "$TM_NEW_FILE"; then
-   sed -e "/\${TM_NEW_FILE_BASENAME}/s//${TM_NEW_FILE_BASENAME}/" \
-       -e "/\${TM_USERNAME}/s//`niutil -readprop / /users/\$USER realname`/" \
-       -e "/\${TM_YEAR}/s//`date +%Y`/" \
-       -e "/\${TM_DATE}/s//`date +%Y-%m-%d`/" \
-       -e "/\${TM_ORGANIZATION_NAME}/s//${TM_ORGANIZATION_NAME}/" \
-       NewPythonScript.py &gt; "$TM_NEW_FILE"
+   TM_YEAR=`date +%Y` \
+   TM_DATE=`date +%Y-%m-%d` \
+   TM_USERNAME=`niutil -readprop / /users/\$USER realname` \
+   perl -pe 's/\$\{([^}]*)\}/$ENV{$1}/g; s/\t/    /g' \
+      &lt; template_in.txt &gt; "$TM_NEW_FILE"
 fi</string>
 	<key>extension</key>
 	<string>py</string>

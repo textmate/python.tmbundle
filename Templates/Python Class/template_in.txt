@@ -1,23 +1,23 @@
-#
-#  ${TM_NEW_FILE_BASENAME}
-#
-#  Created by ${TM_USERNAME} on ${TM_DATE}.
-#  Copyright (c) ${TM_YEAR} ${TM_ORGANIZATION_NAME}. All rights reserved.
-#
+# encoding: utf-8
+
+# ${TM_NEW_FILE_BASENAME}
+# Copyright (c) ${TM_YEAR} ${TM_USERNAME}
+
 
 import sys
 import os
 import unittest
 
+
 class ${TM_NEW_FILE_BASENAME}:
-    def __init__(self):
-        pass
-        
+	def __init__(self):
+		pass
 
 
 class ${TM_NEW_FILE_BASENAME}Tests(unittest.TestCase):
-    def setUp(self):
-        pass
-    
+	def setUp(self):
+		pass
+
+
 if __name__ == '__main__':
-    unittest.main()
+	unittest.main()

@@ -202,6 +202,19 @@
 					<key>name</key>
 					<string>variable.parameter.py</string>
 				</dict>
+				<dict>
+					<key>begin</key>
+					<string>=</string>
+					<key>end</key>
+					<string>,</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>$base</string>
+						</dict>
+					</array>
+				</dict>
 			</array>
 		</dict>
 		<dict>

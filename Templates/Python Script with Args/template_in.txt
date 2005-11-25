@@ -4,13 +4,13 @@
 # Copyright (c) ${TM_YEAR} ${TM_USERNAME}
 
 
-'''
-	The module docstring is used as the default usage message.
-'''
-
-
 import sys
 import getopt
+
+
+help_message = '''
+The help message goes here.
+'''
 
 
 class Usage(Exception):
@@ -32,7 +32,7 @@ def main(argv=None):
 			if option == "-v":
 				verbose = True
 			if option in ("-h", "--help"):
-				raise Usage(__doc__)
+				raise Usage(help_message)
 			if option in ("-o", "--output"):
 				output = value
 	

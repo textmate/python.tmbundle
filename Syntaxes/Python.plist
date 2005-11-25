@@ -127,7 +127,9 @@
 			<string>declaration.function.decorator.py</string>
 		</dict>
 		<dict>
-			<key>captures</key>
+			<key>begin</key>
+			<string>^\s*(def)\s+(__(add|aepack|and|call|cmp|coerce|complex|contains|copy|deepcopy|delattr|delete|delitem|delslice|del|divmod|div|eq|float|floordiv|getattribute|getattr|getinitargs|getitem|getnewargs|getslice|getstate|get|ge|GNUC|gt|hash|iadd|iand|idiv|ifloordiv|ilshift|imod|imul|init|int|ior|ipow|irshift|isub|iter|itruediv|ixor|len|le|long|lshift|lt|main|mod|mul|newobj|new|ne|nonzero|or|pow|radd|rand|rdivmod|rdiv|reduce|repr|rfloordiv|rlshift|rmod|rmul|ror|rpow|rrshift|rshift|rsub|rtruediv|rxor|setattr|setitem|setslice|setstate|setup|set|str|sub|truediv|unicode|xor)__)\s*\(</string>
+			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
 				<dict>
@@ -139,26 +141,47 @@
 					<key>name</key>
 					<string>entity.name.function.py</string>
 				</dict>
-				<key>4</key>
+			</dict>
+			<key>end</key>
+			<string>\):</string>
+			<key>name</key>
+			<string>declaration.function.operator.py</string>
+			<key>patterns</key>
+			<array>
 				<dict>
-					<key>name</key>
-					<string>declaration.parameter.py</string>
-				</dict>
-				<key>5</key>
-				<dict>
-					<key>name</key>
-					<string>constant.language.py</string>
-				</dict>
-				<key>7</key>
-				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>constant.language.py</string>
+						</dict>
+					</dict>
+					<key>match</key>
+					<string>\b(self)\b</string>
 					<key>name</key>
 					<string>variable.parameter.py</string>
 				</dict>
-			</dict>
-			<key>match</key>
-			<string>^\s*(def)\s+(__(add|aepack|and|call|cmp|coerce|complex|contains|copy|deepcopy|delattr|delete|delitem|delslice|del|divmod|div|eq|float|floordiv|getattribute|getattr|getinitargs|getitem|getnewargs|getslice|getstate|get|ge|GNUC|gt|hash|iadd|iand|idiv|ifloordiv|ilshift|imod|imul|init|int|ior|ipow|irshift|isub|iter|itruediv|ixor|len|le|long|lshift|lt|main|mod|mul|newobj|new|ne|nonzero|or|pow|radd|rand|rdivmod|rdiv|reduce|repr|rfloordiv|rlshift|rmod|rmul|ror|rpow|rrshift|rshift|rsub|rtruediv|rxor|setattr|setitem|setslice|setstate|setup|set|str|sub|truediv|unicode|xor)__)\s*(\((self)?(.*)\)):</string>
-			<key>name</key>
-			<string>declaration.function.operator.py</string>
+				<dict>
+					<key>match</key>
+					<string>\b[a-zA-Z_][a-zA-Z0-9_]*\b</string>
+					<key>name</key>
+					<string>variable.parameter.py</string>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>=</string>
+					<key>end</key>
+					<string>,|(?=\))</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>$base</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
 		</dict>
 		<dict>
 			<key>begin</key>
@@ -360,6 +383,27 @@
 			</array>
 			<key>swallow</key>
 			<string>\\.</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>\b([a-zA-Z_.]+)\s*\(</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>meta.function-call.py</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>\)</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>$base</string>
+				</dict>
+			</array>
 		</dict>
 	</array>
 	<key>scopeName</key>

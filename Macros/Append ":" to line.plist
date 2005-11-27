@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>commands</key>
+	<array>
+		<dict>
+			<key>command</key>
+			<string>moveToEndOfParagraph:</string>
+		</dict>
+		<dict>
+			<key>argument</key>
+			<string>:</string>
+			<key>command</key>
+			<string>insertText:</string>
+		</dict>
+	</array>
+	<key>keyEquivalent</key>
+	<string>~@</string>
+	<key>name</key>
+	<string>Append ":"</string>
+	<key>scope</key>
+	<string>source.python</string>
+	<key>scopeType</key>
+	<string>local</string>
+	<key>uuid</key>
+	<string>DAEF8E5C-9C78-43CC-B46B-E19327E67676</string>
+</dict>
+</plist>

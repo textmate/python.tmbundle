@@ -22,7 +22,7 @@
 	<key>keyEquivalent</key>
 	<string>$@</string>
 	<key>name</key>
-	<string>Append ":" and newline</string>
+	<string>Move to EOL and insert “:” + LF</string>
 	<key>scope</key>
 	<string>source.python</string>
 	<key>scopeType</key>

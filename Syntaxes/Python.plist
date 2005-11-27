@@ -294,10 +294,12 @@
 			<key>patterns</key>
 			<array>
 				<dict>
-					<key>match</key>
-					<string>%(\([a-zA-Z_]+\))?(0|\-|\+)?([0-9\.]*)?[diuoxXfeEgGsrc]</string>
-					<key>name</key>
-					<string>constant.other.placeholder.py</string>
+					<key>include</key>
+					<string>#constant_placeholder</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#doctest</string>
 				</dict>
 			</array>
 			<key>swallow</key>
@@ -321,10 +323,12 @@
 			<key>patterns</key>
 			<array>
 				<dict>
-					<key>match</key>
-					<string>%(\([a-zA-Z_]+\))?(0|\-|\+)?([0-9\.]*)?[diuoxXfeEgGsrc]</string>
-					<key>name</key>
-					<string>constant.other.placeholder.py</string>
+					<key>include</key>
+					<string>#constant_placeholder</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#doctest</string>
 				</dict>
 			</array>
 			<key>swallow</key>
@@ -348,10 +352,8 @@
 			<key>patterns</key>
 			<array>
 				<dict>
-					<key>match</key>
-					<string>%(\([a-zA-Z_]+\))?(0|\-|\+)?([0-9\.]*)?[diuoxXfeEgGsrc]</string>
-					<key>name</key>
-					<string>constant.other.placeholder.py</string>
+					<key>include</key>
+					<string>#constant_placeholder</string>
 				</dict>
 			</array>
 			<key>swallow</key>
@@ -375,10 +377,8 @@
 			<key>patterns</key>
 			<array>
 				<dict>
-					<key>match</key>
-					<string>%(\([a-zA-Z_]+\))?(0|\-|\+)?([0-9\.]*)?[diuoxXfeEgGsrc]</string>
-					<key>name</key>
-					<string>constant.other.placeholder.py</string>
+					<key>include</key>
+					<string>#constant_placeholder</string>
 				</dict>
 			</array>
 			<key>swallow</key>
@@ -406,6 +406,33 @@
 			</array>
 		</dict>
 	</array>
+	<key>repository</key>
+	<dict>
+		<key>constant_placeholder</key>
+		<dict>
+			<key>match</key>
+			<string>%(\([a-zA-Z_]+\))?(0|\-|\+)?([0-9\.]*)?[diuoxXfeEgGsrc]</string>
+			<key>name</key>
+			<string>constant.other.placeholder.py</string>
+		</dict>
+		<key>doctest</key>
+		<dict>
+			<key>begin</key>
+			<string>\s(&gt;&gt;&gt;) </string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>comment.other.doctest.py</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>\n</string>
+			<key>name</key>
+			<string>meta.scope.doctest.py</string>
+		</dict>
+	</dict>
 	<key>scopeName</key>
 	<string>source.python</string>
 	<key>uuid</key>

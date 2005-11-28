@@ -18,7 +18,7 @@
 	<key>keyEquivalent</key>
 	<string>~@</string>
 	<key>name</key>
-	<string>Move to EOL and insert “;”</string>
+	<string>Move to EOL and Insert “;”</string>
 	<key>scope</key>
 	<string>source.python</string>
 	<key>scopeType</key>

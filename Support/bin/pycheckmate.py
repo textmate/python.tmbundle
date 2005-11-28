@@ -11,9 +11,9 @@ __version__ = "$Revision$"
 import sys
 import os
 import re
-import select
 import traceback
 from cgi import escape
+from select import select
 from urllib import quote
 
 _pychecker_url = "http://pychecker.sourceforge.net/"
@@ -112,12 +112,9 @@ class MyPopen:
             os.close(stderr_w)
             self._stdout = stdout_r
             self._stderr = stderr_r
-            self._poll = select.poll()
-            self._poll.register(self._stdout)
-            self._poll.register(self._stderr)
             self._stdout_buf = ""
             self._stderr_buf = ""
-
+    
     def _run_child(self, cmd):
         if isinstance(cmd, basestring):
             cmd = ['/bin/sh', '-c', cmd]
@@ -146,9 +143,9 @@ class MyPopen:
         """Returns (stdout, stderr) from child."""
         stdout_buf = ""
         stderr_buf = ""
-        for fd, event in self._poll.poll(timeout):
-            if not (event & select.POLLIN):
-                continue
+        rfds, junk1, junk2 = select([self._stdout, self._stderr], [], [],
+                                    timeout)
+        for fd in rfds:
             if fd == self._stdout:
                 stdout_buf = self._stdout_buf + os.read(self._stdout, 4096)
             elif fd == self._stderr:
@@ -200,8 +197,8 @@ def check_syntax(script_path):
     except SyntaxError, e:
         href = _txmt_url_linecol % (quote(script_path), e.lineno, e.offset)
         print '<a href="%s">%s:%s</a> %s' % (
-            href, 
-            escape(os.path.basename(script_path)), e.lineno, 
+            href,
+            escape(os.path.basename(script_path)), e.lineno,
             e.msg)
     except:
         for line in apply(traceback.format_exception, sys.exc_info()):
@@ -210,17 +207,15 @@ def check_syntax(script_path):
             line = escape(stripped.rstrip())
             print '<span class="stderr">%s%s</span><br>' % (pad, line)
 
-def pychecker_version(pychecker_bin):
-    try:
-        import pychecker.Config
-        return pychecker.Config._VERSION
-    except (ImportError, AttributeError):
-        pass
-    # that didn't work, let's try it the hard way
-    p = os.popen("%s -V 2>/dev/null" % pychecker_bin)
-    version = p.readline().strip()
-    p.close()
-    return version
+def find_pychecker():
+    bin = os.getenv("TM_PYCHECKER", "%s/bin/pychecker" % sys.prefix)
+    if os.path.isfile(bin):
+        p = os.popen("%s -V 2>/dev/null" % bin)
+        ver = p.readline().strip()
+        p.close()
+        if ver:
+            return (bin, ver)
+    return (None, None)
 
 def run_pychecker(pychecker_bin, script_path):
     basepath = os.getenv("TM_PROJECT_DIRECTORY")
@@ -234,7 +229,7 @@ def run_pychecker(pychecker_bin, script_path):
             match = _pattern.search(line)
             if match:
                 filename, lineno, msg = match.groups()
-                href = _txmt_url_line % (quote(os.path.abspath(filename)), 
+                href = _txmt_url_line % (quote(os.path.abspath(filename)),
                                          lineno)
                 if basepath is not None and filename.startswith(basepath):
                     filename = filename[len(basepath)+1:]
@@ -260,10 +255,9 @@ def run_pychecker(pychecker_bin, script_path):
     p.close()
 
 def main(script_path):
-    pychecker_bin = os.getenv("TM_PYCHECKER", "pychecker")
-    pychecker_ver = pychecker_version(pychecker_bin)
+    pychecker_bin, pychecker_ver = find_pychecker()
     my_revision = __version__.split()[1]
-    if not pychecker_ver:        
+    if not pychecker_ver:
         version_string = "PyCheckMate r%s &ndash; PyChecker %s" % (
             my_revision, "not installed")
     else:
@@ -277,9 +271,9 @@ def main(script_path):
         title = "%s &mdash; %s" % (escape(script_name), escape(project_dir))
     else:
         title = escape(script_path)
-
+    
     print _html_header % (title, version_string)
-    if pychecker_ver:        
+    if pychecker_ver:
         run_pychecker(pychecker_bin, script_path)
     else:
         print \
@@ -297,3 +291,4 @@ if __name__ == "__main__":
     else:
         print "pycheckermate.py <file.py>"
         sys.exit(1)
+

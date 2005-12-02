@@ -1,16 +1,27 @@
 #!/usr/bin/python
 #
 # PyCheckMate, a PyChecker output beautifier for TextMate.
-# Copyright (c) Jay Soffian, 2005.
+# Copyright (c) Jay Soffian, 2005. <jay at soffian dot org>
 # Inspired by Domenico Carbotta's PyMate.
 #
 # License: Artistic.
 #
-# DANGER WILL ROBINSON: before sending updates to this code, please make sure
-# you have the latest version:
-# http://macromates.com/wiki/pmwiki?n=Main.SubversionCheckout
+# Usage:
+# - Out of the box, pycheckmate.py will perform only a basic syntax check
+#   by attempting to compile the python code.
+# - Install PyChecker or PyFlakes for more extensive checking. If both are
+#   installed, PyChecker will be used.
+# - TM_PYCHECKER may be set to control which checker is used. Set it to just
+#   "pychecker" or "pyflakes" to locate these programs in the default python
+#   bin directory or to a full path if the checker program is installed
+#   elsewhere.
+# - If for some reason you want to use the built-in sytax check when either
+#   pychecker or pyflakes are installed, you may set TM_PYCHECKER to
+#   "builtin".
 #
-# Thanks - jay at soffian dot org
+# Notice to contributors:
+#   Before sending updates to this code, please make sure you have the latest
+#   version: http://macromates.com/wiki/pmwiki?n=Main.SubversionCheckout
 
 __version__ = "$Revision$"
 
@@ -22,15 +33,20 @@ from cgi import escape
 from select import select
 from urllib import quote
 
-_pychecker_url = "http://pychecker.sourceforge.net/"
+###
+### Constants
+###
 
-# pattern to match pychecker output
-_pattern = re.compile(r"^(.*?\.pyc?):(\d+):\s+(.*)$")
+PYCHECKER_URL = "http://pychecker.sourceforge.net/"
+PYFLAKES_URL = "http://divmod.org/projects/pyflakes"
+
+# patterns to match output of checker programs
+PYCHECKER_RE = re.compile(r"^(.*?\.pyc?):(\d+):\s+(.*)$")
 
 # careful editing these, they are format strings
-_txmt_url_line = r"txmt://open?url=file://%s&line=%s"
-_txmt_url_linecol = r"txmt://open?url=file://%s&line=%s&col=%s"
-_html_header = r"""<html>
+TXMT_URL1_FORMAT = r"txmt://open?url=file://%s&line=%s"
+TXMT_URL2_FORMAT = r"txmt://open?url=file://%s&line=%s&col=%s"
+HTML_HEADER_FORMAT = r"""<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>PyCheckMate %s</title>
@@ -71,11 +87,15 @@ p {margin: 0; padding: 2px 0; }
 <div id="output">
 """
 
-_html_footer = """</div>
+HTML_FOOTER = """</div>
 </div>
 </body>
 </html>
 """
+
+###
+### Helper classes
+###
 
 class Error(Exception): pass
 
@@ -189,6 +209,10 @@ class MyPopen:
         os.close(self._stdout)
         os.close(self._stderr)
 
+###
+### Program code
+###
+
 def check_syntax(script_path):
     f = open(script_path, 'r')
     source = ''.join(f.readlines()+["\n"])
@@ -198,7 +222,7 @@ def check_syntax(script_path):
         compile(source, script_path, "exec")
         print "None<br>"
     except SyntaxError, e:
-        href = _txmt_url_linecol % (quote(script_path), e.lineno, e.offset)
+        href = TXMT_URL2_FORMAT % (quote(script_path), e.lineno, e.offset)
         print '<a href="%s">%s:%s</a> %s' % (
             href,
             escape(os.path.basename(script_path)), e.lineno,
@@ -210,17 +234,35 @@ def check_syntax(script_path):
             line = escape(stripped.rstrip())
             print '<span class="stderr">%s%s</span><br>' % (pad, line)
 
-def find_pychecker():
-    bin = os.getenv("TM_PYCHECKER", "%s/bin/pychecker" % sys.prefix)
-    if os.path.isfile(bin):
-        p = os.popen("%s -V 2>/dev/null" % bin)
-        ver = p.readline().strip()
-        p.close()
-        if ver:
-            return (bin, ver)
-    return (None, None)
+def find_checker_program():
+    checkers = ["pychecker", "pyflakes"]
+    tm_pychecker = os.getenv("TM_PYCHECKER")
+    if tm_pychecker == "builtin":
+        return ("", "Syntax check only")
+    if tm_pychecker is not None:
+        checkers.insert(0, tm_pychecker)
+    for checker in checkers:
+        basename = os.path.split(checker)[1]
+        if checker == basename:
+            checker = os.path.join(sys.prefix, "bin", checker)
+        if os.path.isfile(checker):
+            if basename == "pychecker":
+                p = os.popen('"%s" -V 2>/dev/null' % (checker))
+                version = p.readline().strip()
+                status = p.close()
+                if status is None and version:
+                    return (checker, ("PyChecker %s" % version))
+            elif basename == "pyflakes":
+                # pyflakes doesn't have a version string embedded anywhere,
+                # so run it against itself to make sure it's functional
+                p = os.popen('"%s" "%s" 2>&1 >/dev/null' % (checker, checker))
+                output = p.readlines()
+                status = p.close()
+                if status is None and not output:
+                    return (checker, "PyFlakes")
+    return (None, "Syntax check only")
 
-def run_pychecker(pychecker_bin, script_path):
+def run_checker_program(pychecker_bin, script_path):
     basepath = os.getenv("TM_PROJECT_DIRECTORY")
     p = MyPopen([pychecker_bin, script_path])
     while 1:
@@ -228,11 +270,11 @@ def run_pychecker(pychecker_bin, script_path):
         if stdout is None: break
         for line in stdout:
             line = line.rstrip()
-            match = _pattern.search(line)
+            match = PYCHECKER_RE.search(line)
             if match:
                 filename, lineno, msg = match.groups()
-                href = _txmt_url_line % (quote(os.path.abspath(filename)),
-                                         lineno)
+                href = TXMT_URL1_FORMAT % (quote(os.path.abspath(filename)),
+                                           lineno)
                 if basepath is not None and filename.startswith(basepath):
                     filename = filename[len(basepath)+1:]
                 # naive linewrapping, but it seems to work well-enough
@@ -254,17 +296,22 @@ def run_pychecker(pychecker_bin, script_path):
             pad = "&nbsp;" * (len(line) - len(stripped))
             line = escape(stripped.rstrip())
             print '<span class="stderr">%s%s</span><br>' % (pad, line)
+    print "<br>Exit status: %s" % p.status()
     p.close()
 
 def main(script_path):
-    pychecker_bin, pychecker_ver = find_pychecker()
+    checker_bin, checker_ver = find_checker_program()
     my_revision = __version__.split()[1]
-    if not pychecker_ver:
-        version_string = "PyCheckMate r%s &ndash; PyChecker %s" % (
-            my_revision, "not installed")
-    else:
-        version_string = "PyCheckMate r%s &ndash; PyChecker %s" % (
-            my_revision, pychecker_ver)
+    version_string = "PyCheckMate r%s &ndash; %s" % (my_revision, checker_ver)
+    warning_string = ""
+    if checker_bin is None:
+        href_format = \
+            "<a href=\"javascript:TextMate.system('open %s', null)\">%s</a>"
+        pychecker_url = href_format % (PYCHECKER_URL, "PyChecker")
+        pyflakes_url  = href_format % (PYFLAKES_URL, "PyFlakes")
+        warning_string = \
+            "<p>Please install %s or %s for more extensive code checking." \
+            "</p><br>" % (pychecker_url, pyflakes_url)
     
     basepath = os.getenv("TM_PROJECT_DIRECTORY")
     if basepath:
@@ -274,17 +321,14 @@ def main(script_path):
     else:
         title = escape(script_path)
     
-    print _html_header % (title, version_string)
-    if pychecker_ver:
-        run_pychecker(pychecker_bin, script_path)
+    print HTML_HEADER_FORMAT % (title, version_string)
+    if warning_string:
+        print warning_string
+    if checker_bin:
+        run_checker_program(checker_bin, script_path)
     else:
-        print \
-            "<p>Please install " \
-            "<a href=\"javascript:TextMate.system('open %s', null)\">" \
-            "PyChecker</a> for more extensive code checking.</p><br>" \
-            % _pychecker_url
         check_syntax(script_path)
-    print _html_footer
+    print HTML_FOOTER
     return 0
 
 if __name__ == "__main__":

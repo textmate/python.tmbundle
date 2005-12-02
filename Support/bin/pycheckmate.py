@@ -5,6 +5,12 @@
 # Inspired by Domenico Carbotta's PyMate.
 #
 # License: Artistic.
+#
+# DANGER WILL ROBINSON: before sending updates to this code, please make sure
+# you have the latest version:
+# http://macromates.com/wiki/pmwiki?n=Main.SubversionCheckout
+#
+# Thanks - jay at soffian dot org
 
 __version__ = "$Revision$"
 
@@ -84,8 +90,7 @@ class MyPopen:
     return no additional output. At that point drain() should be called to
     return the last bit of output.
     
-    As a simplication, readlines() can be called until (stdout, stderr) both
-    return zero lines.
+    As a simplication, readlines() can be called until it returns (None, None)
     """
     
     try:
@@ -97,6 +102,7 @@ class MyPopen:
         stdout_r, stdout_w = os.pipe()
         stderr_r, stderr_w = os.pipe()
         self._status = -1
+        self._drained = 0
         self._pid = os.fork()
         if self._pid == 0:
             # child
@@ -141,29 +147,21 @@ class MyPopen:
     
     def poll(self, timeout=None):
         """Returns (stdout, stderr) from child."""
-        stdout_buf = ""
-        stderr_buf = ""
-        rfds, junk1, junk2 = select([self._stdout, self._stderr], [], [],
-                                    timeout)
-        for fd in rfds:
-            if fd == self._stdout:
-                stdout_buf = self._stdout_buf + os.read(self._stdout, 4096)
-            elif fd == self._stderr:
-                stderr_buf = self._stderr_buf + os.read(self._stderr, 4096)
-            else:
-                raise Error("Implementation Error")
+        bufs = {self._stdout:self._stdout_buf, self._stderr:self._stderr_buf}
+        fds, junk_fds1, junk_fds2 = select(bufs.keys(), [], [], timeout)
+        for fd in fds: bufs[fd] += os.read(fd, 4096)
         self._stdout_buf = ""
         self._stderr_buf = ""
-        stdout_lines = stdout_buf.splitlines()
-        stderr_lines = stderr_buf.splitlines()
-        if stdout_lines and not stdout_buf.endswith("\n"):
+        stdout_lines = bufs[self._stdout].splitlines()
+        stderr_lines = bufs[self._stderr].splitlines()
+        if stdout_lines and not bufs[self._stdout].endswith("\n"):
             self._stdout_buf = stdout_lines.pop()
-        if stderr_lines and not stderr_buf.endswith("\n"):
+        if stderr_lines and not bufs[self._stderr].endswith("\n"):
             self._stderr_buf = stderr_lines.pop()
         return (stdout_lines, stderr_lines)
     
     def drain(self):
-        stdout, stderr = [], []
+        stdout, stderr = [self._stdout_buf], [self._stderr_buf]
         while 1:
             data = os.read(self._stdout, 4096)
             if not data: break
@@ -172,12 +170,17 @@ class MyPopen:
             data = os.read(self._stderr, 4096)
             if not data: break
             stderr.append(data)
-        stdout = ''.join(stdout).splitlines()
-        stderr = ''.join(stderr).splitlines()
-        return (stdout, stderr)
+        self._stdout_buf = ""
+        self._stderr_buf = ""
+        self._drained = 1
+        stdout_lines = ''.join(stdout).splitlines()
+        stderr_lines = ''.join(stderr).splitlines()
+        return (stdout_lines, stderr_lines)
     
     def readlines(self):
-        if self.status() == -1:
+        if self._drained:
+            return None, None
+        elif self.status() == -1:
             return self.poll()
         else:
             return self.drain()
@@ -222,8 +225,7 @@ def run_pychecker(pychecker_bin, script_path):
     p = MyPopen([pychecker_bin, script_path])
     while 1:
         stdout, stderr = p.readlines()
-        if not stdout and not stderr:
-            break
+        if stdout is None: break
         for line in stdout:
             line = line.rstrip()
             match = _pattern.search(line)
@@ -291,4 +293,3 @@ if __name__ == "__main__":
     else:
         print "pycheckermate.py <file.py>"
         sys.exit(1)
-

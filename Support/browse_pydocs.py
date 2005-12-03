@@ -1,11 +1,12 @@
 #!/usr/bin/env python
-# kumar dot mcmillan at gmail
+# kumar.mcmillan at gmail
 
 import os
 import sys
 import pydoc
 import time
 from urllib2 import urlopen, URLError
+from traceback import format_exc
 
 PORT=9877
 URL='http://localhost:%d/' % PORT
@@ -13,11 +14,10 @@ UID='pydoc_server_%d' % PORT
 OUT_LOG = file('/tmp/%s.log' % UID, 'a+')
 ERR_LOG = file('/tmp/%s_error.log' % UID, 'a+', 0)
 
-def browse_and_exit():
+def browse_docs():
     cmd = 'open %s' % URL
     if os.system(cmd) is not 0:
         raise OSError("failed: %s" % cmd)
-    sys.exit(0)
 
 def is_serving():
     try:
@@ -81,12 +81,14 @@ def wait_for_server(finished):
 def main():
     def onserve():
         print info()
-        browse_and_exit()
+        browse_docs()
         
     try:
-        if is_serving(): onserve()
+        if is_serving(): 
+            onserve()
+            sys.exit(0)
         
-        # the magical two forks, lifted from:
+        # daemonize with the magical two forks, lifted from:
         # http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/66012
         try:
             pid = os.fork()
@@ -111,8 +113,12 @@ def main():
             raise
     
         start_serv()
+    except SystemExit, e:
+        # don't want this printing a <pre> tag in the TM thread
+        raise
     except:
-        print "<pre>" # ugly hack :(
+        ERR_LOG.write(format_exc())
+        print "<pre>" # so we can read the traceback in the TM thread :)
         raise
 
 if __name__ == '__main__':

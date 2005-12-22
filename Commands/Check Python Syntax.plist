@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>beforeRunningCommand</key>
-	<string>nop</string>
+	<string>saveActiveFile</string>
 	<key>capturePattern</key>
 	<string>^(.*)\s+line:\s+(\d+)\s+col:\s+(\d+).*$</string>
 	<key>columnCaptureRegister</key>
@@ -20,7 +20,7 @@
 	<key>lineCaptureRegister</key>
 	<string>2</string>
 	<key>name</key>
-	<string>Check Syntax (PyCheckMate)</string>
+	<string>Validate Syntax (PyCheckMate)</string>
 	<key>output</key>
 	<string>showAsHTML</string>
 	<key>scope</key>

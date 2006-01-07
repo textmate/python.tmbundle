@@ -23,9 +23,9 @@ def main(argv=None):
 		argv = sys.argv
 	try:
 		try:
-			opts, args = getopt.getopt(argv[1:], "hov:", ["help", "output="])
+			opts, args = getopt.getopt(argv[1:], "ho:v", ["help", "output="])
 		except getopt.error, msg:
-			 raise Usage(msg)
+			raise Usage(msg)
 	
 		# option processing
 		for option, value in opts:

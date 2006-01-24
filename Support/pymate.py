@@ -91,7 +91,7 @@ def disabled_input_replacement(prompt=''):
 
 try:
     _limit = int(os.environ['TM_PYMATE_LINE_WIDTH'])
-    if _limit < 50 and limit != 0:
+    if _limit < 50 and _limit != 0:
         _limit = 50
 except (KeyError, ValueError):
     _limit = 80
@@ -260,7 +260,7 @@ def main(script_name):
         
         # retrieving exception data...
         e_name = str(e_obj.__class__).replace('exceptions.', '')
-        e_args = (' in <a href="txmt://open?url=file://%s&line=%d&column=%d">' +
+        e_args = (' in <a href="txmt://open?url=file://%s&line=%d">' +
                 '%s</a> at line %d')
         
         if e_obj.filename in (None, '<string>'):
@@ -269,8 +269,7 @@ def main(script_name):
         else:
             filename = e_obj.filename
             short_filename = os.path.basename(e_obj.filename)
-                
-        e_args = e_args % (filename, e_obj.lineno, e_obj.offset,
+        e_args = e_args % (filename, e_obj.lineno,
                 short_filename, e_obj.lineno)
         print pmout.syntax % (e_name, e_args)
         return

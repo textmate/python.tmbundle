@@ -143,7 +143,7 @@
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>\):</string>
+			<string>\)\s*:</string>
 			<key>name</key>
 			<string>declaration.function.operator.py</string>
 			<key>patterns</key>
@@ -200,7 +200,7 @@
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>\):</string>
+			<string>\)\s*:</string>
 			<key>name</key>
 			<string>declaration.function.py</string>
 			<key>patterns</key>
@@ -257,7 +257,7 @@
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>[)]?:</string>
+			<string>[)]?\s*:</string>
 			<key>name</key>
 			<string>declaration.class.py</string>
 			<key>patterns</key>

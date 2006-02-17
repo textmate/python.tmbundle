@@ -8,6 +8,8 @@
 	<string>source.python</string>
 	<key>settings</key>
 	<dict>
+		<key>decreaseIndentPattern</key>
+		<string>^\s*(elif|else|except|finally)\b.*:</string>
 		<key>increaseIndentPattern</key>
 		<string>^\s*(class|def|elif|else|except|finally|for|if|try|while)\b.*:</string>
 		<key>shellVariables</key>

@@ -386,7 +386,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\b([a-zA-Z_.]+)\s*\(</string>
+			<string>\b([a-zA-Z_][a-zA-Z_0-9]*)\s*\(</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>

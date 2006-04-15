@@ -20,18 +20,6 @@
 				<key>value</key>
 				<string># </string>
 			</dict>
-			<dict>
-				<key>name</key>
-				<string>TM_COMMENT_END</string>
-				<key>value</key>
-				<string></string>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>TM_COMMENT_MODE</string>
-				<key>value</key>
-				<string>line</string>
-			</dict>
 		</array>
 	</dict>
 	<key>uuid</key>

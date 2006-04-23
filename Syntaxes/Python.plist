@@ -104,7 +104,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(__debug__|__import__|__name__|abs|apply|basestring|bool|buffer|callable|chr|classmethod|cmp|coerce|compile|complex|copyright|delattr|dict|dir|divmod|enumerate|eval|execfile|exit|file|filter|float|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|license|list|locals|long|map|max|min|object|oct|open|ord|pow|property|range|raw_input|reduce|reload|repr|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unichr|unicode|vars|xrange|zip)\b(?=\s*\(.*\))</string>
+			<string>\b(__debug__|__import__|__name__|abs|apply|basestring|bool|buffer|callable|chr|classmethod|cmp|coerce|compile|complex|copyright|delattr|dict|dir|divmod|enumerate|eval|execfile|exit|file|filter|float|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|license|list|locals|long|map|max|min|object|oct|open|ord|pow|property|range|raw_input|reduce|reload|repr|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unichr|unicode|vars|xrange|zip)\b</string>
 			<key>name</key>
 			<string>support.function.py</string>
 		</dict>

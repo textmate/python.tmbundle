@@ -118,8 +118,8 @@ class SafeStream:
         self.before = unicode(before)
         self.after = unicode(after)
         self.encoding = encoding
-        
-        
+    
+    
     def write(self, string):
         try:
             SafeStream.TheLock.acquire()
@@ -149,17 +149,19 @@ class SafeStream:
                     # t3h b0rken stream (is it even possible?)
                     pass
                 else:
-                    # 
+                    #
                     self.encoding = 'latin-1'
             string = (self.before + decoded_string + self.after).encode('utf-8')
             sys.__stdout__.write(string)
             sys.__stdout__.flush()
-                
+        
         finally:
             SafeStream.TheLock.release()
-        
+    
+    
     def flush(self):
         pass
+    
 
 
 def sanitize(encoding):
@@ -206,7 +208,7 @@ def main(script_name):
     
     # the environment in which the script will run
     script_env = {}
-        
+    
     # the script should run in the __main__ namespace
     script_env['__name__'] = '__main__'
     # We set the filename to the filename of the script:
@@ -224,13 +226,13 @@ def main(script_name):
     # we overwrite our path since we won't load any other modules
     # and we don't want script to look for modules from our directory!
     sys.path[0] = os.path.dirname(script_name)
-        
+    
     # we clean traces of our presence from sys.argv[]
     sys.argv.pop(0)
     
     # let's cd the scripts' directory
     os.chdir(os.path.dirname(script_name))
-        
+    
     # let's get the the default output encoding used by the script.
     encoding = get_file_encoding(script_name)
     
@@ -252,7 +254,7 @@ def main(script_name):
         else:
             e_repr = repr(e_obj.args)
         
-        print pmout.std_preface % ('Script terminated raising SystemExit,', 
+        print pmout.std_preface % ('Script terminated raising SystemExit,',
                 e_repr)
     
     except (SyntaxError, IndentationError), e_obj:
@@ -273,7 +275,7 @@ def main(script_name):
                 short_filename, e_obj.lineno)
         print pmout.syntax % (e_name, e_args)
         return
-        
+    
     except:
         remove_sanitization()
         
@@ -315,7 +317,7 @@ def main(script_name):
             script_dir = os.path.dirname(script_name)
         
         while tb is not None:
-
+            
             # extract the file name from the current traceback
             filename = tb.tb_frame.f_code.co_filename
             short_filename = os.path.basename(filename)
@@ -323,24 +325,24 @@ def main(script_name):
             # extract the function name from the current traceback
             func_name = tb.tb_frame.f_code.co_name
             if func_name == '?':
-                func_name = '<em>module body</em>'            
+                func_name = '<em>module body</em>'
             
             # when we reach a traceback item that refers to pymate,
             # it's an internal error.
             # suppress it... (or not?)
             # i.e. if there's an encoding error, pymate shows in the traceback
             # but it's not our fault!
-            if filename.endswith('pymate.py'):            
+            if filename.endswith('pymate.py'):
                 break
             lineno = tb.tb_lineno
             
             if not os.path.exists(filename):
                 print pmout.tbitem_binary % locals()
             
-            else:         
+            else:
                 # as suggested by Jeroen: mark files which don't belong to the
                 # current project.
-            
+                
                 if current_project is None:
                     # the script is being run from a "standalone" window (i.e.
                     # there's no open project).
@@ -354,12 +356,12 @@ def main(script_name):
                 else:
                     # there's an open project. see tmproj module for info.
                     is_near = filename in current_project
-            
+                
                 if is_near:
                     template = pmout.tbitem_near
                 else:
                     template = pmout.tbitem_far
-            
+                
                 print template % locals()
             
             # advance to the next traceback object
@@ -373,7 +375,7 @@ def main(script_name):
 
 
 class pymateTests(unittest.TestCase):
-        
+    
     def testUseAltCmdShiftR(self):
         if SafeStream.last is None:
             sys.__stdout__.write('</div>')
@@ -382,13 +384,12 @@ class pymateTests(unittest.TestCase):
 Use &#x2325;&#x2318;&#x21E7;R to run all the Unit Tests in the current project.
 ''')
         SafeStream.last = self
-        
+    
 
 
 if __name__ == '__main__':
     
     if len(sys.argv) < 2:
-        # main('/Users/Domenico/Desktop/testme.py')
         print 'PyMate is designed for use under TextMate.'
     else:
         main(sys.argv[1])

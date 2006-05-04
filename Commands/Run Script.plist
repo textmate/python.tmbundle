@@ -3,13 +3,19 @@
 <plist version="1.0">
 <dict>
 	<key>beforeRunningCommand</key>
-	<string>saveActiveFile</string>
+	<string>nop</string>
 	<key>command</key>
-	<string>TPY=${TM_PYTHON:-pythonw}
+	<string># Save file, use tmp-file if there's no filepath.
+[[ -z "$TM_FILEPATH" ]] &amp;&amp; TM_TMPFILE=$(mktemp -t pythonmate)
+: "${TM_FILEPATH:=$TM_TMPFILE}"; cat &gt;"$TM_FILEPATH"
 
-"$TPY" "$TM_BUNDLE_SUPPORT/pymate.py" "$TM_FILEPATH"</string>
+TPY=${TM_PYTHON:-pythonw}
+
+"$TPY" "$TM_BUNDLE_SUPPORT/pymate.py" "$TM_FILEPATH"
+
+rm -f "$TM_TMPFILE"</string>
 	<key>input</key>
-	<string>none</string>
+	<string>document</string>
 	<key>keyEquivalent</key>
 	<string>@r</string>
 	<key>name</key>

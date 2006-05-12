@@ -34,7 +34,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>(?&lt;!")"(")(?!")</string>
+			<string>(?&lt;!")(")"(?!")</string>
 			<key>name</key>
 			<string>string.quoted.double.py</string>
 		</dict>
@@ -48,7 +48,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>(?&lt;!')'(')(?!')</string>
+			<string>(?&lt;!')(')'(?!')</string>
 			<key>name</key>
 			<string>string.quoted.single.py</string>
 		</dict>

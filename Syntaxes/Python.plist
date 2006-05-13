@@ -86,9 +86,15 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(True|False|None|Ellipsis|self)\b</string>
+			<string>\b(True|False|None|Ellipsis)\b</string>
 			<key>name</key>
 			<string>constant.language.py</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\b(self|cls)\b</string>
+			<key>name</key>
+			<string>variable.language.py</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -154,11 +160,11 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>constant.language.py</string>
+							<string>variable.language.py</string>
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>\b(self)\b</string>
+					<string>\b(self|cls)\b</string>
 					<key>name</key>
 					<string>variable.parameter.py</string>
 				</dict>
@@ -211,11 +217,11 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>constant.language.py</string>
+							<string>variable.language.py</string>
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>\b(self)\b</string>
+					<string>\b(self|cls)\b</string>
 					<key>name</key>
 					<string>variable.parameter.py</string>
 				</dict>

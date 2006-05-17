@@ -98,7 +98,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+[.]?[0-9]*)|([.][0-9]+))((e|E)(\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f)?[jJ]?\b</string>
+			<string>\b(?i:((0x\h*)|(\d+\.?\d*|\.\d+)(e[-+]?\d+)?)(l|u|f|ul)?j?)\b</string>
 			<key>name</key>
 			<string>constant.numeric.py</string>
 		</dict>
@@ -284,7 +284,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(r|u|ur|R|U|UR|Ur|uR)?'''[^']*</string>
+			<string>(\b(?i:r|u|ur))?'''[^']*</string>
 			<key>end</key>
 			<string>'(')'</string>
 			<key>endCaptures</key>
@@ -313,7 +313,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(r|u|ur|R|U|UR|Ur|uR)?"""[^"]*</string>
+			<string>(\b(?i:r|u|ur))?"""[^"]*</string>
 			<key>end</key>
 			<string>"(")"</string>
 			<key>endCaptures</key>
@@ -342,7 +342,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(r|u|ur|R|U|UR|Ur|uR)?'(?=.*([\\$]|'))</string>
+			<string>(\b(?i:r|u|ur))?'(?=.*([\\$]|'))</string>
 			<key>end</key>
 			<string>'|(?&lt;!\\)(?:\\\\)*(\n)</string>
 			<key>endCaptures</key>
@@ -367,7 +367,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(r|u|ur|R|U|UR|Ur|uR)?"</string>
+			<string>(\b(?i:r|u|ur))?"</string>
 			<key>end</key>
 			<string>"|(?&lt;!\\)(?:\\\\)*(\n)</string>
 			<key>endCaptures</key>

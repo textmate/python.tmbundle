@@ -3,20 +3,40 @@
 <plist version="1.0">
 <dict>
 	<key>beforeRunningCommand</key>
-	<string>saveActiveFile</string>
+	<string>nop</string>
 	<key>command</key>
-	<string>TPY=${TM_PYTHON:-pythonw}
+	<string>#!/bin/bash
+[[ -z "$TM_FILEPATH" ]] &amp;&amp; TM_TMPFILE=$(mktemp -t pythonInTerm)
+: "${TM_FILEPATH:=$TM_TMPFILE}"; cat &gt;"$TM_FILEPATH"
 
-cd "${TM_DIRECTORY}"
-"$TPY" "$TM_FILEPATH"</string>
+TPY=${TM_PYTHON:-pythonw}
+
+esc () {
+STR="$1" ruby &lt;&lt;"RUBY"
+   str = ENV['STR']
+   str = str.gsub(/'/, "'\\\\''")
+   str = str.gsub(/[\\"]/, '\\\\\\0')
+   print "'#{str}'"
+RUBY
+}
+
+osascript &lt;&lt;- APPLESCRIPT
+	tell app "Terminal"
+	    activate
+	    do script "clear; cd $(esc "${TM_DIRECTORY}"); $(esc "${TPY}") $(esc "${TM_FILEPATH}"); rm -f $(esc "${TM_TMPFILE}")"
+	    set position of first window to { 100, 100 }
+	end tell	
+APPLESCRIPT
+
+</string>
 	<key>input</key>
-	<string>none</string>
+	<string>document</string>
 	<key>keyEquivalent</key>
 	<string>@R</string>
 	<key>name</key>
-	<string>Run Script (Plain)</string>
+	<string>Run Script (Terminal)</string>
 	<key>output</key>
-	<string>openAsNewDocument</string>
+	<string>discard</string>
 	<key>scope</key>
 	<string>source.python</string>
 	<key>uuid</key>

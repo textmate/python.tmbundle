@@ -20,6 +20,12 @@
 				<key>value</key>
 				<string># </string>
 			</dict>
+			<dict>
+				<key>name</key>
+				<string>TM_LINE_TERMINATOR</string>
+				<key>value</key>
+				<string>:</string>
+			</dict>
 		</array>
 	</dict>
 	<key>uuid</key>

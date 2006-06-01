@@ -12,7 +12,7 @@
 	<string># Find all files that end with "Test.py" and run 
 # them.
 
-find . -name "*Test.py" -exec "${TM_PYTHON:-python}" '{}' \;</string>
+find . -name "*Test.py" -exec "${TM_PYTHON:-python}" '{}' \;|pre</string>
 	<key>fileCaptureRegister</key>
 	<string>1</string>
 	<key>input</key>
@@ -24,7 +24,7 @@ find . -name "*Test.py" -exec "${TM_PYTHON:-python}" '{}' \;</string>
 	<key>name</key>
 	<string>Run Project Unit Tests</string>
 	<key>output</key>
-	<string>separateWindow</string>
+	<string>showAsHTML</string>
 	<key>scope</key>
 	<string>source.python</string>
 	<key>uuid</key>

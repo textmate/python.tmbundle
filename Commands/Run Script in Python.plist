@@ -22,10 +22,11 @@ RUBY
 
 osascript &lt;&lt;- APPLESCRIPT
 	tell app "Terminal"
+	    launch
 	    activate
 	    do script "clear; cd $(esc "${TM_DIRECTORY}"); $(esc "${TPY}") $(esc "${TM_FILEPATH}"); rm -f $(esc "${TM_TMPFILE}")"
 	    set position of first window to { 100, 100 }
-	end tell	
+	end tell
 APPLESCRIPT
 
 </string>

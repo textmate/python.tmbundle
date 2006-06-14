@@ -6,7 +6,7 @@
 	<string>if __name__ == '__main__':
 	${1:main()}$0</string>
 	<key>name</key>
-	<string>if __name__ == '__main__' (ifmain)</string>
+	<string>if __name__ == '__main__'</string>
 	<key>scope</key>
 	<string>source.python</string>
 	<key>tabTrigger</key>

@@ -5,7 +5,7 @@
 	<key>content</key>
 	<string>def get$1(self): return self._$1</string>
 	<key>name</key>
-	<string>New Get Method (get)</string>
+	<string>New Get Method</string>
 	<key>scope</key>
 	<string>source.python</string>
 	<key>tabTrigger</key>

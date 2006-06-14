@@ -6,7 +6,7 @@
 	<string>def ${1:fname}(${2:self}):
 	${3:pass}</string>
 	<key>name</key>
-	<string>New Function (def)</string>
+	<string>New Function</string>
 	<key>scope</key>
 	<string>source.python</string>
 	<key>tabTrigger</key>

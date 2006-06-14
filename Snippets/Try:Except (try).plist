@@ -8,7 +8,7 @@
 except:
 	raise</string>
 	<key>name</key>
-	<string>Try/Except (try)</string>
+	<string>Try/Except</string>
 	<key>scope</key>
 	<string>source.python</string>
 	<key>tabTrigger</key>

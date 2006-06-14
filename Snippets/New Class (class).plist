@@ -11,7 +11,7 @@ ${3/([a-zA-Z0-9_]+)\s*(=[^,]*)?(,\s*|$)/\t\tself.$1 = $1\n/g}		${4:pass}
 
 $0</string>
 	<key>name</key>
-	<string>New Class (class)</string>
+	<string>New Class</string>
 	<key>scope</key>
 	<string>source.python</string>
 	<key>tabTrigger</key>

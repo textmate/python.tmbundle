@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 #
 # PyCheckMate, a PyChecker output beautifier for TextMate.
 # Copyright (c) Jay Soffian, 2005. <jay at soffian dot org>

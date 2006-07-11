@@ -130,7 +130,7 @@
 			<key>match</key>
 			<string>^\s*@([a-zA-Z_][a-zA-Z_0-9]*)(\(.*\))?</string>
 			<key>name</key>
-			<string>declaration.function.decorator.py</string>
+			<string>meta.function.decorator.py</string>
 		</dict>
 		<dict>
 			<key>begin</key>
@@ -151,7 +151,7 @@
 			<key>end</key>
 			<string>\)\s*:</string>
 			<key>name</key>
-			<string>declaration.function.operator.py</string>
+			<string>meta.function.operator.py</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -208,7 +208,7 @@
 			<key>end</key>
 			<string>\)\s*:</string>
 			<key>name</key>
-			<string>declaration.function.py</string>
+			<string>meta.function.py</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -265,7 +265,7 @@
 			<key>end</key>
 			<string>[)]?\s*:</string>
 			<key>name</key>
-			<string>declaration.class.py</string>
+			<string>meta.class.py</string>
 			<key>patterns</key>
 			<array>
 				<dict>

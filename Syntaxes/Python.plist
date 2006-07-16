@@ -430,7 +430,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>comment.other.doctest.py</string>
+					<string>keyword.other.doctest.py</string>
 				</dict>
 			</dict>
 			<key>end</key>

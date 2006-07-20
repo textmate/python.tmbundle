@@ -244,22 +244,34 @@ def find_checker_program():
     for checker in checkers:
         basename = os.path.split(checker)[1]
         if checker == basename:
-            checker = os.path.join(sys.prefix, "bin", checker)
-        if os.path.isfile(checker):
-            if basename == "pychecker":
-                p = os.popen('"%s" -V 2>/dev/null' % (checker))
-                version = p.readline().strip()
-                status = p.close()
-                if status is None and version:
-                    return (checker, ("PyChecker %s" % version))
-            elif basename == "pyflakes":
-                # pyflakes doesn't have a version string embedded anywhere,
-                # so run it against itself to make sure it's functional
-                p = os.popen('"%s" "%s" 2>&1 >/dev/null' % (checker, checker))
-                output = p.readlines()
-                status = p.close()
-                if status is None and not output:
-                    return (checker, "PyFlakes")
+            # look for checker in same bin directory as python (might be 
+            # symlinked)
+            bindir = os.path.split(sys.executable)[0]
+            checker = os.path.join(bindir, checker)
+            if not os.path.isfile(checker):
+                # look wher epython is installed
+                checker = os.path.join(sys.prefix, "bin", checker)
+            if not os.path.isfile(checker):
+                # search the PATH
+                p = os.popen("/usr/bin/which '%s'" % checker)
+                checker = p.readline().strip()
+                p.close()
+        if not os.path.isfile(checker):
+            continue
+        if basename == "pychecker":
+            p = os.popen('"%s" -V 2>/dev/null' % (checker))
+            version = p.readline().strip()
+            status = p.close()
+            if status is None and version:
+                return (checker, ("PyChecker %s" % version))
+        elif basename == "pyflakes":
+            # pyflakes doesn't have a version string embedded anywhere,
+            # so run it against itself to make sure it's functional
+            p = os.popen('"%s" "%s" 2>&1 >/dev/null' % (checker, checker))
+            output = p.readlines()
+            status = p.close()
+            if status is None and not output:
+                return (checker, "PyFlakes")
     return (None, "Syntax check only")
 
 def run_checker_program(pychecker_bin, script_path):

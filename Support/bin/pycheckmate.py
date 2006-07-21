@@ -247,13 +247,13 @@ def find_checker_program():
             # look for checker in same bin directory as python (might be 
             # symlinked)
             bindir = os.path.split(sys.executable)[0]
-            checker = os.path.join(bindir, checker)
+            checker = os.path.join(bindir, basename)
             if not os.path.isfile(checker):
-                # look wher epython is installed
-                checker = os.path.join(sys.prefix, "bin", checker)
+                # look where python is installed
+                checker = os.path.join(sys.prefix, "bin", basename)
             if not os.path.isfile(checker):
                 # search the PATH
-                p = os.popen("/usr/bin/which '%s'" % checker)
+                p = os.popen("/usr/bin/which '%s'" % basename)
                 checker = p.readline().strip()
                 p.close()
         if not os.path.isfile(checker):

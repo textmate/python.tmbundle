@@ -3,7 +3,12 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>def ${1:fname}(${2:self}):
+	<string>def ${1:fname}(${2:`if [ "$TM_CURRENT_LINE" != "" ]
+				# poor man's way ... check if there is an indent or not
+				# (cuz we would have lost the class scope by this point)
+				then
+					echo "self"
+				fi`}):
 	${3:pass}</string>
 	<key>name</key>
 	<string>New Function</string>

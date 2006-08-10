@@ -301,6 +301,10 @@
 			<array>
 				<dict>
 					<key>include</key>
+					<string>#escaped_char</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#constant_placeholder</string>
 				</dict>
 				<dict>
@@ -308,8 +312,6 @@
 					<string>#doctest</string>
 				</dict>
 			</array>
-			<key>swallow</key>
-			<string>\\.</string>
 		</dict>
 		<dict>
 			<key>begin</key>
@@ -330,6 +332,10 @@
 			<array>
 				<dict>
 					<key>include</key>
+					<string>#escaped_char</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#constant_placeholder</string>
 				</dict>
 				<dict>
@@ -337,8 +343,6 @@
 					<string>#doctest</string>
 				</dict>
 			</array>
-			<key>swallow</key>
-			<string>\\.</string>
 		</dict>
 		<dict>
 			<key>begin</key>
@@ -359,11 +363,13 @@
 			<array>
 				<dict>
 					<key>include</key>
+					<string>#escaped_char</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#constant_placeholder</string>
 				</dict>
 			</array>
-			<key>swallow</key>
-			<string>\\.</string>
 		</dict>
 		<dict>
 			<key>begin</key>
@@ -384,11 +390,13 @@
 			<array>
 				<dict>
 					<key>include</key>
+					<string>#escaped_char</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#constant_placeholder</string>
 				</dict>
 			</array>
-			<key>swallow</key>
-			<string>\\.</string>
 		</dict>
 		<dict>
 			<key>begin</key>
@@ -437,6 +445,13 @@
 			<string>\n</string>
 			<key>name</key>
 			<string>meta.scope.doctest.py</string>
+		</dict>
+		<key>escaped_char</key>
+		<dict>
+			<key>match</key>
+			<string>\\.</string>
+			<key>name</key>
+			<string>constant.character.escape.py</string>
 		</dict>
 	</dict>
 	<key>scopeName</key>

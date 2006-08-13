@@ -254,7 +254,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>storage.type.py</string>
+					<string>storage.type.class.py</string>
 				</dict>
 				<key>2</key>
 				<dict>

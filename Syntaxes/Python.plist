@@ -76,7 +76,7 @@
 			<key>match</key>
 			<string>\bimport\b</string>
 			<key>name</key>
-			<string>keyword.other.include.import</string>
+			<string>keyword.control.import</string>
 		</dict>
 		<dict>
 			<key>match</key>

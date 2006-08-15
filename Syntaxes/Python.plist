@@ -259,7 +259,7 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.class.py</string>
+					<string>entity.name.type.class.py</string>
 				</dict>
 			</dict>
 			<key>end</key>

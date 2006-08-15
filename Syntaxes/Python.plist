@@ -76,13 +76,13 @@
 			<key>match</key>
 			<string>\bimport\b</string>
 			<key>name</key>
-			<string>keyword.control.import</string>
+			<string>keyword.control.import.py</string>
 		</dict>
 		<dict>
 			<key>match</key>
 			<string>\bfrom\b</string>
 			<key>name</key>
-			<string>keyword.other.include.from</string>
+			<string>keyword.control.import.from.py</string>
 		</dict>
 		<dict>
 			<key>match</key>

@@ -425,7 +425,7 @@
 		<key>constant_placeholder</key>
 		<dict>
 			<key>match</key>
-			<string>%(\([a-zA-Z_]+\))?(0|\-|\+)?([0-9\.]*)?[diuoxXfeEgGsrc]</string>
+			<string>%(%|(\([a-zA-Z_]+\))?(0|\-|\+)?([0-9\.]*)?[diuoxXfeEgGsrc])</string>
 			<key>name</key>
 			<string>constant.other.placeholder.py</string>
 		</dict>

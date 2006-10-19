@@ -30,11 +30,21 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
+					<string>punctuation.definition.string.begin.py</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.end.py</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
 					<string>meta.empty-string.double.py</string>
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>(?&lt;!")"(")(?!")</string>
+			<string>(?&lt;!")(")(("))(?!")</string>
 			<key>name</key>
 			<string>string.quoted.double.py</string>
 		</dict>
@@ -44,11 +54,21 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
+					<string>punctuation.definition.string.begin.py</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.end.py</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
 					<string>meta.empty-string.single.py</string>
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>(?&lt;!')'(')(?!')</string>
+			<string>(?&lt;!')(')(('))(?!')</string>
 			<key>name</key>
 			<string>string.quoted.single.py</string>
 		</dict>
@@ -127,14 +147,27 @@
 			<string>support.class.exception.py</string>
 		</dict>
 		<dict>
+			<key>captures</key>
+			<dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.arguments.py</string>
+				</dict>
+				<key>5</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.arguments.py</string>
+				</dict>
+			</dict>
 			<key>match</key>
-			<string>^\s*@([a-zA-Z_][a-zA-Z_0-9]*)(\.\g&lt;1&gt;)*(\(.*\))?</string>
+			<string>^\s*@([a-zA-Z_][a-zA-Z_0-9]*)(\.\g&lt;1&gt;)*((\().*(\)))?</string>
 			<key>name</key>
 			<string>meta.function.decorator.py</string>
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(def)\s+(__(add|aepack|and|call|cmp|coerce|complex|contains|copy|deepcopy|delattr|delete|delitem|delslice|del|divmod|div|eq|float|floordiv|getattribute|getattr|getinitargs|getitem|getnewargs|getslice|getstate|get|ge|GNUC|gt|hash|iadd|iand|idiv|ifloordiv|ilshift|imod|imul|init|int|ior|ipow|irshift|isub|iter|itruediv|ixor|len|le|long|lshift|lt|main|mod|mul|newobj|new|ne|nonzero|or|pow|radd|rand|rdivmod|rdiv|reduce|repr|rfloordiv|rlshift|rmod|rmul|ror|rpow|rrshift|rshift|rsub|rtruediv|rxor|setattr|setitem|setslice|setstate|setup|set|str|sub|truediv|unicode|xor)__)\s*\(</string>
+			<string>^\s*(def)\s+(__(add|aepack|and|call|cmp|coerce|complex|contains|copy|deepcopy|delattr|delete|delitem|delslice|del|divmod|div|eq|float|floordiv|getattribute|getattr|getinitargs|getitem|getnewargs|getslice|getstate|get|ge|GNUC|gt|hash|iadd|iand|idiv|ifloordiv|ilshift|imod|imul|init|int|ior|ipow|irshift|isub|iter|itruediv|ixor|len|le|long|lshift|lt|main|mod|mul|newobj|new|ne|nonzero|or|pow|radd|rand|rdivmod|rdiv|reduce|repr|rfloordiv|rlshift|rmod|rmul|ror|rpow|rrshift|rshift|rsub|rtruediv|rxor|setattr|setitem|setslice|setstate|setup|set|str|sub|truediv|unicode|xor)__)\s*(\()</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -147,9 +180,27 @@
 					<key>name</key>
 					<string>entity.name.function.py</string>
 				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.parameters.py</string>
+				</dict>
 			</dict>
 			<key>end</key>
-			<string>\)\s*:</string>
+			<string>(\))\s*(:)</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.parameters.py</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.sectin.function.py</string>
+				</dict>
+			</dict>
 			<key>name</key>
 			<string>meta.function.operator.py</string>
 			<key>patterns</key>
@@ -177,8 +228,24 @@
 				<dict>
 					<key>begin</key>
 					<string>=</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.separator.key-value.py</string>
+						</dict>
+					</dict>
 					<key>end</key>
 					<string>,|(?=\))</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.separator.parameters.py</string>
+						</dict>
+					</dict>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -191,7 +258,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(def)\s+([a-zA-Z_][a-zA-Z_0-9]*)\s*\(</string>
+			<string>^\s*(def)\s+([a-zA-Z_][a-zA-Z_0-9]*)\s*(\()</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -204,9 +271,27 @@
 					<key>name</key>
 					<string>entity.name.function.py</string>
 				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.parameters.py</string>
+				</dict>
 			</dict>
 			<key>end</key>
-			<string>\)\s*:</string>
+			<string>(\))\s*(:)</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.parameters.py</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.sectin.function.py</string>
+				</dict>
+			</dict>
 			<key>name</key>
 			<string>meta.function.py</string>
 			<key>patterns</key>
@@ -234,8 +319,24 @@
 				<dict>
 					<key>begin</key>
 					<string>=</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.separator.key-value.py</string>
+						</dict>
+					</dict>
 					<key>end</key>
 					<string>,|(?=\))</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.separator.parameters.py</string>
+						</dict>
+					</dict>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -261,9 +362,27 @@
 					<key>name</key>
 					<string>entity.name.type.class.py</string>
 				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.section.inheritance.py</string>
+				</dict>
 			</dict>
 			<key>end</key>
-			<string>[)]?\s*:</string>
+			<string>([)]?)\s*(:)</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.section.inheritance.py</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.sectin.class.py</string>
+				</dict>
+			</dict>
 			<key>name</key>
 			<string>meta.class.py</string>
 			<key>patterns</key>
@@ -277,18 +396,39 @@
 			</array>
 		</dict>
 		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.comment.py</string>
+				</dict>
+			</dict>
 			<key>match</key>
-			<string>#.*$\n?</string>
+			<string>(#).*$\n?</string>
 			<key>name</key>
 			<string>comment.line.number-sign.py</string>
 		</dict>
 		<dict>
 			<key>begin</key>
 			<string>(\b(?i:r|u|ur))?'''[^']*</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.begin.py</string>
+				</dict>
+			</dict>
 			<key>end</key>
 			<string>'(')'</string>
 			<key>endCaptures</key>
 			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.end.py</string>
+				</dict>
 				<key>1</key>
 				<dict>
 					<key>name</key>
@@ -316,10 +456,23 @@
 		<dict>
 			<key>begin</key>
 			<string>(\b(?i:r|u|ur))?"""[^"]*</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.begin.py</string>
+				</dict>
+			</dict>
 			<key>end</key>
 			<string>"(")"</string>
 			<key>endCaptures</key>
 			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.end.py</string>
+				</dict>
 				<key>1</key>
 				<dict>
 					<key>name</key>
@@ -347,10 +500,23 @@
 		<dict>
 			<key>begin</key>
 			<string>(\b(?i:r|u|ur))?'(?=.*([\\$]|'))</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.begin.py</string>
+				</dict>
+			</dict>
 			<key>end</key>
 			<string>'|(?&lt;!\\)(?:\\\\)*(\n)</string>
 			<key>endCaptures</key>
 			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.end.py</string>
+				</dict>
 				<key>1</key>
 				<dict>
 					<key>name</key>
@@ -374,10 +540,23 @@
 		<dict>
 			<key>begin</key>
 			<string>(\b(?i:r|u|ur))?"</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.begin.py</string>
+				</dict>
+			</dict>
 			<key>end</key>
 			<string>"|(?&lt;!\\)(?:\\\\)*(\n)</string>
 			<key>endCaptures</key>
 			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.end.py</string>
+				</dict>
 				<key>1</key>
 				<dict>
 					<key>name</key>
@@ -400,7 +579,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\b([a-zA-Z_][a-zA-Z_0-9]*)\s*\(</string>
+			<string>\b([a-zA-Z_][a-zA-Z_0-9]*)\s*(\()</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -408,9 +587,22 @@
 					<key>name</key>
 					<string>meta.function-call.py</string>
 				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.arguments.py</string>
+				</dict>
 			</dict>
 			<key>end</key>
-			<string>\)</string>
+			<string>(\))</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.arguments.py</string>
+				</dict>
+			</dict>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -424,8 +616,16 @@
 	<dict>
 		<key>constant_placeholder</key>
 		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.constant.py</string>
+				</dict>
+			</dict>
 			<key>match</key>
-			<string>%(%|(\([a-zA-Z_]+\))?(0|\-|\+)?([0-9\.]*)?[diuoxXfeEgGsrc])</string>
+			<string>(%)(%|(\([a-zA-Z_]+\))?(0|\-|\+)?([0-9\.]*)?[diuoxXfeEgGsrc])</string>
 			<key>name</key>
 			<string>constant.other.placeholder.py</string>
 		</dict>

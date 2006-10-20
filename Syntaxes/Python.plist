@@ -198,7 +198,7 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.sectin.function.py</string>
+					<string>punctuation.section.function.py</string>
 				</dict>
 			</dict>
 			<key>name</key>
@@ -289,7 +289,7 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.sectin.function.py</string>
+					<string>punctuation.section.function.py</string>
 				</dict>
 			</dict>
 			<key>name</key>

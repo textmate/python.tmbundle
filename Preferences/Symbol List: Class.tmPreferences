@@ -3,15 +3,15 @@
 <plist version="1.0">
 <dict>
 	<key>name</key>
-	<string>Symbol List: Function/Method</string>
+	<string>Symbol List: Class</string>
 	<key>scope</key>
-	<string>source.python meta.function.python</string>
+	<string>source.python meta.class.python</string>
 	<key>settings</key>
 	<dict>
 		<key>showInSymbolList</key>
 		<integer>1</integer>
 	</dict>
 	<key>uuid</key>
-	<string>0B54D7DC-3FC9-41F5-A415-25FFDBB83817</string>
+	<string>B6F92FB4-E510-47F6-9299-4407F9785504</string>
 </dict>
 </plist>

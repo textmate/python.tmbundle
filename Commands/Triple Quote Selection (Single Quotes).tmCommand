@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env python
+
+from os import environ as env
+from sys import stdout
+
+if "TM_SELECTED_TEXT" in env:
+	stdout.write("'''%s'''$0" % env["TM_SELECTED_TEXT"])
+</string>
+	<key>fallbackInput</key>
+	<string>none</string>
+	<key>input</key>
+	<string>selection</string>
+	<key>keyEquivalent</key>
+	<string>^'</string>
+	<key>name</key>
+	<string>Triple Quote Selection (Single Quotes)</string>
+	<key>output</key>
+	<string>insertAsSnippet</string>
+	<key>scope</key>
+	<string>source.python</string>
+	<key>uuid</key>
+	<string>77359DF3-E248-45CE-9A51-AFE55329A725</string>
+</dict>
+</plist>

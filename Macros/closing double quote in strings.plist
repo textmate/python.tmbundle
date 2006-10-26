@@ -14,7 +14,7 @@
 	<key>name</key>
 	<string>Inside String: Overtype Closing "</string>
 	<key>scope</key>
-	<string>source.python meta.close.string.quoted.double.py</string>
+	<string>source.python string.quoted.double.single-line punctuation.definition.string.end.python</string>
 	<key>scopeType</key>
 	<string>local</string>
 	<key>uuid</key>

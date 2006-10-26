@@ -8,16 +8,18 @@
 			<key>command</key>
 			<string>moveRight:</string>
 		</dict>
+		<dict>
+			<key>command</key>
+			<string>moveRight:</string>
+		</dict>
 	</array>
 	<key>keyEquivalent</key>
-	<string>'</string>
+	<string>)</string>
 	<key>name</key>
-	<string>Inside String: Overtype Closing '</string>
+	<string>Inside Parameter List: Overtype Closing ):</string>
 	<key>scope</key>
-	<string>source.python string.quoted.single punctuation.definition.string.end.python</string>
-	<key>scopeType</key>
-	<string>local</string>
+	<string>source.python meta.function.python punctuation.definition.parameter-list.end.python</string>
 	<key>uuid</key>
-	<string>7797CDD8-76A2-4A5C-A41C-9AA7E6FBBA84</string>
+	<string>CDA11D94-712F-48EB-932E-114878FD6A54</string>
 </dict>
 </plist>

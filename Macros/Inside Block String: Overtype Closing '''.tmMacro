@@ -8,16 +8,22 @@
 			<key>command</key>
 			<string>moveRight:</string>
 		</dict>
+		<dict>
+			<key>command</key>
+			<string>moveRight:</string>
+		</dict>
+		<dict>
+			<key>command</key>
+			<string>moveRight:</string>
+		</dict>
 	</array>
 	<key>keyEquivalent</key>
 	<string>'</string>
 	<key>name</key>
-	<string>Inside String: Overtype Closing '</string>
+	<string>Inside Block String: Overtype Closing '''</string>
 	<key>scope</key>
-	<string>source.python string.quoted.single punctuation.definition.string.end.python</string>
-	<key>scopeType</key>
-	<string>local</string>
+	<string>source.python string.quoted.single.block punctuation.definition.string.end.python</string>
 	<key>uuid</key>
-	<string>7797CDD8-76A2-4A5C-A41C-9AA7E6FBBA84</string>
+	<string>777874B4-E62C-4454-AC56-D4DB3F9965F8</string>
 </dict>
 </plist>

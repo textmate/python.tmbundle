@@ -159,7 +159,7 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.class.python</string>
+					<string>entity.name.type.class.python</string>
 				</dict>
 				<key>3</key>
 				<dict>
@@ -183,7 +183,7 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.class.python</string>
+					<string>entity.name.type.class.python</string>
 				</dict>
 				<key>3</key>
 				<dict>
@@ -209,7 +209,7 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.class.python</string>
+					<string>entity.name.type.class.python</string>
 				</dict>
 				<key>3</key>
 				<dict>

@@ -428,18 +428,18 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(@)((?:[a-zA-Z_][a-zA-Z_0-9]*)(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*)(\()</string>
+			<string>^\s*((@)(?:[a-zA-Z_][a-zA-Z_0-9]*)(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*)(\()</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.section.decorator.python</string>
+					<string>entity.name.function.decorator.python</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.decorator.python</string>
+					<string>punctuation.definition.decorator.python</string>
 				</dict>
 				<key>3</key>
 				<dict>
@@ -477,16 +477,16 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.section.decorator.python</string>
+					<string>entity.name.function.decorator.python</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.decorator.python</string>
+					<string>punctuation.definition.decorator.python</string>
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>^\s*(@)((?:[a-zA-Z_][a-zA-Z_0-9]*)(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*)</string>
+			<string>^\s*((@)(?:[a-zA-Z_][a-zA-Z_0-9]*)(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*)</string>
 			<key>name</key>
 			<string>meta.function.decorator.python</string>
 		</dict>

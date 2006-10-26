@@ -624,7 +624,7 @@
 			<key>comment</key>
 			<string>single quoted raw-unicode string</string>
 			<key>end</key>
-			<string>(?&lt;!\\)(''')</string>
+			<string>(''')</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
@@ -634,7 +634,7 @@
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>string.quoted.single.block.raw-unicode.string</string>
+			<string>string.quoted.single.block.raw-unicode.python</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -670,7 +670,7 @@
 			<key>comment</key>
 			<string>single quoted raw-unicode string</string>
 			<key>end</key>
-			<string>(?&lt;!\\\\)(""")</string>
+			<string>(""")</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
@@ -680,7 +680,7 @@
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>string.quoted.double.block.raw-unicode.string</string>
+			<string>string.quoted.double.block.raw-unicode.python</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -716,7 +716,7 @@
 			<key>comment</key>
 			<string>single quoted raw string</string>
 			<key>end</key>
-			<string>(?&lt;!\\)(''')</string>
+			<string>(''')</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
@@ -726,7 +726,7 @@
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>string.quoted.single.block.raw.string</string>
+			<string>string.quoted.single.block.raw.python</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -762,7 +762,7 @@
 			<key>comment</key>
 			<string>double quoted raw string</string>
 			<key>end</key>
-			<string>(?&lt;!\\\\)(""")</string>
+			<string>(""")</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
@@ -772,7 +772,7 @@
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>string.quoted.double.block.raw.string</string>
+			<string>string.quoted.double.block.raw.python</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -808,7 +808,7 @@
 			<key>comment</key>
 			<string>single quoted unicode string</string>
 			<key>end</key>
-			<string>(?&lt;!\\)(''')</string>
+			<string>(''')</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
@@ -818,7 +818,7 @@
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>string.quoted.single.block.unicode.string</string>
+			<string>string.quoted.single.block.unicode.python</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -850,7 +850,7 @@
 			<key>comment</key>
 			<string>double quoted unicode string</string>
 			<key>end</key>
-			<string>(?&lt;!\\\\)(""")</string>
+			<string>(""")</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
@@ -860,7 +860,7 @@
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>string.quoted.double.block.unicode.string</string>
+			<string>string.quoted.double.block.unicode.python</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -892,7 +892,7 @@
 			<key>comment</key>
 			<string>single quoted raw string</string>
 			<key>end</key>
-			<string>(?&lt;!\\)(')|(?&lt;!\\)(\n)</string>
+			<string>(')|(\n)</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
@@ -907,7 +907,7 @@
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>string.quoted.single.single-line.raw-unicode.string</string>
+			<string>string.quoted.single.single-line.raw-unicode.python</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -943,7 +943,7 @@
 			<key>comment</key>
 			<string>double-quoted raw string</string>
 			<key>end</key>
-			<string>(?&lt;!\\\\)(")|(?&lt;!\\\\)(\n)</string>
+			<string>(")|(\n)</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
@@ -958,7 +958,7 @@
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>string.quoted.double.single-line.raw-unicode.string</string>
+			<string>string.quoted.double.single-line.raw-unicode.python</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -994,7 +994,7 @@
 			<key>comment</key>
 			<string>double-quoted raw string</string>
 			<key>end</key>
-			<string>(?&lt;!\\\\)(")|(?&lt;!\\\\)(\n)</string>
+			<string>(")|(\n)</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
@@ -1009,7 +1009,7 @@
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>string.quoted.double.single-line.raw.string</string>
+			<string>string.quoted.double.single-line.raw.python</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -1045,7 +1045,7 @@
 			<key>comment</key>
 			<string>single quoted raw string</string>
 			<key>end</key>
-			<string>(?&lt;!\\)(')|(?&lt;!\\)(\n)</string>
+			<string>(')|(\n)</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
@@ -1060,7 +1060,7 @@
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>string.quoted.single.single-line.raw.string</string>
+			<string>string.quoted.single.single-line.raw.python</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -1096,7 +1096,7 @@
 			<key>comment</key>
 			<string>double-quoted raw string</string>
 			<key>end</key>
-			<string>(?&lt;!\\\\)(")|(?&lt;!\\\\)(\n)</string>
+			<string>(")|(\n)</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
@@ -1111,7 +1111,7 @@
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>string.quoted.double.single-line.raw.string</string>
+			<string>string.quoted.double.single-line.raw.python</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -1142,7 +1142,7 @@
 			<key>comment</key>
 			<string>single quoted unicode string</string>
 			<key>end</key>
-			<string>(?&lt;!\\)(')|(?&lt;!\\)(\n)</string>
+			<string>(')|(\n)</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
@@ -1157,7 +1157,7 @@
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>string.quoted.single.single-line.unicode.string</string>
+			<string>string.quoted.single.single-line.unicode.python</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -1189,7 +1189,7 @@
 			<key>comment</key>
 			<string>double quoted unicode string</string>
 			<key>end</key>
-			<string>(?&lt;!\\\\)(")|(?&lt;!\\\\)(\n)</string>
+			<string>(")|(\n)</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
@@ -1204,7 +1204,7 @@
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>string.quoted.double.single-line.unicode.string</string>
+			<string>string.quoted.double.single-line.unicode.python</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -1231,7 +1231,7 @@
 			<key>comment</key>
 			<string>single quoted string</string>
 			<key>end</key>
-			<string>(?&lt;!\\)(''')</string>
+			<string>(''')</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
@@ -1268,7 +1268,7 @@
 			<key>comment</key>
 			<string>double quoted string</string>
 			<key>end</key>
-			<string>(?&lt;!\\\\)(""")</string>
+			<string>(""")</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
@@ -1305,7 +1305,7 @@
 			<key>comment</key>
 			<string>single quoted string</string>
 			<key>end</key>
-			<string>(?&lt;!\\)(')|(?&lt;!\\)(\n)</string>
+			<string>(')|(\n)</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
@@ -1347,7 +1347,7 @@
 			<key>comment</key>
 			<string>double quoted string</string>
 			<key>end</key>
-			<string>(?&lt;!\\\\)(")|(?&lt;!\\\\)(\n)</string>
+			<string>(")|(\n)</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
@@ -1385,8 +1385,7 @@
 			<key>comment</key>
 			<string>magic attributes which a class/module may have.</string>
 			<key>match</key>
-			<string>\b__(all|bases|class|debug|dict|doc|file|members|
-							   metaclass|methods|name|slots|weakref)__\b</string>
+			<string>\b__(all|bases|class|debug|dict|doc|file|members|metaclass|methods|name|slots|weakref)__\b</string>
 			<key>name</key>
 			<string>support.variable.attribute.magic.python</string>
 		</dict>
@@ -1416,7 +1415,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(?&lt;=[A-Za-z0-9_])\s*\[</string>
+			<string>([A-Za-z_][A-Za-z0-9_]*)\s*\[</string>
 			<key>end</key>
 			<string>\]</string>
 			<key>name</key>
@@ -1430,8 +1429,14 @@
 			</array>
 		</dict>
 		<dict>
+			<key>match</key>
+			<string>([A-Za-z_][A-Za-z0-9_]*)\.</string>
+			<key>name</key>
+			<string>meta.attribute-access.python</string>
+		</dict>
+		<dict>
 			<key>begin</key>
-			<string>(?&lt;=[A-Za-z0-9_])\s*\(</string>
+			<string>([A-Za-z_][A-Za-z0-9_]*)\s*\(</string>
 			<key>contentName</key>
 			<string>meta.function-call.argument-list.python</string>
 			<key>end</key>
@@ -1687,7 +1692,7 @@
 		<key>escaped_char</key>
 		<dict>
 			<key>match</key>
-			<string>\\.</string>
+			<string>\\[.\n]</string>
 			<key>name</key>
 			<string>constant.character.escape.python</string>
 		</dict>

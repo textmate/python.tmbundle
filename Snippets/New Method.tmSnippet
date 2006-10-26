@@ -3,20 +3,15 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>class ${1:ClassName}(${2:object}):
-	
-	def __init__(self${3/([^,])?.*/(?1:, )/}${3:arg}):
-${3/([a-zA-Z0-9_]+)\s*(=[^,]*)?(,\s*|$)/\t\tself.$1 = $1\n/g}		${4:pass}
-	
-
-$0</string>
+	<string>def ${1:mname}(self${2/([^,])?.*/(?1:, )/}${2:arg}):
+	${3:pass}</string>
 	<key>name</key>
-	<string>New Class</string>
+	<string>New Method</string>
 	<key>scope</key>
 	<string>source.python</string>
 	<key>tabTrigger</key>
-	<string>class</string>
+	<string>defs</string>
 	<key>uuid</key>
-	<string>659D189C-EC3E-4C4E-9377-B7F5F5216CBD</string>
+	<string>70E8843A-A8C0-44FC-ACF3-3DEAE48AE784</string>
 </dict>
 </plist>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>class ${1:ClassName}(${2:object}):
+	"""The $1 class."""
+	def __init__(self${3/([^,])?.*/(?1:, )/}${3:arg}):
+${3/,?\s*([a-zA-Z0-9_]+)\s*(=[^,]*)?(,\s*|$)/\t\tself.$1 = $1\n/g}${3/(\A\Z)|.*/(?1:\t\t)/}${4:${3/(\A\Z)|.*/(?1:pass)/}}</string>
+	<key>name</key>
+	<string>New Class</string>
+	<key>scope</key>
+	<string>source.python</string>
+	<key>tabTrigger</key>
+	<string>class</string>
+	<key>uuid</key>
+	<string>659D189C-EC3E-4C4E-9377-B7F5F5216CBD</string>
+</dict>
+</plist>

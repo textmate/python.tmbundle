@@ -3,14 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>def get$1(self): return self._$1</string>
+	<string>"$0"</string>
+	<key>keyEquivalent</key>
+	<string>"</string>
 	<key>name</key>
-	<string>New Get Method</string>
+	<string>Inside String: Insert "…"</string>
 	<key>scope</key>
-	<string>source.python</string>
-	<key>tabTrigger</key>
-	<string>get</string>
+	<string>source.python meta.empty-string.double.python</string>
 	<key>uuid</key>
-	<string>D1D53498-B33A-11D9-89C9-000D93347A42</string>
+	<string>44F64180-F86E-4980-895A-2994B0EEDB5D</string>
 </dict>
 </plist>

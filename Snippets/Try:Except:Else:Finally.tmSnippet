@@ -3,14 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>def set$1(self, ${2:newValue}): self._$1 = $2</string>
+	<string>try:
+	${1:pass}
+except${2: ${3:Exception}, ${4:e}}:
+	${5:raise}
+else:
+	${6:pass}
+finally:
+	${7:pass}</string>
 	<key>name</key>
-	<string>New Set Method</string>
+	<string>Try/Except/Else/Finally</string>
 	<key>scope</key>
 	<string>source.python</string>
 	<key>tabTrigger</key>
-	<string>set</string>
+	<string>try</string>
 	<key>uuid</key>
-	<string>F3FFF149-B33A-11D9-89C9-000D93347A42</string>
+	<string>2FB8153A-1ABE-44A7-A760-763BA141724B</string>
 </dict>
 </plist>

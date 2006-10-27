@@ -20,6 +20,10 @@
 	</array>
 	<key>firstLineMatch</key>
 	<string>^#!/.*\bpython\b</string>
+	<key>foldingStartMarker</key>
+	<string>^\s*(def|class)\s+([.a-zA-Z0-9_ b]+)\s*(\((.*)\))?\s*:|\{\s*$|\(\s*$|\[\s*$|^\s*"""(?=.)(?!.*""")</string>
+	<key>foldingStopMarker</key>
+	<string>^\s*$|^\s*\}|^\s*\]|^\s*\)|^\s*"""\s*$</string>
 	<key>keyEquivalent</key>
 	<string>^~P</string>
 	<key>name</key>
@@ -147,6 +151,12 @@
 			<string>\=</string>
 			<key>name</key>
 			<string>keyword.operator.assignment.python</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\b(self|cls)\b</string>
+			<key>name</key>
+			<string>variable.language.python</string>
 		</dict>
 		<dict>
 			<key>captures</key>
@@ -1392,7 +1402,7 @@
 		<dict>
 			<key>match</key>
 			<string>(?x:\b(
-                __import__|abs|apply|callable|chr|cmp|coerce|compile|delattr|dir|
+                __import__|all|abs|any|apply|callable|chr|cmp|coerce|compile|delattr|dir|
                 divmod|eval|execfile|filter|getattr|globals|hasattr|hash|hex|id|
                 input|intern|isinstance|issubclass|iter|len|locals|map|max|min|oct|
                 ord|pow|range|raw_input|reduce|reload|repr|round|setattr|sorted|
@@ -1650,19 +1660,7 @@
 		<key>builtin_exceptions</key>
 		<dict>
 			<key>match</key>
-			<string>(?x:\b(
-				ArithmeticError|AssertionError|AttributeError|
-				DeprecationWarning|EOFError|EnvironmentError|Exception|
-				FloatingPointError|FutureWarning|IOError|ImportError|
-				IndentationError|IndexError|KeyError|KeyboardInterrupt|
-				LookupError|MemoryError|NameError|NotImplementedError|OSError|
-				OverflowError|OverflowWarning|PendingDeprecationWarning|
-				ReferenceError|RuntimeError|RuntimeWarning|StandardError|
-				StopIteration|SyntaxError|SyntaxWarning|SystemError|SystemExit|
-				TabError|TypeError|UnboundLocalError|UnicodeDecodeError|
-				UnicodeEncodeError|UnicodeError|UnicodeTranslateError|
-				UserWarning|ValueError|Warning|ZeroDivisionError
-			)\b)</string>
+			<string>\b((Arithmetic|Assertion|Attribute|EOF|Environment|FloatingPoint|IO|Import|Indentation|Index|Key|Lookup|Memory|Name|OS|Overflow|NotImplemented|Reference|Runtime|Standard|Syntax|System|Tab|Type|UnboundLocal|Unicode(Translate|Encode|Decode)?|Value|ZeroDivision)Error|(Deprecation|Future|Overflow|PendingDeprecation|Runtime|Syntax|User)?Warning|KeyboardInterrupt|NotImplemented|StopIteration|SystemExit|(Base)?Exception)\b</string>
 			<key>name</key>
 			<string>support.type.exception.python</string>
 		</dict>

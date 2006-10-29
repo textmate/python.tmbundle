@@ -833,6 +833,10 @@
 			<string>keyword.operator.assignment.python</string>
 		</dict>
 		<dict>
+			<key>include</key>
+			<string>#line_continuation</string>
+		</dict>
+		<dict>
 			<key>match</key>
 			<string>\b(self|cls)\b</string>
 			<key>name</key>
@@ -2026,6 +2030,24 @@
 					<string>$base</string>
 				</dict>
 			</array>
+		</dict>
+		<key>line_continuation</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.separator.continuation.line.python</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>invalid.illegal.unexpected-text.python</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>(\\)(.*)$\n?</string>
 		</dict>
 		<key>magic_function_names</key>
 		<dict>

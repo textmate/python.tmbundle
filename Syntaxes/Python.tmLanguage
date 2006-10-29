@@ -468,7 +468,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.section.arguments.begin.python</string>
+							<string>punctuation.definition.arguments.begin.python</string>
 						</dict>
 					</dict>
 					<key>contentName</key>
@@ -480,7 +480,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.section.arguments.end.python</string>
+							<string>punctuation.definition.arguments.end.python</string>
 						</dict>
 					</dict>
 					<key>patterns</key>
@@ -563,7 +563,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.section.arguments.begin.python</string>
+							<string>punctuation.definition.arguments.begin.python</string>
 						</dict>
 					</dict>
 					<key>contentName</key>
@@ -575,7 +575,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.section.arguments.end.python</string>
+							<string>punctuation.definition.arguments.end.python</string>
 						</dict>
 					</dict>
 					<key>patterns</key>
@@ -600,7 +600,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.section.arguments.begin.python</string>
+					<string>punctuation.definition.arguments.begin.python</string>
 				</dict>
 			</dict>
 			<key>contentName</key>
@@ -612,7 +612,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.section.arguments.end.python</string>
+					<string>punctuation.definition.arguments.end.python</string>
 				</dict>
 			</dict>
 			<key>name</key>
@@ -659,7 +659,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.section.arguments.begin.python</string>
+							<string>punctuation.definition.arguments.begin.python</string>
 						</dict>
 					</dict>
 					<key>contentName</key>
@@ -671,7 +671,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.section.arguments.end.python</string>
+							<string>punctuation.definition.arguments.end.python</string>
 						</dict>
 					</dict>
 					<key>patterns</key>
@@ -692,7 +692,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.section.arguments.begin.python</string>
+					<string>punctuation.definition.arguments.begin.python</string>
 				</dict>
 			</dict>
 			<key>contentName</key>
@@ -704,7 +704,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.section.arguments.end.python</string>
+					<string>punctuation.definition.arguments.end.python</string>
 				</dict>
 			</dict>
 			<key>name</key>

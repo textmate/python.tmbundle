@@ -850,7 +850,7 @@
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#magic_method_name</string>
+			<string>#magic_function_names</string>
 		</dict>
 		<dict>
 			<key>include</key>

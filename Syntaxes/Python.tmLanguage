@@ -647,7 +647,7 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#entity_name</string>
+							<string>#function_name</string>
 						</dict>
 					</array>
 				</dict>

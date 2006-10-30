@@ -862,6 +862,10 @@
 		</dict>
 		<dict>
 			<key>include</key>
+			<string>#builtin_functions</string>
+		</dict>
+		<dict>
+			<key>include</key>
 			<string>#builtin_exceptions</string>
 		</dict>
 		<dict>

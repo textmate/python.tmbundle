@@ -149,7 +149,7 @@
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>(?&lt;=\:)|(?&lt;=\))</string>
+			<string>(?&lt;=\))|(?&lt;=\:)</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
@@ -191,7 +191,7 @@
 					<key>contentName</key>
 					<string>meta.class.inheritance.python</string>
 					<key>end</key>
-					<string>(\))\s*(?:(\:)|(\n))</string>
+					<string>(\))\s*(?:(\:)|(.*$\n?))</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>1</key>
@@ -218,7 +218,7 @@
 							<key>contentName</key>
 							<string>entity.other.inherited-class.python</string>
 							<key>end</key>
-							<string>\s*(?:(,)|(?=\)\s*\:))</string>
+							<string>\s*(?:(,)|(?=\)))</string>
 							<key>endCaptures</key>
 							<dict>
 								<key>1</key>
@@ -251,7 +251,7 @@
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>(?&lt;=[A-Za-z0-9_])\s*(?:(\()|(\n|#.*$\n?))</string>
+			<string>(?&lt;=[A-Za-z0-9_])\s*(?:(\()|($\n?|.*$\n?))</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
@@ -332,7 +332,7 @@
 					<key>contentName</key>
 					<string>meta.function.parameters.python</string>
 					<key>end</key>
-					<string>(\))\s*(?:(\:)|(\n))</string>
+					<string>(\))\s*(?:(\:)|($\n?))</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>1</key>
@@ -390,7 +390,7 @@
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>(\()|\s*(\n|#.*$\n?)</string>
+			<string>(\()|\s*($\n?|#.*$\n?)</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
@@ -503,7 +503,7 @@
 			<key>contentName</key>
 			<string>entity.name.function.decorator.python</string>
 			<key>end</key>
-			<string>(?&lt;=[a-zA-Z_0-9])(?=\s|\n|#)</string>
+			<string>(?&lt;=[a-zA-Z_0-9])(?=\s|$\n?|#)</string>
 			<key>name</key>
 			<string>meta.function.decorator.python</string>
 			<key>patterns</key>
@@ -520,7 +520,7 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>(?&lt;=[A-Za-z0-9_])(?=\s|\n|#)</string>
+					<string>(?&lt;=[A-Za-z0-9_])(?=\s|$\n?|#)</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -2052,7 +2052,7 @@
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>\s*(?:(,)|(?=[\n\)]))</string>
+			<string>\s*(?:(,)|(?=$\n?|[\)]))</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>

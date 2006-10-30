@@ -551,7 +551,7 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#entity_name</string>
+							<string>#function_name</string>
 						</dict>
 					</array>
 				</dict>
@@ -920,7 +920,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>string.prefix.python</string>
+					<string>storage.type.string.python</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -966,7 +966,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>string.prefix.python</string>
+					<string>storage.type.string.python</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -1012,7 +1012,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>string.prefix.python</string>
+					<string>storage.type.string.python</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -1058,7 +1058,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>string.prefix.python</string>
+					<string>storage.type.string.python</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -1104,7 +1104,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>string.prefix.python</string>
+					<string>storage.type.string.python</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -1146,7 +1146,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>string.prefix.python</string>
+					<string>storage.type.string.python</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -1188,7 +1188,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>string.prefix.python</string>
+					<string>storage.type.string.python</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -1239,7 +1239,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>string.prefix.python</string>
+					<string>storage.type.string.python</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -1290,7 +1290,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>string.prefix.python</string>
+					<string>storage.type.string.python</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -1341,7 +1341,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>string.prefix.python</string>
+					<string>storage.type.string.python</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -1392,7 +1392,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>string.prefix.python</string>
+					<string>storage.type.string.python</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -1485,7 +1485,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>string.prefix.python</string>
+					<string>storage.type.string.python</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -1983,6 +1983,40 @@
 			<string>\\[.\n]</string>
 			<key>name</key>
 			<string>constant.character.escape.python</string>
+		</dict>
+		<key>function_name</key>
+		<dict>
+			<key>begin</key>
+			<string>(?=[A-Za-z_][A-Za-z0-9_]*)</string>
+			<key>end</key>
+			<string>(?&lt;=[A-Za-z0-9_])</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#magic_function_names</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#magic_variable_names</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#builtin_exceptions</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#builtin_functions</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#builtin_types</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#generic_name</string>
+				</dict>
+			</array>
 		</dict>
 		<key>generic_name</key>
 		<dict>

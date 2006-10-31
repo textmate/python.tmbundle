@@ -18,7 +18,7 @@
 	<key>name</key>
 	<string>Inside Parameter List: Overtype Closing ):</string>
 	<key>scope</key>
-	<string>source.python meta.function.python punctuation.definition.parameter-list.end.python</string>
+	<string>source.python meta.function.python punctuation.definition.parameters.end.python</string>
 	<key>uuid</key>
 	<string>CDA11D94-712F-48EB-932E-114878FD6A54</string>
 </dict>

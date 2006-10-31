@@ -105,6 +105,97 @@
 			<string>constant.numeric.integer.decimal.python</string>
 		</dict>
 		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.modifier.global.python</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>\b(global)\b</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.control.import.python</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.control.import.from.python</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>\b(?:(import)|(from))\b</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>keywords that delimit flow blocks</string>
+			<key>match</key>
+			<string>\b(elif|else|except|finally|for|if|try|while|with)\b</string>
+			<key>name</key>
+			<string>keyword.control.flow.python</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>keywords that alter flow from within a block</string>
+			<key>match</key>
+			<string>\b(break|continue|pass|raise|return|yield)\b</string>
+			<key>name</key>
+			<string>keyword.control.flow.python</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>keyword operators that evaluate to True or False</string>
+			<key>match</key>
+			<string>\b(and|in|is|not|or)\b</string>
+			<key>name</key>
+			<string>keyword.operator.logical.python</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.python</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>keywords that haven't fit into other groups (yet).</string>
+			<key>match</key>
+			<string>\b(as|assert|del|exec|print)\b</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\+\=|-\=|\*\=|/\=|//\=|%\=|&amp;\=|\|\=|\^\=|&gt;&gt;\=|&lt;&lt;\=|\*\*\=</string>
+			<key>name</key>
+			<string>keyword.operator.assignment.augmented.python</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\+|\-|\*|\*\*|/|//|%|&lt;&lt;|&gt;&gt;|&amp;|\||\^|~</string>
+			<key>name</key>
+			<string>keyword.operator.arithmetic.python</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>&lt;|&gt;|&lt;\=|&gt;\=|\=\=|!\=|&lt;&gt;</string>
+			<key>name</key>
+			<string>keyword.operator.comparison.python</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\=</string>
+			<key>name</key>
+			<string>keyword.operator.assignment.python</string>
+		</dict>
+		<dict>
 			<key>begin</key>
 			<string>^\s*(class)\s+(?=[a-zA-Z_][a-zA-Z_0-9]*\s*\:)</string>
 			<key>beginCaptures</key>
@@ -738,97 +829,6 @@
 			</dict>
 			<key>match</key>
 			<string>\b(class)\b</string>
-		</dict>
-		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>storage.modifier.global.python</string>
-				</dict>
-			</dict>
-			<key>match</key>
-			<string>\b(global)\b</string>
-		</dict>
-		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>keyword.control.import.python</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>keyword.control.import.from.python</string>
-				</dict>
-			</dict>
-			<key>match</key>
-			<string>\b(?:(import)|(from))\b</string>
-		</dict>
-		<dict>
-			<key>comment</key>
-			<string>keywords that delimit flow blocks</string>
-			<key>match</key>
-			<string>\b(elif|else|except|finally|for|if|try|while|with)\b</string>
-			<key>name</key>
-			<string>keyword.control.flow.python</string>
-		</dict>
-		<dict>
-			<key>comment</key>
-			<string>keywords that alter flow from within a block</string>
-			<key>match</key>
-			<string>\b(break|continue|pass|raise|return|yield)\b</string>
-			<key>name</key>
-			<string>keyword.control.flow.python</string>
-		</dict>
-		<dict>
-			<key>comment</key>
-			<string>keyword operators that evaluate to True or False</string>
-			<key>match</key>
-			<string>\b(and|in|is|not|or)\b</string>
-			<key>name</key>
-			<string>keyword.operator.logical.python</string>
-		</dict>
-		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>keyword.other.python</string>
-				</dict>
-			</dict>
-			<key>comment</key>
-			<string>keywords that haven't fit into other groups (yet).</string>
-			<key>match</key>
-			<string>\b(as|assert|del|exec|print)\b</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\+\=|-\=|\*\=|/\=|//\=|%\=|&amp;\=|\|\=|\^\=|&gt;&gt;\=|&lt;&lt;\=|\*\*\=</string>
-			<key>name</key>
-			<string>keyword.operator.assignment.augmented.python</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\+|\-|\*|\*\*|/|//|%|&lt;&lt;|&gt;&gt;|&amp;|\||\^|~</string>
-			<key>name</key>
-			<string>keyword.operator.arithmetic.python</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>&lt;|&gt;|&lt;\=|&gt;\=|\=\=|!\=|&lt;&gt;</string>
-			<key>name</key>
-			<string>keyword.operator.comparison.python</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\=</string>
-			<key>name</key>
-			<string>keyword.operator.assignment.python</string>
 		</dict>
 		<dict>
 			<key>include</key>

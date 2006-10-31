@@ -543,8 +543,6 @@
 				<dict>
 					<key>begin</key>
 					<string>(?=[A-Za-z_][A-Za-z0-9_]*)</string>
-					<key>contentName</key>
-					<string>entity.name.function.python</string>
 					<key>end</key>
 					<string>(?=\()</string>
 					<key>patterns</key>

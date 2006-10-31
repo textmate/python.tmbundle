@@ -5,8 +5,8 @@
 	<key>content</key>
 	<string>class ${1:ClassName}(${2:object}):
 	"""The $1 class."""
-	def __init__(self${3/([^,])?.*/(?1:, )/}${3:arg}):
-${3/,?\s*([a-zA-Z0-9_]+)\s*(=[^,]*)?(,\s*|$)/\t\tself.$1 = $1\n/g}${3/(\A\Z)|.*/(?1:\t\t)/}${4:${3/(\A\Z)|.*/(?1:pass)/}}</string>
+	def __init__(self${3/([^,])?(.*)/(?1:, )/}${3:arg}):
+${3/(\A\s*,\s*\Z)|,?\s*([A-Za-z_][a-zA-Z0-9_]*)\s*(=[^,]*)?(,\s*|$)/(?2:\t\tself.$2 = $2\n)/g}${3/(\A\Z|\A\s*,\s*\Z)|.*/(?1:\t\t)/}${4:${3/(\A\Z|\A\s*,\s*\Z)|.*/(?1:pass)/}}</string>
 	<key>name</key>
 	<string>New Class</string>
 	<key>scope</key>

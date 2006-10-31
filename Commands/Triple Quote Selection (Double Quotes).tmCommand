@@ -12,7 +12,8 @@ from sys import stdout
 
 if "TM_SELECTED_TEXT" in env:
 	stdout.write('"""%s"""$0' % env["TM_SELECTED_TEXT"])
-</string>
+else:
+	stdout.write('"""$0"""')</string>
 	<key>fallbackInput</key>
 	<string>none</string>
 	<key>input</key>

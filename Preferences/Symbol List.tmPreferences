@@ -3,15 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>name</key>
-	<string>Symbol List: Class</string>
+	<string>Symbol List</string>
 	<key>scope</key>
-	<string>source.python meta.class.python</string>
+	<string>source.python meta.function.python, source.python meta.class.python</string>
 	<key>settings</key>
 	<dict>
 		<key>showInSymbolList</key>
 		<integer>1</integer>
+		<key>symbolTransformation</key>
+		<string>s/\t/ /g; s/^(\s+)?(?:class|def)\s+(.*):$/(?1:$1 )$2/; s/ *=.*?(,|\))/$1/g; s/^(.*\(.{30}).*?(.{30}\))/$1…$2/</string>
 	</dict>
 	<key>uuid</key>
-	<string>B6F92FB4-E510-47F6-9299-4407F9785504</string>
+	<string>005BE156-8D74-4036-AF38-283708645115</string>
 </dict>
 </plist>

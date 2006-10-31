@@ -4,6 +4,8 @@
 <dict>
 	<key>name</key>
 	<string>Smart-Typing Pairs</string>
+	<key>scope</key>
+	<string>source.python</string>
 	<key>settings</key>
 	<dict>
 		<key>smartTypingPairs</key>

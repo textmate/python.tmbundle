@@ -283,10 +283,12 @@ def main(script_name):
         e_class, e_obj, tb = sys.exc_info()
         
         # retrieving exception name
-        e_name = str(e_class)
-        if e_name.startswith('exceptions.'):
-            # undecorated exception name
-            e_name = e_name.split('.')[-1]
+        try:
+            e_name = e_class.__name__
+        except AttributeError:
+            e_name = str(e_class)
+            for sub_from, sub_to in html_substitutions:
+                e_name = e_name.replace(sub_from, sub_to)
         
         # traceback lenght is useful for checking wheter a SyntaxError
         # occurred in the main file or in an exec statement

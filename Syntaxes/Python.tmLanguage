@@ -624,65 +624,6 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\b(?=[A-Za-z_][A-Za-z0-9_]*\s*\()</string>
-			<key>end</key>
-			<string>(?&lt;=\))</string>
-			<key>name</key>
-			<string>meta.function-call.python</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>begin</key>
-					<string>(?=[A-Za-z_][A-Za-z0-9_]*)</string>
-					<key>end</key>
-					<string>(?=\()</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#function_name</string>
-						</dict>
-					</array>
-				</dict>
-				<dict>
-					<key>begin</key>
-					<string>(\()</string>
-					<key>beginCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.arguments.begin.python</string>
-						</dict>
-					</dict>
-					<key>contentName</key>
-					<string>meta.function-call.arguments.python</string>
-					<key>end</key>
-					<string>(\))</string>
-					<key>endCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.arguments.end.python</string>
-						</dict>
-					</dict>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#keyword_arguments</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>$base</string>
-						</dict>
-					</array>
-				</dict>
-			</array>
-		</dict>
-		<dict>
-			<key>begin</key>
 			<string>(?&lt;=\)|\])\s*(\()</string>
 			<key>beginCaptures</key>
 			<dict>
@@ -715,6 +656,65 @@
 				<dict>
 					<key>include</key>
 					<string>$base</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>\b(?=(?&gt;[A-Za-z_][A-Za-z0-9_]*\s*\())</string>
+			<key>end</key>
+			<string>(\))</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.arguments.end.python</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>meta.function-call.python</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>(?=(?&gt;[A-Za-z_][A-Za-z0-9_]*))</string>
+					<key>end</key>
+					<string>(?=(?&gt;\s*\())</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#function_name</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(\()</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.arguments.begin.python</string>
+						</dict>
+					</dict>
+					<key>contentName</key>
+					<string>meta.function-call.arguments.python</string>
+					<key>end</key>
+					<string>(?=\))</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#keyword_arguments</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>$base</string>
+						</dict>
+					</array>
 				</dict>
 			</array>
 		</dict>

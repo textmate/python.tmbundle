@@ -722,7 +722,7 @@
 			<key>begin</key>
 			<string>\b(?=[A-Za-z_][A-Za-z0-9_]*\s*\[)</string>
 			<key>end</key>
-			<string>(?&lt;=\])</string>
+			<string>(\])</string>
 			<key>name</key>
 			<string>meta.item-access.python</string>
 			<key>patterns</key>
@@ -731,7 +731,7 @@
 					<key>begin</key>
 					<string>(?=[A-Za-z_][A-Za-z0-9_]*)</string>
 					<key>end</key>
-					<string>(?=\[)</string>
+					<string>(?=(?&gt;\s*\[))</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -754,7 +754,7 @@
 					<key>contentName</key>
 					<string>meta.item-access.arguments.python</string>
 					<key>end</key>
-					<string>(\])</string>
+					<string>(?=\])</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>1</key>

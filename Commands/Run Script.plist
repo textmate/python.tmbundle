@@ -5,15 +5,10 @@
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
 	<key>command</key>
-	<string># Save file, use tmp-file if there's no filepath.
-[[ -z "$TM_FILEPATH" ]] &amp;&amp; TM_TMPFILE=$(mktemp -t pythonmate)
-: "${TM_FILEPATH:=$TM_TMPFILE}"; cat &gt;"$TM_FILEPATH"
+	<string>export PYTHONPATH="$TM_BUNDLE_SUPPORT/PyMate"
+export TM_PYTHON=$(which "${TM_PYTHON:-python}")
 
-TPY=${TM_PYTHON:-pythonw}
-
-"$TPY" "$TM_BUNDLE_SUPPORT/pymate.py" "$TM_FILEPATH"
-
-rm -f "$TM_TMPFILE"</string>
+/usr/bin/ruby -- "$TM_BUNDLE_SUPPORT/PyMate/pymate.rb"</string>
 	<key>input</key>
 	<string>document</string>
 	<key>keyEquivalent</key>

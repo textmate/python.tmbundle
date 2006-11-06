@@ -26,12 +26,12 @@ to_python = plistlib.readPlistFromString
 def e_sh(s):
     return re.sub(r"(?=[^a-zA-Z0-9_.\/\-\x7F-\xFF\n])", r'\\', s).replace("\n", "'\n'")
 
-def tm_raw_input(prompt):
+def tm_raw_input(prompt=""):
     dialog = path.join(environ["TM_SUPPORT_PATH"], 'bin/tm_dialog')
     nib = path.join(environ["TM_BUNDLE_SUPPORT"], "PyMate/TextInput.nib")
     cmd = 'bash -c "%s -mp %s %s"' % \
         (e_sh(dialog),
-         e_sh(from_python({"prompt":prompt})),
+         e_sh(from_python({"prompt": prompt})),
          e_sh(nib))
     io = popen(cmd)
     plist = io.read()
@@ -44,7 +44,7 @@ def tm_raw_input(prompt):
     else:
         return ""
     
-def tm_input(prompt):
+def tm_input(prompt=""):
     try:
         frame = inspect.getouterframes(inspect.currentframe())[1][0]
         result = eval(tm_raw_input(prompt), frame.f_globals, frame.f_locals)

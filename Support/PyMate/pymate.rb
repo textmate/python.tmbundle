@@ -29,7 +29,7 @@ class UserScript
   end
 
   def python_version_string
-    res = %x{ #{e_sh python} -c "import sys; print sys.version.split(' ')[0]" }
+    res = %x{ #{e_sh python} -c "import sys; print sys.version.split(' ')[0]" }.chomp
     res + " (#{python})"
   end
 

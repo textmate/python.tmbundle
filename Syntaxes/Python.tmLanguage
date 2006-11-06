@@ -1982,7 +1982,7 @@
 		<key>escaped_char</key>
 		<dict>
 			<key>match</key>
-			<string>\\[.\n]</string>
+			<string>\\(?:.|\n)</string>
 			<key>name</key>
 			<string>constant.character.escape.python</string>
 		</dict>

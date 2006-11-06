@@ -64,8 +64,11 @@ def tm_excepthook(e_type, e, tb):
     error_fd = int(str(environ['TM_ERROR_FD']))
     io = fdopen(error_fd, 'w')
     io.write("<div id='exception_report' class='framed'>\n")
-    io.write("<p id='exception'><strong>%s:</strong> %s</p>\n" %
-                            (e_type.__name__, escape(getattr(e, "message", ""))))
+    if isinstance(e_type, str):
+        io.write("<p id='exception'><strong>String Exception:</strong> %s</p>\n" % escape(e_type))
+    else:
+        io.write("<p id='exception'><strong>%s:</strong> %s</p>\n" %
+                                (e_type.__name__, escape(getattr(e, "message", ""))))
     # now we write out the stack trace
     io.write("<blockquote><table border='0' cellspacing='0' cellpadding='0'>\n")
     for trace in extract_tb(tb):
@@ -79,11 +82,11 @@ def tm_excepthook(e_type, e, tb):
             display_name = path.basename(filename)
         io.write("<tr><td><a class='near' href='txmt://open?line=%i%s'>" %
                                                         (line_number, url))
-        if function_name:
-            io.write("function %s" % escape(function_name))
+        if function_name and function_name != "?":
+            io.write("function %s " % escape(function_name))
         else:
-            io.write('<em>at file root</em>')
-        io.write("</a></td>\n<td>in <strong>%s</strong> at line %i</td></tr>\n" %
+            io.write(' <em>at file root</em> ')
+        io.write(" </a></td>\n<td>&nbsp; in <strong>%s</strong> at line %i</td></tr>\n" %
                                             (escape(display_name), line_number))
     io.write("</table></blockquote></div>")
     io.flush()

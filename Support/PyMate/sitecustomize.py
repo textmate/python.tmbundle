@@ -65,7 +65,7 @@ def tm_excepthook(e_type, e, tb):
     io = fdopen(error_fd, 'w')
     io.write("<div id='exception_report' class='framed'>\n")
     io.write("<p id='exception'><strong>%s:</strong> %s</p>\n" %
-                            (e_type.__name__, escape(getattr(e, "message", "")))
+                            (e_type.__name__, escape(getattr(e, "message", ""))))
     # now we write out the stack trace
     io.write("<blockquote><table border='0' cellspacing='0' cellpadding='0'>\n")
     for trace in extract_tb(tb):

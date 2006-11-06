@@ -5,7 +5,7 @@ require 'open3'
 require 'cgi'
 require 'fcntl'
 
-$PYTHONMATE_VERSION = "$Revision: 5712 $"
+$PYTHONMATE_VERSION = "$Revision$"
 
 class UserScript
   def initialize

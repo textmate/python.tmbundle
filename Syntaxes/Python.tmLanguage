@@ -956,6 +956,10 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#escaped_unicode_char</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#escaped_char</string>
 				</dict>
 			</array>
@@ -999,6 +1003,10 @@
 				<dict>
 					<key>include</key>
 					<string>#constant_placeholder</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#escaped_unicode_char</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -1136,6 +1144,10 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#escaped_unicode_char</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#escaped_char</string>
 				</dict>
 			</array>
@@ -1175,6 +1187,10 @@
 				<dict>
 					<key>include</key>
 					<string>#constant_placeholder</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#escaped_unicode_char</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -1229,6 +1245,10 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#escaped_unicode_char</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#escaped_char</string>
 				</dict>
 			</array>
@@ -1277,6 +1297,10 @@
 				<dict>
 					<key>include</key>
 					<string>#constant_placeholder</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#escaped_unicode_char</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -1475,6 +1499,10 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#escaped_unicode_char</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#escaped_char</string>
 				</dict>
 			</array>
@@ -1519,6 +1547,10 @@
 				<dict>
 					<key>include</key>
 					<string>#constant_placeholder</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#escaped_unicode_char</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -1981,10 +2013,99 @@
 		</dict>
 		<key>escaped_char</key>
 		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape.hex.python</string>
+				</dict>
+				<key>10</key>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape.linefeed.python</string>
+				</dict>
+				<key>11</key>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape.return.python</string>
+				</dict>
+				<key>12</key>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape.tab.python</string>
+				</dict>
+				<key>13</key>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape.vertical-tab.python</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape.octal.python</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape.newline.python</string>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape.backlash.python</string>
+				</dict>
+				<key>5</key>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape.double-quote.python</string>
+				</dict>
+				<key>6</key>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape.single-quote.python</string>
+				</dict>
+				<key>7</key>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape.bell.python</string>
+				</dict>
+				<key>8</key>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape.backspace.python</string>
+				</dict>
+				<key>9</key>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape.formfeed.python</string>
+				</dict>
+			</dict>
 			<key>match</key>
-			<string>\\(?:.|\n)</string>
-			<key>name</key>
-			<string>constant.character.escape.python</string>
+			<string>(\\\\x[0-9A-F]{2})|(\\\\[0-7]{3})|(\\\n)|(\\\\)|(\\\")|(\\')|(\\a)|(\\b)|(\\f)|(\\n)|(\\r)|(\\t)|(\\v)</string>
+		</dict>
+		<key>escaped_unicode_char</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape.unicode.16-bit-hex.python</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape.unicode.32-bit-hex.python</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape.unicode.name.python</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>(\\U[0-9A-Fa-f]{8})|(\\u[0-9A-Fa-f]{4})|(\\N\{[a-zA-Z ]+\})</string>
 		</dict>
 		<key>function_name</key>
 		<dict>

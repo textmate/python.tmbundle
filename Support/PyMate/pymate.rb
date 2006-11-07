@@ -10,8 +10,8 @@ $PYTHONMATE_VERSION = "$Revision$"
 class UserScript
   def initialize
     @content = STDIN.read
-    @arg0 = $1       if @content =~ /\A#!([^ \n]+\/python\b)/
-    @args = $1.split if @content =~ /\A#!.*?\bpython[ \t]+(.*)$/
+    @arg0 = $1       if @content =~ /\A#!([^ \n]+\/python(?:\d+\.\d+)?\b)/
+    @args = $1.split if @content =~ /\A#!.*?\bpython(?:\d+\.\d+)?[ \t]+(.*)$/
 
     if ENV.has_key? 'TM_FILEPATH' then
       @path = ENV['TM_FILEPATH']

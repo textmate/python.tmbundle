@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 sitecustomize.py for PyMate.
 
@@ -67,34 +68,45 @@ def tm_excepthook(e_type, e, tb):
     if isinstance(e_type, str):
         io.write("<p id='exception'><strong>String Exception:</strong> %s</p>\n" % escape(e_type))
     else:
-        message = ''
-        if len(e.args) != 0:
+        if e.args:
             message = e.args[0]
         io.write("<p id='exception'><strong>%s:</strong> %s</p>\n" %
                                 (e_type.__name__, escape(message)))
-    # now we write out the stack trace
-    io.write("<blockquote><table border='0' cellspacing='0' cellpadding='0'>\n")
-    for trace in extract_tb(tb):
-        filename, line_number, function_name, text = trace
-        if path.basename(filename) == "sitecustomize.py":
-            # don't send errors about ourself to the user.
-            continue
+    if e_type is SyntaxError:
+        # if this is a SyntaxError, then tb == None
+        filename, line_number, offset, text = e.filename, e.lineno, e.offset, e.text
         url, display_name = '', 'unknown location' # might be into an exec'ed string
+        io.write("<pre>%s\n%s</pre>\n" % (escape(e.text).rstrip(), "&nbsp;" * (offset-1) + "↑"))
+        io.write("<blockquote><table border='0' cellspacing='0' cellpadding='0'>\n")
         if filename and path.exists(filename):
             url = "&url=file://%s" % quote(filename)
             display_name = path.basename(filename)
-        io.write("<tr><td><a class='near' href='txmt://open?line=%i%s'>" %
-                                                        (line_number, url))
-        if function_name and function_name != "?":
-            if function_name == '<module>':
-                io.write("<em>module body</em> ")
+        io.write("<tr><td><a class='near' href='txmt://open?line=%i&column=%i%s'>" %
+                                                    (line_number, offset, url))
+        io.write("line %i, column %i" % (line_number, offset))
+        io.write("</a></td>\n<td>&nbsp;in <strong>%s</strong></td></tr>\n" %
+                                            (escape(display_name)))
+        io.write("</table></blockquote></div>")
+    if tb: # now we write out the stack trace if we have a traceback
+        io.write("<blockquote><table border='0' cellspacing='0' cellpadding='0'>\n")
+        for trace in extract_tb(tb):
+            filename, line_number, function_name, text = trace
+            url, display_name = '', 'unknown location' # might be into an exec'ed string
+            if filename and path.exists(filename):
+                url = "&url=file://%s" % quote(filename)
+                display_name = path.basename(filename)
+            io.write("<tr><td><a class='near' href='txmt://open?line=%i%s'>" %
+                                                            (line_number, url))
+            if function_name and function_name != "?":
+                if function_name == '<module>':
+                    io.write("<em>module body</em> ")
+                else:
+                    io.write("function %s " % escape(function_name))
             else:
-                io.write("function %s " % escape(function_name))
-        else:
-            io.write(' <em>at file root</em> ')
-        io.write(" </a></td>\n<td>&nbsp; in <strong>%s</strong> at line %i</td></tr>\n" %
-                                            (escape(display_name), line_number))
-    io.write("</table></blockquote></div>")
+                io.write(' <em>at file root</em> ')
+            io.write(" </a></td>\n<td>&nbsp; in <strong>%s</strong> at line %i</td></tr>\n" %
+                                                (escape(display_name), line_number))
+        io.write("</table></blockquote></div>")
     io.flush()
 
 sys.excepthook = tm_excepthook

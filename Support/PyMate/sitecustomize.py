@@ -67,8 +67,11 @@ def tm_excepthook(e_type, e, tb):
     if isinstance(e_type, str):
         io.write("<p id='exception'><strong>String Exception:</strong> %s</p>\n" % escape(e_type))
     else:
+        message = ''
+        if len(e.args) != 0:
+            message = e.args[0]
         io.write("<p id='exception'><strong>%s:</strong> %s</p>\n" %
-                                (e_type.__name__, escape(getattr(e, "message", ""))))
+                                (e_type.__name__, escape(message)))
     # now we write out the stack trace
     io.write("<blockquote><table border='0' cellspacing='0' cellpadding='0'>\n")
     for trace in extract_tb(tb):
@@ -76,14 +79,17 @@ def tm_excepthook(e_type, e, tb):
         if path.basename(filename) == "sitecustomize.py":
             # don't send errors about ourself to the user.
             continue
-        url, display_name = '', 'untitled'
+        url, display_name = '', 'unknown location' # might be into an exec'ed string
         if filename and path.exists(filename):
             url = "&url=file://%s" % quote(filename)
             display_name = path.basename(filename)
         io.write("<tr><td><a class='near' href='txmt://open?line=%i%s'>" %
                                                         (line_number, url))
         if function_name and function_name != "?":
-            io.write("function %s " % escape(function_name))
+            if function_name == '<module>':
+                io.write("<em>module body</em> ")
+            else:
+                io.write("function %s " % escape(function_name))
         else:
             io.write(' <em>at file root</em> ')
         io.write(" </a></td>\n<td>&nbsp; in <strong>%s</strong> at line %i</td></tr>\n" %

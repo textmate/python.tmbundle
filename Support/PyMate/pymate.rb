@@ -10,8 +10,8 @@ $PYTHONMATE_VERSION = "$Revision$"
 class UserScript
   def initialize
     @content = STDIN.read
-    @arg0 = $1       if @content =~ /\A#!([^ \n]+\/python(?:\d+\.\d+)?\b)/
-    @args = $1.split if @content =~ /\A#!.*?\bpython(?:\d+\.\d+)?[ \t]+(.*)$/
+    @arg0 = $1       if @content =~ /\A#!([^ \n]*(?:env\s+)?python(?:\d+\.\d+)?)/
+    @args = $1.split if @content =~ /\A#![^ \n]*(?:env\s+)?python(?:\d+\.\d+)?[ \t]+(.*)$/
 
     if ENV.has_key? 'TM_FILEPATH' then
       @path = ENV['TM_FILEPATH']
@@ -29,7 +29,7 @@ class UserScript
   end
 
   def python_version_string
-    res = %x{ #{e_sh python} -c "import sys; print sys.version.split(' ')[0]" }.chomp
+    res = %x{ #{python} -c "import sys; print sys.version.split(' ')[0]" }.chomp
     res + " (#{python})"
   end
 
@@ -37,8 +37,8 @@ class UserScript
     rd, wr = IO.pipe
     rd.fcntl(Fcntl::F_SETFD, 1)
     ENV['TM_ERROR_FD'] = wr.to_i.to_s
-    args = [ python, "-u", Array(@args), @path, ARGV.to_a ].flatten
-    stdin, stdout, stderr = Open3.popen3(*args)
+    args = [python, "-u", Array(@args), @path, ARGV.to_a ].flatten
+    stdin, stdout, stderr = Open3.popen3(args.join(" "))
     Thread.new { stdin.write @content; stdin.close } unless ENV.has_key? 'TM_FILEPATH'
     wr.close
     [ stdout, stderr, rd ]

@@ -5,15 +5,11 @@
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
 	<key>command</key>
-	<string>#!/usr/bin/env python
-
-from os import environ as env
-from sys import stdout
-
-if "TM_SELECTED_TEXT" in env:
-	stdout.write("'''%s'''$0" % env["TM_SELECTED_TEXT"])
-else:
-	stdout.write("'''$0'''")</string>
+	<string>if [ -n "$TM_SELECTED_TEXT" ]; then
+	echo "'''$TM_SELECTED_TEXT'''\$0"
+else
+	echo "'''\$0'''"
+fi</string>
 	<key>fallbackInput</key>
 	<string>none</string>
 	<key>input</key>

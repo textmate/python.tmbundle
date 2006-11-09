@@ -6,9 +6,9 @@
 	<string>nop</string>
 	<key>command</key>
 	<string>if [ -n "$TM_SELECTED_TEXT" ]; then
-	echo '"""$TM_SELECTED_TEXT"""$0'
+	echo -n '"""$TM_SELECTED_TEXT"""$0'
 else
-	echo '"""$0"""'
+	echo -n '"""$0"""'
 fi</string>
 	<key>fallbackInput</key>
 	<string>none</string>

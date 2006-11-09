@@ -5,7 +5,7 @@
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
 	<key>command</key>
-	<string>#!/usr/bin/env python
+	<string>#!/usr/bin/env python -S
 
 # This program takes in the name of one of python's special methods, and
 # spits a snippet out.  If the name is unknown, make a regular (non-magic)

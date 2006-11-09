@@ -29,7 +29,7 @@ class UserScript
   end
 
   def python_version_string
-    res = %x{ #{python} -c "import sys; print sys.version.split(' ')[0]" }.chomp
+    res = %x{ #{python} -V 2>&1 }.chomp
     res + " (#{python})"
   end
 
@@ -56,7 +56,7 @@ puts <<-HTML
 	<div class="pythonmate">
 		
 		<div><!-- first box containing version info and script output -->
-			<pre><strong>PyMate r#{$PYTHONMATE_VERSION[/\d+/]} running Python v#{script.python_version_string}</strong>
+			<pre><strong>PyMate r#{$PYTHONMATE_VERSION[/\d+/]} running #{script.python_version_string}</strong>
 <strong>>>> #{script.display_name}</strong>
 
 <div style="white-space: normal; -khtml-nbsp-mode: space; -khtml-line-break: after-white-space;"> <!-- Script output -->

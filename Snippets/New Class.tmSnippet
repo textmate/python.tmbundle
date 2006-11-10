@@ -4,9 +4,8 @@
 <dict>
 	<key>content</key>
 	<string>class ${1:ClassName}(${2:object}):
-	"""The $1 class."""
-	def __init__(self${3/([^,])?(.*)/(?1:, )/}${3:arg}):
-${3/(\A\s*,\s*\Z)|,?\s*([A-Za-z_][a-zA-Z0-9_]*)\s*(=[^,]*)?(,\s*|$)/(?2:\t\tself.$2 = $2\n)/g}${3/(\A\Z|\A\s*,\s*\Z)|.*/(?1:\t\t)/}${4:${3/(\A\Z|\A\s*,\s*\Z)|.*/(?1:pass)/}}</string>
+	${3/.+/"""/}${3:docstring for $1}${3/.+/"""\n/}${3/.+/\t/}def __init__(self${4/([^,])?(.*)/(?1:, )/}${4:arg}):
+${4/(\A\s*,\s*\Z)|,?\s*([A-Za-z_][a-zA-Z0-9_]*)\s*(=[^,]*)?(,\s*|$)/(?2:\t\tself.$2 = $2\n)/g}		${0:${4/(\A\Z|\A\s*,\s*\Z)|(.+)/(?1:pass)(?2:)/}}</string>
 	<key>name</key>
 	<string>New Class</string>
 	<key>scope</key>

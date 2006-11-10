@@ -868,10 +868,6 @@
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#docstrings</string>
-		</dict>
-		<dict>
-			<key>include</key>
 			<string>#strings</string>
 		</dict>
 		<dict>
@@ -1067,6 +1063,10 @@
 				</dict>
 			</array>
 		</dict>
+		<dict>
+			<key>include</key>
+			<string>#docstrings</string>
+		</dict>
 	</array>
 	<key>repository</key>
 	<dict>
@@ -1114,9 +1114,9 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>^\s*(?=[uU]?[rR]?")</string>
+					<string>^\s*(?=[uU]?[rR]?""")</string>
 					<key>end</key>
-					<string>(?&lt;=")</string>
+					<string>(?&lt;=""")</string>
 					<key>name</key>
 					<string>comment.block.python</string>
 					<key>patterns</key>
@@ -1129,9 +1129,9 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>^\s*(?=[uU]?[rR]?')</string>
+					<string>^\s*(?=[uU]?[rR]?''')</string>
 					<key>end</key>
-					<string>(?&lt;=')</string>
+					<string>(?&lt;=''')</string>
 					<key>name</key>
 					<string>comment.block.python</string>
 					<key>patterns</key>

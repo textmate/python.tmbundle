@@ -44,7 +44,7 @@ selfAndMore = {
             'exit' : 'exc_type, exc_value, traceback',
 }
 
-sPass = "\t${0:pass}"
+sPass = '\t${4/.+/"""/}${4:docstring for %s}${4/.+/"""\n/}${4/.+/\t/}${0:pass}'
 
 def defLine(func, args):
     return ''.join(["def __", func, "__(", args, "):\n", sPass])
@@ -63,7 +63,7 @@ def make_snippet(name):
         return defLine(name, 'self${2/([^,])?.*/(?1:, )/}${2:arg}')
         
     else:
-        return ''.join(['def ', name, '(${3:self${2/([^,])?.*/(?1:, )/}${2:arg}}):\n', sPass])
+        return ''.join(['def ', name, '(${3:self${2/([^,])?.*/(?1:, )/}${2:arg}}):\n', sPass % name])
 
 # actually print the thing out, using the current word in TM
 from os import environ as env

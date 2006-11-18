@@ -433,7 +433,7 @@
 					<key>contentName</key>
 					<string>meta.function.parameters.python</string>
 					<key>end</key>
-					<string>(?=\))</string>
+					<string>(?=\)\s*\:)</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -860,6 +860,19 @@
 		<dict>
 			<key>include</key>
 			<string>#strings</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>(\()</string>
+			<key>end</key>
+			<string>(\))</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>$base</string>
+				</dict>
+			</array>
 		</dict>
 		<dict>
 			<key>captures</key>

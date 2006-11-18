@@ -240,10 +240,20 @@
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>(?&lt;=\))|(?&lt;=\:)</string>
+			<string>(\))\s*(?:(\:)|(.*$\n?))</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.inheritance.end.python</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.section.class.begin.python</string>
+				</dict>
+				<key>3</key>
 				<dict>
 					<key>name</key>
 					<string>invalid.illegal.missing-section-begin.python</string>
@@ -276,31 +286,13 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.section.inheritance.begin.python</string>
+							<string>punctuation.definition.inheritance.begin.python</string>
 						</dict>
 					</dict>
 					<key>contentName</key>
 					<string>meta.class.inheritance.python</string>
 					<key>end</key>
-					<string>(\))\s*(?:(\:)|(.*$\n?))</string>
-					<key>endCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.section.inheritance.end.python</string>
-						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.section.class.begin.python</string>
-						</dict>
-						<key>3</key>
-						<dict>
-							<key>name</key>
-							<string>invalid.illegal.missing-section-begin.python</string>
-						</dict>
-					</dict>
+					<string>(?=\)|:)</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -379,7 +371,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(def)\s+(?=[A-Za-z_][A-Za-z_]*\s*\()</string>
+			<string>^\s*(def)\s+(?=[A-Za-z_][A-Za-z0-9_]*\s*\()</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -389,7 +381,25 @@
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>(?&lt;=\:)|(?&lt;=\))</string>
+			<string>(\))\s*(?:(\:)|(.*$\n?))</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.parameters.end.python</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.section.function.begin.python</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>invalid.illegal.missing-section-begin.python</string>
+				</dict>
+			</dict>
 			<key>name</key>
 			<string>meta.function.python</string>
 			<key>patterns</key>
@@ -423,25 +433,7 @@
 					<key>contentName</key>
 					<string>meta.function.parameters.python</string>
 					<key>end</key>
-					<string>(\))\s*(?:(\:)|($\n?))</string>
-					<key>endCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.parameters.end.python</string>
-						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.section.function.begin.python</string>
-						</dict>
-						<key>3</key>
-						<dict>
-							<key>name</key>
-							<string>invalid.illegal.missing-section-begin.python</string>
-						</dict>
-					</dict>
+					<string>(?=\))</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -522,7 +514,15 @@
 			<key>comment</key>
 			<string>a decorator may be a function call which returns a decorator.</string>
 			<key>end</key>
-			<string>(?&lt;=\))</string>
+			<string>(\))</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.arguments.end.python</string>
+				</dict>
+			</dict>
 			<key>name</key>
 			<string>meta.function.decorator.python</string>
 			<key>patterns</key>
@@ -564,15 +564,7 @@
 					<key>contentName</key>
 					<string>meta.function.decorator.arguments.python</string>
 					<key>end</key>
-					<string>(\))</string>
-					<key>endCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.arguments.end.python</string>
-						</dict>
-					</dict>
+					<string>(?=\))</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -1416,7 +1408,7 @@
 						setslice|str|sub|truediv|unicode|xor
 					)__)\b</string>
 			<key>name</key>
-			<string>entity.name.function.magic.python</string>
+			<string>support.function.magic.python</string>
 		</dict>
 		<key>magic_variable_names</key>
 		<dict>

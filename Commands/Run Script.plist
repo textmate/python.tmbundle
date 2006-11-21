@@ -5,10 +5,7 @@
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
 	<key>command</key>
-	<string>export PYTHONPATH="$TM_BUNDLE_SUPPORT/PyMate"
-export TM_PYTHON=$(which "${TM_PYTHON:-python}")
-export TM_RUBY=$(which "${TM_RUBY:-ruby}")
-
+	<string>export TM_RUBY=$(which "${TM_RUBY:-ruby}")
 "$TM_RUBY" -- "$TM_BUNDLE_SUPPORT/PyMate/pymate.rb"</string>
 	<key>input</key>
 	<string>document</string>

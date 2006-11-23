@@ -538,6 +538,8 @@
 							<string>punctuation.definition.decorator.python</string>
 						</dict>
 					</dict>
+					<key>contentName</key>
+					<string>entity.name.function.decorator.python</string>
 					<key>end</key>
 					<string>(?&lt;=[A-Za-z0-9_])(?=\s*\()</string>
 					<key>patterns</key>

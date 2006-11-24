@@ -1206,7 +1206,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#generic_namess</string>
+							<string>#generic_names</string>
 						</dict>
 					</array>
 				</dict>
@@ -1366,7 +1366,7 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#generic_namess</string>
+					<string>#generic_names</string>
 				</dict>
 			</array>
 		</dict>

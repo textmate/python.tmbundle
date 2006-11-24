@@ -209,7 +209,7 @@
 			<key>contentName</key>
 			<string>entity.name.type.class.python</string>
 			<key>end</key>
-			<string>(?&lt;=[A-Za-z0-9_])\s*(:)</string>
+			<string>\s*(:)</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
@@ -224,7 +224,7 @@
 			<array>
 				<dict>
 					<key>include</key>
-					<string>#entity_name</string>
+					<string>#entity_name_class</string>
 				</dict>
 			</array>
 		</dict>
@@ -269,12 +269,12 @@
 					<key>contentName</key>
 					<string>entity.name.type.class.python</string>
 					<key>end</key>
-					<string>(?&lt;=[A-Za-z0-9_])</string>
+					<string>(?![A-Za-z0-9_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#entity_name</string>
+							<string>#entity_name_class</string>
 						</dict>
 					</array>
 				</dict>
@@ -334,7 +334,7 @@
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>(?&lt;=[A-Za-z0-9_])\s*(?:(\()|($\n?|.*$\n?))</string>
+			<string>(\()|\s*($\n?|#.*$\n?)</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
@@ -358,12 +358,12 @@
 					<key>contentName</key>
 					<string>entity.name.type.class.python</string>
 					<key>end</key>
-					<string>(?&lt;=[A-Za-z0-9_])</string>
+					<string>(?![A-Za-z0-9_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#entity_name</string>
+							<string>#entity_name_function</string>
 						</dict>
 					</array>
 				</dict>
@@ -410,12 +410,12 @@
 					<key>contentName</key>
 					<string>entity.name.function.python</string>
 					<key>end</key>
-					<string>(?&lt;=[A-Za-z0-9_])</string>
+					<string>(?![A-Za-z0-9_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#entity_name</string>
+							<string>#entity_name_function</string>
 						</dict>
 					</array>
 				</dict>
@@ -497,12 +497,12 @@
 					<key>contentName</key>
 					<string>entity.name.function.python</string>
 					<key>end</key>
-					<string>(?&lt;=[A-Za-z0-9_])</string>
+					<string>(?![A-Za-z0-9_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#entity_name</string>
+							<string>#entity_name_function</string>
 						</dict>
 					</array>
 				</dict>
@@ -541,12 +541,12 @@
 					<key>contentName</key>
 					<string>entity.name.function.decorator.python</string>
 					<key>end</key>
-					<string>(?&lt;=[A-Za-z0-9_])(?=\s*\()</string>
+					<string>(?=\s*\()</string>
 					<key>patterns</key>
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#dotted_entity_name</string>
+							<string>#dotted_name</string>
 						</dict>
 					</array>
 				</dict>
@@ -585,7 +585,7 @@
 			<key>contentName</key>
 			<string>entity.name.function.decorator.python</string>
 			<key>end</key>
-			<string>(?&lt;=[a-zA-Z_0-9])(?=\s|$\n?|#)</string>
+			<string>(?=\s|$\n?|#)</string>
 			<key>name</key>
 			<string>meta.function.decorator.python</string>
 			<key>patterns</key>
@@ -602,12 +602,12 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>(?&lt;=[A-Za-z0-9_])(?=\s|$\n?|#)</string>
+					<string>(?=\s|$\n?|#)</string>
 					<key>patterns</key>
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#dotted_entity_name</string>
+							<string>#dotted_name</string>
 						</dict>
 					</array>
 				</dict>
@@ -652,7 +652,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\b(?=(?&gt;[A-Za-z_][A-Za-z0-9_]*\s*\())</string>
+			<string>(?=[A-Za-z_][A-Za-z0-9_]*(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*\s*\()</string>
 			<key>end</key>
 			<string>(\))</string>
 			<key>endCaptures</key>
@@ -669,14 +669,14 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=(?&gt;[A-Za-z_][A-Za-z0-9_]*))</string>
+					<string>(?=[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*\s*\()</string>
 					<key>end</key>
-					<string>(?=(?&gt;\s*\())</string>
+					<string>(?=\s*\()</string>
 					<key>patterns</key>
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#function_name</string>
+							<string>#dotted_name</string>
 						</dict>
 					</array>
 				</dict>
@@ -711,7 +711,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\b(?=[A-Za-z_][A-Za-z0-9_]*\s*\[)</string>
+			<string>(?=[A-Za-z_][A-Za-z0-9_]*(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*\s*\[)</string>
 			<key>end</key>
 			<string>(\])</string>
 			<key>name</key>
@@ -720,14 +720,14 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=[A-Za-z_][A-Za-z0-9_]*)</string>
+					<string>(?=[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*\s*\[)</string>
 					<key>end</key>
-					<string>(?=(?&gt;\s*\[))</string>
+					<string>(?=\s*\[)</string>
 					<key>patterns</key>
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#function_name</string>
+							<string>#dotted_name</string>
 						</dict>
 					</array>
 				</dict>
@@ -839,23 +839,7 @@
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#magic_function_names</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#magic_variable_names</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#builtin_types</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#builtin_functions</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#builtin_exceptions</string>
+			<string>#dotted_name</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -1148,35 +1132,102 @@
 				</dict>
 			</array>
 		</dict>
-		<key>dotted_entity_name</key>
+		<key>dotted_name</key>
 		<dict>
 			<key>begin</key>
-			<string>(?=[A-Za-z_][A-Za-z0-9_]*(\.[A-Za-z_][A-Za-z0-9_]*)*)</string>
+			<string>(?=[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*)</string>
 			<key>end</key>
-			<string>(?&lt;=[A-Za-z0-9_])</string>
+			<string>(?![A-Za-z0-9_\.])</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=[A-Za-z_][A-Za-z0-9_]*)</string>
+					<string>(\.)(?=[A-Za-z_][A-Za-z0-9_]*)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation</string>
+						</dict>
+					</dict>
 					<key>end</key>
-					<string>(?&lt;=[A-Za-z0-9_])</string>
+					<string>(?![A-Za-z0-9_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#entity_name</string>
+							<string>#magic_function_names</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#magic_variable_names</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#illegal_names</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#generic_names</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(?&lt;!\.)(?=[A-Za-z_][A-Za-z0-9_]*)</string>
+					<key>end</key>
+					<string>(?![A-Za-z0-9_])</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#builtin_functions</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#builtin_types</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#builtin_exceptions</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#illegal_names</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#magic_function_names</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#magic_variable_names</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#generic_namess</string>
 						</dict>
 					</array>
 				</dict>
 			</array>
 		</dict>
-		<key>entity_name</key>
+		<key>entity_name_class</key>
 		<dict>
-			<key>begin</key>
-			<string>(?=[A-Za-z_][A-Za-z0-9_]*)</string>
-			<key>end</key>
-			<string>(?&lt;=[A-Za-z0-9_])</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#illegal_names</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#generic_names</string>
+				</dict>
+			</array>
+		</dict>
+		<key>entity_name_function</key>
+		<dict>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -1185,27 +1236,11 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#magic_variable_names</string>
-				</dict>
-				<dict>
-					<key>include</key>
 					<string>#illegal_names</string>
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#builtin_exceptions</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#builtin_functions</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#builtin_types</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#generic_name</string>
+					<string>#generic_names</string>
 				</dict>
 			</array>
 		</dict>
@@ -1307,10 +1342,6 @@
 		</dict>
 		<key>function_name</key>
 		<dict>
-			<key>begin</key>
-			<string>(?=[A-Za-z_][A-Za-z0-9_]*)</string>
-			<key>end</key>
-			<string>(?&lt;=[A-Za-z0-9_])</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -1335,11 +1366,11 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#generic_name</string>
+					<string>#generic_namess</string>
 				</dict>
 			</array>
 		</dict>
-		<key>generic_name</key>
+		<key>generic_names</key>
 		<dict>
 			<key>match</key>
 			<string>[A-Za-z_][A-Za-z0-9_]*</string>

@@ -68,6 +68,7 @@ def tm_excepthook(e_type, e, tb):
     if isinstance(e_type, str):
         io.write("<p id='exception'><strong>String Exception:</strong> %s</p>\n" % escape(e_type))
     else:
+        message = ""
         if e.args:
             message = e.args[0]
         io.write("<p id='exception'><strong>%s:</strong> %s</p>\n" %
@@ -75,12 +76,14 @@ def tm_excepthook(e_type, e, tb):
     if e_type is SyntaxError:
         # if this is a SyntaxError, then tb == None
         filename, line_number, offset, text = e.filename, e.lineno, e.offset, e.text
-        url, display_name = '', 'unknown location' # might be into an exec'ed string
+        url, display_name = '', 'untitled'
         io.write("<pre>%s\n%s</pre>\n" % (escape(e.text).rstrip(), "&nbsp;" * (offset-1) + "↑"))
         io.write("<blockquote><table border='0' cellspacing='0' cellpadding='0'>\n")
         if filename and path.exists(filename):
             url = "&url=file://%s" % quote(filename)
             display_name = path.basename(filename)
+        if filename == '<string>': # exception in exec'd string.
+            display_name = 'exec'
         io.write("<tr><td><a class='near' href='txmt://open?line=%i&column=%i%s'>" %
                                                     (line_number, offset, url))
         io.write("line %i, column %i" % (line_number, offset))
@@ -91,12 +94,14 @@ def tm_excepthook(e_type, e, tb):
         io.write("<blockquote><table border='0' cellspacing='0' cellpadding='0'>\n")
         for trace in extract_tb(tb):
             filename, line_number, function_name, text = trace
-            url, display_name = '', 'unknown location' # might be into an exec'ed string
+            url, display_name = '', 'untitled'
             if filename and path.exists(filename):
                 url = "&url=file://%s" % quote(filename)
                 display_name = path.basename(filename)
             io.write("<tr><td><a class='near' href='txmt://open?line=%i%s'>" %
                                                             (line_number, url))
+            if filename == '<string>': # exception in exec'd string.
+                display_name = 'exec'
             if function_name and function_name != "?":
                 if function_name == '<module>':
                     io.write("<em>module body</em> ")

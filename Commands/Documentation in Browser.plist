@@ -5,11 +5,37 @@
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
 	<key>command</key>
-	<string>TPY=${TM_PYTHON:-python}
+	<string>#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+import sys
+from sys import exit
+from os import environ as env
+import os.path
+sys.path.append(os.path.join(env["TM_BUNDLE_SUPPORT"], "DocMate"))
+sys.path.append(os.path.join(env["TM_SUPPORT_PATH"], "lib"))
 
-echo '&lt;html&gt;&lt;body&gt;'
-"$TPY" "${TM_BUNDLE_SUPPORT}/browse_pydocs.py"
-echo '&lt;/body&gt;&lt;/html&gt;'</string>
+from docmate import doc, increment_hitcount
+import dialog
+
+word = env["TM_CURRENT_WORD"]
+
+if "TM_PYTHON_DOCPATH" in env:
+    path_to_doc = env["TM_PYTHON_DOCPATH"]
+else:
+    path_to_doc = "http://docs.python.org/lib/"
+
+opts = doc(word)
+url = dialog.menu(opts)
+
+if url:
+	increment_hitcount(url)
+	url = os.path.join(path_to_doc, url)
+	print "&lt;meta http-equiv='Refresh' content='0;URL=%s'&gt;" % url
+	exit(205) # show as html.
+else:
+	print "Didn't find any documentation for %s." % word
+	exit(206) # show as tooltip.
+</string>
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>
@@ -17,7 +43,7 @@ echo '&lt;/body&gt;&lt;/html&gt;'</string>
 	<key>name</key>
 	<string>Documentation in Browser</string>
 	<key>output</key>
-	<string>showAsHTML</string>
+	<string>showAsTooltip</string>
 	<key>scope</key>
 	<string>source.python</string>
 	<key>uuid</key>

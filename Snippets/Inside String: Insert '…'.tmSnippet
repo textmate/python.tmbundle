@@ -9,7 +9,7 @@
 	<key>name</key>
 	<string>Inside String: Insert '…'</string>
 	<key>scope</key>
-	<string>source.python meta.empty-string.single.python</string>
+	<string>source.python string.quoted.single.single-line meta.empty-string.single</string>
 	<key>uuid</key>
 	<string>1BAD838C-8B2A-45FD-9AD2-7F3DCA2DD388</string>
 </dict>

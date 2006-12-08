@@ -839,11 +839,15 @@
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#dotted_name</string>
+			<string>#string_quoted_single</string>
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#strings</string>
+			<string>#string_quoted_double</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#dotted_name</string>
 		</dict>
 		<dict>
 			<key>begin</key>
@@ -1051,10 +1055,6 @@
 				</dict>
 			</array>
 		</dict>
-		<dict>
-			<key>include</key>
-			<string>#docstrings</string>
-		</dict>
 	</array>
 	<key>repository</key>
 	<dict>
@@ -1126,7 +1126,7 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#strings</string>
+							<string>#string_quoted_single</string>
 						</dict>
 					</array>
 				</dict>
@@ -1468,30 +1468,6 @@
 			<key>patterns</key>
 			<array>
 				<dict>
-					<key>captures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.string.begin.python</string>
-						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.string.end.python</string>
-						</dict>
-						<key>3</key>
-						<dict>
-							<key>name</key>
-							<string>meta.empty-string.double.python</string>
-						</dict>
-					</dict>
-					<key>match</key>
-					<string>(?&lt;!")(")(("))(?!")</string>
-					<key>name</key>
-					<string>string.quoted.double.single-line.python</string>
-				</dict>
-				<dict>
 					<key>begin</key>
 					<string>((?i:ur))(""")</string>
 					<key>beginCaptures</key>
@@ -1508,9 +1484,9 @@
 						</dict>
 					</dict>
 					<key>comment</key>
-					<string>single quoted raw-unicode string</string>
+					<string>single quoted unicode-raw string</string>
 					<key>end</key>
-					<string>(""")</string>
+					<string>((?&lt;=""")(")""|""")</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>1</key>
@@ -1518,9 +1494,14 @@
 							<key>name</key>
 							<string>punctuation.definition.string.end.python</string>
 						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>meta.empty-string.double.python</string>
+						</dict>
 					</dict>
 					<key>name</key>
-					<string>string.quoted.double.block.raw-unicode.python</string>
+					<string>string.quoted.double.block.unicode-raw.python</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -1560,13 +1541,18 @@
 					<key>comment</key>
 					<string>double quoted raw string</string>
 					<key>end</key>
-					<string>(""")</string>
+					<string>((?&lt;=""")(")""|""")</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>1</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.string.end.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>meta.empty-string.double.python</string>
 						</dict>
 					</dict>
 					<key>name</key>
@@ -1606,13 +1592,18 @@
 					<key>comment</key>
 					<string>double quoted unicode string</string>
 					<key>end</key>
-					<string>(""")</string>
+					<string>((?&lt;=""")(")""|""")</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>1</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.string.end.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>meta.empty-string.double.python</string>
 						</dict>
 					</dict>
 					<key>name</key>
@@ -1652,7 +1643,7 @@
 					<key>comment</key>
 					<string>double-quoted raw string</string>
 					<key>end</key>
-					<string>(")|(\n)</string>
+					<string>((?&lt;=")(")|")|(\n)</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>1</key>
@@ -1663,11 +1654,16 @@
 						<key>2</key>
 						<dict>
 							<key>name</key>
+							<string>meta.empty-string.double.python</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
 							<string>invalid.illegal.unclosed-string.python</string>
 						</dict>
 					</dict>
 					<key>name</key>
-					<string>string.quoted.double.single-line.raw-unicode.python</string>
+					<string>string.quoted.double.single-line.unicode-raw.python</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -1707,7 +1703,7 @@
 					<key>comment</key>
 					<string>double-quoted raw string</string>
 					<key>end</key>
-					<string>(")|(\n)</string>
+					<string>((?&lt;=")(")|")|(\n)</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>1</key>
@@ -1716,6 +1712,11 @@
 							<string>punctuation.definition.string.end.python</string>
 						</dict>
 						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>meta.empty-string.double.python</string>
+						</dict>
+						<key>3</key>
 						<dict>
 							<key>name</key>
 							<string>invalid.illegal.unclosed-string.python</string>
@@ -1758,7 +1759,7 @@
 					<key>comment</key>
 					<string>double-quoted raw string</string>
 					<key>end</key>
-					<string>(")|(\n)</string>
+					<string>((?&lt;=")(")|")|(\n)</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>1</key>
@@ -1767,6 +1768,11 @@
 							<string>punctuation.definition.string.end.python</string>
 						</dict>
 						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>meta.empty-string.double.python</string>
+						</dict>
+						<key>3</key>
 						<dict>
 							<key>name</key>
 							<string>invalid.illegal.unclosed-string.python</string>
@@ -1809,7 +1815,7 @@
 					<key>comment</key>
 					<string>double quoted unicode string</string>
 					<key>end</key>
-					<string>(")|(\n)</string>
+					<string>((?&lt;=")(")|")|(\n)</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>1</key>
@@ -1818,6 +1824,11 @@
 							<string>punctuation.definition.string.end.python</string>
 						</dict>
 						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>meta.empty-string.double.python</string>
+						</dict>
+						<key>3</key>
 						<dict>
 							<key>name</key>
 							<string>invalid.illegal.unclosed-string.python</string>
@@ -1855,13 +1866,18 @@
 					<key>comment</key>
 					<string>double quoted string</string>
 					<key>end</key>
-					<string>(""")</string>
+					<string>((?&lt;=""")(")""|""")</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>1</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.string.end.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>meta.empty-string.double.python</string>
 						</dict>
 					</dict>
 					<key>name</key>
@@ -1892,7 +1908,7 @@
 					<key>comment</key>
 					<string>double quoted string</string>
 					<key>end</key>
-					<string>(")|(\n)</string>
+					<string>((?&lt;=")(")|")|(\n)</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>1</key>
@@ -1901,6 +1917,11 @@
 							<string>punctuation.definition.string.end.python</string>
 						</dict>
 						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>meta.empty-string.double.python</string>
+						</dict>
+						<key>3</key>
 						<dict>
 							<key>name</key>
 							<string>invalid.illegal.unclosed-string.python</string>
@@ -1967,9 +1988,9 @@
 						</dict>
 					</dict>
 					<key>comment</key>
-					<string>single quoted raw-unicode string</string>
+					<string>single quoted unicode-raw string</string>
 					<key>end</key>
-					<string>(''')</string>
+					<string>((?&lt;=''')(')''|''')</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>1</key>
@@ -1977,9 +1998,14 @@
 							<key>name</key>
 							<string>punctuation.definition.string.end.python</string>
 						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>meta.empty-string.single.python</string>
+						</dict>
 					</dict>
 					<key>name</key>
-					<string>string.quoted.single.block.raw-unicode.python</string>
+					<string>string.quoted.single.block.unicode-raw.python</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -2019,13 +2045,18 @@
 					<key>comment</key>
 					<string>single quoted raw string</string>
 					<key>end</key>
-					<string>(''')</string>
+					<string>((?&lt;=''')(')''|''')</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>1</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.string.end.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>meta.empty-string.single.python</string>
 						</dict>
 					</dict>
 					<key>name</key>
@@ -2065,13 +2096,18 @@
 					<key>comment</key>
 					<string>single quoted unicode string</string>
 					<key>end</key>
-					<string>(''')</string>
+					<string>((?&lt;=''')(')''|''')</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>1</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.string.end.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>meta.empty-string.single.python</string>
 						</dict>
 					</dict>
 					<key>name</key>
@@ -2126,7 +2162,7 @@
 						</dict>
 					</dict>
 					<key>name</key>
-					<string>string.quoted.single.single-line.raw-unicode.python</string>
+					<string>string.quoted.single.single-line.unicode-raw.python</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -2200,10 +2236,15 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>[uU](')</string>
+					<string>([uU])(')</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>storage.type.string.python</string>
+						</dict>
+						<key>2</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.string.begin.python</string>
@@ -2258,13 +2299,18 @@
 					<key>comment</key>
 					<string>single quoted string</string>
 					<key>end</key>
-					<string>(''')</string>
+					<string>((?&lt;=''')(')''|''')</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>1</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.string.end.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>meta.empty-string.single.python</string>
 						</dict>
 					</dict>
 					<key>name</key>

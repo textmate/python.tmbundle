@@ -13,7 +13,7 @@ echo '&lt;/body&gt;&lt;/html&gt;'</string>
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>
-	<string>^h</string>
+	<string>^H</string>
 	<key>name</key>
 	<string>Documentation in Browser</string>
 	<key>output</key>

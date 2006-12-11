@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/local/bin/python2.5
+# -*- coding: UTF-8 -*-
+import sys
+from sys import exit
+from os import environ as env
+import os.path
+sys.path.append(os.path.join(env["TM_BUNDLE_SUPPORT"], "DocMate"))
+sys.path.append(os.path.join(env["TM_SUPPORT_PATH"], "lib"))
+
+import tm_helpers
+import docmate
+import dialog
+
+docmate.launch_pydoc_server()
+
+# get current dotted word from the env
+word = tm_helpers.current_word(r"[A-Za-z0-9_\.]*")
+
+if not word:
+	print "&lt;meta http-equiv='Refresh' content='0;URL=%s'&gt;" % docmate.PYDOC_URL
+	exit(205)
+
+opts = docmate.doc(word)
+if opts:
+	url = ""
+	if len(opts) == 1:
+		# only one option, so don't bother with a menu.
+		url = opts[0][1]
+	elif len(opts) == 0:
+		print "Didn't find any documentation for '%s'." % word
+		exit(206) # show as tooltip.
+	else:
+		# get user input.
+		url = dialog.menu(opts)
+	if url:
+		docmate.increment_hitcount(url)
+		print "&lt;meta http-equiv='Refresh' content='0;URL=%s'&gt;" % url
+		exit(205) # show as html.
+	else:
+		exit(200) # exit and discard (user pressed ESC)
+
+</string>
+	<key>input</key>
+	<string>none</string>
+	<key>keyEquivalent</key>
+	<string>^h</string>
+	<key>name</key>
+	<string>Documentation for Current Word</string>
+	<key>output</key>
+	<string>showAsTooltip</string>
+	<key>scope</key>
+	<string>source.python</string>
+	<key>uuid</key>
+	<string>443BBF21-6124-4486-BFCA-D18606465885</string>
+</dict>
+</plist>

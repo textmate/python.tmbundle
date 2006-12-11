@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 import re
 import sys
-from os import path, mkdir, environ as env
+from os import system, path, mkdir, environ as env
 import cPickle
 import urllib2
 import inspect
@@ -73,9 +73,10 @@ def increment_hitcount(url):
 def launch_pydoc_server():
     if not accessible(PYDOC_URL):
         # launch pydoc.
-        sh("/usr/bin/nohup pydoc -p %i &" % PYDOC_PORT)
+        system("/usr/bin/nohup pydoc -p %i 1> /tmp/pydoc.log &" % PYDOC_PORT)
         # wait until pydoc is up.
-        max_wait = 1
+        max_wait = .5
+        waited = 0
         while not accessible(PYDOC_URL) and waited < max_wait:
             time.sleep(0.1)
             waited += 0.1

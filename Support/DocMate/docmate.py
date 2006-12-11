@@ -74,21 +74,21 @@ def launch_pydoc_server():
     if not accessible(PYDOC_URL):
         # launch pydoc.
         sh("/usr/bin/nohup pydoc -p %i &" % PYDOC_PORT)
-    # wait until pydoc is up.
-    max_wait = 1
-    while not accessible(PYDOC_URL) and waited < max_wait:
-        time.sleep(0.05)
-        waited += 0.05
-    if not accessible(PYDOC_URL):
-        raise OSError("Could not start PyDoc server.")
+        # wait until pydoc is up.
+        max_wait = 1
+        while not accessible(PYDOC_URL) and waited < max_wait:
+            time.sleep(0.1)
+            waited += 0.1
+        if not accessible(PYDOC_URL):
+            raise OSError("Could not start PyDoc server.")
 
 def doc(word):
     """ Return a list of (desc, url) pairs for `word`. """
     pairs = []
-    if PYTHONDOCS and accessible(PYTHONDOCS):
+    if PYTHONDOCS: # and accessible(PYTHONDOCS)
         pairs = library_docs(word)
-    if accessible(PYDOC_URL):
-        pairs.extend(pydoc(word))
+    #if accessible(PYDOC_URL):
+    pairs.extend(pydoc(word))
     # sort by hit count.
     if pairs:
         h = load_hitcounts()

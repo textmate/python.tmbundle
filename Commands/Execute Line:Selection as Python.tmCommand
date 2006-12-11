@@ -9,7 +9,7 @@
 
 import os
 from sys import stdout, stdin, exit
-from traceback import format_exc
+from traceback import format_stack
 
 py = stdin.read()
 
@@ -20,9 +20,9 @@ else:
 
 try:
     scope = {}
-    result = eval("""%s""" % py, globals(), scope)
+    result = eval(py, globals(), scope)
 except:
-    exc = format_exc()
+    exc = format_stack()
     stdout.write(exc)
     exit(206) # exiting with this code show's output in a tooltip 
 else:

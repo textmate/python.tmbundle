@@ -5,14 +5,13 @@
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
 	<key>command</key>
-	<string>#!/usr/bin/env python
+	<string>#!/usr/bin/env python -S
 # -*- coding: UTF-8 -*-
 import sys
 from sys import exit
-from os import environ as env
-import os.path
-sys.path.append(os.path.join(env["TM_BUNDLE_SUPPORT"], "DocMate"))
-sys.path.append(os.path.join(env["TM_SUPPORT_PATH"], "lib"))
+from os import path, environ as env
+sys.path.insert(0, path.join(env["TM_BUNDLE_SUPPORT"], "DocMate"))
+sys.path.insert(0, path.join(env["TM_SUPPORT_PATH"], "lib"))
 
 import tm_helpers
 import docmate

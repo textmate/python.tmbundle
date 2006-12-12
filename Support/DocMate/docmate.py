@@ -89,13 +89,13 @@ def launch_pydoc_server():
                     1>> /tmp/pydoc.log 2>> /tmp/pydoc.log &' \
                     % (python, tm_helpers.sh_escape(server), port, TIMEOUT))
         # wait until pydoc is up.
-        max_wait = 3
-        waited = 0
-        while not accessible(url) and waited < max_wait:
-            time.sleep(0.1)
-            waited += 0.1
-        if not accessible(url):
-            raise OSError("Timed out waiting for PyDoc to start.")
+        # max_wait = 3
+        # waited = 0
+        # while not accessible(url) and waited < max_wait:
+        #     time.sleep(0.1)
+        #     waited += 0.1
+        # if not accessible(url):
+        #     raise OSError("Timed out waiting for PyDoc to start.")
     return url
 
 def doc(word):

@@ -45,6 +45,13 @@ if opts:
 		url = dialog.menu(opts)
 	if url:
 		docmate.increment_hitcount(url)
+		max_wait = 3
+		waited = 0
+		while not docmate.accessible(url) and waited &lt; max_wait:
+    			time.sleep(0.1)
+    			waited += 0.1
+		if not docmate.accessible(url):
+		    raise OSError("Timed out waiting for PyDoc to start.")
 		print "&lt;meta http-equiv='Refresh' content='0;URL=%s'&gt;" % url
 		exit(205) # show as html.
 	else:

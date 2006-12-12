@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2.5
 # -*- coding: UTF-8 -*-
 import re
 import sys
@@ -9,8 +9,6 @@ import inspect
 from urlparse import urljoin as _urljoin
 import time
 
-# console = open("/dev/console", 'w')
-# print >> console, "importing docmate."
 # make sure Support/lib is on the path
 support_lib = path.join(env["TM_SUPPORT_PATH"], "lib")
 if support_lib not in sys.path:
@@ -23,8 +21,9 @@ if "TM_PYTHONDOCS" in env:
 else:
     PYTHONDOCS = "http://docs.python.org"
 
-PYDOC_PORT = 7464
-PYDOC_URL = "http://localhost:%i/" % PYDOC_PORT
+TIMEOUT = 5 * 60
+_PYDOC_PORT = 7400
+_PYDOC_URL = "http://localhost:%i/"
 
 prefdir = path.join(env["HOME"], "Library/Preferences/com.macromates.textmate.python")
 if not path.exists(prefdir):
@@ -73,21 +72,31 @@ def increment_hitcount(url):
     finally:
         f.close()
 
+def pydoc_url():
+    """ Return a URL to pydoc for the python returned by tm_helpers.env_python(). """
+    python, version = tm_helpers.env_python()
+    port = _PYDOC_PORT + version
+    url = _PYDOC_URL % port
+    return url, port
+
 def launch_pydoc_server():
-    if not accessible(PYDOC_URL):
+    server = path.join(env["TM_BUNDLE_SUPPORT"], "DocMate/pydoc_server.py")
+    python, version = tm_helpers.env_python()
+    url, port = pydoc_url()
+    if not accessible(url):
         # launch pydoc.
-        # print >> console, "Starting pydoc."
-        system("/usr/bin/nohup pydoc -p %i 1>> /tmp/pydoc.log 2>> /tmp/pydoc.log &" % PYDOC_PORT)
-        # print >> console, ""
+        system('/usr/bin/nohup %s %s %i %i\
+                    1>> /tmp/pydoc.log 2>> /tmp/pydoc.log &' \
+                    % (python, tm_helpers.sh_escape(server), port, TIMEOUT))
         # wait until pydoc is up.
-        max_wait = .5
+        max_wait = 3
         waited = 0
-        while not accessible(PYDOC_URL) and waited < max_wait:
+        while not accessible(url) and waited < max_wait:
             time.sleep(0.1)
             waited += 0.1
-        if not accessible(PYDOC_URL):
-            raise OSError("Could not start PyDoc server.")
-    return
+        if not accessible(url):
+            raise OSError("Timed out waiting for PyDoc to start.")
+    return url
 
 def doc(word):
     """ Return a list of (desc, url) pairs for `word`. """
@@ -123,4 +132,4 @@ def library_docs(word):
     return paths
 
 def pydoc(word):
-    return [(word + " (pydoc)", urljoin(PYDOC_URL, "%s.html" % word))]
+    return [(word + " (pydoc)", urljoin(pydoc_url()[0], "%s.html" % word))]

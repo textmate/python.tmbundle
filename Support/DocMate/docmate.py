@@ -7,7 +7,10 @@ import cPickle
 import urllib2
 import inspect
 from urlparse import urljoin as _urljoin
+import time
 
+# console = open("/dev/console", 'w')
+# print >> console, "importing docmate."
 # make sure Support/lib is on the path
 support_lib = path.join(env["TM_SUPPORT_PATH"], "lib")
 if support_lib not in sys.path:
@@ -73,7 +76,9 @@ def increment_hitcount(url):
 def launch_pydoc_server():
     if not accessible(PYDOC_URL):
         # launch pydoc.
-        system("/usr/bin/nohup pydoc -p %i 1> /tmp/pydoc.log &" % PYDOC_PORT)
+        # print >> console, "Starting pydoc."
+        system("/usr/bin/nohup pydoc -p %i 1>> /tmp/pydoc.log 2>> /tmp/pydoc.log &" % PYDOC_PORT)
+        # print >> console, ""
         # wait until pydoc is up.
         max_wait = .5
         waited = 0
@@ -82,6 +87,7 @@ def launch_pydoc_server():
             waited += 0.1
         if not accessible(PYDOC_URL):
             raise OSError("Could not start PyDoc server.")
+    return
 
 def doc(word):
     """ Return a list of (desc, url) pairs for `word`. """

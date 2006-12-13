@@ -88,14 +88,6 @@ def launch_pydoc_server():
         system('/usr/bin/nohup %s %s %i %i\
                     1>> /tmp/pydoc.log 2>> /tmp/pydoc.log &' \
                     % (python, tm_helpers.sh_escape(server), port, TIMEOUT))
-        # wait until pydoc is up.
-        # max_wait = 3
-        # waited = 0
-        # while not accessible(url) and waited < max_wait:
-        #     time.sleep(0.1)
-        #     waited += 0.1
-        # if not accessible(url):
-        #     raise OSError("Timed out waiting for PyDoc to start.")
     return url
 
 def doc(word):
@@ -104,7 +96,6 @@ def doc(word):
     if PYTHONDOCS: # and accessible(PYTHONDOCS)
         pairs = library_docs(word)
     #if accessible(PYDOC_URL):
-    pairs.extend(pydoc(word))
     # sort by hit count.
     if pairs:
         h = load_hitcounts()
@@ -114,6 +105,9 @@ def doc(word):
         t.sort()
         t.reverse()
         pairs = [(desc,url) for c, desc, url in t]
+    if pairs:
+        pairs.append(None)
+    pairs.extend(pydoc(word))
     return pairs
 
 def library_docs(word):
@@ -132,4 +126,4 @@ def library_docs(word):
     return paths
 
 def pydoc(word):
-    return [(word + " (pydoc)", urljoin(pydoc_url()[0], "%s.html" % word))]
+    return [("pydoc", urljoin(pydoc_url()[0], "%s.html" % word))]

@@ -21,6 +21,7 @@ from sys import exit
 import tm_helpers
 import docmate
 import dialog
+import time
 
 docmate.launch_pydoc_server()
 

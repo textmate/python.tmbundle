@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.5
+#!/usr/bin/env python2.3
 # -*- coding: UTF-8 -*-
 import re
 import sys
@@ -105,8 +105,6 @@ def doc(word):
         t.sort()
         t.reverse()
         pairs = [(desc,url) for c, desc, url in t]
-    if pairs:
-        pairs.append(None)
     pairs.extend(pydoc(word))
     return pairs
 
@@ -125,5 +123,11 @@ def library_docs(word):
             paths.append((desc, urljoin(PYTHONDOCS, "lib/", url)))
     return paths
 
-def pydoc(word):
-    return [("pydoc", urljoin(pydoc_url()[0], "%s.html" % word))]
+def local_docs(word):
+    import pydoc
+    try:
+        obj, name = pydoc.resolve(word)
+    except ImportError:
+        return None
+    desc = pydoc.describe(obj)
+    return [(desc, urljoin(pydoc_url()[0], "%s.html" % word))]

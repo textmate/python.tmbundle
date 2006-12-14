@@ -19,9 +19,9 @@ import sys
 from sys import exit
 
 import tm_helpers
+import webpreview
 import docmate
 import dialog
-import time
 
 docmate.launch_pydoc_server()
 
@@ -29,35 +29,33 @@ docmate.launch_pydoc_server()
 word = tm_helpers.current_word(r"[A-Za-z0-9_\.]*")
 
 if not word:
-	print "&lt;meta http-equiv='Refresh' content='0;URL=%s'&gt;" % docmate.PYDOC_URL
-	exit(205)
-
-opts = docmate.doc(word)
-if opts:
-	url = ""
-	if len(opts) == 1:
-		# only one option, so don't bother with a menu.
-		url = opts[0][1]
-	elif len(opts) == 0:
-		print "Didn't find any documentation for '%s'." % word
-		exit(206) # show as tooltip.
-	else:
-		# get user input.
-		url = dialog.menu(opts)
-	if url:
-		docmate.increment_hitcount(url)
-		max_wait = 3
-		waited = 0
-		while not docmate.accessible(url) and waited &lt; max_wait:
-    			time.sleep(0.1)
-    			waited += 0.1
-		if not docmate.accessible(url):
-		    raise OSError("Timed out waiting for PyDoc to start.")
-		print "&lt;meta http-equiv='Refresh' content='0;URL=%s'&gt;" % url
-		exit(205) # show as html.
-	else:
-		exit(200) # exit and discard (user pressed ESC)
+    print "&lt;meta http-equiv='Refresh' content='0;URL=%s'&gt;" % docmate.pydoc_url()[0]
+else:
+    library_docs = docmate.library_docs(word)
+    local_docs = docmate.local_docs(word)
+    if library_docs:
+        print webpreview.html_header("DocMate", "Python")
+        print "&lt;h3&gt;Python Library Documentation&lt;/h3&gt;\n"
+        print "&lt;ol style='list-style-type: lower-alpha;'&gt;\n"
+        for n, opt in enumerate(library_docs):
+            desc, url = opt
+            accesskey = chr(ord("a") + n)
+            print '\t&lt;li&gt;&lt;a href="%s" accesskey="%s"&gt;%s&lt;/a&gt;&lt;/li&gt;\n' % (url, accesskey, desc)
+        print "&lt;/ol&gt;\n"
+    if local_docs and library_docs:
+        print "&lt;h3&gt;Pydoc Documentation&lt;/h3&gt;"
+        print "&lt;ol style='list-style-type: decimal;'&gt;\n"
+        for n, opt in enumerate(local_docs):
+            desc, url = opt
+            accesskey = chr(ord("1") + n)
+            print '\t&lt;li&gt;&lt;a href="%s" accesskey="%s"&gt;%s&lt;/a&gt;&lt;/li&gt;\n' % (url, accesskey, desc)
+        print "&lt;/ol&gt;\n"
+        print webpreview.html_footer()
+    elif local_docs and not library_docs:
+        print "&lt;meta http-equiv='Refresh' content='0;URL=%s'&gt;" % local_docs[0][1]
 PYTHON
+
+
 </string>
 	<key>input</key>
 	<string>document</string>
@@ -66,7 +64,7 @@ PYTHON
 	<key>name</key>
 	<string>Documentation for Current Word</string>
 	<key>output</key>
-	<string>showAsTooltip</string>
+	<string>showAsHTML</string>
 	<key>scope</key>
 	<string>source.python</string>
 	<key>uuid</key>

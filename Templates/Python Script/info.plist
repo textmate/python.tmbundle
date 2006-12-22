@@ -3,17 +3,30 @@
 <plist version="1.0">
 <dict>
 	<key>command</key>
-	<string>if test \! -e "$TM_NEW_FILE"; then
-   TM_YEAR=`date +%Y` \
-   TM_DATE=`date +%Y-%m-%d` \
-   TM_USERNAME=`niutil -readprop / /users/\$USER realname` \
-   perl -pe 's/\$\{([^}]*)\}/$ENV{$1}/g; s/\t/    /g' \
-      &lt; template.py &gt; "$TM_NEW_FILE"
-fi</string>
+	<string>/usr/bin/ruby &lt;&lt;'RUBY'
+f = open(ENV["TM_NEW_FILE"], 'w')
+template = open("template.py").read
+
+ENV["TM_YEAR"] = `date +%Y`.chomp
+ENV["TM_DATE"] = `date +%Y-%m-%d`.chomp
+ENV["TM_USERNAME"] = `niutil -readprop / /users/$USER realname`.strip
+
+if ENV["TM_SOFT_TABS"] == "YES"
+	tab_size = ENV["TM_TAB_SIZE"].to_i
+	tab_size = tab_size ? tab_size : 4
+	template = template.gsub(/\t/, " "*tab_size)
+end
+
+template = template.gsub(/[$]\{([^}]+)\}/){|match| "#{ENV[$1]}" }
+f.write template
+f.close
+RUBY</string>
 	<key>extension</key>
 	<string>py</string>
 	<key>name</key>
 	<string>Python Script</string>
+	<key>scope</key>
+	<string>source.python</string>
 	<key>uuid</key>
 	<string>BE99DE86-7BAA-11D9-9C9F-000D93B6E43C</string>
 </dict>

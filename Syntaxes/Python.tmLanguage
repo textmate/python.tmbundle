@@ -1143,14 +1143,6 @@
 				<dict>
 					<key>begin</key>
 					<string>(\.)(?=[A-Za-z_][A-Za-z0-9_]*)</string>
-					<key>beginCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation</string>
-						</dict>
-					</dict>
 					<key>end</key>
 					<string>(?![A-Za-z0-9_])</string>
 					<key>patterns</key>

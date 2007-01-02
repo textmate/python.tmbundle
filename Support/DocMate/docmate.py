@@ -116,7 +116,7 @@ def library_docs(word):
         index = cPickle.load(f)
     finally:
         f.close()
-    word_re = re.compile(r"\b(%s)\b" % word)
+    word_re = re.compile(r"\b(%s)\b" % re.sub('[^a-zA-Z0-9_\. ]+', '', word))
     matching_keys = [key for key in index if word_re.search(key)]
     for key in matching_keys:
         for desc, url in index[key]:

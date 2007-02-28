@@ -70,7 +70,7 @@ def tm_excepthook(e_type, e, tb):
     else:
         message = ""
         if e.args:
-            message = e.args[0]
+            message = str(e.args[0])
         io.write("<p id='exception'><strong>%s:</strong> %s</p>\n" %
                                 (e_type.__name__, escape(message)))
     if e_type is SyntaxError:

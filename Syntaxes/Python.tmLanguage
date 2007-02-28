@@ -46,31 +46,31 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(?i:(0x\h*)L)\b</string>
+			<string>\b(?i:(0x\h*)L)</string>
 			<key>name</key>
 			<string>constant.numeric.integer.long.hexadecimal.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(?i:(0x\h*))\b</string>
+			<string>\b(?i:(0x\h*))</string>
 			<key>name</key>
 			<string>constant.numeric.integer.hexadecimal.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(?i:(0[0-7]+)L)\b</string>
+			<string>\b(?i:(0[0-7]+)L)</string>
 			<key>name</key>
 			<string>constant.numeric.integer.long.octal.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(0[0-7]+)\b</string>
+			<string>\b(0[0-7]+)</string>
 			<key>name</key>
 			<string>constant.numeric.integer.octal.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(?i:(((\d+(\.(?=[^a-zA-Z_])\d*)?|(?&lt;=[^0-9a-zA-Z_])\.\d+)(e[\-\+]?\d+)?))J)\b</string>
+			<string>\b(?i:(((\d+(\.(?=[^a-zA-Z_])\d*)?|(?&lt;=[^0-9a-zA-Z_])\.\d+)(e[\-\+]?\d+)?))J)</string>
 			<key>name</key>
 			<string>constant.numeric.complex.python</string>
 		</dict>
@@ -82,25 +82,25 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>(?&lt;=[^0-9a-zA-Z_])(?i:(\.\d+(e[\-\+]?\d+)?))\b</string>
+			<string>(?&lt;=[^0-9a-zA-Z_])(?i:(\.\d+(e[\-\+]?\d+)?))</string>
 			<key>name</key>
 			<string>constant.numeric.float.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(?i:(\d+e[\-\+]?\d+))\b</string>
+			<string>\b(?i:(\d+e[\-\+]?\d+))</string>
 			<key>name</key>
 			<string>constant.numeric.float.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(?i:([1-9]+[0-9]*|0)L)\b</string>
+			<string>\b(?i:([1-9]+[0-9]*|0)L)</string>
 			<key>name</key>
 			<string>constant.numeric.integer.long.decimal.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b([1-9]+[0-9]*|0)\b</string>
+			<string>\b([1-9]+[0-9]*|0)</string>
 			<key>name</key>
 			<string>constant.numeric.integer.decimal.python</string>
 		</dict>

@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>contactEmailRot13</key>
+	<string>nyrk.w.ebff@tznvy.pbz</string>
+	<key>contactName</key>
+	<string>Alexander John Ross</string>
 	<key>deleted</key>
 	<array>
 		<string>DAEF8E5C-9C78-43CC-B46B-E19327E67676</string>
@@ -17,6 +21,8 @@
 		<string>FFBE5EDC-D4C2-4412-A381-E59D40BF910A</string>
 		<string>77359DF3-E248-45CE-9A51-AFE55329A725</string>
 	</array>
+	<key>description</key>
+	<string>Support for the &lt;a href="http://www.python.org/"&gt;Python&lt;/a&gt; programming language.</string>
 	<key>mainMenu</key>
 	<dict>
 		<key>excludedItems</key>

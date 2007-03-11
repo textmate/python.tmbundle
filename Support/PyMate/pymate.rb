@@ -2,15 +2,14 @@ require "#{ENV["TM_SUPPORT_PATH"]}/lib/scriptmate"
 require "pathname"
 
 $SCRIPTMATE_VERSION = "$Revision$"
-PYMATE_PATH = Pathname.new(ENV["TM_BUNDLE_SUPPORT"]) + Pathname.new("PyMate")
-if ENV["PYTHONPATH"]
-  ENV["PYTHONPATH"] = PYMATE_PATH + ":" + ENV["PYTHONPATH"]
-else
-  ENV["PYTHONPATH"] = PYMATE_PATH
-end
 
 class PythonScript < UserScript
   def lang; "Python" end
+  def filter_cmd(cmd)
+    pymatepath = Pathname.new(ENV["TM_BUNDLE_SUPPORT"]) +\
+                  Pathname.new("PyMate")
+    return ["export PYTHONPATH=\"#{pymatepath}:$PYTHONPATH\";"] + cmd
+  end
   def executable; @hashbang || ENV['TM_PYTHON'] || 'python' end
   def args; ['-u'] end
   def version_string

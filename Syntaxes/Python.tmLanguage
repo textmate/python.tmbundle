@@ -1307,7 +1307,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>(\\\\x[0-9A-F]{2})|(\\\\[0-7]{3})|(\\\n)|(\\\\)|(\\\")|(\\')|(\\a)|(\\b)|(\\f)|(\\n)|(\\r)|(\\t)|(\\v)</string>
+			<string>(\\x[0-9A-F]{2})|(\\[0-7]{3})|(\\\n)|(\\\\)|(\\\")|(\\')|(\\a)|(\\b)|(\\f)|(\\n)|(\\r)|(\\t)|(\\v)</string>
 		</dict>
 		<key>escaped_unicode_char</key>
 		<dict>
@@ -1498,10 +1498,6 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>source.regexp</string>
-						</dict>
-						<dict>
-							<key>include</key>
 							<string>#constant_placeholder</string>
 						</dict>
 						<dict>
@@ -1511,6 +1507,10 @@
 						<dict>
 							<key>include</key>
 							<string>#escaped_char</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>source.regexp.python</string>
 						</dict>
 					</array>
 				</dict>
@@ -1553,15 +1553,15 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>source.regexp</string>
-						</dict>
-						<dict>
-							<key>include</key>
 							<string>#constant_placeholder</string>
 						</dict>
 						<dict>
 							<key>include</key>
 							<string>#escaped_char</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>source.regexp.python</string>
 						</dict>
 					</array>
 				</dict>
@@ -1660,10 +1660,6 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>source.regexp</string>
-						</dict>
-						<dict>
-							<key>include</key>
 							<string>#constant_placeholder</string>
 						</dict>
 						<dict>
@@ -1674,61 +1670,9 @@
 							<key>include</key>
 							<string>#escaped_char</string>
 						</dict>
-					</array>
-				</dict>
-				<dict>
-					<key>begin</key>
-					<string>([rR])(")</string>
-					<key>beginCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>storage.type.string.python</string>
-						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.string.begin.python</string>
-						</dict>
-					</dict>
-					<key>comment</key>
-					<string>double-quoted raw string</string>
-					<key>end</key>
-					<string>((?&lt;=")(")|")|(\n)</string>
-					<key>endCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.string.end.python</string>
-						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>meta.empty-string.double.python</string>
-						</dict>
-						<key>3</key>
-						<dict>
-							<key>name</key>
-							<string>invalid.illegal.unclosed-string.python</string>
-						</dict>
-					</dict>
-					<key>name</key>
-					<string>string.quoted.double.single-line.raw.python</string>
-					<key>patterns</key>
-					<array>
 						<dict>
 							<key>include</key>
-							<string>source.regexp</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#constant_placeholder</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_char</string>
+							<string>source.regexp.python</string>
 						</dict>
 					</array>
 				</dict>
@@ -1776,8 +1720,60 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>source.regexp</string>
+							<string>#constant_placeholder</string>
 						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>source.regexp.python</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>([rR])(")</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>storage.type.string.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.python</string>
+						</dict>
+					</dict>
+					<key>comment</key>
+					<string>double-quoted raw string</string>
+					<key>end</key>
+					<string>((?&lt;=")(")|")|(\n)</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>meta.empty-string.double.python</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>invalid.illegal.unclosed-string.python</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>string.quoted.double.single-line.raw.python</string>
+					<key>patterns</key>
+					<array>
 						<dict>
 							<key>include</key>
 							<string>#constant_placeholder</string>
@@ -1785,6 +1781,10 @@
 						<dict>
 							<key>include</key>
 							<string>#escaped_char</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>source.regexp.python</string>
 						</dict>
 					</array>
 				</dict>
@@ -2002,10 +2002,6 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>source.regexp</string>
-						</dict>
-						<dict>
-							<key>include</key>
 							<string>#constant_placeholder</string>
 						</dict>
 						<dict>
@@ -2015,6 +2011,10 @@
 						<dict>
 							<key>include</key>
 							<string>#escaped_char</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>source.regexp.python</string>
 						</dict>
 					</array>
 				</dict>
@@ -2057,15 +2057,15 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>source.regexp</string>
-						</dict>
-						<dict>
-							<key>include</key>
 							<string>#constant_placeholder</string>
 						</dict>
 						<dict>
 							<key>include</key>
 							<string>#escaped_char</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>source.regexp.python</string>
 						</dict>
 					</array>
 				</dict>
@@ -2159,10 +2159,6 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>source.regexp</string>
-						</dict>
-						<dict>
-							<key>include</key>
 							<string>#constant_placeholder</string>
 						</dict>
 						<dict>
@@ -2172,6 +2168,10 @@
 						<dict>
 							<key>include</key>
 							<string>#escaped_char</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>source.regexp.python</string>
 						</dict>
 					</array>
 				</dict>
@@ -2214,15 +2214,15 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>source.regexp</string>
-						</dict>
-						<dict>
-							<key>include</key>
 							<string>#constant_placeholder</string>
 						</dict>
 						<dict>
 							<key>include</key>
 							<string>#escaped_char</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>source.regexp.python</string>
 						</dict>
 					</array>
 				</dict>

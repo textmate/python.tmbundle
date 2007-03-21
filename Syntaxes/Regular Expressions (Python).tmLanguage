@@ -49,14 +49,6 @@
 			<string>comment.block.regexp</string>
 		</dict>
 		<dict>
-			<key>comment</key>
-			<string>We are restrictive in what we allow to go after the comment character to avoid false positives, since the availability of comments depend on regexp flags.</string>
-			<key>match</key>
-			<string>(?&lt;!\\)\#[^\n]*?(?=\\\n|\n)</string>
-			<key>name</key>
-			<string>comment.line.number-sign.regexp</string>
-		</dict>
-		<dict>
 			<key>match</key>
 			<string>\(\?[iLmsux]+\)</string>
 			<key>name</key>

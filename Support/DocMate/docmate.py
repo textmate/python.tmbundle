@@ -1,5 +1,6 @@
-#!/usr/bin/env python2.3
+#!/usr/bin/python2.3
 # -*- coding: UTF-8 -*-
+
 import re
 import sys
 from os import system, path, mkdir, environ as env
@@ -43,35 +44,6 @@ def accessible(url):
     except urllib2.URLError:
         return False
 
-def load_hitcounts():
-    hit_count = {}
-    if path.exists(hitcount_path):
-        f = None
-        try:
-            f = open(hitcount_path, 'r')
-            hit_count = cPickle.load(f)
-        finally:
-            if f: f.close()
-    return hit_count
-
-def increment_hitcount(url):
-    if path.exists(hitcount_path):
-        try:
-            f = open(hitcount_path, 'r')
-            hit_count = cPickle.load(f)
-        finally:
-            f.close()
-    else:
-        hit_count = {}
-    try:
-        f = open(hitcount_path, 'w')
-        if not url in hit_count:
-            hit_count[url] = 0
-        hit_count[url] += 1
-        cPickle.dump(hit_count, f)
-    finally:
-        f.close()
-
 def pydoc_url():
     """ Return a URL to pydoc for the python returned by tm_helpers.env_python(). """
     python, version = tm_helpers.env_python()
@@ -89,24 +61,6 @@ def launch_pydoc_server():
                     1>> /tmp/pydoc.log 2>> /tmp/pydoc.log &' \
                     % (python, tm_helpers.sh_escape(server), port, TIMEOUT))
     return url
-
-def doc(word):
-    """ Return a list of (desc, url) pairs for `word`. """
-    pairs = []
-    if PYTHONDOCS: # and accessible(PYTHONDOCS)
-        pairs = library_docs(word)
-    #if accessible(PYDOC_URL):
-    # sort by hit count.
-    if pairs:
-        h = load_hitcounts()
-        t = []
-        for desc, url in pairs:
-            t.append((h.get(url, 0), desc, url))
-        t.sort()
-        t.reverse()
-        pairs = [(desc,url) for c, desc, url in t]
-    pairs.extend(pydoc(word))
-    return pairs
 
 def library_docs(word):
     # build a list of matching library docs

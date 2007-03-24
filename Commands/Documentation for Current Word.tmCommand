@@ -10,7 +10,7 @@ read first_line
 0&lt;&amp;- # close STDIN
 export TM_FIRST_LINE="$first_line"
 
-export PYTHONPATH="$TM_BUNDLE_SUPPORT/DocMate:$PYTHONPATH"
+export PYTHONPATH="$TM_BUNDLE_SUPPORT/DocMate"
 export PYTHONPATH="$TM_SUPPORT_PATH/lib:$PYTHONPATH"
 
 /usr/bin/python2.3 -S - &lt;&lt;PYTHON

@@ -826,10 +826,8 @@
 			<string>#line_continuation</string>
 		</dict>
 		<dict>
-			<key>match</key>
-			<string>\b(self|cls)\b</string>
-			<key>name</key>
-			<string>variable.language.python</string>
+			<key>include</key>
+			<string>#language_variables</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -1198,6 +1196,10 @@
 						</dict>
 						<dict>
 							<key>include</key>
+							<string>#language_variables</string>
+						</dict>
+						<dict>
+							<key>include</key>
 							<string>#generic_names</string>
 						</dict>
 					</array>
@@ -1408,6 +1410,13 @@
 					<string>$base</string>
 				</dict>
 			</array>
+		</dict>
+		<key>language_variables</key>
+		<dict>
+			<key>match</key>
+			<string>\b(self|cls)\b</string>
+			<key>name</key>
+			<string>variable.language.python</string>
 		</dict>
 		<key>line_continuation</key>
 		<dict>

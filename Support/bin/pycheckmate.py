@@ -12,9 +12,9 @@
 # - Install PyChecker or PyFlakes for more extensive checking. If both are
 #   installed, PyChecker will be used.
 # - TM_PYCHECKER may be set to control which checker is used. Set it to just
-#   "pychecker" or "pyflakes" to locate these programs in the default python
-#   bin directory or to a full path if the checker program is installed
-#   elsewhere.
+#   "pychecker", "pyflakes", or "pylint" to locate these programs in the
+#   default python bin directory or to a full path if the checker program is
+#   installed elsewhere.
 # - If for some reason you want to use the built-in sytax check when either
 #   pychecker or pyflakes are installed, you may set TM_PYCHECKER to
 #   "builtin".
@@ -39,6 +39,7 @@ from urllib import quote
 
 PYCHECKER_URL = "http://pychecker.sourceforge.net/"
 PYFLAKES_URL = "http://divmod.org/projects/pyflakes"
+PYLINT_URL = "http://www.logilab.org/857"
 
 # patterns to match output of checker programs
 PYCHECKER_RE = re.compile(r"^(.*?\.pyc?):(\d+):\s+(.*)$")
@@ -97,7 +98,8 @@ HTML_FOOTER = """</div>
 ### Helper classes
 ###
 
-class Error(Exception): pass
+class Error(Exception):
+    pass
 
 class MyPopen:
     """Modifed version of standard popen2.Popen class that does what I need.
@@ -168,8 +170,9 @@ class MyPopen:
     def poll(self, timeout=None):
         """Returns (stdout, stderr) from child."""
         bufs = {self._stdout:self._stdout_buf, self._stderr:self._stderr_buf}
-        fds, junk_fds1, junk_fds2 = select(bufs.keys(), [], [], timeout)
-        for fd in fds: bufs[fd] += os.read(fd, 4096)
+        fds, dummy, dummy = select(bufs.keys(), [], [], timeout)
+        for fd in fds:
+            bufs[fd] += os.read(fd, 4096)
         self._stdout_buf = ""
         self._stderr_buf = ""
         stdout_lines = bufs[self._stdout].splitlines()
@@ -184,11 +187,13 @@ class MyPopen:
         stdout, stderr = [self._stdout_buf], [self._stderr_buf]
         while 1:
             data = os.read(self._stdout, 4096)
-            if not data: break
+            if not data:
+                break
             stdout.append(data)
         while 1:
             data = os.read(self._stderr, 4096)
-            if not data: break
+            if not data:
+                break
             stderr.append(data)
         self._stdout_buf = ""
         self._stderr_buf = ""
@@ -235,16 +240,19 @@ def check_syntax(script_path):
             print '<span class="stderr">%s%s</span><br>' % (pad, line)
 
 def find_checker_program():
-    checkers = ["pychecker", "pyflakes"]
+    checkers = ["pychecker", "pyflakes", "pylint"]
     tm_pychecker = os.getenv("TM_PYCHECKER")
+    
     if tm_pychecker == "builtin":
-        return ("", "Syntax check only")
+        return ('', None, "Syntax check only")
+    
     if tm_pychecker is not None:
         checkers.insert(0, tm_pychecker)
+    
     for checker in checkers:
         basename = os.path.split(checker)[1]
         if checker == basename:
-            # look for checker in same bin directory as python (might be 
+            # look for checker in same bin directory as python (might be
             # symlinked)
             bindir = os.path.split(sys.executable)[0]
             checker = os.path.join(bindir, basename)
@@ -256,14 +264,29 @@ def find_checker_program():
                 p = os.popen("/usr/bin/which '%s'" % basename)
                 checker = p.readline().strip()
                 p.close()
+        
         if not os.path.isfile(checker):
             continue
+        
         if basename == "pychecker":
             p = os.popen('"%s" -V 2>/dev/null' % (checker))
             version = p.readline().strip()
             status = p.close()
             if status is None and version:
-                return (checker, ("PyChecker %s" % version))
+                version = "PyChecker %s" % version
+                return (checker, None, version)
+        
+        elif basename == "pylint":
+            p = os.popen('"%s" --version 2>/dev/null' % (checker))
+            version = p.readline().strip()
+            status = p.close()
+            if status is None and version:
+                version = re.sub('^pylint\s*', '', version)
+                version = re.sub(',$', '', version)
+                version = "Pylint %s" % version
+                opts = ('--output-format=parseable',)
+                return (checker, opts, version)
+        
         elif basename == "pyflakes":
             # pyflakes doesn't have a version string embedded anywhere,
             # so run it against itself to make sure it's functional
@@ -271,15 +294,22 @@ def find_checker_program():
             output = p.readlines()
             status = p.close()
             if status is None and not output:
-                return (checker, "PyFlakes")
-    return (None, "Syntax check only")
+                return (checker, None, "PyFlakes")
+    
+    return ('', None, "Syntax check only")
 
-def run_checker_program(pychecker_bin, script_path):
+def run_checker_program(checker_bin, checker_opts, script_path):
     basepath = os.getenv("TM_PROJECT_DIRECTORY")
-    p = MyPopen([pychecker_bin, script_path])
+    cmd = []
+    cmd.append(checker_bin)
+    if checker_opts:
+        cmd.extend(checker_opts)
+    cmd.append(script_path)
+    p = MyPopen(cmd)
     while 1:
         stdout, stderr = p.readlines()
-        if stdout is None: break
+        if stdout is None:
+            break
         for line in stdout:
             line = line.rstrip()
             match = PYCHECKER_RE.search(line)
@@ -312,7 +342,7 @@ def run_checker_program(pychecker_bin, script_path):
     p.close()
 
 def main(script_path):
-    checker_bin, checker_ver = find_checker_program()
+    checker_bin, checker_opts, checker_ver = find_checker_program()
     my_revision = __version__.split()[1]
     version_string = "PyCheckMate r%s &ndash; %s" % (my_revision, checker_ver)
     warning_string = ""
@@ -321,9 +351,10 @@ def main(script_path):
             "<a href=\"javascript:TextMate.system('open %s', null)\">%s</a>"
         pychecker_url = href_format % (PYCHECKER_URL, "PyChecker")
         pyflakes_url  = href_format % (PYFLAKES_URL, "PyFlakes")
+        pylint_url  = href_format % (PYLINT_URL, "Pylint")
         warning_string = \
-            "<p>Please install %s or %s for more extensive code checking." \
-            "</p><br>" % (pychecker_url, pyflakes_url)
+            "<p>Please install %s, %s or %s for more extensive code checking." \
+            "</p><br>" % (pychecker_url, pyflakes_url, pylint_url)
     
     basepath = os.getenv("TM_PROJECT_DIRECTORY")
     if basepath:
@@ -337,7 +368,7 @@ def main(script_path):
     if warning_string:
         print warning_string
     if checker_bin:
-        run_checker_program(checker_bin, script_path)
+        run_checker_program(checker_bin, checker_opts, script_path)
     else:
         check_syntax(script_path)
     print HTML_FOOTER

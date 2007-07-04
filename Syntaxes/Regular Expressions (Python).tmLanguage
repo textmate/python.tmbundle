@@ -282,7 +282,7 @@
 								</dict>
 							</dict>
 							<key>match</key>
-							<string>(.|(\\.))\-([^\]]|(\\.))</string>
+							<string>((\\.)|.)\-((\\.)|[^\]])</string>
 							<key>name</key>
 							<string>constant.other.character-class.range.regexp</string>
 						</dict>

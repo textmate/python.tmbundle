@@ -47,7 +47,7 @@ class PyMate < ScriptMate
           elsif line =~ /^FAILED(.*)/
             "<span style=\"color: red\"><b>FAILED#{$1}</b></span><br/>"
           elsif line =~ /^OK(.*)/
-            "<span style=\"color: red\"><b>OK#{$1}</b></span><br/>"
+            "<span style=\"color: green\"><b>OK#{$1}</b></span><br/>"
           else
             htmlize(line)
           end

@@ -1464,6 +1464,20 @@
 			<key>name</key>
 			<string>support.variable.magic.python</string>
 		</dict>
+		<key>regular_expressions</key>
+		<dict>
+			<key>comment</key>
+			<string>Changed disabled to 1 to turn off syntax highlighting in “r” strings.</string>
+			<key>disabled</key>
+			<integer>0</integer>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>source.regexp.python</string>
+				</dict>
+			</array>
+		</dict>
 		<key>string_quoted_double</key>
 		<dict>
 			<key>patterns</key>
@@ -1519,7 +1533,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>source.regexp.python</string>
+							<string>#regular_expressions</string>
 						</dict>
 					</array>
 				</dict>
@@ -1621,7 +1635,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>source.regexp.python</string>
+							<string>#regular_expressions</string>
 						</dict>
 					</array>
 				</dict>
@@ -1779,7 +1793,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>source.regexp.python</string>
+							<string>#regular_expressions</string>
 						</dict>
 					</array>
 				</dict>
@@ -1891,7 +1905,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>source.regexp.python</string>
+							<string>#regular_expressions</string>
 						</dict>
 					</array>
 				</dict>
@@ -2173,7 +2187,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>source.regexp.python</string>
+							<string>#regular_expressions</string>
 						</dict>
 					</array>
 				</dict>
@@ -2275,7 +2289,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>source.regexp.python</string>
+							<string>#regular_expressions</string>
 						</dict>
 					</array>
 				</dict>
@@ -2428,7 +2442,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>source.regexp.python</string>
+							<string>#regular_expressions</string>
 						</dict>
 					</array>
 				</dict>
@@ -2530,7 +2544,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>source.regexp.python</string>
+							<string>#regular_expressions</string>
 						</dict>
 					</array>
 				</dict>

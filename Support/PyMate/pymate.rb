@@ -13,7 +13,7 @@ class PythonScript < UserScript
   end
   def test_script?
     @path    =~ /(?:\b|_)(?:test)(?:\b|_)/ or
-    @content =~ /\import\b.+(?:unittest)/
+    @content =~ /\bimport\b.+(?:unittest)/
   end
   def filter_cmd(cmd)
     pymatepath = Pathname.new(ENV["TM_BUNDLE_SUPPORT"]) +\
@@ -22,42 +22,38 @@ class PythonScript < UserScript
   end
 end
 
-# we inherit from scriptmate just to change the classname to PyMate.
 class PyMate < ScriptMate
   def filter_stderr(str)
-    if @command.test_script? and str =~ /\A[EF]+\Z/
-      return htmlize(str).gsub(/[EF]+/, "<span style=\"color: red\"><b>\\&</b></span>") +
-            "<br style=\"display: none\"/>"
-    elsif @command.test_script? and str =~ /\A\.\Z/
-      return htmlize(str).gsub(/\./, "<span style=\"color: green\"><b>\\&</b></span>") +
-            "<br style=\"display: none\"/>"
-    elsif @command.test_script?
-        return ( str.map do |line|
-          if line =~ /^(\s+)File (\S.+), line (\d+), in (.*)/
-            indent, file, line, method = $1, $2, $3, $4
-            url, display_name = '', 'untitled document';
-            unless file == "-"
-              indent += " " if file.sub!(/^"(.*)"/,'\1')
-              url = '&amp;url=file://' + e_url(file)
-              display_name = File.basename(file)
-            end
-            "#{indent}<a class='near' href='txmt://open?line=#{line + url}'>" +
+    if @command.test_script?
+      (str.map do |line|
+        if line =~ /\A[F]\Z/
+          "<span style=\"color: red\"><b>#{line.strip}</b></span><br>"
+        elsif line =~ /\A\.\Z/
+          "<span style=\"color: green\"><b>#{line.strip}</b></span><br>"
+        elsif line =~ /\A(FAILED.*)\Z/
+          "<span style=\"color: red;\"><b>#{$1}</b></span><br/>\n"
+        elsif line =~ /\A(OK.*)\Z/
+          "<span style=\"color: green\"><b>#{$1}</b></span><br/>"
+        elsif line =~ /^(\s+)File "(.+)", line (\d+), in (.*)/
+          indent, file, line, method = $1, $2, $3, $4
+          url, display_name = '', 'untitled';
+          unless file == "-" or file == "<stdin>"
+            indent += " " if file.sub!(/^"(.*)"/,'\1')
+            url = '&amp;url=file://' + e_url(file)
+            display_name = File.basename(file)
+          end
+          "#{htmlize(indent)}<a class='near' href='txmt://open?line=#{line + url}'>" +
             (method ? "method #{CGI::escapeHTML method}" : '<em>at top level</em>') +
             "</a> in <strong>#{CGI::escapeHTML display_name}</strong> at line #{line}<br/>"
-          elsif line =~ /^FAILED(.*)/
-            "<span style=\"color: red\"><b>FAILED#{$1}</b></span><br/>"
-          elsif line =~ /^OK(.*)/
-            "<span style=\"color: green\"><b>OK#{$1}</b></span><br/>"
-          else
-            htmlize(line)
-          end
-        end.join )
+        else
+          htmlize(line)
+        end
+      end).join.gsub(/\<br\/?\>/, "<br>\n")
     else
-      "<span style='color: red'>#{htmlize str}</span>".gsub(/\<br\>/, "<br>\n")
+      "<span style='color: red'>#{htmlize str}</span>"
     end
   end
 end
-
 
 script = PythonScript.new(STDIN.read)
 PyMate.new(script).emit_html

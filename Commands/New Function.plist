@@ -6,6 +6,7 @@
 	<string>nop</string>
 	<key>command</key>
 	<string>#!/usr/bin/env python -S
+# coding: utf-8
 
 # This program takes in the name of one of python's special methods, and
 # spits a snippet out.  If the name is unknown, make a regular (non-magic)
@@ -67,7 +68,12 @@ def make_snippet(name):
 
 # actually print the thing out, using the current word in TM
 from os import environ as env
-print make_snippet(env['TM_CURRENT_WORD'])</string>
+from sys import exit
+try:
+    print make_snippet(env['TM_CURRENT_WORD'])
+except KeyError:
+    print 'Please type the new function\'s name\n(you can also use def⇥).'
+    exit(206)</string>
 	<key>fallbackInput</key>
 	<string>word</string>
 	<key>input</key>

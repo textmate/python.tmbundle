@@ -10,7 +10,6 @@ template = open("template.py").read
 
 ENV["TM_YEAR"] = `date +%Y`.chomp
 ENV["TM_DATE"] = `date +%Y-%m-%d`.chomp
-ENV["TM_USERNAME"] = `niutil -readprop / /users/$USER realname`.strip
 
 if ENV["TM_SOFT_TABS"] == "YES"
 	tab_size = ENV["TM_TAB_SIZE"].to_i

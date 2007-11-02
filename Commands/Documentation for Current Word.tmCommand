@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>beforeRunningCommand</key>
@@ -13,7 +13,7 @@ export TM_FIRST_LINE="$first_line"
 export PYTHONPATH="$TM_BUNDLE_SUPPORT/DocMate"
 export PYTHONPATH="$TM_SUPPORT_PATH/lib:$PYTHONPATH"
 
-/usr/bin/python2.3 -S - &lt;&lt;PYTHON
+/usr/bin/env python -S - &lt;&lt;PYTHON
 # coding: UTF-8
 import sys
 from sys import exit

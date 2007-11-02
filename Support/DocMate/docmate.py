@@ -1,4 +1,3 @@
-#!/usr/bin/python2.3
 # -*- coding: UTF-8 -*-
 
 import re

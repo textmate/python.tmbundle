@@ -191,7 +191,11 @@ def _dateFromString(s):
         if val is None:
             break
         lst.append(int(val))
-    return datetime.datetime(*lst)
+
+    try:
+      return datetime.datetime(*lst)
+    except ValueError:
+      return datetime.datetime.min
 
 def _dateToString(d):
     return '%04d-%02d-%02dT%02d:%02d:%02dZ' % (

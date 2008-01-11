@@ -173,21 +173,21 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\+\=|-\=|\*\=|/\=|//\=|%\=|&amp;\=|\|\=|\^\=|&gt;&gt;\=|&lt;&lt;\=|\*\*\=</string>
-			<key>name</key>
-			<string>keyword.operator.assignment.augmented.python</string>
-		</dict>
-		<dict>
-			<key>match</key>
 			<string>\+|\-|\*|\*\*|/|//|%|&lt;&lt;|&gt;&gt;|&amp;|\||\^|~</string>
 			<key>name</key>
 			<string>keyword.operator.arithmetic.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>&lt;|&gt;|&lt;\=|&gt;\=|\=\=|!\=|&lt;&gt;</string>
+			<string>&lt;\=|&gt;\=|\=\=|&lt;|&gt;|&lt;&gt;</string>
 			<key>name</key>
 			<string>keyword.operator.comparison.python</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\+\=|-\=|\*\=|/\=|//\=|%\=|&amp;\=|\|\=|\^\=|&gt;&gt;\=|&lt;&lt;\=|\*\*\=</string>
+			<key>name</key>
+			<string>keyword.operator.assignment.augmented.python</string>
 		</dict>
 		<dict>
 			<key>match</key>

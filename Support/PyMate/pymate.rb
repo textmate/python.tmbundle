@@ -1,5 +1,7 @@
 require "#{ENV["TM_SUPPORT_PATH"]}/lib/scriptmate"
 require "pathname"
+$KCODE = 'u'
+require 'jcode'
 
 STDOUT.sync = true
 

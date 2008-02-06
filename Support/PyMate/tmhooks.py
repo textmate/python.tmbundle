@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 """
-sitecustomize.py for PyMate.
+tmhooks.py for PyMate.
 
 This file monkey-patches sys.excepthook to intercept any unhandled
 exceptions, format the exception in fancy html, and write them to
@@ -14,6 +14,8 @@ a tm_dialog.
 import re
 import sys
 import inspect
+import codecs
+import locale
 
 from os import environ, path, fdopen, popen
 from traceback import extract_tb
@@ -23,6 +25,10 @@ from urllib import quote
 import plistlib
 from_python = plistlib.writePlistToString
 to_python = plistlib.readPlistFromString
+
+# add utf-8 support to stdout/stderr
+sys.stdout = codecs.getwriter('utf-8')(sys.stdout);
+sys.stderr = codecs.getwriter('utf-8')(sys.stderr);
 
 def e_sh(s):
     return re.sub(r"(?=[^a-zA-Z0-9_.\/\-\x7F-\xFF\n])", r'\\', s).replace("\n", "'\n'")
@@ -63,16 +69,18 @@ def tm_excepthook(e_type, e, tb):
     """
     # get the file descriptor.
     error_fd = int(str(environ['TM_ERROR_FD']))
-    io = fdopen(error_fd, 'wb')
+    io = fdopen(error_fd, 'wb', 0)
     io.write("<div id='exception_report' class='framed'>\n")
     if isinstance(e_type, str):
         io.write("<p id='exception'><strong>String Exception:</strong> %s</p>\n" % escape(e_type))
     else:
         message = ""
-        if e.args:
+        if e.args and e_type is not SyntaxError:
             message = ", ".join([unicode(arg) for arg in e.args])
+        else:
+            message = unicode(e.args[0])
         io.write("<p id='exception'><strong>%s:</strong> %s</p>\n" %
-                                (e_type.__name__, escape(message.encode("utf-8"))))
+                                (e_type.__name__, escape(message).encode("utf-8")))
     if e_type is SyntaxError:
         # if this is a SyntaxError, then tb == None
         filename, line_number, offset, text = e.filename, e.lineno, e.offset, e.text
@@ -110,7 +118,7 @@ def tm_excepthook(e_type, e, tb):
             else:
                 io.write('<em>at file root</em>')
             io.write("</a> in <strong>%s</strong> at line %i</td></tr>\n" %
-                                                (escape(display_name), line_number))
+                                                (escape(display_name).encode("utf-8"), line_number))
             io.write("<tr><td><pre class=\"snippet\">%s</pre></tr></td>" % text)
         io.write("</table></blockquote></div>")
     io.flush()

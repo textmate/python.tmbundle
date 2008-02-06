@@ -1,12 +1,20 @@
 require "#{ENV["TM_SUPPORT_PATH"]}/lib/scriptmate"
 require "pathname"
 
+STDOUT.sync = true
+
 $SCRIPTMATE_VERSION = "$Revision$"
 
 class PythonScript < UserScript
   def lang; "Python" end
   def executable; @hashbang || ENV['TM_PYTHON'] || 'python' end
-  def args; ['-u'] end
+  def args;
+    if @path != "-"
+      ['-u', "-c \"import tmhooks, sys; del sys.argv[0]; __file__ = sys.argv[0]; del sys, tmhooks; execfile(__file__)\""]
+    else
+      ['-u', "-c #{e_sh "import tmhooks, sys; del tmhooks,sys;\n" + @content}"]
+    end
+  end
   def version_string
     res = %x{#{executable} -V 2>&1 }.chomp
     res + " (#{executable})"
@@ -55,5 +63,5 @@ class PyMate < ScriptMate
   end
 end
 
-script = PythonScript.new(STDIN.read)
+script = PythonScript.new(STDIN.read, false)
 PyMate.new(script).emit_html

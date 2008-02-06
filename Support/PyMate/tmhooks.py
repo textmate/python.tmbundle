@@ -70,7 +70,7 @@ def tm_excepthook(e_type, e, tb):
     else:
         message = ""
         if e.args:
-            message = str(e.args[0])
+            message = ", ".join([str(arg) for arg in e.args])
         io.write("<p id='exception'><strong>%s:</strong> %s</p>\n" %
                                 (e_type.__name__, escape(message)))
     if e_type is SyntaxError:
@@ -92,11 +92,11 @@ def tm_excepthook(e_type, e, tb):
         io.write("</table></blockquote></div>")
     if tb: # now we write out the stack trace if we have a traceback
         io.write("<blockquote><table border='0' cellspacing='0' cellpadding='0'>\n")
-        for trace in extract_tb(tb):
+        for trace in extract_tb(tb)[1:]: # skip the first one, to avoid showing pymate's execfile call.
             filename, line_number, function_name, text = trace
             url, display_name = '', 'untitled'
             if filename and path.exists(filename):
-                url = "&url=file://%s" % quote(filename)
+                url = "&url=file://%s" % quote(path.abspath(filename))
                 display_name = path.basename(filename)
             io.write("<tr><td><a class='near' href='txmt://open?line=%i%s'>" %
                                                             (line_number, url))
@@ -104,13 +104,14 @@ def tm_excepthook(e_type, e, tb):
                 display_name = 'exec'
             if function_name and function_name != "?":
                 if function_name == '<module>':
-                    io.write("<em>module body</em> ")
+                    io.write("<em>module body</em>")
                 else:
-                    io.write("function %s " % escape(function_name))
+                    io.write("function %s" % escape(function_name))
             else:
-                io.write(' <em>at file root</em> ')
-            io.write(" </a></td>\n<td>&nbsp; in <strong>%s</strong> at line %i</td></tr>\n" %
+                io.write('<em>at file root</em>')
+            io.write("</a> in <strong>%s</strong> at line %i</td></tr>\n" %
                                                 (escape(display_name), line_number))
+            io.write("<tr><td><pre class=\"snippet\">%s</pre></tr></td>" % text)
         io.write("</table></blockquote></div>")
     io.flush()
 

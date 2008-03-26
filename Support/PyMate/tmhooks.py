@@ -77,7 +77,7 @@ def tm_excepthook(e_type, e, tb):
         message = ""
         if e.args and e_type is not SyntaxError:
             message = ", ".join([unicode(arg) for arg in e.args])
-        else:
+        elif len(e.args):
             message = unicode(e.args[0])
         io.write("<p id='exception'><strong>%s:</strong> %s</p>\n" %
                                 (e_type.__name__, escape(message).encode("utf-8")))

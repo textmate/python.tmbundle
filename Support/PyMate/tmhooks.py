@@ -101,9 +101,13 @@ def tm_excepthook(e_type, e, tb):
             if len(e.args) > 1:
                 for arg in e.args:
                     message += ", %s" % arg
-        io.write("<p id='exception'><strong>%s:</strong> %s</p>\n" %
-                                (e_type.__name__, escape(message).encode("utf-8")))
-
+        if isinstance(message, unicode):
+            io.write("<p id='exception'><strong>%s:</strong> %s</p>\n" %
+                                    (e_type.__name__, escape(message).encode("utf-8")))
+        else:
+            io.write("<p id='exception'><strong>%s:</strong> %s</p>\n" %
+                                    (e_type.__name__, escape(message)))
+            
     if tb: # now we write out the stack trace if we have a traceback
         io.write("<blockquote><table border='0' cellspacing='0' cellpadding='0'>\n")
         for trace in extract_tb(tb)[1:]: # skip the first one, to avoid showing pymate's execfile call.

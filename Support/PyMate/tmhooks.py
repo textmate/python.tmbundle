@@ -73,15 +73,7 @@ def tm_excepthook(e_type, e, tb):
     io.write("<div id='exception_report' class='framed'>\n")
     if isinstance(e_type, str):
         io.write("<p id='exception'><strong>String Exception:</strong> %s</p>\n" % escape(e_type))
-    else:
-        message = ""
-        if e.args and e_type is not SyntaxError:
-            message = ", ".join([unicode(arg) for arg in e.args])
-        elif len(e.args):
-            message = unicode(e.args[0])
-        io.write("<p id='exception'><strong>%s:</strong> %s</p>\n" %
-                                (e_type.__name__, escape(message).encode("utf-8")))
-    if e_type is SyntaxError:
+    elif e_type is SyntaxError:
         # if this is a SyntaxError, then tb == None
         filename, line_number, offset, text = e.filename, e.lineno, e.offset, e.text
         url, display_name = '', 'untitled'
@@ -98,6 +90,20 @@ def tm_excepthook(e_type, e, tb):
         io.write("</a></td>\n<td>&nbsp;in <strong>%s</strong></td></tr>\n" %
                                             (escape(display_name)))
         io.write("</table></blockquote></div>")
+    else:
+        message = ""
+        if e.args:
+            # For some reason the loop below works, but using either of the lines below
+            # doesn't
+            # message = ", ".join([str(arg) for arg in e.args])
+            # message = ", ".join([unicode(arg) for arg in e.args])
+            message = "%s" % e.args[0]
+            if len(e.args) > 1:
+                for arg in e.args:
+                    message += ", %s" % arg
+        io.write("<p id='exception'><strong>%s:</strong> %s</p>\n" %
+                                (e_type.__name__, escape(message).encode("utf-8")))
+
     if tb: # now we write out the stack trace if we have a traceback
         io.write("<blockquote><table border='0' cellspacing='0' cellpadding='0'>\n")
         for trace in extract_tb(tb)[1:]: # skip the first one, to avoid showing pymate's execfile call.

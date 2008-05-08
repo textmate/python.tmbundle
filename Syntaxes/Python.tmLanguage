@@ -747,14 +747,6 @@
 					<string>meta.item-access.arguments.python</string>
 					<key>end</key>
 					<string>(?=\])</string>
-					<key>endCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.arguments.end.python</string>
-						</dict>
-					</dict>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -764,6 +756,14 @@
 					</array>
 				</dict>
 			</array>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.arguments.end.python</string>
+				</dict>
+			</dict>
 		</dict>
 		<dict>
 			<key>begin</key>

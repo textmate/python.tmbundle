@@ -346,7 +346,7 @@ def main(script_path):
     my_revision = __version__.split()[1]
     version_string = "PyCheckMate r%s &ndash; %s" % (my_revision, checker_ver)
     warning_string = ""
-    if checker_bin is None:
+    if not checker_bin:
         href_format = \
             "<a href=\"javascript:TextMate.system('open %s', null)\">%s</a>"
         pychecker_url = href_format % (PYCHECKER_URL, "PyChecker")
@@ -378,5 +378,5 @@ if __name__ == "__main__":
     if len(sys.argv) == 2:
         sys.exit(main(sys.argv[1]))
     else:
-        print "pycheckermate.py <file.py>"
+        print "pycheckmate.py <file.py>"
         sys.exit(1)

@@ -12,9 +12,9 @@ class PythonScript < UserScript
   def executable; @hashbang || ENV['TM_PYTHON'] || 'python' end
   def args;
     if @path != "-"
-      ['-u', "-c \"import tmhooks, sys; del sys.argv[0]; __file__ = sys.argv[0]; del sys, tmhooks; execfile(__file__)\""]
+      ['-u', "-c", "import tmhooks, sys; del sys.argv[0]; __file__ = sys.argv[0]; del sys, tmhooks; execfile(__file__)"]
     else
-      ['-u', "-c #{e_sh "import tmhooks, sys; del tmhooks,sys;\n" + @content}"]
+      ['-u', "-c", "import tmhooks, sys; del tmhooks,sys;\n#{@content}"]
     end
   end
   def version_string
@@ -25,10 +25,10 @@ class PythonScript < UserScript
     @path    =~ /(?:\b|_)(?:test)(?:\b|_)/ or
     @content =~ /\bimport\b.+(?:unittest)/
   end
-  def filter_cmd(cmd)
+  def env
     pymatepath = Pathname.new(ENV["TM_BUNDLE_SUPPORT"]) +\
                   Pathname.new("PyMate")
-    return ["export PYTHONPATH=\"#{pymatepath}:$PYTHONPATH\";"] + cmd
+    { "PYTHONPATH" => "#{pymatepath}:#{ENV['PYTHONPATH']}" }
   end
 end
 

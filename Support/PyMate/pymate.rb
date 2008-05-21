@@ -9,7 +9,7 @@ $SCRIPTMATE_VERSION = "$Revision$"
 
 class PythonScript < UserScript
   def lang; "Python" end
-  def executable; @hashbang || ENV['TM_PYTHON'] || 'python' end
+  def executable; ENV['TM_PYTHON'] || 'python' end
   def args;
     if @path != "-"
       ['-u', "-c", "import tmhooks, sys; del sys.argv[0]; __file__ = sys.argv[0]; del sys, tmhooks; execfile(__file__)"]

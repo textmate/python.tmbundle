@@ -6,61 +6,21 @@ This file monkey-patches sys.excepthook to intercept any unhandled
 exceptions, format the exception in fancy html, and write them to
 a file handle (for instance, sys.stderr).
 
-We also monkey-patch the input and raw_input functions to provide
-a tm_dialog.
+Also, sys.stdout and sys.stder are wrapped in a utf-8 codec writer.
 
 """
 
-import re
 import sys
-import inspect
 import codecs
-import locale
 
 from os import environ, path, fdopen, popen
 from traceback import extract_tb
 from cgi import escape
 from urllib import quote
 
-import plistlib
-from_python = plistlib.writePlistToString
-to_python = plistlib.readPlistFromString
-
 # add utf-8 support to stdout/stderr
 sys.stdout = codecs.getwriter('utf-8')(sys.stdout);
 sys.stderr = codecs.getwriter('utf-8')(sys.stderr);
-
-def e_sh(s):
-    return re.sub(r"(?=[^a-zA-Z0-9_.\/\-\x7F-\xFF\n])", r'\\', s).replace("\n", "'\n'")
-
-def tm_raw_input(prompt=""):
-    dialog = path.join(environ["TM_SUPPORT_PATH"], 'bin/tm_dialog')
-    nib = path.join(environ["TM_BUNDLE_SUPPORT"], "PyMate/TextInput.nib")
-    cmd = 'bash -c "%s -mp %s %s"' % \
-        (e_sh(dialog),
-         e_sh(from_python({"prompt": prompt})),
-         e_sh(nib))
-    io = popen(cmd)
-    plist = io.read()
-    io.close()
-    plist = to_python(plist)
-    if plist['returnCode'] == 1:
-        raise KeyboardInterrupt
-    if "inputText" in plist:
-        return plist["inputText"]
-    else:
-        return ""
-    
-def tm_input(prompt=""):
-    try:
-        frame = inspect.getouterframes(inspect.currentframe())[1][0]
-        result = eval(tm_raw_input(prompt), frame.f_globals, frame.f_locals)
-    finally:
-        del frame
-    return result
-    
-__builtins__['raw_input'] = tm_raw_input
-__builtins__['input'] = tm_input
 
 def tm_excepthook(e_type, e, tb):
     """

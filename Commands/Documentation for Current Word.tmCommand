@@ -53,9 +53,9 @@ else:
         print webpreview.html_footer()
     elif local_docs and not library_docs:
         print "&lt;meta http-equiv='Refresh' content='0;URL=%s'&gt;" % local_docs[0][1]
+    else:
+        print "&lt;meta http-equiv='Refresh' content='0;URL=%s'&gt;" % docmate.pydoc_url()[0]
 PYTHON
-
-
 </string>
 	<key>input</key>
 	<string>document</string>

@@ -1,20 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>autoScrollOutput</key>
-    <true/>
+	<key>autoScrollOutput</key>
+	<true/>
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
 	<key>command</key>
-	<string>export TM_RUBY=$(type -p "${TM_RUBY:-ruby}")
-"$TM_RUBY" -- "$TM_BUNDLE_SUPPORT/PyMate/pymate.rb"</string>
+	<string>/usr/bin/env ruby -e'
+require ENV["TM_SUPPORT_PATH"] + "/lib/tm/executor"
+require ENV["TM_SUPPORT_PATH"] + "/lib/tm/save_current_document"
+
+TextMate.save_current_document
+
+ENV["PYTHONPATH"] = ENV["TM_BUNDLE_SUPPORT"] + (ENV.has_key?("PYTHONPATH") ? ":" + ENV["PYTHONPATH"] : "")
+
+is_test_script = ENV["TM_FILEPATH"] =~ /(?:\b|_)(?:test)(?:\b|_)/ or
+                 File.read(ENV["TM_FILEPATH"]) =~ /\bimport\b.+(?:unittest)/
+
+TextMate::Executor.run(ENV["TM_PYTHON"] || "python", "-u", ENV["TM_FILEPATH"], :version_args =&gt; ["--version", "2&gt;&amp;1"]) do |str, type|
+  if is_test_script and type == :err
+    if str =~ /\A[F]\Z/
+      "&lt;span style=\"color: red\"&gt;&lt;b&gt;#{htmlize line.strip}&lt;/b&gt;&lt;/span&gt;&lt;br&gt;\n"
+    elsif str =~ /\A\.\Z/
+      "&lt;span style=\"color: green\"&gt;&lt;b&gt;#{htmlize line.strip}&lt;/b&gt;&lt;/span&gt;&lt;br&gt;\n"
+    elsif str =~ /\A(FAILED.*)\Z/
+      "&lt;span style=\"color: red;\"&gt;&lt;b&gt;#{htmlize $1}&lt;/b&gt;&lt;/span&gt;&lt;br/&gt;\n"
+    elsif str =~ /\A(OK.*)\Z/
+      "&lt;span style=\"color: green\"&gt;&lt;b&gt;#{htmlize $1}&lt;/b&gt;&lt;/span&gt;&lt;br/&gt;\n"
+    elsif str =~ /^(\s+)File "(.+)", line (\d+), in (.*)/
+      indent = $1
+      file   = $2
+      line   = $3
+      method = $4
+      indent += " " if file.sub!(/^\"(.*)\"/,"\1")
+      url = "&amp;amp;url=file://" + e_url(file)
+      display_name = ENV["TM_DISPLAYNAME"]
+      "#{htmlize(indent)}&lt;a class=\"near\" href=\"txmt://open?line=#{line + url}\"&gt;" +
+        (method ? "method #{CGI::escapeHTML method}" : "&lt;em&gt;at top level&lt;/em&gt;") +
+        "&lt;/a&gt; in &lt;strong&gt;#{CGI::escapeHTML display_name}&lt;/strong&gt; at line #{line}&lt;br/&gt;"
+    else
+      "&lt;span style=\"color: red\"&gt;#{htmlize str}&lt;/span&gt;"
+    end
+  elsif type == :err
+    "&lt;span style=\"color: red\"&gt;#{htmlize str}&lt;/span&gt;"
+  else
+    htmlize(str)
+  end
+end'&lt;&amp;0</string>
 	<key>input</key>
 	<string>document</string>
 	<key>keyEquivalent</key>
 	<string>@r</string>
 	<key>name</key>
-	<string>Run Script (PyMate)</string>
+	<string>Run Script</string>
 	<key>output</key>
 	<string>showAsHTML</string>
 	<key>scope</key>

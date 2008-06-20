@@ -10,7 +10,17 @@ Also, sys.stdout and sys.stder are wrapped in a utf-8 codec writer.
 
 """
 
-import sys
+import sys, os
+
+# remove TM_BUNDLE_SUPPORT from the path.
+sys.path.remove(os.environ['TM_BUNDLE_SUPPORT'])
+
+# now import local sitecustomize
+try:
+  import sitecustomize
+  reload(sitecustomize)
+except ImportError: pass
+
 import codecs
 
 from os import environ, path, fdopen, popen

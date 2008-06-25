@@ -18,7 +18,7 @@ ENV["PYTHONPATH"] = ENV["TM_BUNDLE_SUPPORT"] + (ENV.has_key?("PYTHONPATH") ? ":"
 is_test_script = ENV["TM_FILEPATH"] =~ /(?:\b|_)(?:test)(?:\b|_)/ or
                  File.read(ENV["TM_FILEPATH"]) =~ /\bimport\b.+(?:unittest)/
 
-TextMate::Executor.run(ENV["TM_PYTHON"] || "python", "-u", ENV["TM_FILEPATH"], :version_args =&gt; ["--version", "2&gt;&amp;1"]) do |str, type|
+TextMate::Executor.run(ENV["TM_PYTHON"] || "python", "-u", ENV["TM_FILEPATH"]) do |str, type|
   if is_test_script and type == :err
     if str =~ /\A[F]\Z/
       "&lt;span style=\"color: red\"&gt;&lt;b&gt;#{htmlize line.strip}&lt;/b&gt;&lt;/span&gt;&lt;br&gt;\n"

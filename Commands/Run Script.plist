@@ -21,13 +21,13 @@ is_test_script = ENV["TM_FILEPATH"] =~ /(?:\b|_)(?:test)(?:\b|_)/ or
 TextMate::Executor.run(ENV["TM_PYTHON"] || "python", "-u", ENV["TM_FILEPATH"]) do |str, type|
   if is_test_script and type == :err
     if str =~ /\A[F]\Z/
-      "&lt;span style=\"color: red\"&gt;&lt;b&gt;#{htmlize line.strip}&lt;/b&gt;&lt;/span&gt;&lt;br&gt;\n"
+      "&lt;div style=\"test fail\"&gt;#{htmlize line.strip}&lt;/div&gt;&lt;\n"
     elsif str =~ /\A\.\Z/
-      "&lt;span style=\"color: green\"&gt;&lt;b&gt;#{htmlize line.strip}&lt;/b&gt;&lt;/span&gt;&lt;br&gt;\n"
+      "&lt;div style=\"test pass\"&gt;#{htmlize line.strip}&lt;/div&gt;\n"
     elsif str =~ /\A(FAILED.*)\Z/
-      "&lt;span style=\"color: red;\"&gt;&lt;b&gt;#{htmlize $1}&lt;/b&gt;&lt;/span&gt;&lt;br/&gt;\n"
+      "&lt;div style=\"test fail\"&gt;#{htmlize $1}&lt;/div&gt;\n"
     elsif str =~ /\A(OK.*)\Z/
-      "&lt;span style=\"color: green\"&gt;&lt;b&gt;#{htmlize $1}&lt;/b&gt;&lt;/span&gt;&lt;br/&gt;\n"
+      "&lt;div style=\"test pass\"&gt;#{htmlize $1}&lt;/div&gt;\n"
     elsif str =~ /^(\s+)File "(.+)", line (\d+), in (.*)/
       indent = $1
       file   = $2
@@ -38,14 +38,8 @@ TextMate::Executor.run(ENV["TM_PYTHON"] || "python", "-u", ENV["TM_FILEPATH"]) d
       display_name = ENV["TM_DISPLAYNAME"]
       "#{htmlize(indent)}&lt;a class=\"near\" href=\"txmt://open?line=#{line + url}\"&gt;" +
         (method ? "method #{CGI::escapeHTML method}" : "&lt;em&gt;at top level&lt;/em&gt;") +
-        "&lt;/a&gt; in &lt;strong&gt;#{CGI::escapeHTML display_name}&lt;/strong&gt; at line #{line}&lt;br/&gt;"
-    else
-      "&lt;span style=\"color: red\"&gt;#{htmlize str}&lt;/span&gt;"
+        "&lt;/a&gt; in &lt;strong&gt;#{CGI::escapeHTML display_name}&lt;/strong&gt; at line #{line}&lt;br/&gt;\n"
     end
-  elsif type == :err
-    "&lt;span style=\"color: red\"&gt;#{htmlize str}&lt;/span&gt;"
-  else
-    htmlize(str)
   end
 end'</string>
 	<key>input</key>

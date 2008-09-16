@@ -7,7 +7,7 @@
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
 	<key>command</key>
-	<string>/usr/bin/env ruby -e'
+	<string>$(type -p "${TM_RUBY:-ruby}") -e'
 require ENV["TM_SUPPORT_PATH"] + "/lib/tm/executor"
 require ENV["TM_SUPPORT_PATH"] + "/lib/tm/save_current_document"
 
@@ -47,7 +47,7 @@ TextMate::Executor.run(ENV["TM_PYTHON"] || "python", "-u", ENV["TM_FILEPATH"]) d
   else
     htmlize(str)
   end
-end'&lt;&amp;0</string>
+end'</string>
 	<key>input</key>
 	<string>document</string>
 	<key>keyEquivalent</key>

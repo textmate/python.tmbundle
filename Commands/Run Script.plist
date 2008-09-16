@@ -20,14 +20,13 @@ is_test_script = ENV["TM_FILEPATH"] =~ /(?:\b|_)(?:test)(?:\b|_)/ or
 
 TextMate::Executor.run(ENV["TM_PYTHON"] || "python", "-u", ENV["TM_FILEPATH"]) do |str, type|
   if is_test_script and type == :err
-    if str =~ /\A[F]\Z/
-      "&lt;div style=\"test fail\"&gt;#{htmlize line.strip}&lt;/div&gt;&lt;\n"
-    elsif str =~ /\A\.\Z/
-      "&lt;div style=\"test pass\"&gt;#{htmlize line.strip}&lt;/div&gt;\n"
+    if str =~ /\A[\.F]*\Z/
+      str.gsub!(/(\.|F)/, "&lt;span class=\"test ok\"&gt;\\1&lt;/span&gt;")
+      str + "&lt;br/&gt;\n"
     elsif str =~ /\A(FAILED.*)\Z/
-      "&lt;div style=\"test fail\"&gt;#{htmlize $1}&lt;/div&gt;\n"
+      "&lt;div class=\"test fail\"&gt;#{htmlize $1}&lt;/div&gt;\n"
     elsif str =~ /\A(OK.*)\Z/
-      "&lt;div style=\"test pass\"&gt;#{htmlize $1}&lt;/div&gt;\n"
+      "&lt;div class=\"test ok\"&gt;#{htmlize $1}&lt;/div&gt;\n"
     elsif str =~ /^(\s+)File "(.+)", line (\d+), in (.*)/
       indent = $1
       file   = $2

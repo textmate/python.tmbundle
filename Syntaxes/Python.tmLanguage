@@ -138,17 +138,9 @@
 		</dict>
 		<dict>
 			<key>comment</key>
-			<string>keywords that delimit flow blocks</string>
+			<string>keywords that delimit flow blocks or alter flow from within a block</string>
 			<key>match</key>
-			<string>\b(elif|else|except|finally|for|if|try|while|with)\b</string>
-			<key>name</key>
-			<string>keyword.control.flow.python</string>
-		</dict>
-		<dict>
-			<key>comment</key>
-			<string>keywords that alter flow from within a block</string>
-			<key>match</key>
-			<string>\b(break|continue|pass|raise|return|yield)\b</string>
+			<string>\b(elif|else|except|finally|for|if|try|while|with|break|continue|pass|raise|return|yield)\b</string>
 			<key>name</key>
 			<string>keyword.control.flow.python</string>
 		</dict>

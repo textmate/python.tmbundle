@@ -1137,7 +1137,18 @@
 		<key>builtin_exceptions</key>
 		<dict>
 			<key>match</key>
-			<string>(?x)\b((Arithmetic|Assertion|Attribute|EOF|Environment|FloatingPoint|IO|Import|Indentation|Index|Key|Lookup|Memory|Name|OS|Overflow|NotImplemented|Reference|Runtime|Standard|Syntax|System|Tab|Type|UnboundLocal|Unicode(Translate|Encode|Decode)?|Value|ZeroDivision)Error|(Deprecation|Future|Overflow|PendingDeprecation|Runtime|Syntax|User)?Warning|KeyboardInterrupt|NotImplemented|StopIteration|SystemExit|(Base)?Exception)\b</string>
+			<string>(?x)\b(
+                (
+                    Arithmetic|Assertion|Attribute|Buffer|EOF|Environment|FloatingPoint|IO|
+                    Import|Indentation|Index|Key|Lookup|Memory|Name|NotImplemented|OS|Overflow|
+                    Reference|Runtime|Standard|Syntax|System|Tab|Type|UnboundLocal|
+                    Unicode(Encode|Decode|Translate)?|
+                    Value|VMS|Windows|ZeroDivision
+                )Error|
+                ((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes)?Warning|
+                (Base)?Exception|
+                SystemExit|StopIteration|NotImplemented|KeyboardInterrupt|GeneratorExit
+			)\b</string>
 			<key>name</key>
 			<string>support.type.exception.python</string>
 		</dict>

@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>(${0:object}):</string>
+	<string>(${1:object}):$0</string>
 	<key>keyEquivalent</key>
 	<string>(</string>
 	<key>name</key>

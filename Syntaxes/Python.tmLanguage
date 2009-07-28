@@ -176,7 +176,13 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>&lt;\=|&gt;\=|\=\=|&lt;|&gt;|&lt;&gt;</string>
+			<string>&lt;&gt;</string>
+			<key>name</key>
+			<string>invalid.deprecated.operator.python</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>&lt;\=|&gt;\=|\=\=|&lt;|&gt;|\!\=</string>
 			<key>name</key>
 			<string>keyword.operator.comparison.python</string>
 		</dict>

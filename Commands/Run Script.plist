@@ -7,7 +7,7 @@
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
 	<key>command</key>
-	<string>$(type -p "${TM_RUBY:-ruby}") -e'
+	<string>#!/usr/bin/env ruby
 require ENV["TM_SUPPORT_PATH"] + "/lib/tm/executor"
 require ENV["TM_SUPPORT_PATH"] + "/lib/tm/save_current_document"
 
@@ -41,7 +41,7 @@ TextMate::Executor.run(ENV["TM_PYTHON"] || "python", "-u", ENV["TM_FILEPATH"]) d
         "&lt;/a&gt; in &lt;strong&gt;#{CGI::escapeHTML display_name}&lt;/strong&gt; at line #{line}&lt;br/&gt;\n"
     end
   end
-end'</string>
+end</string>
 	<key>input</key>
 	<string>document</string>
 	<key>keyEquivalent</key>

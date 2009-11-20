@@ -23,7 +23,7 @@
 #   Before sending updates to this code, please make sure you have the latest
 #   version: http://macromates.com/wiki/pmwiki?n=Main.SubversionCheckout
 
-__version__ = "$Revision$"
+__version__ = "1.0"
 
 import sys
 import os
@@ -343,8 +343,7 @@ def run_checker_program(checker_bin, checker_opts, script_path):
 
 def main(script_path):
     checker_bin, checker_opts, checker_ver = find_checker_program()
-    my_revision = __version__.split()[1]
-    version_string = "PyCheckMate r%s &ndash; %s" % (my_revision, checker_ver)
+    version_string = "PyCheckMate %s &ndash; %s" % (__version__, checker_ver)
     warning_string = ""
     if not checker_bin:
         href_format = \

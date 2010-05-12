@@ -54,6 +54,7 @@
 			<string>5836C2BA-1237-4CC1-A4E5-5B41A4E233E8</string>
 			<string>5A2133DB-C0F4-4485-980A-9EBC2280B3DE</string>
 			<string>61740577-3150-424B-B775-2667DBB3AEEC</string>
+			<string>76E0A13C-73CC-4F1D-8959-FD4D9D1C65B1</string>
 			<string>------------------------------------</string>
 			<string>443BBF21-6124-4486-BFCA-D18606465885</string>
 			<string>86BCD309-37C2-4978-B332-EC91AEF70340</string>
@@ -98,6 +99,19 @@
 				</array>
 				<key>name</key>
 				<string>Idioms</string>
+			</dict>
+			<key>76E0A13C-73CC-4F1D-8959-FD4D9D1C65B1</key>
+			<dict>
+				<key>items</key>
+				<array>
+					<string>AD5B91E1-7DF0-4E4C-B794-591640FAFD08</string>
+					<string>190010F6-A759-44C1-A994-479847B23A97</string>
+					<string>6A34B01B-9250-43AF-8563-8E47FABA6E77</string>
+					<string>D07F50BE-9DC8-4F76-96FB-88DD69E3F3C1</string>
+					<string>2065BBC9-C4FC-49B8-A36C-804721F97B9C</string>
+				</array>
+				<key>name</key>
+				<string>Tests</string>
 			</dict>
 		</dict>
 	</dict>
@@ -150,6 +164,11 @@
 		<string>3AFD7429-7123-4ADD-B3CC-A9F112F8643B</string>
 		<string>70E8843A-A8C0-44FC-ACF3-3DEAE48AE784</string>
 		<string>86BCD309-37C2-4978-B332-EC91AEF70340</string>
+		<string>AD5B91E1-7DF0-4E4C-B794-591640FAFD08</string>
+		<string>190010F6-A759-44C1-A994-479847B23A97</string>
+		<string>6A34B01B-9250-43AF-8563-8E47FABA6E77</string>
+		<string>D07F50BE-9DC8-4F76-96FB-88DD69E3F3C1</string>
+		<string>2065BBC9-C4FC-49B8-A36C-804721F97B9C</string>
 	</array>
 	<key>uuid</key>
 	<string>E3BADC20-6B0E-11D9-9DC9-000D93589AF6</string>

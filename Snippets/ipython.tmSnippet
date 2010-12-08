@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>from IPython.Shell import IPShellEmbed
+ipshell = IPShellEmbed()(local_ns=locals(), global_ns=globals())</string>
+	<key>name</key>
+	<string>ipy</string>
+	<key>scope</key>
+	<string>source.python</string>
+	<key>tabTrigger</key>
+	<string>ipy</string>
+	<key>uuid</key>
+	<string>14A77A30-2E2F-4818-AD24-00EA37E18475</string>
+</dict>
+</plist>

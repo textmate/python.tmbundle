@@ -4,6 +4,8 @@
 # Copyright (c) Jay Soffian, 2005. <jay at soffian dot org>
 # Inspired by Domenico Carbotta's PyMate.
 #
+# Contributions by Travis Jeffery <travisjeffery at gmail dot com>
+#
 # License: Artistic.
 #
 # Usage:
@@ -12,9 +14,9 @@
 # - Install PyChecker or PyFlakes for more extensive checking. If both are
 #   installed, PyChecker will be used.
 # - TM_PYCHECKER may be set to control which checker is used. Set it to just
-#   "pychecker", "pyflakes", or "pylint" to locate these programs in the
-#   default python bin directory or to a full path if the checker program is
-#   installed elsewhere.
+#   "pychecker", "pyflakes", "pep8", "flake8", or "pylint" to locate these
+#   programs in the default python bin directory or to a full path if the
+#   checker program is installed elsewhere.
 # - If for some reason you want to use the built-in sytax check when either
 #   pychecker or pyflakes are installed, you may set TM_PYCHECKER to
 #   "builtin".
@@ -23,7 +25,7 @@
 #   Before sending updates to this code, please make sure you have the latest
 #   version: http://macromates.com/wiki/pmwiki?n=Main.SubversionCheckout
 
-__version__ = "1.0"
+__version__ = "1.1"
 
 import sys
 import os
@@ -40,6 +42,8 @@ from urllib import quote
 PYCHECKER_URL = "http://pychecker.sourceforge.net/"
 PYFLAKES_URL = "http://divmod.org/projects/pyflakes"
 PYLINT_URL = "http://www.logilab.org/857"
+PEP8_URL = "http://pypi.python.org/pypi/pep8"
+FLAKE8_URL = "http://pypi.python.org/pypi/flake8/"
 
 # patterns to match output of checker programs
 PYCHECKER_RE = re.compile(r"^(.*?\.pyc?):(\d+):\s+(.*)$")
@@ -103,7 +107,7 @@ class Error(Exception):
 
 class MyPopen:
     """Modifed version of standard popen2.Popen class that does what I need.
-    
+
     Runs command with stdin redirected from /dev/null and monitors its stdout
     and stderr. Each time poll() is called a tuple of (stdout, stderr) is
     returned where stdout and stderr are lists of zero or more lines of output
@@ -111,15 +115,15 @@ class MyPopen:
     it returns other than -1 then the child has terminated and poll() will
     return no additional output. At that point drain() should be called to
     return the last bit of output.
-    
+
     As a simplication, readlines() can be called until it returns (None, None)
     """
-    
+
     try:
         MAXFD = os.sysconf('SC_OPEN_MAX')
     except (AttributeError, ValueError):
         MAXFD = 256
-    
+
     def __init__(self, cmd):
         stdout_r, stdout_w = os.pipe()
         stderr_r, stderr_w = os.pipe()
@@ -142,7 +146,7 @@ class MyPopen:
             self._stderr = stderr_r
             self._stdout_buf = ""
             self._stderr_buf = ""
-    
+
     def _run_child(self, cmd):
         if isinstance(cmd, basestring):
             cmd = ['/bin/sh', '-c', cmd]
@@ -155,7 +159,7 @@ class MyPopen:
             os.execvp(cmd[0], cmd)
         finally:
             os._exit(1)
-    
+
     def status(self):
         """Returns exit status of child or -1 if still running."""
         if self._status < 0:
@@ -166,7 +170,7 @@ class MyPopen:
             except os.error:
                 pass
         return self._status
-    
+
     def poll(self, timeout=None):
         """Returns (stdout, stderr) from child."""
         bufs = {self._stdout:self._stdout_buf, self._stderr:self._stderr_buf}
@@ -182,7 +186,7 @@ class MyPopen:
         if stderr_lines and not bufs[self._stderr].endswith("\n"):
             self._stderr_buf = stderr_lines.pop()
         return (stdout_lines, stderr_lines)
-    
+
     def drain(self):
         stdout, stderr = [self._stdout_buf], [self._stderr_buf]
         while 1:
@@ -201,7 +205,7 @@ class MyPopen:
         stdout_lines = ''.join(stdout).splitlines()
         stderr_lines = ''.join(stderr).splitlines()
         return (stdout_lines, stderr_lines)
-    
+
     def readlines(self):
         if self._drained:
             return None, None
@@ -209,7 +213,7 @@ class MyPopen:
             return self.poll()
         else:
             return self.drain()
-    
+
     def close(self):
         os.close(self._stdout)
         os.close(self._stderr)
@@ -240,15 +244,15 @@ def check_syntax(script_path):
             print '<span class="stderr">%s%s</span><br>' % (pad, line)
 
 def find_checker_program():
-    checkers = ["pychecker", "pyflakes", "pylint"]
+    checkers = ["pychecker", "pyflakes", "pylint", "pep8", "flake8"]
     tm_pychecker = os.getenv("TM_PYCHECKER")
-    
+
     if tm_pychecker == "builtin":
         return ('', None, "Syntax check only")
-    
+
     if tm_pychecker is not None:
         checkers.insert(0, tm_pychecker)
-    
+
     for checker in checkers:
         basename = os.path.split(checker)[1]
         if checker == basename:
@@ -264,10 +268,10 @@ def find_checker_program():
                 p = os.popen("/usr/bin/which '%s'" % basename)
                 checker = p.readline().strip()
                 p.close()
-        
+
         if not os.path.isfile(checker):
             continue
-        
+
         if basename == "pychecker":
             p = os.popen('"%s" -V 2>/dev/null' % (checker))
             version = p.readline().strip()
@@ -275,7 +279,7 @@ def find_checker_program():
             if status is None and version:
                 version = "PyChecker %s" % version
                 return (checker, None, version)
-        
+
         elif basename == "pylint":
             p = os.popen('"%s" --version 2>/dev/null' % (checker))
             version = p.readline().strip()
@@ -286,7 +290,7 @@ def find_checker_program():
                 version = "Pylint %s" % version
                 opts = ('--output-format=parseable',)
                 return (checker, opts, version)
-        
+
         elif basename == "pyflakes":
             # pyflakes doesn't have a version string embedded anywhere,
             # so run it against itself to make sure it's functional
@@ -295,7 +299,26 @@ def find_checker_program():
             status = p.close()
             if status is None and not output:
                 return (checker, None, "PyFlakes")
-    
+
+        elif basename == "pep8":
+            p = os.popen('"%s" --version 2>/dev/null' % (checker))
+            version = p.readline().strip()
+            status = p.close()
+            if status is None and version:
+                version = "PEP 8 %s" % version
+                global PYCHECKER_RE
+                PYCHECKER_RE = re.compile(r"^(.*?\.pyc?):(\d+):(?:\d+:)?\s+(.*)$")
+                return (checker, None, version)
+
+        elif basename == "flake8":
+            p = os.popen('"%s" --version 2>/dev/null' % (checker))
+            version = p.readline().strip()
+            status = p.close()
+            if status is None and version:
+                version = "flake8 %s" % version
+                PYCHECKER_RE = re.compile(r"^(.*?\.pyc?):(\d+):(?:\d+:)?\s+(.*)$")
+                return (checker, None, version)
+
     return ('', None, "Syntax check only")
 
 def run_checker_program(checker_bin, checker_opts, script_path):
@@ -351,10 +374,12 @@ def main(script_path):
         pychecker_url = href_format % (PYCHECKER_URL, "PyChecker")
         pyflakes_url  = href_format % (PYFLAKES_URL, "PyFlakes")
         pylint_url  = href_format % (PYLINT_URL, "Pylint")
+        pep8_url = href_format % (PEP8_URL, "PEP 8")
+        flake8_url = href_format % (FLAKE8_URL, "flake8")
         warning_string = \
             "<p>Please install %s, %s or %s for more extensive code checking." \
-            "</p><br>" % (pychecker_url, pyflakes_url, pylint_url)
-    
+            "</p><br>" % (pychecker_url, pyflakes_url, pylint_url, pep8_url, flake8_url)
+
     basepath = os.getenv("TM_PROJECT_DIRECTORY")
     if basepath:
         project_dir = os.path.basename(basepath)
@@ -362,7 +387,7 @@ def main(script_path):
         title = "%s &mdash; %s" % (escape(script_name), escape(project_dir))
     else:
         title = escape(script_path)
-    
+
     print HTML_HEADER_FORMAT % (title, version_string)
     if warning_string:
         print warning_string

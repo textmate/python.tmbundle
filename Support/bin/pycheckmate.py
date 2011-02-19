@@ -3,6 +3,8 @@
 # PyCheckMate, a PyChecker output beautifier for TextMate.
 # Copyright (c) Jay Soffian, 2005. <jay at soffian dot org>
 # Inspired by Domenico Carbotta's PyMate.
+# 
+# Contributions by Travis Jeffery <travisjeffery at gmail dot com>
 #
 # License: Artistic.
 #
@@ -23,7 +25,7 @@
 #   Before sending updates to this code, please make sure you have the latest
 #   version: http://macromates.com/wiki/pmwiki?n=Main.SubversionCheckout
 
-__version__ = "1.0"
+__version__ = "1.1"
 
 import sys
 import os
@@ -40,6 +42,7 @@ from urllib import quote
 PYCHECKER_URL = "http://pychecker.sourceforge.net/"
 PYFLAKES_URL = "http://divmod.org/projects/pyflakes"
 PYLINT_URL = "http://www.logilab.org/857"
+PEP8_URL = "http://pypi.python.org/pypi/pep8"
 
 # patterns to match output of checker programs
 PYCHECKER_RE = re.compile(r"^(.*?\.pyc?):(\d+):\s+(.*)$")
@@ -240,7 +243,7 @@ def check_syntax(script_path):
             print '<span class="stderr">%s%s</span><br>' % (pad, line)
 
 def find_checker_program():
-    checkers = ["pychecker", "pyflakes", "pylint"]
+    checkers = ["pychecker", "pyflakes", "pylint", "pep8"]
     tm_pychecker = os.getenv("TM_PYCHECKER")
     
     if tm_pychecker == "builtin":
@@ -295,6 +298,16 @@ def find_checker_program():
             status = p.close()
             if status is None and not output:
                 return (checker, None, "PyFlakes")
+        
+        elif basename == "pep8":
+            p = os.popen('"%s" --version 2>/dev/null' % (checker))
+            version = p.readline().strip()
+            status = p.close()
+            if status is None and version:
+                version = "PEP 8 %s" % version
+                global PYCHECKER_RE
+                PYCHECKER_RE = re.compile(r"^(.*?\.pyc?):(\d+):\d+(.*)$")
+                return (checker, None, version) 
     
     return ('', None, "Syntax check only")
 
@@ -351,9 +364,10 @@ def main(script_path):
         pychecker_url = href_format % (PYCHECKER_URL, "PyChecker")
         pyflakes_url  = href_format % (PYFLAKES_URL, "PyFlakes")
         pylint_url  = href_format % (PYLINT_URL, "Pylint")
+        pep8_url = href_format % (PEP8_URL, "PEP 8")
         warning_string = \
             "<p>Please install %s, %s or %s for more extensive code checking." \
-            "</p><br>" % (pychecker_url, pyflakes_url, pylint_url)
+            "</p><br>" % (pychecker_url, pyflakes_url, pylint_url, pep8_url)
     
     basepath = os.getenv("TM_PROJECT_DIRECTORY")
     if basepath:

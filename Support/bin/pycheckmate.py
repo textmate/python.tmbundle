@@ -307,7 +307,7 @@ def find_checker_program():
             if status is None and version:
                 version = "PEP 8 %s" % version
                 global PYCHECKER_RE
-                PYCHECKER_RE = re.compile(r"^(.*?\.pyc?):(\d+):\d+(.*)$")
+                PYCHECKER_RE = re.compile(r"^(.*?\.pyc?):(\d+):(?:\d+:)?\s+(.*)$")
                 return (checker, None, version) 
         
         elif basename == "flake8":
@@ -316,7 +316,7 @@ def find_checker_program():
             status = p.close()
             if status is None and version:
                 version = "flake8 %s" % version
-                PYCHECKER_RE = re.compile(r"^(.*?\.pyc?):(\d+):\d+(.*)$")
+                PYCHECKER_RE = re.compile(r"^(.*?\.pyc?):(\d+):(?:\d+:)?\s+(.*)$")
                 return (checker, None, version)
     
     return ('', None, "Syntax check only")

@@ -1171,7 +1171,7 @@
 		<key>constant_placeholder</key>
 		<dict>
 			<key>match</key>
-			<string>(?i:(%(\([a-z_]+\))?#?0?\-?[ ]?\+?([0-9]*|\*)(\.([0-9]*|\*))?[hL]?[a-z%])|(\{([\w]+)?\}))</string>
+			<string>(?i:(%(\([a-z_]+\))?#?0?\-?[ ]?\+?([0-9]*|\*)(\.([0-9]*|\*))?[hL]?[a-z%])|(\{([!\[\].:\w ]+)?\}))</string>
 			<key>name</key>
 			<string>constant.other.placeholder.python</string>
 		</dict>

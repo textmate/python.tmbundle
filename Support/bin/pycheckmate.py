@@ -377,7 +377,7 @@ def main(script_path):
         pep8_url = href_format % (PEP8_URL, "PEP 8")
         flake8_url = href_format % (FLAKE8_URL, "flake8")
         warning_string = \
-            "<p>Please install %s, %s or %s for more extensive code checking." \
+            "<p>Please install %s, %s, %s, %s or %s for more extensive code checking." \
             "</p><br>" % (pychecker_url, pyflakes_url, pylint_url, pep8_url, flake8_url)
 
     basepath = os.getenv("TM_PROJECT_DIRECTORY")

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env python
+import sys
+import os
+import ast
+
+
+
+LINE = int(os.getenv('TM_LINE_NUMBER'))
+COL = int(os.getenv('TM_LINE_INDEX'))
+
+source_lines = sys.stdin.readlines()
+
+line = source_lines[LINE-1]
+source_lines[LINE-1] = line[:COL] + 'super' + line[COL:]
+source = ''.join(source_lines)
+
+class SuperVisitor(ast.NodeVisitor):
+	
+	current_func = None
+	current_args = None
+	snippet = None
+	
+	def __init__(self, current_class=None):
+		self.current_class = current_class
+	
+	def generic_visit(self, node):
+		if getattr(node, 'lineno', -1) &gt;= LINE and getattr(node, 'col_offset', -1) &gt;= COL:
+			# We just passed the node we're looking for, last snippet must be it
+			print SuperVisitor.snippet
+			sys.exit()
+		self_str = "self"
+		arg_strs = []
+		if self.current_args:
+			tab_marker = 4
+			if self.current_args.args:
+				self_str = getattr(self.current_args.args[0],'id', 'self')
+				for arg in self.current_args.args[1:]:
+					arg_strs.append("${%d:%s}" % (tab_marker, arg.id))
+					tab_marker += 1
+			if self.current_args.vararg:
+				arg_strs.append("${%d:*%s}" % (tab_marker, self.current_args.vararg))
+				tab_marker += 1
+			if self.current_args.kwarg:
+				arg_strs.append("${%d:**%s}" % (tab_marker, self.current_args.kwarg))
+				tab_marker += 1
+				
+				
+		SuperVisitor.snippet = "super(${1:%s}, ${2:%s}).${3:%s}(%s)"%(
+			getattr(self.current_class, 'name', 'BaseClass'), 
+			self_str, 
+			getattr(self.current_func, 'name', 'function_name'),
+			', '.join(arg_strs)
+		)
+		return super(SuperVisitor, self).generic_visit(node)
+	
+	# 'arguments' always means function argspecs (never call args)
+	def visit_arguments(self, node):
+		if not self.current_args and self.current_class and self.current_func:
+			self.current_args = node
+		return self.generic_visit(node)
+	
+	def visit_FunctionDef(self, node):
+		if not self.current_func:
+			self.current_func = node
+			returning = self.generic_visit(node)
+			self.current_func = None
+			self.current_args = None
+		return self.generic_visit(node)
+	
+	def visit_ClassDef(self, node):
+		return SuperVisitor(node).generic_visit(node)
+	
+
+SuperVisitor().visit(ast.parse(source))</string>
+	<key>input</key>
+	<string>document</string>
+	<key>name</key>
+	<string>super</string>
+	<key>output</key>
+	<string>insertAsSnippet</string>
+	<key>scope</key>
+	<string>source.python</string>
+	<key>tabTrigger</key>
+	<string>super</string>
+	<key>uuid</key>
+	<string>96FC8316-D3A1-4378-8C89-C431EE8AF013</string>
+</dict>
+</plist>

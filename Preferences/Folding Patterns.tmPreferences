@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>Folding Patterns</string>
+	<key>scope</key>
+	<string>source.python</string>
+	<key>settings</key>
+	<dict>
+		<key>foldingIndentedBlockStart</key>
+		<string>^\s*(class|def|for|while|if|elif|else|try|except)\b.*:$</string>
+	</dict>
+	<key>uuid</key>
+	<string>4A5DB35F-D647-4357-9D9B-57313710B95B</string>
+</dict>
+</plist>

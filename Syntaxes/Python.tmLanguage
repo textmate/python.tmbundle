@@ -23,10 +23,6 @@
 	</array>
 	<key>firstLineMatch</key>
 	<string>^#!/.*\bpython\b</string>
-	<key>foldingStartMarker</key>
-	<string>^\s*"""(?=.)(?!.*""")</string>
-	<key>foldingStopMarker</key>
-	<string>^\s*"""\s*$</string>
 	<key>keyEquivalent</key>
 	<string>^~P</string>
 	<key>name</key>

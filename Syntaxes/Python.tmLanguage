@@ -1145,16 +1145,18 @@
 		<dict>
 			<key>match</key>
 			<string>(?x)\b(
-                (
-                    Arithmetic|Assertion|Attribute|Buffer|EOF|Environment|FloatingPoint|IO|
-                    Import|Indentation|Index|Key|Lookup|Memory|Name|NotImplemented|OS|Overflow|
-                    Reference|Runtime|Standard|Syntax|System|Tab|Type|UnboundLocal|
-                    Unicode(Encode|Decode|Translate)?|
-                    Value|VMS|Windows|ZeroDivision
-                )Error|
-                ((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes)?Warning|
-                (Base)?Exception|
-                SystemExit|StopIteration|NotImplemented|KeyboardInterrupt|GeneratorExit
+				(
+					Arithmetic|Assertion|Attribute|BlockingIO|BrokenPipe|Buffer|ChildProcess|
+					Connection(Aborted|Refused|Reset)?|EOF|Environment|FileExists|
+					FileNotFound|FloatingPoint|Interrupted|IO|IsADirectoryError|
+					Import|Indentation|Index|Key|Lookup|Memory|Name|NotADirectory|
+					NotImplemented|OS|Overflow|Permission|ProcessLookup|Reference|
+					Runtime|Standard|Syntax|System|Tab|Timeout|Type|UnboundLocal|
+					Unicode(Encode|Decode|Translate)?|Value|VMS|Windows|ZeroDivision
+				)Error|
+				((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes)?Warning|
+				(Base)?Exception|
+				SystemExit|StopIteration|NotImplemented|KeyboardInterrupt|GeneratorExit
 			)\b</string>
 			<key>name</key>
 			<string>support.type.exception.python</string>
@@ -1163,11 +1165,12 @@
 		<dict>
 			<key>match</key>
 			<string>(?x)\b(
-                __import__|all|abs|any|apply|callable|chr|cmp|coerce|compile|delattr|dir|
-                divmod|eval|execfile|filter|getattr|globals|hasattr|hash|hex|id|
-                input|intern|isinstance|issubclass|iter|len|locals|map|max|min|oct|
-                ord|pow|range|raw_input|reduce|reload|repr|round|setattr|sorted|
-                sum|unichr|vars|zip
+				__import__|all|abs|any|apply|ascii|bin|callable|chr|classmethod|cmp|coerce|
+				compile|delattr|dir|divmod|enumerate|eval|execfile|filter|format|getattr|
+				globals|hasattr|hash|help|hex|id|input|intern|isinstance|issubclass|iter|
+				len|locals|map|max|min|next|oct|open|ord|pow|print|property|range|
+				raw_input|reduce|reload|repr|reversed|round|setattr|sorted|staticmethod|
+				sum|super|type|unichr|vars|zip
 			)\b</string>
 			<key>name</key>
 			<string>support.function.builtin.python</string>
@@ -1176,9 +1179,8 @@
 		<dict>
 			<key>match</key>
 			<string>(?x)\b(
-				basestring|bool|buffer|classmethod|complex|dict|enumerate|file|
-				float|frozenset|int|list|long|object|open|property|reversed|set|
-				slice|staticmethod|str|super|tuple|type|unicode|xrange
+				basestring|bool|buffer|bytearray|bytes|complex|dict|float|frozenset|int|
+				list|long|memoryview|object|range|set|slice|str|tuple|unicode|xrange
 			)\b</string>
 			<key>name</key>
 			<string>support.type.python</string>

@@ -73,7 +73,7 @@ def tm_excepthook(e_type, e, tb):
             message = repr(e.args[0])
             if len(e.args) > 1:
                 for arg in e.args[1:]:
-                    message += ", %s" % repr(arg)
+                    message += ", %r" % (arg,)
         if isinstance(message, unicode):
             io.write("<p id='exception'><strong>%s:</strong> %s</p>\n" %
                                     (e_type.__name__, escape(message).encode("utf-8")))

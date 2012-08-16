@@ -247,6 +247,8 @@ def find_checker_program():
     checkers = ["pychecker", "pyflakes", "pylint", "pep8", "flake8"]
     tm_pychecker = os.getenv("TM_PYCHECKER")
 
+    opts = filter(None, os.getenv('TM_PYCHECKER_OPTIONS', '').split())
+
     if tm_pychecker == "builtin":
         return ('', None, "Syntax check only")
 
@@ -278,7 +280,7 @@ def find_checker_program():
             status = p.close()
             if status is None and version:
                 version = "PyChecker %s" % version
-                return (checker, None, version)
+                return (checker, opts, version)
 
         elif basename == "pylint":
             p = os.popen('"%s" --version 2>/dev/null' % (checker))
@@ -288,7 +290,7 @@ def find_checker_program():
                 version = re.sub('^pylint\s*', '', version)
                 version = re.sub(',$', '', version)
                 version = "Pylint %s" % version
-                opts = ('--output-format=parseable',)
+                opts += ('--output-format=parseable',)
                 return (checker, opts, version)
 
         elif basename == "pyflakes":
@@ -298,7 +300,7 @@ def find_checker_program():
             output = p.readlines()
             status = p.close()
             if status is None and not output:
-                return (checker, None, "PyFlakes")
+                return (checker, opts, "PyFlakes")
 
         elif basename == "pep8":
             p = os.popen('"%s" --version 2>/dev/null' % (checker))
@@ -308,7 +310,7 @@ def find_checker_program():
                 version = "PEP 8 %s" % version
                 global PYCHECKER_RE
                 PYCHECKER_RE = re.compile(r"^(.*?\.pyc?):(\d+):(?:\d+:)?\s+(.*)$")
-                return (checker, None, version)
+                return (checker, opts, version)
 
         elif basename == "flake8":
             p = os.popen('"%s" --version 2>/dev/null' % (checker))
@@ -317,7 +319,7 @@ def find_checker_program():
             if status is None and version:
                 version = "flake8 %s" % version
                 PYCHECKER_RE = re.compile(r"^(.*?\.pyc?):(\d+):(?:\d+:)?\s+(.*)$")
-                return (checker, None, version)
+                return (checker, opts, version)
 
     return ('', None, "Syntax check only")
 

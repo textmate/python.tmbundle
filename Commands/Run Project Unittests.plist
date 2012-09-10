@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>beforeRunningCommand</key>
@@ -9,7 +9,10 @@
 	<key>capturePattern</key>
 	<string>^\s*File "(.+)", line (\d+)</string>
 	<key>command</key>
-	<string># Find all files that end with "Test.py" and run 
+	<string>#!/usr/bin/env bash
+[[ -f "${TM_SUPPORT_PATH}/lib/bash_init.sh" ]] &amp;&amp; . "${TM_SUPPORT_PATH}/lib/bash_init.sh"
+
+# Find all files that end with "Test.py" and run 
 # them.
 
 find . -name "*Test.py" -exec "${TM_PYTHON:-python}" '{}' \;|pre</string>
@@ -17,17 +20,27 @@ find . -name "*Test.py" -exec "${TM_PYTHON:-python}" '{}' \;|pre</string>
 	<string>1</string>
 	<key>input</key>
 	<string>none</string>
+	<key>inputFormat</key>
+	<string>text</string>
 	<key>keyEquivalent</key>
 	<string>~@R</string>
 	<key>lineCaptureRegister</key>
 	<string>2</string>
 	<key>name</key>
 	<string>Run Project Unit Tests</string>
-	<key>output</key>
-	<string>showAsHTML</string>
+	<key>outputCaret</key>
+	<string>afterOutput</string>
+	<key>outputFormat</key>
+	<string>html</string>
+	<key>outputLocation</key>
+	<string>newWindow</string>
 	<key>scope</key>
 	<string>source.python</string>
+	<key>semanticClass</key>
+	<string>process.test.python</string>
 	<key>uuid</key>
 	<string>1FAC4AE2-B00C-11D9-91F2-000D93347A42</string>
+	<key>version</key>
+	<integer>2</integer>
 </dict>
 </plist>

@@ -44,15 +44,25 @@ TextMate::Executor.run(ENV["TM_PYTHON"] || "python", "-u", ENV["TM_FILEPATH"]) d
 end</string>
 	<key>input</key>
 	<string>document</string>
+	<key>inputFormat</key>
+	<string>text</string>
 	<key>keyEquivalent</key>
 	<string>@r</string>
 	<key>name</key>
 	<string>Run Script</string>
-	<key>output</key>
-	<string>showAsHTML</string>
+	<key>outputCaret</key>
+	<string>afterOutput</string>
+	<key>outputFormat</key>
+	<string>html</string>
+	<key>outputLocation</key>
+	<string>newWindow</string>
 	<key>scope</key>
 	<string>source.python</string>
+	<key>semanticClass</key>
+	<string>process.run.script.python</string>
 	<key>uuid</key>
 	<string>D1C3D420-2DC5-4C61-9586-00E76A6C054B</string>
+	<key>version</key>
+	<integer>2</integer>
 </dict>
 </plist>

@@ -82,7 +82,7 @@ def tm_excepthook(e_type, e, tb):
                                     (e_type.__name__, escape(message)))
     if tb: # now we write out the stack trace if we have a traceback
         io.write("<blockquote><table border='0' cellspacing='0' cellpadding='0'>\n")
-        for trace in extract_tb(tb)[1:]: # skip the first one, to avoid showing pymate's execfile call.
+        for trace in extract_tb(tb):
             filename, line_number, function_name, text = trace
             url, display_name = '', 'untitled'
             if filename and path.exists(filename):

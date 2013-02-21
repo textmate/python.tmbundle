@@ -6,26 +6,24 @@
 	<string>nop</string>
 	<key>command</key>
 	<string>#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 import os
 from sys import stdout, stdin, exit
-from traceback import format_stack
 
 py = stdin.read()
-
-if 'TM_SELECTED_SCOPE' in os.environ:
-    stdout.write(" ")
-else:
-    stdout.write("\n")
 
 try:
     scope = {}
     result = eval(py, globals(), scope)
 except:
-    exc = format_stack()
-    stdout.write(exc)
+    stdout.write("error evaluating: ‘%s’" % py)
     exit(206) # exiting with this code show's output in a tooltip 
 else:
+    if 'TM_SELECTED_TEXT' in os.environ:
+        stdout.write(" #=&gt; ")
+    else:
+        stdout.write("\n")
     stdout.write(repr(result))
 
 </string>

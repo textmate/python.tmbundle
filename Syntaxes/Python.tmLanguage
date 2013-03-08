@@ -21,6 +21,7 @@
 		<string>sconstruct</string>
 		<string>SConscript</string>
 		<string>gyp</string>
+		<string>gypi</string>
 	</array>
 	<key>firstLineMatch</key>
 	<string>^#!/.*\bpython\b</string>

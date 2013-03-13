@@ -352,7 +352,7 @@
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>(\()|\s*($\n?|#.*$\n?)</string>
+			<string>(\()|(\s*$\n?|#.*$\n?)</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>

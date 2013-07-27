@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>command</key>
-	<string>#!/usr/bin/env ruby -wKU
+	<string>#!/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby -wKU
 
 f = open(ENV["TM_NEW_FILE"], 'w')
 template = open("template.py").read

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>#!/usr/bin/env python
+</string>
+	<key>name</key>
+	<string>#!/usr/bin/env python</string>
+	<key>scope</key>
+	<string>L:dyn.caret.begin.document</string>
+	<key>tabTrigger</key>
+	<string>py</string>
+	<key>uuid</key>
+	<string>C397A615-11CE-4332-BB89-186F826417B4</string>
+</dict>
+</plist>

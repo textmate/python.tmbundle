@@ -13,7 +13,8 @@ Also, sys.stdout and sys.stder are wrapped in a utf-8 codec writer.
 import sys, os
 
 # remove TM_BUNDLE_SUPPORT from the path.
-sys.path.remove(os.environ['TM_BUNDLE_SUPPORT'])
+if os.environ['TM_BUNDLE_SUPPORT'] in sys.path:
+  sys.path.remove(os.environ['TM_BUNDLE_SUPPORT'])
 
 # now import local sitecustomize
 try:

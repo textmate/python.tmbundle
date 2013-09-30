@@ -14,9 +14,7 @@ require ENV["TM_SUPPORT_PATH"] + "/lib/tm/save_current_document"
 TextMate.save_if_untitled('py')
 TextMate::Executor.make_project_master_current_document
 
-unless ENV["TM_PYTHON"].to_s =~ /3/ # Python 3
-  ENV["PYTHONPATH"] = ENV["TM_BUNDLE_SUPPORT"] + (ENV.has_key?("PYTHONPATH") ? ":" + ENV["PYTHONPATH"] : "")
-end
+ENV["PYTHONPATH"] = ENV["TM_BUNDLE_SUPPORT"] + (ENV.has_key?("PYTHONPATH") ? ":" + ENV["PYTHONPATH"] : "")
 
 is_test_script = ENV["TM_FILEPATH"] =~ /(?:\b|_)(?:test)(?:\b|_)/ or
                  File.read(ENV["TM_FILEPATH"]) =~ /\bimport\b.+(?:unittest)/

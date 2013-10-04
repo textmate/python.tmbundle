@@ -50,7 +50,7 @@ PYCHECKER_RE = re.compile(r"^(.*?\.pyc?):(\d+):\s+(.*)$")
 
 # careful editing these, they are format strings
 TXMT_URL1_FORMAT = r"txmt://open?url=file://%s&line=%s"
-TXMT_URL2_FORMAT = r"txmt://open?url=file://%s&line=%s&col=%s"
+TXMT_URL2_FORMAT = r"txmt://open?url=file://%s&line=%s&column=%s"
 HTML_HEADER_FORMAT = r"""<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />

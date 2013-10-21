@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>commands</key>
@@ -26,7 +26,7 @@
 	<key>name</key>
 	<string>Inside Empty Block String: Reduce To Single Quoted String</string>
 	<key>scope</key>
-	<string>source.python string.quoted.single.block meta.empty-string, source.python string.quoted.double.block meta.empty-string</string>
+	<string>source.python string.quoted.single.block punctuation.definition.string.end &amp; L:punctuation.definition.string.begin, source.python string.quoted.double.block punctuation.definition.string.end &amp; L:punctuation.definition.string.begin</string>
 	<key>uuid</key>
 	<string>8C6C3826-E2AD-410D-9B18-1567F86F7569</string>
 </dict>

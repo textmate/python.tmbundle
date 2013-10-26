@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>commands</key>
+	<array>
+		<dict>
+			<key>argument</key>
+			<string>:</string>
+			<key>command</key>
+			<string>insertText:</string>
+		</dict>
+		<dict>
+			<key>command</key>
+			<string>indent:</string>
+		</dict>
+	</array>
+	<key>hideFromUser</key>
+	<true/>
+	<key>keyEquivalent</key>
+	<string>:</string>
+	<key>name</key>
+	<string>Insert : and Indent</string>
+	<key>scope</key>
+	<string>source.python</string>
+	<key>uuid</key>
+	<string>60CEF3EA-997B-44F7-A369-081BAA7C28F5</string>
+</dict>
+</plist>

@@ -357,23 +357,13 @@
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>(\))\s*(?:(\:)|(.*$\n?))</string>
+			<string>(\:)</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.definition.parameters.end.python</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
 					<string>punctuation.section.function.begin.python</string>
-				</dict>
-				<key>3</key>
-				<dict>
-					<key>name</key>
-					<string>invalid.illegal.missing-section-begin.python</string>
 				</dict>
 			</dict>
 			<key>name</key>
@@ -409,9 +399,13 @@
 					<key>contentName</key>
 					<string>meta.function.parameters.python</string>
 					<key>end</key>
-					<string>(?=\)\s*\:)</string>
+					<string>(?=\)\s*(?:\:|-\&gt;))</string>
 					<key>patterns</key>
 					<array>
+						<dict>
+							<key>include</key>
+							<string>#annotated_arguments</string>
+						</dict>
 						<dict>
 							<key>include</key>
 							<string>#keyword_arguments</string>
@@ -436,6 +430,32 @@
 							</dict>
 							<key>match</key>
 							<string>\b([a-zA-Z_][a-zA-Z_0-9]*)\s*(?:(,)|(?=[\n\)]))</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(\))\s*(\-&gt;)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.parameters.end.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.separator.annotation.result.python</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>(?=\:)</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>$self</string>
 						</dict>
 					</array>
 				</dict>
@@ -1105,6 +1125,137 @@
 	</array>
 	<key>repository</key>
 	<dict>
+		<key>annotated_arguments</key>
+		<dict>
+			<key>begin</key>
+			<string>\b([a-zA-Z_][a-zA-Z_0-9]*)\s*(:)|(?=\()</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter.function.python</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.separator.annotation.python</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>\s*(?:(,)|(?=$\n?|[\)\:]))</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.separator.parameters.python</string>
+				</dict>
+			</dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#annotated_group</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>=</string>
+					<key>name</key>
+					<string>keyword.operator.assignment.python</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>$self</string>
+				</dict>
+			</array>
+		</dict>
+		<key>annotated_group</key>
+		<dict>
+			<key>begin</key>
+			<string>(\()</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.parameters-group.begin.python</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>(\))</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.parameters-group.end.python</string>
+				</dict>
+			</dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>\b([a-zA-Z_][a-zA-Z_0-9]*)\s*(:)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>variable.parameter.function.python</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.separator.annotation.python</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>\s*(?:(,)|(?=$\n?|\)))</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.separator.parameters.python</string>
+						</dict>
+					</dict>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>$self</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>\b([a-zA-Z_][a-zA-Z_0-9]*)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>variable.parameter.function.python</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>\s*(?:(,)|(?=$\n?|\)))</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.separator.parameters.python</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#comments</string>
+				</dict>
+			</array>
+		</dict>
 		<key>builtin_exceptions</key>
 		<dict>
 			<key>match</key>

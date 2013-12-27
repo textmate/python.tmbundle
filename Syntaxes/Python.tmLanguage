@@ -729,6 +729,10 @@
 		</dict>
 		<dict>
 			<key>include</key>
+			<string>#builtin_exceptions</string>
+		</dict>
+		<dict>
+			<key>include</key>
 			<string>#magic_function_names</string>
 		</dict>
 		<dict>

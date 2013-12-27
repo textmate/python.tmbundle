@@ -733,6 +733,10 @@
 		</dict>
 		<dict>
 			<key>include</key>
+			<string>#magic_variable_names</string>
+		</dict>
+		<dict>
+			<key>include</key>
 			<string>#language_variables</string>
 		</dict>
 		<dict>
@@ -1736,12 +1740,18 @@
 		</dict>
 		<key>magic_variable_names</key>
 		<dict>
+			<key>captures</key>
+			<dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>support.variable.magic.python</string>
+				</dict>
+			</dict>
 			<key>comment</key>
 			<string>magic variables which a class/module may have.</string>
 			<key>match</key>
-			<string>\b__(all|bases|class|debug|dict|doc|file|members|metaclass|methods|name|slots|weakref)__\b</string>
-			<key>name</key>
-			<string>support.variable.magic.python</string>
+			<string>(?x)(\.)?\b(__(?:all|bases|class|debug|dict|doc|file|members|metaclass|methods|name|slots|weakref)__)\b</string>
 		</dict>
 		<key>regular_expressions</key>
 		<dict>

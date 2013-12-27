@@ -1666,7 +1666,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>variable.parameter.function.python</string>
+					<string>variable.parameter.function.keyword.python</string>
 				</dict>
 				<key>2</key>
 				<dict>

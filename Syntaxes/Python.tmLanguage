@@ -420,16 +420,21 @@
 								<key>1</key>
 								<dict>
 									<key>name</key>
-									<string>variable.parameter.function.python</string>
+									<string>variable.parameter.function.language.python</string>
 								</dict>
 								<key>2</key>
+								<dict>
+									<key>name</key>
+									<string>variable.parameter.function.python</string>
+								</dict>
+								<key>3</key>
 								<dict>
 									<key>name</key>
 									<string>punctuation.separator.parameters.python</string>
 								</dict>
 							</dict>
 							<key>match</key>
-							<string>\b([a-zA-Z_][a-zA-Z_0-9]*)\s*(?:(,)|(?=[\n\)]))</string>
+							<string>\b(?:(self|cls)|([a-zA-Z_][a-zA-Z_0-9]*))\s*(?:(,)|(?=[\n\)]))</string>
 						</dict>
 					</array>
 				</dict>

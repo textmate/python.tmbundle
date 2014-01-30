@@ -4,17 +4,17 @@
 <dict>
 	<key>content</key>
 	<string>@property
-            def ${1:name}(self):
-                "${2:The $1 property.}"
-                ${3:return self._$1}
+def ${1:name}(self):
+    "${2:The $1 property.}"
+    ${3:return self._$1}
 
-            ${4:@$1.setter
-            def $1(self, value):
-                self._$1 = value}
+${4:@$1.setter
+def $1(self, value):
+    self._$1 = value}
 
-            ${5:@$1.deleter
-            def $1(self):
-                del self._$1}$0</string>
+${5:@$1.deleter
+def $1(self):
+    del self._$1}$0</string>
 	<key>name</key>
 	<string>New Property</string>
 	<key>scope</key>

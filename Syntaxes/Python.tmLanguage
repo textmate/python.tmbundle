@@ -101,9 +101,9 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(global)\b</string>
+			<string>\b(global|nonlocal)\b</string>
 			<key>name</key>
-			<string>storage.modifier.global.python</string>
+			<string>storage.modifier.$1.python</string>
 		</dict>
 		<dict>
 			<key>match</key>

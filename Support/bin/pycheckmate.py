@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# encoding: utf-8
 #
 # PyCheckMate, a PyChecker output beautifier for TextMate.
 # Copyright (c) Jay Soffian, 2005. <jay at soffian dot org>
@@ -24,16 +25,22 @@
 # Notice to contributors:
 #   Before sending updates to this code, please make sure you have the latest
 #   version: http://macromates.com/wiki/pmwiki?n=Main.SubversionCheckout
+from __future__ import absolute_import, print_function
 
-__version__ = "1.1"
-
-import sys
 import os
 import re
+import sys
 import traceback
 from cgi import escape
 from select import select
-from urllib import quote
+
+__version__ = "1.2"
+
+
+if sys.version_info < (3, 0):
+    from urllib import quote
+else:
+    from urllib.parse import quote
 
 ###
 ### Constants
@@ -105,7 +112,7 @@ HTML_FOOTER = """</div>
 class Error(Exception):
     pass
 
-class MyPopen:
+class MyPopen(object):
     """Modifed version of standard popen2.Popen class that does what I need.
 
     Runs command with stdin redirected from /dev/null and monitors its stdout
@@ -227,21 +234,20 @@ def check_syntax(script_path):
     source = ''.join(f.readlines()+["\n"])
     f.close()
     try:
-        print "Syntax Errors...<br><br>"
+        print("Syntax Errors...<br><br>")
         compile(source, script_path, "exec")
-        print "None<br>"
-    except SyntaxError, e:
+        print("None<br>")
+    except SyntaxError as e:
         href = TXMT_URL2_FORMAT % (quote(script_path), e.lineno, e.offset)
-        print '<a href="%s">%s:%s</a> %s' % (
-            href,
-            escape(os.path.basename(script_path)), e.lineno,
-            e.msg)
+        print('<a href="%s">%s:%s</a> %s' % (href,
+                                             escape(os.path.basename(script_path)),
+                                             e.lineno, e.msg))
     except:
         for line in apply(traceback.format_exception, sys.exc_info()):
             stripped = line.lstrip()
             pad = "&nbsp;" * (len(line) - len(stripped))
             line = escape(stripped.rstrip())
-            print '<span class="stderr">%s%s</span><br>' % (pad, line)
+            print('<span class="stderr">%s%s</span><br>' % (pad, line))
 
 def find_checker_program():
     checkers = ["pychecker", "pyflakes", "pylint", "pep8", "flake8", "frosted"]
@@ -354,7 +360,7 @@ def run_checker_program(checker_bin, checker_opts, script_path):
                        escape(msg))
             else:
                 line = escape(line)
-            print "%s<br>" % line
+            print("%s<br>" % line)
         for line in stderr:
             # strip whitespace off front and replace with &nbsp; so that
             # we can allow the browser to wrap long lines but we don't lose
@@ -362,8 +368,8 @@ def run_checker_program(checker_bin, checker_opts, script_path):
             stripped = line.lstrip()
             pad = "&nbsp;" * (len(line) - len(stripped))
             line = escape(stripped.rstrip())
-            print '<span class="stderr">%s%s</span><br>' % (pad, line)
-    print "<br>Exit status: %s" % p.status()
+            print('<span class="stderr">%s%s</span><br>' % (pad, line))
+    print("<br>Exit status: %s" % p.status())
     p.close()
 
 def main(script_path):
@@ -390,19 +396,19 @@ def main(script_path):
     else:
         title = escape(script_path)
 
-    print HTML_HEADER_FORMAT % (title, version_string)
+    print(HTML_HEADER_FORMAT % (title, version_string))
     if warning_string:
-        print warning_string
+        print(warning_string)
     if checker_bin:
         run_checker_program(checker_bin, checker_opts, script_path)
     else:
         check_syntax(script_path)
-    print HTML_FOOTER
+    print(HTML_FOOTER)
     return 0
 
 if __name__ == "__main__":
     if len(sys.argv) == 2:
         sys.exit(main(sys.argv[1]))
     else:
-        print "pycheckmate.py <file.py>"
+        print("Usage: %s <file.py>" % sys.argv[0], file=sys.stderr)
         sys.exit(1)

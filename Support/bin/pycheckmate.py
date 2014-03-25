@@ -5,8 +5,6 @@
 # Copyright (c) Jay Soffian, 2005. <jay at soffian dot org>
 # Inspired by Domenico Carbotta's PyMate.
 #
-# Contributions by Travis Jeffery <travisjeffery at gmail dot com>
-#
 # License: Artistic.
 #
 # Usage:
@@ -15,16 +13,13 @@
 # - Install PyChecker or PyFlakes for more extensive checking. If both are
 #   installed, PyChecker will be used.
 # - TM_PYCHECKER may be set to control which checker is used. Set it to just
-#   "pychecker", "pyflakes", "pep8", "flake8", or "pylint" to locate these
-#   programs in the default python bin directory or to a full path if the
-#   checker program is installed elsewhere.
+#   "pychecker", "pyflakes", "pep8", "flake8", or "pylint", or "frosted" to
+#   locate these programs in the default python bin directory or to a full
+#   path if the checker program is installed elsewhere.
 # - If for some reason you want to use the built-in sytax check when either
 #   pychecker or pyflakes are installed, you may set TM_PYCHECKER to
 #   "builtin".
-#
-# Notice to contributors:
-#   Before sending updates to this code, please make sure you have the latest
-#   version: http://macromates.com/wiki/pmwiki?n=Main.SubversionCheckout
+
 from __future__ import absolute_import, print_function
 
 import os

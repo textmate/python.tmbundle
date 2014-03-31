@@ -19,7 +19,7 @@ ENV["PYTHONPATH"] = ENV["TM_BUNDLE_SUPPORT"] + (ENV.has_key?("PYTHONPATH") ? ":"
 is_test_script = ENV["TM_FILEPATH"] =~ /(?:\b|_)(?:test)(?:\b|_)/ or
                  File.read(ENV["TM_FILEPATH"]) =~ /\bimport\b.+(?:unittest)/
 
-TextMate::Executor.run(ENV["TM_PYTHON"] || "python", "-u", ENV["TM_FILEPATH"], :use_hashbang =&gt; !ENV.has_key?('TM_PYTHON')) do |str, type|
+TextMate::Executor.run(ENV["TM_PYTHON"] || "python", "-u", ENV["TM_FILEPATH"], :create_error_pipe =&gt; true, :use_hashbang =&gt; !ENV.has_key?('TM_PYTHON')) do |str, type|
   if is_test_script and type == :err
     if str =~ /\A[\.F]*\Z/
       str.gsub!(/(\.|F)/, "&lt;span class=\"test ok\"&gt;\\1&lt;/span&gt;")

@@ -12,7 +12,7 @@ Also, sys.stdout and sys.stder are wrapped in a utf-8 codec writer.
 
 import sys, os
 
-# In 3.3, remove if the sys.path.remove
+# In 3.3, remove if TM_BUNDLE_SUPPORT is already in sys.path
 # In 3.4, do *not* remove TM_BUNDLE_SUPPORT, causes importlib errors
 # All other pythons (2.5, 2.6, 2.7, 3.1, 3.2) may remove it, or not
 

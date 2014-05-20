@@ -56,9 +56,7 @@ def tm_excepthook(e_type, e, tb):
     # get the file descriptor.
     error_fd = int(str(environ['TM_ERROR_FD']))
     if sys.version_info[0] >= 3:
-        io = fdopen(error_fd, 'wb', 0)
-        
-        # io = open(error_fd, 'w', closefd=False)
+        io = open(error_fd, 'w', closefd=False)
     else:
         io = fdopen(error_fd, 'wb', 0)
     io.write("<div id='exception_report' class='framed'>\n")

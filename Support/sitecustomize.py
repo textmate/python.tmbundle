@@ -12,24 +12,24 @@ Also, sys.stdout and sys.stder are wrapped in a utf-8 codec writer.
 
 import sys, os
 
-# In 3.3, remove if TM_BUNDLE_SUPPORT is already in sys.path
-# In 3.4, do *not* remove TM_BUNDLE_SUPPORT, causes importlib errors
-# All other pythons (2.5, 2.6, 2.7, 3.1, 3.2) may remove it, or not
-
-if sys.version_info[:2] < (3,3):
-  sys.path.remove(os.environ['TM_BUNDLE_SUPPORT'])
-elif sys.version_info[:2] == (3, 3):
+# In 3.3, only remove if TM_BUNDLE_SUPPORT is already in sys.path
+if sys.version_info[:2] == (3, 3):
   if os.environ['TM_BUNDLE_SUPPORT'] in sys.path:
     sys.path.remove(os.environ['TM_BUNDLE_SUPPORT'])
-# elif sys.version_info[:2] >= (3, 4):
-#   **do nothing**
+else:
+  sys.path.remove(os.environ['TM_BUNDLE_SUPPORT'])
 
 # now import local sitecustomize
 try:
   import sitecustomize
   if sys.version_info[0] >= 3:
     from imp import reload
-  reload(sitecustomize)
+  try:
+    reload(sitecustomize)
+  except AttributeError:
+    # in py3.4, an AttributeError is raised if there is no other sitecustomize
+    # http://bugs.python.org/issue21617
+    pass
 except ImportError: pass
 
 import codecs

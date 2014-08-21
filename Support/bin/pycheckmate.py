@@ -245,7 +245,7 @@ def check_syntax(script_path):
             print('<span class="stderr">%s%s</span><br>' % (pad, line))
 
 def find_checker_program():
-    checkers = ["pychecker", "pyflakes", "pylint", "pep8", "flake8", "frosted"]
+    checkers = ["pychecker", "pyflakes", "pylint", "pep8", "flake8"]
     tm_pychecker = os.getenv("TM_PYCHECKER")
 
     opts = filter(None, os.getenv('TM_PYCHECKER_OPTIONS', '').split())

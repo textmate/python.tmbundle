@@ -28,8 +28,10 @@
 			<string>#comment</string>
 		</dict>
 		<dict>
+			<key>comment</key>
+			<string>Match identifiers in ALL_CAPS as constants, except when followed by . or (</string>
 			<key>match</key>
-			<string>\b([A-Z_][A-Z0-9_]*)\b(?!\()</string>
+			<string>\b([A-Z_][A-Z0-9_]*)\b(?![\.\(])</string>
 			<key>name</key>
 			<string>constant.other.allcaps.python</string>
 		</dict>

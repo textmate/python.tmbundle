@@ -1669,7 +1669,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>(\\x[0-9A-F]{2})|(\\[0-7]{3})|(\\\n)|(\\\\)|(\\\")|(\\')|(\\a)|(\\b)|(\\f)|(\\n)|(\\r)|(\\t)|(\\v)</string>
+			<string>(\\x[0-9a-fA-F]{2})|(\\[0-7]{3})|(\\\n)|(\\\\)|(\\\")|(\\')|(\\a)|(\\b)|(\\f)|(\\n)|(\\r)|(\\t)|(\\v)</string>
 		</dict>
 		<key>escaped_unicode_char</key>
 		<dict>
@@ -1692,7 +1692,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>(\\U[0-9A-Fa-f]{8})|(\\u[0-9A-Fa-f]{4})|(\\N\{[a-zA-Z0-9 ]+\})</string>
+			<string>(\\U[0-9A-Fa-f]{8})|(\\u[0-9A-Fa-f]{4})|(\\N\{[a-zA-Z0-9\, ]+\})</string>
 		</dict>
 		<key>function_name</key>
 		<dict>

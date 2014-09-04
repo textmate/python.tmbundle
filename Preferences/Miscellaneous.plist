@@ -9,9 +9,9 @@
 	<key>settings</key>
 	<dict>
 		<key>decreaseIndentPattern</key>
-		<string>^\s*(elif|else|except|finally)\b.*:|^\s*\}</string>
+		<string>^\s*(elif|else|except|finally)\b.*:|^\s*(\}|\])</string>
 		<key>increaseIndentPattern</key>
-		<string>^\s*(class|def|elif|else|except|finally|for|if|try|with|while)\b.*:\s*$|\{\s*$</string>
+		<string>^\s*(class|def|elif|else|except|finally|for|if|try|with|while)\b.*:\s*$|(\{|\[)\s*$</string>
 		<key>shellVariables</key>
 		<array>
 			<dict>

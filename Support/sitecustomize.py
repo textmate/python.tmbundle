@@ -31,12 +31,24 @@ from traceback import extract_tb
 from cgi import escape
 
 try:
+    # Python 2.x
     from urllib import quote
-    # add utf-8 support to stdout/stderr
+    # add utf-8 support to stdout/stderr for Python 2.x
     sys.stdout = codecs.getwriter('utf-8')(sys.stdout);
     sys.stderr = codecs.getwriter('utf-8')(sys.stderr);
+
+    def getIoWrite(io):
+        def ioWrite(msg):
+            io.write(unicode(msg, 'UTF-8'))
+        return ioWrite
+        
 except:
+    # Python 3.x
     from urllib.parse import quote
+    def getIoWrite(io):
+        def ioWrite(msg):
+            io.write(bytes(msg, 'UTF-8'))
+        return ioWrite
     
 
 
@@ -56,10 +68,8 @@ def tm_excepthook(e_type, e, tb):
     error_fd = int(str(environ['TM_ERROR_FD']))
     io = fdopen(error_fd, 'wb', 0)
     
-    def ioWrite(s):
-        # if isinstance(message, unicode):
-        io.write(bytes(s, 'UTF-8'))
-        
+    ioWrite = getIoWrite(io)
+    
     ioWrite("<div id='exception_report' class='framed'>\n")
     
     if isinstance(e_type, str):

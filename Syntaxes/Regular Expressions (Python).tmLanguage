@@ -214,10 +214,14 @@
 			<key>include</key>
 			<string>#character-class</string>
 		</dict>
+		<dict>
+			<key>include</key>
+			<string>#character-class-contents</string>
+		</dict>
 	</array>
 	<key>repository</key>
 	<dict>
-		<key>character-class</key>
+		<key>character-class-contents</key>
 		<dict>
 			<key>patterns</key>
 			<array>
@@ -233,6 +237,12 @@
 					<key>name</key>
 					<string>constant.character.escape.backslash.regexp</string>
 				</dict>
+			</array>
+		</dict>
+		<key>character-class</key>
+		<dict>
+			<key>patterns</key>
+			<array>
 				<dict>
 					<key>begin</key>
 					<string>(\[)(\^)?</string>
@@ -265,7 +275,7 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#character-class</string>
+							<string>#character-class-contents</string>
 						</dict>
 						<dict>
 							<key>captures</key>

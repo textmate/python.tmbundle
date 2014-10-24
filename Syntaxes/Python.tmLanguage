@@ -1813,9 +1813,7 @@
 					</array>
 				</dict>
 				<dict>
-					<key>begin</key>
-					<string>([uU]r)(")</string>
-					<key>beginCaptures</key>
+					<key>captures</key>
 					<dict>
 						<key>1</key>
 						<dict>
@@ -1827,45 +1825,40 @@
 							<key>name</key>
 							<string>punctuation.definition.string.begin.python</string>
 						</dict>
-					</dict>
-					<key>comment</key>
-					<string>double-quoted raw string</string>
-					<key>end</key>
-					<string>(")|(\n)</string>
-					<key>endCaptures</key>
-					<dict>
-						<key>1</key>
+						<key>3</key>
+						<dict>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#constant_placeholder</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#escaped_unicode_char</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#escaped_char</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#regular_expressions</string>
+								</dict>
+							</array>
+						</dict>
+						<key>4</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.string.end.python</string>
 						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>invalid.illegal.unclosed-string.python</string>
-						</dict>
 					</dict>
+					<key>comment</key>
+					<string>double-quoted raw string</string>
+					<key>match</key>
+					<string>([uU]r)(")((?:[^"\\]|\\.)*)(")</string>
 					<key>name</key>
 					<string>string.quoted.double.single-line.unicode-raw-regex.python</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#constant_placeholder</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_unicode_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#regular_expressions</string>
-						</dict>
-					</array>
 				</dict>
 				<dict>
 					<key>begin</key>
@@ -1919,9 +1912,7 @@
 					</array>
 				</dict>
 				<dict>
-					<key>begin</key>
-					<string>(r)(")</string>
-					<key>beginCaptures</key>
+					<key>captures</key>
 					<dict>
 						<key>1</key>
 						<dict>
@@ -1933,41 +1924,36 @@
 							<key>name</key>
 							<string>punctuation.definition.string.begin.python</string>
 						</dict>
-					</dict>
-					<key>comment</key>
-					<string>double-quoted raw string</string>
-					<key>end</key>
-					<string>(")|(\n)</string>
-					<key>endCaptures</key>
-					<dict>
-						<key>1</key>
+						<key>3</key>
+						<dict>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#constant_placeholder</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#escaped_char</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#regular_expressions</string>
+								</dict>
+							</array>
+						</dict>
+						<key>4</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.string.end.python</string>
 						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>invalid.illegal.unclosed-string.python</string>
-						</dict>
 					</dict>
+					<key>comment</key>
+					<string>double-quoted raw string</string>
+					<key>match</key>
+					<string>(r)(")((?:[^"\\]|\\.)*)(")</string>
 					<key>name</key>
 					<string>string.quoted.double.single-line.raw-regex.python</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#constant_placeholder</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#regular_expressions</string>
-						</dict>
-					</array>
 				</dict>
 				<dict>
 					<key>begin</key>
@@ -2470,9 +2456,7 @@
 					</array>
 				</dict>
 				<dict>
-					<key>begin</key>
-					<string>([uU]r)(')</string>
-					<key>beginCaptures</key>
+					<key>captures</key>
 					<dict>
 						<key>1</key>
 						<dict>
@@ -2484,45 +2468,40 @@
 							<key>name</key>
 							<string>punctuation.definition.string.begin.python</string>
 						</dict>
-					</dict>
-					<key>comment</key>
-					<string>single quoted raw string</string>
-					<key>end</key>
-					<string>(')|(\n)</string>
-					<key>endCaptures</key>
-					<dict>
-						<key>1</key>
+						<key>3</key>
+						<dict>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#constant_placeholder</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#escaped_unicode_char</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#escaped_char</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#regular_expressions</string>
+								</dict>
+							</array>
+						</dict>
+						<key>4</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.string.end.python</string>
 						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>invalid.illegal.unclosed-string.python</string>
-						</dict>
 					</dict>
+					<key>comment</key>
+					<string>single quoted raw string</string>
+					<key>match</key>
+					<string>([uU]r)(')((?:[^'\\]|\\.)*)(')</string>
 					<key>name</key>
 					<string>string.quoted.single.single-line.unicode-raw-regex.python</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#constant_placeholder</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_unicode_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#regular_expressions</string>
-						</dict>
-					</array>
 				</dict>
 				<dict>
 					<key>begin</key>
@@ -2576,9 +2555,7 @@
 					</array>
 				</dict>
 				<dict>
-					<key>begin</key>
-					<string>(r)(')</string>
-					<key>beginCaptures</key>
+					<key>captures</key>
 					<dict>
 						<key>1</key>
 						<dict>
@@ -2590,41 +2567,36 @@
 							<key>name</key>
 							<string>punctuation.definition.string.begin.python</string>
 						</dict>
-					</dict>
-					<key>comment</key>
-					<string>single quoted raw string</string>
-					<key>end</key>
-					<string>(')|(\n)</string>
-					<key>endCaptures</key>
-					<dict>
-						<key>1</key>
+						<key>3</key>
+						<dict>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#constant_placeholder</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#escaped_char</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#regular_expressions</string>
+								</dict>
+							</array>
+						</dict>
+						<key>4</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.string.end.python</string>
 						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>invalid.illegal.unclosed-string.python</string>
-						</dict>
 					</dict>
+					<key>comment</key>
+					<string>single quoted raw string</string>
+					<key>match</key>
+					<string>(r)(')((?:[^'\\]|\\.)*)(')</string>
 					<key>name</key>
 					<string>string.quoted.single.single-line.raw-regex.python</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#constant_placeholder</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#regular_expressions</string>
-						</dict>
-					</array>
 				</dict>
 				<dict>
 					<key>begin</key>

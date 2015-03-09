@@ -31,7 +31,7 @@
 			<key>comment</key>
 			<string>Match identifiers in ALL_CAPS as constants, except when followed by . or (</string>
 			<key>match</key>
-			<string>\b([A-Z_][A-Z0-9_]*)\b(?![\.\(])</string>
+			<string>\b([\p{Upper}_][\p{Upper}\p{Digit}_]*)\b(?![\.\(])</string>
 			<key>name</key>
 			<string>constant.other.allcaps.python</string>
 		</dict>
@@ -73,19 +73,19 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(?i:(((\d+(\.(?=[^a-zA-Z_])\d*)?|(?&lt;=[^0-9a-zA-Z_])\.\d+)(e[\-\+]?\d+)?))J)</string>
+			<string>\b(?i:(((\d+(\.(?=[^\p{Alpha}_])\d*)?|(?&lt;=[^\p{Alnum}_])\.\d+)(e[\-\+]?\d+)?))J)</string>
 			<key>name</key>
 			<string>constant.numeric.complex.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(?i:(\d+\.\d*(e[\-\+]?\d+)?))(?=[^a-zA-Z_])</string>
+			<string>\b(?i:(\d+\.\d*(e[\-\+]?\d+)?))(?=[^\p{Alpha}_])</string>
 			<key>name</key>
 			<string>constant.numeric.float.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>(?&lt;=[^0-9a-zA-Z_])(?i:(\.\d+(e[\-\+]?\d+)?))</string>
+			<string>(?&lt;=[^\p{Alnum}_])(?i:(\.\d+(e[\-\+]?\d+)?))</string>
 			<key>name</key>
 			<string>constant.numeric.float.python</string>
 		</dict>
@@ -187,7 +187,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(class)\s+(?=[a-zA-Z_][a-zA-Z_0-9]*\s*\:)</string>
+			<string>^\s*(class)\s+(?=[\p{Alpha}_][\p{Alnum}_]*\s*\:)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -220,7 +220,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(class)\s+(?=[a-zA-Z_][a-zA-Z_0-9]*\s*\()</string>
+			<string>^\s*(class)\s+(?=[\p{Alpha}_][\p{Alnum}_]*\s*\()</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -255,11 +255,11 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=[A-Za-z_][A-Za-z0-9_]*)</string>
+					<string>(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
 					<key>contentName</key>
 					<string>entity.name.type.class.python</string>
 					<key>end</key>
-					<string>(?![A-Za-z0-9_])</string>
+					<string>(?![\p{Alnum}_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -314,7 +314,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(class)\s+(?=[a-zA-Z_][a-zA-Z_0-9])</string>
+			<string>^\s*(class)\s+(?=[\p{Alpha}_][\p{Alnum}_])</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -361,7 +361,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(def)\s+(?=[A-Za-z_][A-Za-z0-9_]*\s*\()</string>
+			<string>^\s*(def)\s+(?=[\p{Alpha}_][\p{Alnum}_]*\s*\()</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -386,7 +386,7 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=[A-Za-z_][A-Za-z0-9_]*)</string>
+					<string>(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
 					<key>contentName</key>
 					<string>entity.name.function.python</string>
 					<key>end</key>
@@ -448,7 +448,7 @@
 								</dict>
 							</dict>
 							<key>match</key>
-							<string>\b(?:(self|cls)|([a-zA-Z_][a-zA-Z_0-9]*))\s*(?:(,)|(?=[\n\)]))</string>
+							<string>\b(?:(self|cls)|([\p{Alpha}_][\p{Alnum}_]*))\s*(?:(,)|(?=[\n\)]))</string>
 						</dict>
 					</array>
 				</dict>
@@ -482,7 +482,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(def)\s+(?=[A-Za-z_][A-Za-z0-9_]*)</string>
+			<string>^\s*(def)\s+(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -512,11 +512,11 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=[A-Za-z_][A-Za-z0-9_]*)</string>
+					<string>(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
 					<key>contentName</key>
 					<string>entity.name.function.python</string>
 					<key>end</key>
-					<string>(?![A-Za-z0-9_])</string>
+					<string>(?![\p{Alnum}_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -590,7 +590,7 @@
 								</dict>
 							</dict>
 							<key>match</key>
-							<string>\b([a-zA-Z_][a-zA-Z_0-9]*)\s*(?:(,)|(?=[\n\)\:]))</string>
+							<string>\b([\p{Alpha}_][\p{Alnum}_]*)\s*(?:(,)|(?=[\n\)\:]))</string>
 						</dict>
 					</array>
 				</dict>
@@ -598,7 +598,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(?=@\s*[A-Za-z_][A-Za-z0-9_]*(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*\s*\()</string>
+			<string>^\s*(?=@\s*[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\()</string>
 			<key>comment</key>
 			<string>a decorator may be a function call which returns a decorator.</string>
 			<key>end</key>
@@ -617,7 +617,7 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=(@)\s*[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*\s*\()</string>
+					<string>(?=(@)\s*[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\()</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -669,7 +669,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(?=@\s*[A-Za-z_][A-Za-z0-9_]*(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*)</string>
+			<string>^\s*(?=@\s*[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*)</string>
 			<key>contentName</key>
 			<string>entity.name.function.decorator.python</string>
 			<key>end</key>
@@ -680,7 +680,7 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=(@)\s*[A-Za-z_][A-Za-z0-9_]*(\.[A-Za-z_][A-Za-z0-9_]*)*)</string>
+					<string>(?=(@)\s*[\p{Alpha}_][\p{Alnum}_]*(\.[\p{Alpha}_][\p{Alnum}_]*)*)</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -772,7 +772,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(?=[A-Za-z_][A-Za-z0-9_]*(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*\s*\()</string>
+			<string>(?=[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\()</string>
 			<key>end</key>
 			<string>(\))</string>
 			<key>endCaptures</key>
@@ -789,7 +789,7 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*\s*\()</string>
+					<string>(?=[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\()</string>
 					<key>end</key>
 					<string>(?=\s*\()</string>
 					<key>patterns</key>
@@ -831,7 +831,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(?=[A-Za-z_][A-Za-z0-9_]*(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*\s*\[)</string>
+			<string>(?=[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\[)</string>
 			<key>end</key>
 			<string>(\])</string>
 			<key>endCaptures</key>
@@ -848,7 +848,7 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*\s*\[)</string>
+					<string>(?=[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\[)</string>
 					<key>end</key>
 					<string>(?=\s*\[)</string>
 					<key>patterns</key>
@@ -1173,7 +1173,7 @@
 		<key>annotated_arguments</key>
 		<dict>
 			<key>begin</key>
-			<string>\b([a-zA-Z_][a-zA-Z_0-9]*)\s*(:)|(?=\()</string>
+			<string>\b([\p{Alpha}_][\p{Alnum}_]*)\s*(:)|(?=\()</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -1241,7 +1241,7 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>\b([a-zA-Z_][a-zA-Z_0-9]*)\s*(:)</string>
+					<string>\b([\p{Alpha}_][\p{Alnum}_]*)\s*(:)</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -1275,7 +1275,7 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>\b([a-zA-Z_][a-zA-Z_0-9]*)</string>
+					<string>\b([\p{Alpha}_][\p{Alnum}_]*)</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -1353,7 +1353,7 @@
 					<array>
 						<dict>
 							<key>begin</key>
-							<string>(?=[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*\s*\()</string>
+							<string>(?=[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\()</string>
 							<key>end</key>
 							<string>(?=\s*\()</string>
 							<key>patterns</key>
@@ -1450,7 +1450,7 @@
 		<key>constant_placeholder</key>
 		<dict>
 			<key>match</key>
-			<string>(?i:(%(\([a-z_]+\))?#?0?\-?[ ]?\+?([0-9]*|\*)(\.([0-9]*|\*))?[hL]?[a-z%])|(\{([!\[\].:\w ]+)?\}))</string>
+			<string>(?i:(%(\([\p{Lower}_]+\))?#?0?\-?[ ]?\+?([0-9]*|\*)(\.([0-9]*|\*))?[hL]?[\p{Lower}%])|(\{([!\[\].:\w ]+)?\}))</string>
 			<key>name</key>
 			<string>constant.other.placeholder.python</string>
 		</dict>
@@ -1493,16 +1493,16 @@
 		<key>dotted_name</key>
 		<dict>
 			<key>begin</key>
-			<string>(?=[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*)</string>
+			<string>(?=[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*)</string>
 			<key>end</key>
-			<string>(?![A-Za-z0-9_\.])</string>
+			<string>(?![\p{Alnum}_\.])</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(\.)(?=[A-Za-z_][A-Za-z0-9_]*)</string>
+					<string>(\.)(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
 					<key>end</key>
-					<string>(?![A-Za-z0-9_])</string>
+					<string>(?![\p{Alnum}_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -1525,9 +1525,9 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>(?&lt;!\.)(?=[A-Za-z_][A-Za-z0-9_]*)</string>
+					<string>(?&lt;!\.)(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
 					<key>end</key>
-					<string>(?![A-Za-z0-9_])</string>
+					<string>(?![\p{Alnum}_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -1727,12 +1727,12 @@
 		<key>generic_names</key>
 		<dict>
 			<key>match</key>
-			<string>[A-Za-z_][A-Za-z0-9_]*</string>
+			<string>[\p{Alpha}_][\p{Alnum}_]*</string>
 		</dict>
 		<key>generic_object_names</key>
 		<dict>
 			<key>match</key>
-			<string>(\.\b([A-Za-z_][A-Za-z0-9_]*)\b(?!\(|\[)|\b([A-Za-z_][A-Za-z0-9_]*)\b\.)</string>
+			<string>(\.\b([\p{Alpha}_][\p{Alnum}_]*)\b(?!\(|\[)|\b([\p{Alpha}_][\p{Alnum}_]*)\b\.)</string>
 		</dict>
 		<key>illegal_names</key>
 		<dict>
@@ -1744,7 +1744,7 @@
 		<key>keyword_arguments</key>
 		<dict>
 			<key>begin</key>
-			<string>\b([a-zA-Z_][a-zA-Z_0-9]*)\s*(=)(?!=)</string>
+			<string>\b([\p{Alpha}_][\p{Alnum}_]*)\s*(=)(?!=)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>

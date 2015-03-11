@@ -49,13 +49,13 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(?i:(0b[01]*)L)</string>
+			<string>\b(?i:(0b[01]+)L)</string>
 			<key>name</key>
 			<string>constant.numeric.integer.binary.long.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(?i:(0b[01]*))</string>
+			<string>\b(?i:(0b[01]+))</string>
 			<key>name</key>
 			<string>constant.numeric.integer.binary.python</string>
 		</dict>

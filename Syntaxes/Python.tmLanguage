@@ -37,13 +37,13 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(?i:(0x\h*)L)</string>
+			<string>\b(?i:(0x\h+)L)</string>
 			<key>name</key>
 			<string>constant.numeric.integer.hexadecimal.long.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(?i:(0x\h*))</string>
+			<string>\b(?i:(0x\h+))</string>
 			<key>name</key>
 			<string>constant.numeric.integer.hexadecimal.python</string>
 		</dict>

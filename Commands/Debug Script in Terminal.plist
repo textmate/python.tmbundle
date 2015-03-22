@@ -5,7 +5,9 @@
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
 	<key>command</key>
-	<string># start up Python in debug mode using either Terminal.app or iTerm.app
+	<string>#!/bin/bash
+
+# start up Python in debug mode using either Terminal.app or iTerm.app
 # according to the user's value for TM_TERM_PROG
 # Default to Terminal.app since that is standard.
 TP=${TM_TERM_PROG:=Terminal}
@@ -35,15 +37,23 @@ fi
 </string>
 	<key>input</key>
 	<string>none</string>
+	<key>inputFormat</key>
+	<string>text</string>
 	<key>keyEquivalent</key>
 	<string>@D</string>
 	<key>name</key>
 	<string>Debug Script in Terminal</string>
-	<key>output</key>
+	<key>outputCaret</key>
+	<string>afterOutput</string>
+	<key>outputFormat</key>
+	<string>text</string>
+	<key>outputLocation</key>
 	<string>discard</string>
 	<key>scope</key>
 	<string>source.python</string>
 	<key>uuid</key>
 	<string>504278F6-89F4-11D9-9326-000D93B6E43C</string>
+	<key>version</key>
+	<integer>2</integer>
 </dict>
 </plist>

@@ -5,7 +5,10 @@
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
 	<key>command</key>
-	<string># set up TM_FIRST_LINE containing the first line of the script.
+	<string>#!/bin/bash
+[[ -f "${TM_SUPPORT_PATH}/lib/bash_init.sh" ]] &amp;&amp; . "${TM_SUPPORT_PATH}/lib/bash_init.sh"
+
+# set up TM_FIRST_LINE containing the first line of the script.
 read first_line
 0&lt;&amp;- # close STDIN
 export TM_FIRST_LINE="$first_line"
@@ -59,15 +62,23 @@ PYTHON
 </string>
 	<key>input</key>
 	<string>document</string>
+	<key>inputFormat</key>
+	<string>text</string>
 	<key>keyEquivalent</key>
 	<string>^h</string>
 	<key>name</key>
 	<string>Documentation for Current Word</string>
-	<key>output</key>
-	<string>showAsHTML</string>
+	<key>outputCaret</key>
+	<string>afterOutput</string>
+	<key>outputFormat</key>
+	<string>html</string>
+	<key>outputLocation</key>
+	<string>newWindow</string>
 	<key>scope</key>
 	<string>source.python</string>
 	<key>uuid</key>
 	<string>443BBF21-6124-4486-BFCA-D18606465885</string>
+	<key>version</key>
+	<integer>2</integer>
 </dict>
 </plist>

@@ -9,12 +9,24 @@
 [[ -f "${TM_SUPPORT_PATH}/lib/bash_init.sh" ]] &amp;&amp; . "${TM_SUPPORT_PATH}/lib/bash_init.sh"
 
 # start up Python in debug mode using either Terminal.app or iTerm.app
-# according to the user's value for TM_TERM_PROG
-# Default to Terminal.app since that is standard.
-TP=${TM_TERM_PROG:=Terminal}
+# if iTerm is open or if TM_TERMINAL is set to iTerm then use iTerm
+# otherwise default to Terminal.app since that is standard.
+TP=${TM_TERMINAL:=Terminal}
 TPY=${TM_PYTHON:=python}
 
-if [ "$TP" == iTerm ]; then
+iTerm_running () {
+    ruby &lt;&lt;"RUBY"
+        all = `ps -U "$USER" -o ucomm`
+        split = all.split("\n")
+        if split.find { |cmd| 'iTerm' == cmd.strip }
+            STDOUT.write 0
+        else
+            STDOUT.write 1
+        end
+RUBY
+}
+
+if [ "$TP" == iTerm ] || [ $(iTerm_running) == 0 ]; then
     osascript &lt;&lt;END
         tell application "iTerm"
             activate

@@ -9,7 +9,7 @@
 	<key>capturePattern</key>
 	<string>^\s*File "(.+)", line (\d+)</string>
 	<key>command</key>
-	<string>#!/usr/bin/env bash
+	<string>#!/bin/bash
 [[ -f "${TM_SUPPORT_PATH}/lib/bash_init.sh" ]] &amp;&amp; . "${TM_SUPPORT_PATH}/lib/bash_init.sh"
 
 # Find all files that end with "Test.py" and run 

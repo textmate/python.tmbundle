@@ -5,13 +5,28 @@
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
 	<key>command</key>
-	<string># start up Python in debug mode using either Terminal.app or iTerm.app
-# according to the user's value for TM_TERM_PROG
-# Default to Terminal.app since that is standard.
-TP=${TM_TERM_PROG:=Terminal}
+	<string>#!/bin/bash
+[[ -f "${TM_SUPPORT_PATH}/lib/bash_init.sh" ]] &amp;&amp; . "${TM_SUPPORT_PATH}/lib/bash_init.sh"
+
+# start up Python in debug mode using either Terminal.app or iTerm.app
+# if iTerm is open or if TM_TERMINAL is set to iTerm then use iTerm
+# otherwise default to Terminal.app since that is standard.
+TP=${TM_TERMINAL:=Terminal}
 TPY=${TM_PYTHON:=python}
 
-if [ "$TP" == iTerm ]; then
+iTerm_running () {
+    ruby &lt;&lt;"RUBY"
+        all = `ps -U "$USER" -o ucomm`
+        split = all.split("\n")
+        if split.find { |cmd| 'iTerm' == cmd.strip }
+            STDOUT.write 0
+        else
+            STDOUT.write 1
+        end
+RUBY
+}
+
+if [ "$TP" == iTerm ] || [ $(iTerm_running) == 0 ]; then
     osascript &lt;&lt;END
         tell application "iTerm"
             activate
@@ -35,15 +50,23 @@ fi
 </string>
 	<key>input</key>
 	<string>none</string>
+	<key>inputFormat</key>
+	<string>text</string>
 	<key>keyEquivalent</key>
 	<string>@D</string>
 	<key>name</key>
 	<string>Debug Script in Terminal</string>
-	<key>output</key>
+	<key>outputCaret</key>
+	<string>afterOutput</string>
+	<key>outputFormat</key>
+	<string>text</string>
+	<key>outputLocation</key>
 	<string>discard</string>
 	<key>scope</key>
 	<string>source.python</string>
 	<key>uuid</key>
 	<string>504278F6-89F4-11D9-9326-000D93B6E43C</string>
+	<key>version</key>
+	<integer>2</integer>
 </dict>
 </plist>

@@ -12,8 +12,11 @@ Also, sys.stdout and sys.stder are wrapped in a utf-8 codec writer.
 
 import sys, os
 
-# remove TM_BUNDLE_SUPPORT from the path.
-if os.environ['TM_BUNDLE_SUPPORT'] in sys.path:
+# In 3.3, only remove if TM_BUNDLE_SUPPORT is already in sys.path
+if sys.version_info[:2] == (3, 3):
+  if os.environ['TM_BUNDLE_SUPPORT'] in sys.path:
+    sys.path.remove(os.environ['TM_BUNDLE_SUPPORT'])
+else:
   sys.path.remove(os.environ['TM_BUNDLE_SUPPORT'])
 
 # now import local sitecustomize
@@ -21,7 +24,12 @@ try:
   import sitecustomize
   if sys.version_info[0] >= 3:
     from imp import reload
-  reload(sitecustomize)
+  try:
+    reload(sitecustomize)
+  except AttributeError:
+    # in py3.4, an AttributeError is raised if there is no other sitecustomize
+    # http://bugs.python.org/issue21617
+    pass
 except ImportError: pass
 
 import codecs
@@ -29,11 +37,16 @@ import codecs
 from os import environ, path, fdopen, popen
 from traceback import extract_tb
 from cgi import escape
-from urllib import quote
+
+try:
+  from urllib import quote
+except ImportError:
+  from urllib.parse import quote
 
 # add utf-8 support to stdout/stderr
-sys.stdout = codecs.getwriter('utf-8')(sys.stdout);
-sys.stderr = codecs.getwriter('utf-8')(sys.stderr);
+if sys.version_info[0] < 3:
+  sys.stdout = codecs.getwriter('utf-8')(sys.stdout);
+  sys.stderr = codecs.getwriter('utf-8')(sys.stderr);
 
 def tm_excepthook(e_type, e, tb):
     """
@@ -42,7 +55,10 @@ def tm_excepthook(e_type, e, tb):
     """
     # get the file descriptor.
     error_fd = int(str(environ['TM_ERROR_FD']))
-    io = fdopen(error_fd, 'wb', 0)
+    if sys.version_info[0] >= 3:
+        io = open(error_fd, 'w', closefd=False)
+    else:
+        io = fdopen(error_fd, 'wb', 0)
     io.write("<div id='exception_report' class='framed'>\n")
     if isinstance(e_type, str):
         io.write("<p id='exception'><strong>String Exception:</strong> %s</p>\n" % escape(e_type))
@@ -75,7 +91,10 @@ def tm_excepthook(e_type, e, tb):
             if len(e.args) > 1:
                 for arg in e.args[1:]:
                     message += ", %s" % repr(arg)
-        if isinstance(message, unicode):
+
+        # This is the only Python 2/3-compatible way that I can think of to
+        # safely access the unicode() function
+        if sys.version_info[0] < 3 and isinstance(message, __builtins__.get('unicode')):
             io.write("<p id='exception'><strong>%s:</strong> %s</p>\n" %
                                     (e_type.__name__, escape(message).encode("utf-8")))
         else:
@@ -100,8 +119,13 @@ def tm_excepthook(e_type, e, tb):
                     io.write("function %s" % escape(function_name))
             else:
                 io.write('<em>at file root</em>')
+            
+            if sys.version_info[0] < 3:
+                display_name = escape(display_name).encode('UTF-8')
+            else:
+                display_name = escape(display_name)
             io.write("</a> in <strong>%s</strong> at line %i</td></tr>\n" %
-                                                (escape(display_name).encode("utf-8"), line_number))
+                                                (display_name, line_number))
             io.write("<tr><td><pre class=\"snippet\">%s</pre></tr></td>" % text)
         io.write("</table></blockquote></div>")
     if e_type is UnicodeDecodeError:

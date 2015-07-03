@@ -115,7 +115,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(global|nonlocal)\b</string>
+			<string>\b(global|nonlocal|async)\b</string>
 			<key>name</key>
 			<string>storage.modifier.$1.python</string>
 		</dict>
@@ -129,7 +129,7 @@
 			<key>comment</key>
 			<string>keywords that delimit flow blocks or alter flow from within a block</string>
 			<key>match</key>
-			<string>\b(elif|else|except|finally|for|if|try|while|with|break|continue|pass|raise|return|yield)\b</string>
+			<string>\b(await|break|continue|elif|else|except|finally|for|if|pass|raise|return|try|while|with|yield)\b</string>
 			<key>name</key>
 			<string>keyword.control.flow.python</string>
 		</dict>
@@ -169,13 +169,13 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\+\=|-\=|\*\=|/\=|//\=|%\=|&amp;\=|\|\=|\^\=|&gt;&gt;\=|&lt;&lt;\=|\*\*\=</string>
+			<string>\+\=|-\=|\*\=|/\=|//\=|%\=|&amp;\=|\|\=|\^\=|&gt;&gt;\=|&lt;&lt;\=|\*\*\=|@\=</string>
 			<key>name</key>
 			<string>keyword.operator.assignment.augmented.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\+|\-|\*|\*\*|/|//|%|&lt;&lt;|&gt;&gt;|&amp;|\||\^|~</string>
+			<string>\+|\-|\*|\*\*|/|//|%|&lt;&lt;|&gt;&gt;|&amp;|\||\^|~|(?!^)@</string>
 			<key>name</key>
 			<string>keyword.operator.arithmetic.python</string>
 		</dict>
@@ -1737,7 +1737,7 @@
 		<key>illegal_names</key>
 		<dict>
 			<key>match</key>
-			<string>\b(and|as|assert|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|nonlocal|not|or|pass|print|raise|return|try|while|with|yield)\b</string>
+			<string>\b(and|as|assert|async|await|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|nonlocal|not|or|pass|print|raise|return|try|while|with|yield)\b</string>
 			<key>name</key>
 			<string>invalid.illegal.name.python</string>
 		</dict>

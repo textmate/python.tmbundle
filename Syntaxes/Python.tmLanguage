@@ -163,6 +163,12 @@
 		</dict>
 		<dict>
 			<key>match</key>
+			<string>(?&lt;!\.)(apply|buffer|coerce|intern)\s*(?=\()</string>
+			<key>name</key>
+			<string>invalid.deprecated.function.python</string>
+		</dict>
+		<dict>
+			<key>match</key>
 			<string>&lt;\=|&gt;\=|\=\=|&lt;|&gt;|\!\=</string>
 			<key>name</key>
 			<string>keyword.operator.comparison.python</string>

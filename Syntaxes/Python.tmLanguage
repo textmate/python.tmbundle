@@ -115,7 +115,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(global|nonlocal|async)\b</string>
+			<string>\b(global|nonlocal)\b</string>
 			<key>name</key>
 			<string>storage.modifier.$1.python</string>
 		</dict>
@@ -124,14 +124,6 @@
 			<string>\b(?:(import|from|as))\b</string>
 			<key>name</key>
 			<string>keyword.control.import.$1.python</string>
-		</dict>
-		<dict>
-			<key>comment</key>
-			<string>keywords that delimit flow blocks or alter flow from within a block</string>
-			<key>match</key>
-			<string>\b(await|break|continue|elif|else|except|finally|for|if|pass|raise|return|try|while|with|yield)\b</string>
-			<key>name</key>
-			<string>keyword.control.flow.python</string>
 		</dict>
 		<dict>
 			<key>comment</key>
@@ -367,7 +359,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(def)\s+(?=[\p{Alpha}_][\p{Alnum}_]*\s*\()</string>
+			<string>\s*((?:async\s+)?def)\s+(?=[\p{Alpha}_][\p{Alnum}_]*\s*\()</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -488,7 +480,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(def)\s+(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
+			<string>\s*((?:async\s+)?def)\s+(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -532,6 +524,36 @@
 					</array>
 				</dict>
 			</array>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.function.python</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>\b(((?:async\s+)?def)|lambda)\b</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Keywords that delimit flow blocks or alter flow from within a
+					   block.
+
+					   This block should be matched *after* meta.function.python to
+					   let 'async def' be matched *first*.
+					   </string>
+			<key>match</key>
+			<string>(?x) \b(
+						async | await | break | continue | elif | else | except | finally | for |
+						if | pass | raise | return | try | while | with |
+						(yield(?:\s+from)?)
+					)\b
+					</string>
+			<key>name</key>
+			<string>keyword.control.flow.python</string>
 		</dict>
 		<dict>
 			<key>begin</key>
@@ -922,18 +944,6 @@
 					<string>$self</string>
 				</dict>
 			</array>
-		</dict>
-		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>storage.type.function.python</string>
-				</dict>
-			</dict>
-			<key>match</key>
-			<string>\b(def|lambda)\b</string>
 		</dict>
 		<dict>
 			<key>captures</key>
@@ -1743,7 +1753,7 @@
 		<key>illegal_names</key>
 		<dict>
 			<key>match</key>
-			<string>\b(and|as|assert|async|await|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|nonlocal|not|or|pass|print|raise|return|try|while|with|yield)\b</string>
+			<string>\b(and|as|assert|await|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|nonlocal|not|or|pass|print|raise|return|try|while|with|yield)\b</string>
 			<key>name</key>
 			<string>invalid.illegal.name.python</string>
 		</dict>

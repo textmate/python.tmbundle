@@ -786,7 +786,7 @@
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#builtin_exceptions</string>
+			<string>#errors_warnings_exceptions</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -1327,27 +1327,6 @@
 				</dict>
 			</array>
 		</dict>
-		<key>builtin_exceptions</key>
-		<dict>
-			<key>match</key>
-			<string>(?x)\b(
-				(
-					Arithmetic|Assertion|Attribute|BlockingIO|BrokenPipe|Buffer|
-					ChildProcess|Connection(Aborted|Refused|Reset)?|EOF|Environment|
-					FileExists|FileNotFound|FloatingPoint|Import|Indentation|Index|
-					Interrupted|IsADirectory|Key|Lookup|Memory|Name|NotADirectory|
-					NotImplemented|OS|Overflow|Permission|ProcessLookup|Recursion|
-					Reference|Runtime|Standard|Syntax|System|Tab|Timeout|Type|
-					UnboundLocal|Unicode(Encode|Decode|Translate)?|Value|VMS|
-					Windows|ZeroDivision
-				)Error|
-				((Pending)?Deprecation|Bytes|Future|Import|Resource|Runtime|Syntax|Unicode|User)?Warning|
-				(Base)?Exception|
-				GeneratorExit|KeyboardInterrupt|StopAsyncIteration|StopIteration|SystemExit
-			)\b</string>
-			<key>name</key>
-			<string>support.type.exception.python</string>
-		</dict>
 		<key>builtin_functions</key>
 		<dict>
 			<key>patterns</key>
@@ -1566,7 +1545,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#builtin_exceptions</string>
+							<string>#errors_warnings_exceptions</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -1623,6 +1602,27 @@
 					<string>#generic_names</string>
 				</dict>
 			</array>
+		</dict>
+		<key>errors_warnings_exceptions</key>
+		<dict>
+			<key>match</key>
+			<string>(?x)\b(
+				(
+					Arithmetic|Assertion|Attribute|BlockingIO|BrokenPipe|Buffer|
+					ChildProcess|Connection(Aborted|Refused|Reset)?|EOF|Environment|
+					FileExists|FileNotFound|FloatingPoint|Import|Indentation|Index|
+					Interrupted|IsADirectory|Key|Lookup|Memory|Name|NotADirectory|
+					NotImplemented|OS|Overflow|Permission|ProcessLookup|Recursion|
+					Reference|Runtime|Standard|Syntax|System|Tab|Timeout|Type|
+					UnboundLocal|Unicode(Encode|Decode|Translate)?|Value|VMS|
+					Windows|ZeroDivision
+				)Error|
+				((Pending)?Deprecation|Bytes|Future|Import|Resource|Runtime|Syntax|Unicode|User)?Warning|
+				(Base)?Exception|
+				GeneratorExit|KeyboardInterrupt|StopAsyncIteration|StopIteration|SystemExit
+			)\b</string>
+			<key>name</key>
+			<string>support.type.exception.python</string>
 		</dict>
 		<key>escaped_char</key>
 		<dict>
@@ -1734,7 +1734,7 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#builtin_exceptions</string>
+					<string>#errors_warnings_exceptions</string>
 				</dict>
 				<dict>
 					<key>include</key>

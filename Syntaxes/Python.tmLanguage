@@ -636,7 +636,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(?=@\s*[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\()</string>
+			<string>^\s*(?=@\s*[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\()</string>
 			<key>comment</key>
 			<string>a decorator may be a function call which returns a decorator.</string>
 			<key>end</key>
@@ -655,7 +655,7 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=(@)\s*[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\()</string>
+					<string>(?=(@)\s*[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\()</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -707,7 +707,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(?=@\s*[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*)</string>
+			<string>^\s*(?=@\s*[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*)</string>
 			<key>contentName</key>
 			<string>entity.name.function.decorator.python</string>
 			<key>end</key>
@@ -718,7 +718,7 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=(@)\s*[\p{Alpha}_][\p{Alnum}_]*(\.[\p{Alpha}_][\p{Alnum}_]*)*)</string>
+					<string>(?=(@)\s*[\p{Alpha}_][\p{Alnum}_]*(\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*)</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -865,11 +865,24 @@
 						</dict>
 					</array>
 				</dict>
+				<dict>
+					<key>begin</key>
+					<string>\G</string>
+					<key>end</key>
+					<string>(?=\()</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#dotted_name</string>
+						</dict>
+					</array>
+				</dict>
 			</array>
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(?=[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\[)</string>
+			<string>(?=[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\[)</string>
 			<key>end</key>
 			<string>(\])</string>
 			<key>endCaptures</key>
@@ -886,7 +899,7 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\[)</string>
+					<string>(?=[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\[)</string>
 					<key>end</key>
 					<string>(?=\s*\[)</string>
 					<key>patterns</key>
@@ -917,6 +930,19 @@
 						<dict>
 							<key>include</key>
 							<string>$self</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>\G</string>
+					<key>end</key>
+					<string>(?=\[)</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#dotted_name</string>
 						</dict>
 					</array>
 				</dict>
@@ -1358,7 +1384,7 @@
 					<array>
 						<dict>
 							<key>begin</key>
-							<string>(?=[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\()</string>
+							<string>(?=[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\()</string>
 							<key>end</key>
 							<string>(?=\s*\()</string>
 							<key>patterns</key>
@@ -1498,14 +1524,22 @@
 		<key>dotted_name</key>
 		<dict>
 			<key>begin</key>
-			<string>(?=[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*)</string>
+			<string>(?=(?:\.(?!\s+import)\s*)?[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*)</string>
 			<key>end</key>
-			<string>(?![\p{Alnum}_\.])</string>
+			<string>(?![\p{Alnum}_\.\s])|(?=(?&lt;!\.)\s+[^.])|$</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>begin</key>
 					<string>(\.)(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>meta.dot.python</string>
+						</dict>
+					</dict>
 					<key>end</key>
 					<string>(?![\p{Alnum}_])</string>
 					<key>patterns</key>
@@ -1754,6 +1788,8 @@
 		<dict>
 			<key>match</key>
 			<string>[\p{Alpha}_][\p{Alnum}_]*</string>
+			<key>name</key>
+			<string>meta.identifier.python</string>
 		</dict>
 		<key>generic_object_names</key>
 		<dict>

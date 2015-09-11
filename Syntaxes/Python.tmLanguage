@@ -1554,11 +1554,11 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#illegal_names</string>
+							<string>#generic_names</string>
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#generic_names</string>
+							<string>#illegal_names</string>
 						</dict>
 					</array>
 				</dict>
@@ -1583,10 +1583,6 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#illegal_names</string>
-						</dict>
-						<dict>
-							<key>include</key>
 							<string>#magic_function_names</string>
 						</dict>
 						<dict>
@@ -1601,6 +1597,10 @@
 							<key>include</key>
 							<string>#generic_names</string>
 						</dict>
+						<dict>
+							<key>include</key>
+							<string>#illegal_names</string>
+						</dict>
 					</array>
 				</dict>
 			</array>
@@ -1611,11 +1611,11 @@
 			<array>
 				<dict>
 					<key>include</key>
-					<string>#illegal_names</string>
+					<string>#generic_names</string>
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#generic_names</string>
+					<string>#illegal_names</string>
 				</dict>
 			</array>
 		</dict>
@@ -1629,11 +1629,11 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#illegal_names</string>
+					<string>#generic_names</string>
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#generic_names</string>
+					<string>#illegal_names</string>
 				</dict>
 			</array>
 		</dict>

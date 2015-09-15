@@ -145,7 +145,7 @@
 			<key>comment</key>
 			<string>keywords that haven't fit into other groups (yet).</string>
 			<key>match</key>
-			<string>\b(assert|del|exec|print)\b</string>
+			<string>\b(assert|del|exec)\b</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -899,6 +899,14 @@
 			</array>
 		</dict>
 		<dict>
+			<key>comment</key>
+			<string>Py2 print statement that should only be matched after function calls</string>
+			<key>match</key>
+			<string>(?&lt;!\.)\b(print)(?=\s|$)</string>
+			<key>name</key>
+			<string>keyword.other.print.python</string>
+		</dict>
+		<dict>
 			<key>begin</key>
 			<string>(?=[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\[)</string>
 			<key>end</key>
@@ -1460,7 +1468,7 @@
 					<key>comment</key>
 					<string>These are statements in Py2, but don't really fit into keyword.control.flow with the rest</string>
 					<key>match</key>
-					<string>(?&lt;!\.)\b(print|del)\b</string>
+					<string>(?&lt;!\.)\b(del)\b</string>
 					<key>name</key>
 					<string>support.function.builtin.python</string>
 				</dict>

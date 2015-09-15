@@ -788,11 +788,15 @@
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#builtin_functions</string>
+			<string>#builtin_types</string>
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#builtin_types</string>
+			<string>#builtin_functions_name</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#builtin_functions_call</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -801,6 +805,10 @@
 		<dict>
 			<key>include</key>
 			<string>#magic_function_names</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#magic_function_calls</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -1363,19 +1371,33 @@
 				</dict>
 			</array>
 		</dict>
-		<key>builtin_functions</key>
+		<key>builtin_functions_call</key>
 		<dict>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?&lt;!\.)(__import__|ascii|abs|all|any|apply|bin|bool|buffer|bytearray|bytes|callable|chr|classmethod|cmp|coerce|compile|complex|copyright|credits|del|delattr|dict|dir|divmod|enumerate|eval|exec|execfile|exit|file|filter|float|format|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|license|list|locals|long|map|max|memoryview|min|next|object|oct|open|ord|pow|print|property|quit|range|raw_input|reduce|reload|repr|reversed|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unicode|unichr|vars|xrange|zip)\s*(?=\()</string>
+					<string>(?x)
+							(?&lt;!\.)\b(
+								__import__ | abs | all | any | ascii | basestring | bin | bool |
+								bytearray | bytes | callable | chr | classmethod | cmp | compile |
+								complex | delattr | dict | dir | divmod | enumerate | eval | exec |
+								execfile | file | filter | float | format | frozenset | getattr |
+								globals | hasattr | hash | help | hex | id | input | int |
+								isinstance | issubclass | iter | len | list | locals | long | map |
+								max | memoryview | min | next | object | oct | open | ord | pow |
+								print | property | range | raw_input | reduce | reload | repr |
+								reversed | round | set | setattr | slice | sorted | staticmethod |
+								str | sum | super | tuple | type | unichr | unicode | vars |
+								xrange | zip)
+							\b\s*(?=\()
+							</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>support.function.builtin.python</string>
+							<string>support.function.builtin.call.python</string>
 						</dict>
 					</dict>
 					<key>end</key>
@@ -1444,13 +1466,40 @@
 				</dict>
 			</array>
 		</dict>
-		<key>builtin_types</key>
+		<key>builtin_functions_name</key>
 		<dict>
 			<key>match</key>
-			<string>(?x)(?&lt;!\.)\b(
-				basestring|bool|buffer|bytearray|bytes|complex|dict|float|frozenset|int|
-				list|long|memoryview|object|range|set|slice|str|tuple|unicode|xrange
-			)\b</string>
+			<string>(?x)
+					(?&lt;!\.)
+			        \b(
+						__import__ | abs | all | any | ascii | basestring | bin | bool |
+						bytearray | bytes | callable | chr | classmethod | cmp | compile |
+						complex | delattr | dict | dir | divmod | enumerate | eval | exec |
+						execfile | file | filter | float | format | frozenset | getattr |
+						globals | hasattr | hash | help | hex | id | input | int |
+						isinstance | issubclass | iter | len | list | locals | long | map |
+						max | memoryview | min | next | object | oct | open | ord | pow |
+						property | range | raw_input | reduce | reload | repr |
+						reversed | round | set | setattr | slice | sorted | staticmethod |
+						str | sum | super | tuple | type | unichr | unicode | vars |
+						xrange | zip)
+					\b\s*(?!(\())</string>
+			<key>name</key>
+			<string>support.function.builtin.name.python</string>
+		</dict>
+		<key>builtin_types</key>
+		<dict>
+			<key>comment</key>
+			<string>These are from https://docs.python.org/X/library/stdtypes.html
+      	  				where X is 2.7 or 3.5.</string>
+			<key>match</key>
+			<string>(?x)
+						(?&lt;!\.)
+						\b(
+							bool | buffer | bytearray | bytes | complex | dict | float |
+							frozenset | int | list | long | memoryview | object | property |
+							range | set | slice | str | tuple | type | unicode | xrange)
+						\b\s*(?!(\())</string>
 			<key>name</key>
 			<string>support.type.python</string>
 		</dict>
@@ -1556,6 +1605,10 @@
 					<array>
 						<dict>
 							<key>include</key>
+							<string>#builtin_functions_name</string>
+						</dict>
+						<dict>
+							<key>include</key>
 							<string>#magic_function_names</string>
 						</dict>
 						<dict>
@@ -1581,11 +1634,15 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#builtin_functions</string>
+							<string>#builtin_types</string>
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#builtin_types</string>
+							<string>#builtin_functions_name</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#builtin_functions_call</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -1594,6 +1651,10 @@
 						<dict>
 							<key>include</key>
 							<string>#magic_function_names</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#magic_function_calls</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -1635,6 +1696,10 @@
 			<array>
 				<dict>
 					<key>include</key>
+					<string>#builtin_functions_name</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#magic_function_names</string>
 				</dict>
 				<dict>
@@ -1650,21 +1715,32 @@
 		<key>errors_warnings_exceptions</key>
 		<dict>
 			<key>match</key>
-			<string>(?x)\b(
-				(
-					Arithmetic|Assertion|Attribute|BlockingIO|BrokenPipe|Buffer|
-					ChildProcess|Connection(Aborted|Refused|Reset)?|EOF|Environment|
-					FileExists|FileNotFound|FloatingPoint|Import|Indentation|Index|
-					Interrupted|IsADirectory|Key|Lookup|Memory|Name|NotADirectory|
-					NotImplemented|OS|Overflow|Permission|ProcessLookup|Recursion|
-					Reference|Runtime|Standard|Syntax|System|Tab|Timeout|Type|
-					UnboundLocal|Unicode(Encode|Decode|Translate)?|Value|VMS|
-					Windows|ZeroDivision
-				)Error|
-				((Pending)?Deprecation|Bytes|Future|Import|Resource|Runtime|Syntax|Unicode|User)?Warning|
-				(Base)?Exception|
-				GeneratorExit|KeyboardInterrupt|StopAsyncIteration|StopIteration|SystemExit
-			)\b</string>
+			<string>(?x)
+						\b(
+							(
+								Arithmetic | Assertion | Attribute | Buffer | BlockingIO |
+								BrokenPipe | ChildProcess | (Connection(Aborted | Refused | Reset)?) |
+								EOF | Environment | FileExists | FileNotFound | FloatingPoint | IO |
+								Import | Indentation | Index | Interrupted | IsADirectory |
+								NotADirectory | Permission | ProcessLookup | Timeout | Key | Lookup |
+								Memory | Name | NotImplemented | OS | Overflow | Reference | Runtime |
+								Recursion | Standard | Syntax | System | Tab | Type | UnboundLocal |
+								Unicode(Encode | Decode | Translate)? | Value | VMS | Windows |
+								ZeroDivision | ([\p{Alpha}_][\p{Alnum}_]*))
+							?Error
+							|
+							(
+								(Pending)?Deprecation | Bytes | Future | Import | Resource |
+								Runtime | Syntax | Unicode | User | [\p{Alpha}_][\p{Alnum}_]*)
+							?Warning
+							|
+							SystemExit | Stop(Async)?Iteration | NotImplemented |
+							KeyboardInterrupt | GeneratorExit
+							|
+							([\p{Alpha}_][\p{Alnum}_]*)
+							?Exception
+						)
+						\b</string>
 			<key>name</key>
 			<string>support.type.exception.python</string>
 		</dict>
@@ -1764,36 +1840,6 @@
 			<key>match</key>
 			<string>(\\U[\h]{8})|(\\u[\h]{4})|(\\N\{[a-zA-Z0-9\, ]+\})</string>
 		</dict>
-		<key>function_name</key>
-		<dict>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>include</key>
-					<string>#magic_function_names</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#magic_variable_names</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#errors_warnings_exceptions</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#builtin_functions</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#builtin_types</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#generic_names</string>
-				</dict>
-			</array>
-		</dict>
 		<key>generic_names</key>
 		<dict>
 			<key>match</key>
@@ -1881,6 +1927,105 @@
 			<key>match</key>
 			<string>(\\)(.*)$\n?</string>
 		</dict>
+		<key>magic_function_calls</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>(?x)
+								(\.)?
+								\b(
+									__(?:
+									abs | add | aenter | aexit | aiter | and | anext | await | bool |
+									bytes | call | ceil | cmp | coerce | complex | contains | copy |
+									deepcopy | del | delattr | delete | delitem | delslice | dir | div |
+									divmod | enter | eq | exit | float | floor | floordiv | format | ge |
+									get | getattr | getattribute | getinitargs | getitem | getnewargs |
+									getnewargs_ex | getslice | getstate | gt | hash | hex | iadd | iand |
+									idiv | idivmod | ifloordiv | ilshift | imatmul | imod | imul | index |
+									init | instancecheck | int | invert | iop | ior | ipow | irshift |
+									isub | iter | itruediv | ixor | le | len | length_hint | long |
+									lshift | lt | matmul | missing | mod | mul | ne | neg | new | next |
+									nonzero | oct | op | or | pos | pow | prepare | radd | rand | rcmp |
+									rdiv | rdivmod | reduce | reduce_ex | repr | reversed | rfloordiv |
+									rlshift | rmatmul | rmod | rmul | rop | ror | round | rpow | rrshift |
+									rshift | rsub | rtruediv | rxor | set | setattr | setitem | setslice |
+									setstate | sizeof | str | sub | subclasscheck | truediv | trunc |
+									unicode | xor)
+								__)
+								\s*(?=(\())</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>support.function.magic.call.python</string>
+						</dict>
+						<key>4</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.arguments.begin.python</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>(\))</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.arguments.end.python</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>meta.function-call.python</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>begin</key>
+							<string>(?=[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\()</string>
+							<key>end</key>
+							<string>(?=\s*\()</string>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#dotted_name</string>
+								</dict>
+							</array>
+						</dict>
+						<dict>
+							<key>begin</key>
+							<string>(\()</string>
+							<key>beginCaptures</key>
+							<dict>
+								<key>1</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.definition.arguments.begin.python</string>
+								</dict>
+							</dict>
+							<key>contentName</key>
+							<string>meta.function-call.arguments.python</string>
+							<key>end</key>
+							<string>(?=\))</string>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#keyword_arguments</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>$self</string>
+								</dict>
+							</array>
+						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
 		<key>magic_function_names</key>
 		<dict>
 			<key>captures</key>
@@ -1888,24 +2033,37 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>support.function.magic.python</string>
+					<string>support.function.magic.name.python</string>
 				</dict>
 			</dict>
 			<key>comment</key>
-			<string>these methods have magic interpretation by python and are generally called indirectly through syntactic constructs</string>
+			<string>These methods have magic interpretation by python and are generally
+					   called indirectly through syntactic constructs. Names are from
+					   https://docs.python.org/X/reference/datamodel.html where X is 2.7 and 3.5
+					   See also http://www.rafekettler.com/magicmethods.html</string>
 			<key>match</key>
-			<string>(?x)(\.)?\b(__(?:
-						abs|add|and|bool|call|ceil|cmp|coerce|complex|contains|copy|deepcopy|
-						del|delattr|delete|delitem|delslice|dir|div|divmod|enter|eq|exit|float|
-						floor|floordiv|format|ge|get|getattr|getattribute|getinitargs|getitem|
-						getnewargs|getslice|getstate|gt|hash|hex|iadd|iand|idiv|ifloordiv|
-						ilshift|imod|imul|index|init|instancecheck|int|invert|ior|ipow|irshift|
-						isub|iter|itruediv|ixor|le|len|long|lshift|lt|missing|mod|mul|ne|neg|
-						new|nonzero|oct|or|pos|pow|radd|rand|rdiv|rdivmod|reduce|reduce_ex|
-						repr|reversed|rfloordiv|rlshift|rmod|rmul|ror|round|rpow|rrshift|
-						rshift|rsub|rtruediv|rxor|set|setattr|setitem|setstate|sizeof|str|
-						sub|subclasscheck|truediv|trunc|unicode|xor
-					)__)\b</string>
+			<string>(?x)
+						(\.)?
+						\b (
+							__(?:
+								abs | add | aenter | aexit | aiter | and | anext | await | bool |
+								bytes | call | ceil | cmp | coerce | complex | contains | copy |
+								deepcopy | del | delattr | delete | delitem | delslice | dir | div |
+								divmod | enter | eq | exit | float | floor | floordiv | format | ge |
+								get | getattr | getattribute | getinitargs | getitem | getnewargs |
+								getnewargs_ex | getslice | getstate | gt | hash | hex | iadd | iand |
+								idiv | idivmod | ifloordiv | ilshift | imatmul | imod | imul | index |
+								init | instancecheck | int | invert | iop | ior | ipow | irshift |
+								isub | iter | itruediv | ixor | le | len | length_hint | long |
+								lshift | lt | matmul | missing | mod | mul | ne | neg | new | next |
+								nonzero | oct | op | or | pos | pow | prepare | radd | rand | rcmp |
+								rdiv | rdivmod | reduce | reduce_ex | repr | reversed | rfloordiv |
+								rlshift | rmatmul | rmod | rmul | rop | ror | round | rpow | rrshift |
+								rshift | rsub | rtruediv | rxor | set | setattr | setitem | setslice |
+								setstate | sizeof | str | sub | subclasscheck | truediv | trunc |
+								unicode | xor)
+						__)
+						\b</string>
 		</dict>
 		<key>magic_variable_names</key>
 		<dict>
@@ -1918,9 +2076,17 @@
 				</dict>
 			</dict>
 			<key>comment</key>
-			<string>magic variables which a class/module may have.</string>
+			<string>magic attributes which a class/module may have.</string>
 			<key>match</key>
-			<string>(?x)(\.)?\b(__(?:all|bases|class|debug|dict|doc|file|members|metaclass|methods|module|mro|name|slots|subclasses|version|weakref)__)\b</string>
+			<string>(?x)
+						(\.)?
+						\b(
+							__(?:
+							all | annotations | bases | class | closure | code | debug |
+							defaults | dict | doc | file | func | globals | kwdefaults |
+							members | metaclass | methods | module | mro | name | qualname |
+							self | slots | subclasses | version | weakref)
+						__) \b</string>
 		</dict>
 		<key>regular_expressions</key>
 		<dict>

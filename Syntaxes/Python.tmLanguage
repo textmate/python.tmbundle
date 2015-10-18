@@ -1478,7 +1478,7 @@
 		<dict>
 			<key>match</key>
 			<string>(?x)
-					(?&lt;!\.)
+					(?&lt;!\.|@)
 			        \b(
 						__import__ | abs | all | any | ascii | basestring | bin | bool |
 						bytearray | bytes | callable | chr | classmethod | cmp | compile |

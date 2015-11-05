@@ -1899,7 +1899,7 @@
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>\s*(?:(,)|(?=$\n?|[\)\:]))</string>
+			<string>\s*(?:(,)|(?=[\)\:]))</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
@@ -2077,7 +2077,7 @@
 								setstate | sizeof | str | sub | subclasscheck | truediv | trunc |
 								unicode | xor)
 						__)
-						\b</string>
+						\b\s*(?!(\(.*:\n(\s*\#.*)?$))</string>
 		</dict>
 		<key>magic_variable_names</key>
 		<dict>

@@ -3,23 +3,25 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>def ${1:foo}():
-    doc = "${2:The $1 property.}"
-    def fget(self):
-        ${3:return self._$1}
-    def fset(self, value):
-        ${4:self._$1 = value}
-    def fdel(self):
-        ${5:del self._$1}
-    return locals()
-$1 = property(**$1())$0</string>
+	<string>@property
+def ${1:name}(self):
+    "${2:The $1 property.}"
+    ${3:return self._$1}
+
+${4:@$1.setter
+def $1(self, value):
+    self._$1 = value}
+
+${5:@$1.deleter
+def $1(self):
+    del self._$1}$0</string>
 	<key>name</key>
 	<string>New Property</string>
 	<key>scope</key>
 	<string>source.python</string>
 	<key>tabTrigger</key>
-	<string>property</string>
+	<string>prop</string>
 	<key>uuid</key>
-	<string>195B332F-4464-4539-9FB3-D89152C960DC</string>
+	<string>14F76ADA-3380-4359-B5EF-F48B24884597</string>
 </dict>
 </plist>

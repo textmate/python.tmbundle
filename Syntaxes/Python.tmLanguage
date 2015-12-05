@@ -981,39 +981,6 @@
 			</array>
 		</dict>
 		<dict>
-			<key>begin</key>
-			<string>(?&lt;=\)|\])\s*(\[)</string>
-			<key>beginCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.arguments.begin.python</string>
-				</dict>
-			</dict>
-			<key>contentName</key>
-			<string>meta.item-access.arguments.python</string>
-			<key>end</key>
-			<string>(\])</string>
-			<key>endCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.arguments.end.python</string>
-				</dict>
-			</dict>
-			<key>name</key>
-			<string>meta.item-access.python</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>include</key>
-					<string>$self</string>
-				</dict>
-			</array>
-		</dict>
-		<dict>
 			<key>captures</key>
 			<dict>
 				<key>1</key>

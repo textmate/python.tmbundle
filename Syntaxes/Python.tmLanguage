@@ -825,6 +825,73 @@
 			<string>#magic_variable_names</string>
 		</dict>
 		<dict>
+			<key>begin</key>
+			<string>\b(self|cls)\b\s*(?=(\())</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>variable.language.python</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.arguments.begin.python</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>(\))</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.arguments.end.python</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>meta.function-call.python</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>(\()</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.arguments.begin.python</string>
+						</dict>
+					</dict>
+					<key>contentName</key>
+					<string>meta.function-call.arguments.python</string>
+					<key>end</key>
+					<string>(?=(\)))</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.arguments.end.python</string>
+						</dict>
+					</dict>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#keyword_arguments</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>$self</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
+		<dict>
 			<key>include</key>
 			<string>#language_variables</string>
 		</dict>
@@ -995,10 +1062,6 @@
 		<dict>
 			<key>include</key>
 			<string>#line_continuation</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#language_variables</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -1885,10 +1948,16 @@
 		</dict>
 		<key>language_variables</key>
 		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>variable.language.python</string>
+				</dict>
+			</dict>
 			<key>match</key>
-			<string>(?&lt;!\.)\b(self|cls)\b</string>
-			<key>name</key>
-			<string>variable.language.python</string>
+			<string>(?&lt;!\.)\b(self|cls)\b(?:\.|\()?</string>
 		</dict>
 		<key>line_continuation</key>
 		<dict>

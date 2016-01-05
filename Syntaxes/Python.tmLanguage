@@ -1543,7 +1543,7 @@
 							bool | buffer | bytearray | bytes | complex | dict | float |
 							frozenset | int | list | long | memoryview | object | property |
 							range | set | slice | str | tuple | type | unicode | xrange)
-						\b\s*(?!(\())</string>
+						\b(?!(\s*\())</string>
 			<key>name</key>
 			<string>support.type.python</string>
 		</dict>

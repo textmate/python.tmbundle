@@ -129,16 +129,10 @@
 			<string>constant.numeric.integer.decimal.python</string>
 		</dict>
 		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>storage.modifier.global.python</string>
-				</dict>
-			</dict>
 			<key>match</key>
 			<string>\b(global)\b</string>
+			<key>name</key>
+			<string>storage.modifier.global.python</string>
 		</dict>
 		<dict>
 			<key>captures</key>

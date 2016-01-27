@@ -82,13 +82,13 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(?i:(0[0-7]+)L)</string>
+			<string>\b(?i:(0[o]?[0-7]+)L)</string>
 			<key>name</key>
 			<string>constant.numeric.integer.long.octal.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(0[0-7]+)</string>
+			<string>\b(?i:(0[o]?[0-7]+))</string>
 			<key>name</key>
 			<string>constant.numeric.integer.octal.python</string>
 		</dict>

@@ -1135,17 +1135,18 @@
 			<key>match</key>
 			<string>(?x)\b(
 				(
-					Arithmetic|Assertion|Attribute|BlockingIO|BrokenPipe|Buffer|ChildProcess|
-					Connection(Aborted|Refused|Reset)?|EOF|Environment|FileExists|
-					FileNotFound|FloatingPoint|Interrupted|IO|IsADirectoryError|
-					Import|Indentation|Index|Key|Lookup|Memory|Name|NotADirectory|
-					NotImplemented|OS|Overflow|Permission|ProcessLookup|Reference|
-					Runtime|Standard|Syntax|System|Tab|Timeout|Type|UnboundLocal|
-					Unicode(Encode|Decode|Translate)?|Value|VMS|Windows|ZeroDivision
+					Arithmetic|Assertion|Attribute|BlockingIO|BrokenPipe|Buffer|
+					ChildProcess|Connection(Aborted|Refused|Reset)?|EOF|Environment|
+					FileExists|FileNotFound|FloatingPoint|Import|Indentation|Index|
+					Interrupted|IsADirectory|Key|Lookup|Memory|Name|NotADirectory|
+					NotImplemented|OS|Overflow|Permission|ProcessLookup|Recursion|
+					Reference|Runtime|Standard|Syntax|System|Tab|Timeout|Type|
+					UnboundLocal|Unicode(Encode|Decode|Translate)?|Value|VMS|
+					Windows|ZeroDivision
 				)Error|
-				((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes)?Warning|
+				((Pending)?Deprecation|Bytes|Future|Import|Resource|Runtime|Syntax|Unicode|User)?Warning|
 				(Base)?Exception|
-				SystemExit|StopIteration|NotImplemented|KeyboardInterrupt|GeneratorExit
+				GeneratorExit|KeyboardInterrupt|StopAsyncIteration|StopIteration|SystemExit
 			)\b</string>
 			<key>name</key>
 			<string>support.type.exception.python</string>
@@ -1154,8 +1155,8 @@
 		<dict>
 			<key>match</key>
 			<string>(?x)\b(
-				__import__|all|abs|any|apply|ascii|bin|callable|chr|classmethod|cmp|coerce|
-				compile|delattr|dir|divmod|enumerate|eval|execfile|filter|format|getattr|
+				__import__|abs|all|any|apply|ascii|bin|callable|chr|classmethod|cmp|coerce|
+				compile|delattr|dir|divmod|enumerate|eval|exec|execfile|file|filter|format|getattr|
 				globals|hasattr|hash|help|hex|id|input|intern|isinstance|issubclass|iter|
 				len|locals|map|max|min|next|oct|open|ord|pow|print|property|range|
 				raw_input|reduce|reload|repr|reversed|round|setattr|sorted|staticmethod|

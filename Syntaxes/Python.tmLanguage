@@ -135,21 +135,10 @@
 			<string>storage.modifier.global.python</string>
 		</dict>
 		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>keyword.control.import.python</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>keyword.control.import.from.python</string>
-				</dict>
-			</dict>
 			<key>match</key>
-			<string>\b(?:(import)|(from))\b</string>
+			<string>\b(?:(import|from|as))\b</string>
+			<key>name</key>
+			<string>keyword.control.import.$1.python</string>
 		</dict>
 		<dict>
 			<key>comment</key>
@@ -179,7 +168,7 @@
 			<key>comment</key>
 			<string>keywords that haven't fit into other groups (yet).</string>
 			<key>match</key>
-			<string>\b(as|assert|del|exec|print)\b</string>
+			<string>\b(assert|del|exec|print)\b</string>
 		</dict>
 		<dict>
 			<key>match</key>

@@ -70,6 +70,18 @@
 		</dict>
 		<dict>
 			<key>match</key>
+			<string>\b(?i:(0b[01]*)L)</string>
+			<key>name</key>
+			<string>constant.numeric.integer.long.binary.python</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\b(?i:(0b[01]*))</string>
+			<key>name</key>
+			<string>constant.numeric.integer.binary.python</string>
+		</dict>
+		<dict>
+			<key>match</key>
 			<string>\b(?i:(0[0-7]+)L)</string>
 			<key>name</key>
 			<string>constant.numeric.integer.long.octal.python</string>

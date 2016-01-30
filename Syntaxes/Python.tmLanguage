@@ -720,6 +720,26 @@
 			</array>
 		</dict>
 		<dict>
+			<key>include</key>
+			<string>#builtin_functions</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#builtin_types</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#magic_function_names</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#language_variables</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#generic_object_names</string>
+		</dict>
+		<dict>
 			<key>begin</key>
 			<string>(?=[A-Za-z_][A-Za-z0-9_]*(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*\s*\()</string>
 			<key>end</key>
@@ -1280,7 +1300,7 @@
 		<key>builtin_functions</key>
 		<dict>
 			<key>match</key>
-			<string>(?x)\b(
+			<string>(?x)(?&lt;!\.)\b(
 				__import__|abs|all|any|apply|ascii|bin|callable|chr|classmethod|cmp|coerce|
 				compile|delattr|dir|divmod|enumerate|eval|exec|execfile|file|filter|format|getattr|
 				globals|hasattr|hash|help|hex|id|input|intern|isinstance|issubclass|iter|
@@ -1294,7 +1314,7 @@
 		<key>builtin_types</key>
 		<dict>
 			<key>match</key>
-			<string>(?x)\b(
+			<string>(?x)(?&lt;!\.)\b(
 				basestring|bool|buffer|bytearray|bytes|complex|dict|float|frozenset|int|
 				list|long|memoryview|object|range|set|slice|str|tuple|unicode|xrange
 			)\b</string>
@@ -1617,6 +1637,11 @@
 			<key>match</key>
 			<string>[A-Za-z_][A-Za-z0-9_]*</string>
 		</dict>
+		<key>generic_object_names</key>
+		<dict>
+			<key>match</key>
+			<string>(\.\b([A-Za-z_][A-Za-z0-9_]*)\b(?!\(|\[)|\b([A-Za-z_][A-Za-z0-9_]*)\b\.)</string>
+		</dict>
 		<key>illegal_names</key>
 		<dict>
 			<key>match</key>
@@ -1662,7 +1687,7 @@
 		<key>language_variables</key>
 		<dict>
 			<key>match</key>
-			<string>\b(self|cls)\b</string>
+			<string>(?&lt;!\.)\b(self|cls)\b</string>
 			<key>name</key>
 			<string>variable.language.python</string>
 		</dict>
@@ -1686,10 +1711,18 @@
 		</dict>
 		<key>magic_function_names</key>
 		<dict>
+			<key>captures</key>
+			<dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.magic.python</string>
+				</dict>
+			</dict>
 			<key>comment</key>
 			<string>these methods have magic interpretation by python and are generally called indirectly through syntactic constructs</string>
 			<key>match</key>
-			<string>(?x)\b(__(?:
+			<string>(?x)(\.)?\b(__(?:
 						abs|add|and|bool|call|cmp|coerce|complex|contains|del|delattr|
 						delete|delitem|delslice|div|divmod|enter|eq|exit|float|
 						floordiv|ge|get|getattr|getattribute|getitem|getslice|gt|
@@ -1700,8 +1733,6 @@
 						rpow|rrshift|rshift|rsub|rtruediv|rxor|set|setattr|setitem|
 						setslice|str|sub|truediv|unicode|xor
 					)__)\b</string>
-			<key>name</key>
-			<string>support.function.magic.python</string>
 		</dict>
 		<key>magic_variable_names</key>
 		<dict>

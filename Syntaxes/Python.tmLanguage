@@ -1613,7 +1613,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>(\\U[0-9A-Fa-f]{8})|(\\u[0-9A-Fa-f]{4})|(\\N\{[a-zA-Z ]+\})</string>
+			<string>(\\U[0-9A-Fa-f]{8})|(\\u[0-9A-Fa-f]{4})|(\\N\{[a-zA-Z0-9 ]+\})</string>
 		</dict>
 		<key>function_name</key>
 		<dict>

@@ -29,6 +29,12 @@
 		</dict>
 		<dict>
 			<key>match</key>
+			<string>\b([A-Z_][A-Z0-9_]*)\b(?!\()</string>
+			<key>name</key>
+			<string>constant.other.allcaps.python</string>
+		</dict>
+		<dict>
+			<key>match</key>
 			<string>\b(?i:(0x\h*)L)</string>
 			<key>name</key>
 			<string>constant.numeric.integer.hexadecimal.long.python</string>

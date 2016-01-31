@@ -1765,7 +1765,7 @@
 			<key>comment</key>
 			<string>magic variables which a class/module may have.</string>
 			<key>match</key>
-			<string>(?x)(\.)?\b(__(?:all|bases|class|debug|dict|doc|file|members|metaclass|methods|module|mro|name|slots|subclasses|weakref)__)\b</string>
+			<string>(?x)(\.)?\b(__(?:all|bases|class|debug|dict|doc|file|members|metaclass|methods|module|mro|name|slots|subclasses|version|weakref)__)\b</string>
 		</dict>
 		<key>regular_expressions</key>
 		<dict>

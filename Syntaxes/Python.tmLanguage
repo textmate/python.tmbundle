@@ -742,6 +742,10 @@
 		</dict>
 		<dict>
 			<key>include</key>
+			<string>#docstrings</string>
+		</dict>
+		<dict>
+			<key>include</key>
 			<string>#magic_variable_names</string>
 		</dict>
 		<dict>

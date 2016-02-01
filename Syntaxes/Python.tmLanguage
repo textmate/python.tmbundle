@@ -109,6 +109,12 @@
 		</dict>
 		<dict>
 			<key>match</key>
+			<string>\b(None|True|False|Ellipsis|NotImplemented)\b</string>
+			<key>name</key>
+			<string>constant.language.python</string>
+		</dict>
+		<dict>
+			<key>match</key>
 			<string>\b(global|nonlocal)\b</string>
 			<key>name</key>
 			<string>storage.modifier.$1.python</string>
@@ -942,12 +948,6 @@
 		<dict>
 			<key>include</key>
 			<string>#language_variables</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(None|True|False|Ellipsis|NotImplemented)\b</string>
-			<key>name</key>
-			<string>constant.language.python</string>
 		</dict>
 		<dict>
 			<key>include</key>

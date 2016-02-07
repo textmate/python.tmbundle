@@ -365,7 +365,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>storage.type.async.python</string>
+					<string>storage.modifier.async.python</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -491,7 +491,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>storage.type.async.python</string>
+					<string>storage.modifier.async.python</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -541,11 +541,21 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
+					<string>storage.modifier.async.python</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.function.python</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
 					<string>storage.type.function.python</string>
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(((?:async\s+)?def)|lambda)\b</string>
+			<string>\b(?:(?:(async)\s+)?(def)|(lambda))\b</string>
 		</dict>
 		<dict>
 			<key>comment</key>

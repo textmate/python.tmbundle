@@ -318,7 +318,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(class)\s+(?=[\p{Alpha}_][\p{Alnum}_])</string>
+			<string>^\s*(class)\s+(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -348,11 +348,11 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=[A-Za-z_][A-Za-z0-9_]*)</string>
+					<string>(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
 					<key>contentName</key>
 					<string>entity.name.type.class.python</string>
 					<key>end</key>
-					<string>(?![A-Za-z0-9_])</string>
+					<string>(?![\p{Alnum}_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -399,7 +399,7 @@
 					<key>contentName</key>
 					<string>entity.name.function.python</string>
 					<key>end</key>
-					<string>(?![A-Za-z0-9_])</string>
+					<string>(?![\p{Alnum}_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>

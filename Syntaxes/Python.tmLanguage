@@ -2057,8 +2057,8 @@
 					   See also http://www.rafekettler.com/magicmethods.html</string>
 			<key>match</key>
 			<string>(?x)
-						(\.)?
-						\b (
+						(def|\.)?
+						\s*\b(
 							__(?:
 								abs | add | aenter | aexit | aiter | and | anext | await | bool |
 								bytes | call | ceil | cmp | coerce | complex | contains | copy |
@@ -2077,7 +2077,7 @@
 								setstate | sizeof | str | sub | subclasscheck | truediv | trunc |
 								unicode | xor)
 						__)
-						\b\s*(?!(\(.*:\n(\s*\#.*)?$))</string>
+						\b</string>
 		</dict>
 		<key>magic_variable_names</key>
 		<dict>

@@ -140,18 +140,12 @@
 			<string>keyword.operator.logical.python</string>
 		</dict>
 		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>keyword.other.python</string>
-				</dict>
-			</dict>
 			<key>comment</key>
-			<string>keywords that haven't fit into other groups (yet).</string>
+			<string>keywords that do not fit into other groups.</string>
 			<key>match</key>
-			<string>\b(assert|del|exec)\b</string>
+			<string>\b(assert|del)\b</string>
+			<key>name</key>
+			<string>keyword.other.python</string>
 		</dict>
 		<dict>
 			<key>match</key>

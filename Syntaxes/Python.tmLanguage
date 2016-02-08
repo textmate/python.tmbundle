@@ -1476,14 +1476,6 @@
 						</dict>
 					</array>
 				</dict>
-				<dict>
-					<key>comment</key>
-					<string>These are statements in Py2, but don't really fit into keyword.control.flow with the rest</string>
-					<key>match</key>
-					<string>(?&lt;!\.)\b(del)\b</string>
-					<key>name</key>
-					<string>support.function.builtin.python</string>
-				</dict>
 			</array>
 		</dict>
 		<key>builtin_functions_name</key>

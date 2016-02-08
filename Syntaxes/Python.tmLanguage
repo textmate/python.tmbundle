@@ -895,7 +895,15 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(?=[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\()</string>
+			<string>(?:\.)?([\p{Alpha}_][\p{Alnum}_]*)\s*(?=(\())</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>meta.function-call.generic.python</string>
+				</dict>
+			</dict>
 			<key>end</key>
 			<string>(\))</string>
 			<key>endCaptures</key>
@@ -910,19 +918,6 @@
 			<string>meta.function-call.python</string>
 			<key>patterns</key>
 			<array>
-				<dict>
-					<key>begin</key>
-					<string>(?=[\p{Alpha}_][\p{Alnum}_]*(?:\.[\p{Alpha}_][\p{Alnum}_]*)*\s*\()</string>
-					<key>end</key>
-					<string>(?=\s*\()</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#dotted_name</string>
-						</dict>
-					</array>
-				</dict>
 				<dict>
 					<key>begin</key>
 					<string>(\()</string>
@@ -947,19 +942,6 @@
 						<dict>
 							<key>include</key>
 							<string>$self</string>
-						</dict>
-					</array>
-				</dict>
-				<dict>
-					<key>begin</key>
-					<string>\G</string>
-					<key>end</key>
-					<string>(?=\()</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#dotted_name</string>
 						</dict>
 					</array>
 				</dict>

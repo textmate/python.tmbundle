@@ -5,6 +5,7 @@
 	<key>fileTypes</key>
 	<array>
 		<string>py</string>
+		<string>py3</string>
 		<string>rpy</string>
 		<string>pyw</string>
 		<string>cpy</string>

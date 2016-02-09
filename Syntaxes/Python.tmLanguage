@@ -1825,6 +1825,20 @@
 			<key>match</key>
 			<string>(\\x[\h]{2})|(\\[0-7]{3})|(\\\n)|(\\\\)|(\\\")|(\\')|(\\a)|(\\b)|(\\f)|(\\n)|(\\r)|(\\t)|(\\v)</string>
 		</dict>
+		<key>escaped_char_raw_double</key>
+		<dict>
+			<key>match</key>
+			<string>\\"</string>
+			<key>name</key>
+			<string>constant.character.escape.quote.python</string>
+		</dict>
+		<key>escaped_char_raw_single</key>
+		<dict>
+			<key>match</key>
+			<string>\\'</string>
+			<key>name</key>
+			<string>constant.character.escape.quote.python</string>
+		</dict>
 		<key>escaped_unicode_char</key>
 		<dict>
 			<key>captures</key>
@@ -2158,11 +2172,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_unicode_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_char</string>
+							<string>#escaped_char_raw_double</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -2208,11 +2218,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_unicode_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_char</string>
+							<string>#escaped_char_raw_double</string>
 						</dict>
 					</array>
 				</dict>
@@ -2254,7 +2260,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_char</string>
+							<string>#escaped_char_raw_double</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -2300,7 +2306,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_char</string>
+							<string>#escaped_char_raw_double</string>
 						</dict>
 					</array>
 				</dict>
@@ -2342,7 +2348,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_char</string>
+							<string>#escaped_char_raw_double</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -2388,7 +2394,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_char</string>
+							<string>#escaped_char_raw_double</string>
 						</dict>
 					</array>
 				</dict>
@@ -2507,11 +2513,7 @@
 								</dict>
 								<dict>
 									<key>include</key>
-									<string>#escaped_unicode_char</string>
-								</dict>
-								<dict>
-									<key>include</key>
-									<string>#escaped_char</string>
+									<string>#escaped_char_raw_double</string>
 								</dict>
 								<dict>
 									<key>include</key>
@@ -2575,11 +2577,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_unicode_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_char</string>
+							<string>#escaped_char_raw_double</string>
 						</dict>
 					</array>
 				</dict>
@@ -2626,7 +2624,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_char</string>
+							<string>#escaped_char_raw_double</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -2677,7 +2675,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_char</string>
+							<string>#escaped_char_raw_double</string>
 						</dict>
 					</array>
 				</dict>
@@ -2704,7 +2702,7 @@
 								</dict>
 								<dict>
 									<key>include</key>
-									<string>#escaped_char</string>
+									<string>#escaped_char_raw_double</string>
 								</dict>
 								<dict>
 									<key>include</key>
@@ -2768,7 +2766,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_char</string>
+							<string>#escaped_char_raw_double</string>
 						</dict>
 					</array>
 				</dict>
@@ -3100,11 +3098,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_unicode_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_char</string>
+							<string>#escaped_char_raw_single</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -3150,11 +3144,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_unicode_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_char</string>
+							<string>#escaped_char_raw_single</string>
 						</dict>
 					</array>
 				</dict>
@@ -3196,7 +3186,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_char</string>
+							<string>#escaped_char_raw_single</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -3242,7 +3232,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_char</string>
+							<string>#escaped_char_raw_single</string>
 						</dict>
 					</array>
 				</dict>
@@ -3284,7 +3274,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_char</string>
+							<string>#escaped_char_raw_single</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -3330,7 +3320,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_char</string>
+							<string>#escaped_char_raw_single</string>
 						</dict>
 					</array>
 				</dict>
@@ -3449,11 +3439,7 @@
 								</dict>
 								<dict>
 									<key>include</key>
-									<string>#escaped_unicode_char</string>
-								</dict>
-								<dict>
-									<key>include</key>
-									<string>#escaped_char</string>
+									<string>#escaped_char_raw_single</string>
 								</dict>
 								<dict>
 									<key>include</key>
@@ -3517,11 +3503,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_unicode_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_char</string>
+							<string>#escaped_char_raw_single</string>
 						</dict>
 					</array>
 				</dict>
@@ -3568,7 +3550,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_char</string>
+							<string>#escaped_char_raw_single</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -3619,7 +3601,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_char</string>
+							<string>#escaped_char_raw_single</string>
 						</dict>
 					</array>
 				</dict>
@@ -3646,7 +3628,7 @@
 								</dict>
 								<dict>
 									<key>include</key>
-									<string>#escaped_char</string>
+									<string>#escaped_char_raw_single</string>
 								</dict>
 								<dict>
 									<key>include</key>
@@ -3708,7 +3690,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#escaped_char</string>
+							<string>#escaped_char_raw_single</string>
 						</dict>
 					</array>
 				</dict>

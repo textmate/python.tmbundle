@@ -1716,10 +1716,6 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#generic_names</string>
-				</dict>
-				<dict>
-					<key>include</key>
 					<string>#illegal_names</string>
 				</dict>
 			</array>

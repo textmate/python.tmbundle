@@ -1794,7 +1794,7 @@
 				<key>4</key>
 				<dict>
 					<key>name</key>
-					<string>constant.character.escape.backlash.python</string>
+					<string>constant.character.escape.backslash.python</string>
 				</dict>
 				<key>5</key>
 				<dict>
@@ -1832,12 +1832,12 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>constant.character.escape.unicode.16-bit-hex.python</string>
+					<string>constant.character.escape.unicode.32-bit-hex.python</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>constant.character.escape.unicode.32-bit-hex.python</string>
+					<string>constant.character.escape.unicode.16-bit-hex.python</string>
 				</dict>
 				<key>3</key>
 				<dict>

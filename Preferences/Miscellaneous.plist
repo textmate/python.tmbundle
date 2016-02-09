@@ -11,7 +11,7 @@
 		<key>decreaseIndentPattern</key>
 		<string>^\s*(elif|else|except|finally)\b.*:|^\s*(\}|\])</string>
 		<key>increaseIndentPattern</key>
-		<string>^\s*(class|def|elif|else|except|finally|for|if|try|with|while)\b.*:\s*$|(\{|\[)\s*$</string>
+		<string>^\s*(class|((async\s+)?(def|with|for))|elif|else|except|finally|if|try|while)\b.*:\s*$|(\{|\[)\s*$</string>
 		<key>shellVariables</key>
 		<array>
 			<dict>

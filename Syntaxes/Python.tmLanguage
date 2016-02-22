@@ -38,7 +38,7 @@
 			<key>comment</key>
 			<string>Match identifiers in ALL_CAPS as constants, except when followed by `.`, `(`, `'`, or `"`.</string>
 			<key>match</key>
-			<string>\b([\p{Upper}_][\p{Upper}\p{Digit}_]*)\b(?![\.\(\'\"])</string>
+			<string>\b([[:upper:]_][[:upper:][:digit:]_]*)\b(?![\.\(\'\"])</string>
 			<key>name</key>
 			<string>constant.other.allcaps.python</string>
 		</dict>
@@ -80,19 +80,19 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(?i:(((\d+(\.(?=[^\p{Alpha}_])\d*)?|(?&lt;=[^\p{Alnum}_])\.\d+)(e[\-\+]?\d+)?))J)</string>
+			<string>\b(?i:(((\d+(\.(?=[^[:alpha:]_])\d*)?|(?&lt;=[^[:alnum:]_])\.\d+)(e[\-\+]?\d+)?))J)</string>
 			<key>name</key>
 			<string>constant.numeric.complex.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(?i:(\d+\.\d*(e[\-\+]?\d+)?))(?=[^\p{Alpha}_])</string>
+			<string>\b(?i:(\d+\.\d*(e[\-\+]?\d+)?))(?=[^[:alpha:]_])</string>
 			<key>name</key>
 			<string>constant.numeric.float.python</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>(?&lt;=[^\p{Alnum}_])(?i:(\.\d+(e[\-\+]?\d+)?))</string>
+			<string>(?&lt;=[^[:alnum:]_])(?i:(\.\d+(e[\-\+]?\d+)?))</string>
 			<key>name</key>
 			<string>constant.numeric.float.python</string>
 		</dict>
@@ -186,7 +186,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(class)\s+(?=[\p{Alpha}_][\p{Alnum}_]*\s*\:)</string>
+			<string>^\s*(class)\s+(?=[[:alpha:]_][[:alnum:]_]*\s*\:)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -219,7 +219,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(class)\s+(?=[\p{Alpha}_][\p{Alnum}_]*\s*\()</string>
+			<string>^\s*(class)\s+(?=[[:alpha:]_][[:alnum:]_]*\s*\()</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -254,11 +254,11 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
+					<string>(?=[[:alpha:]_][[:alnum:]_]*)</string>
 					<key>contentName</key>
 					<string>entity.name.type.class.python</string>
 					<key>end</key>
-					<string>(?![\p{Alnum}_])</string>
+					<string>(?![[:alnum:]_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -313,7 +313,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(class)\s+(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
+			<string>^\s*(class)\s+(?=[[:alpha:]_][[:alnum:]_]*)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -343,11 +343,11 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
+					<string>(?=[[:alpha:]_][[:alnum:]_]*)</string>
 					<key>contentName</key>
 					<string>entity.name.type.class.python</string>
 					<key>end</key>
-					<string>(?![\p{Alnum}_])</string>
+					<string>(?![[:alnum:]_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -360,7 +360,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\s*(?:(async)\s+)?(def)\s+(?=[\p{Alpha}_][\p{Alnum}_]*\s*\()</string>
+			<string>\s*(?:(async)\s+)?(def)\s+(?=[[:alpha:]_][[:alnum:]_]*\s*\()</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -390,11 +390,11 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
+					<string>(?=[[:alpha:]_][[:alnum:]_]*)</string>
 					<key>contentName</key>
 					<string>entity.name.function.python</string>
 					<key>end</key>
-					<string>(?![\p{Alnum}_])</string>
+					<string>(?![[:alnum:]_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -452,7 +452,7 @@
 								</dict>
 							</dict>
 							<key>match</key>
-							<string>\b(?:(self|cls)|([\p{Alpha}_][\p{Alnum}_]*))\s*(?:(,)|(?=[\n\)]))</string>
+							<string>\b(?:(self|cls)|([[:alpha:]_][[:alnum:]_]*))\s*(?:(,)|(?=[\n\)]))</string>
 						</dict>
 					</array>
 				</dict>
@@ -486,7 +486,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\s*(?:(async)\s+)?(def)\s+(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
+			<string>\s*(?:(async)\s+)?(def)\s+(?=[[:alpha:]_][[:alnum:]_]*)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -521,11 +521,11 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
+					<string>(?=[[:alpha:]_][[:alnum:]_]*)</string>
 					<key>contentName</key>
 					<string>entity.name.function.python</string>
 					<key>end</key>
-					<string>(?![\p{Alnum}_])</string>
+					<string>(?![[:alnum:]_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -639,7 +639,7 @@
 								</dict>
 							</dict>
 							<key>match</key>
-							<string>\b([\p{Alpha}_][\p{Alnum}_]*)\s*(?:(,)|(?=[\n\)\:]))</string>
+							<string>\b([[:alpha:]_][[:alnum:]_]*)\s*(?:(,)|(?=[\n\)\:]))</string>
 						</dict>
 					</array>
 				</dict>
@@ -647,7 +647,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(?=@\s*[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\()</string>
+			<string>^\s*(?=@\s*[[:alpha:]_][[:alnum:]_]*(?:\s*\.\s*[[:alpha:]_][[:alnum:]_]*)*\s*\()</string>
 			<key>comment</key>
 			<string>a decorator may be a function call which returns a decorator.</string>
 			<key>end</key>
@@ -666,7 +666,7 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=(@)\s*[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\()</string>
+					<string>(?=(@)\s*[[:alpha:]_][[:alnum:]_]*(?:\s*\.\s*[[:alpha:]_][[:alnum:]_]*)*\s*\()</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -718,7 +718,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(?=@\s*[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*)</string>
+			<string>^\s*(?=@\s*[[:alpha:]_][[:alnum:]_]*(?:\s*\.\s*[[:alpha:]_][[:alnum:]_]*)*)</string>
 			<key>contentName</key>
 			<string>entity.name.function.decorator.python</string>
 			<key>end</key>
@@ -729,7 +729,7 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=(@)\s*[\p{Alpha}_][\p{Alnum}_]*(\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*)</string>
+					<string>(?=(@)\s*[[:alpha:]_][[:alnum:]_]*(\s*\.\s*[[:alpha:]_][[:alnum:]_]*)*)</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -896,7 +896,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(?:\.)?([\p{Alpha}_][\p{Alnum}_]*)\s*(?=(\())</string>
+			<string>(?:\.)?([[:alpha:]_][[:alnum:]_]*)\s*(?=(\())</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -958,7 +958,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(?=[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\[)</string>
+			<string>(?=[[:alpha:]_][[:alnum:]_]*(?:\s*\.\s*[[:alpha:]_][[:alnum:]_]*)*\s*\[)</string>
 			<key>end</key>
 			<string>(\])</string>
 			<key>endCaptures</key>
@@ -975,7 +975,7 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\[)</string>
+					<string>(?=[[:alpha:]_][[:alnum:]_]*(?:\s*\.\s*[[:alpha:]_][[:alnum:]_]*)*\s*\[)</string>
 					<key>end</key>
 					<string>(?=\s*\[)</string>
 					<key>patterns</key>
@@ -1264,7 +1264,7 @@
 		<key>annotated_arguments</key>
 		<dict>
 			<key>begin</key>
-			<string>\b([\p{Alpha}_][\p{Alnum}_]*)\s*(:)|(?=\()</string>
+			<string>\b([[:alpha:]_][[:alnum:]_]*)\s*(:)|(?=\()</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -1332,7 +1332,7 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>\b([\p{Alpha}_][\p{Alnum}_]*)\s*(:)</string>
+					<string>\b([[:alpha:]_][[:alnum:]_]*)\s*(:)</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -1366,7 +1366,7 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>\b([\p{Alpha}_][\p{Alnum}_]*)</string>
+					<string>\b([[:alpha:]_][[:alnum:]_]*)</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -1437,7 +1437,7 @@
 					<array>
 						<dict>
 							<key>begin</key>
-							<string>(?=[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\()</string>
+							<string>(?=[[:alpha:]_][[:alnum:]_]*(?:\s*\.\s*[[:alpha:]_][[:alnum:]_]*)*\s*\()</string>
 							<key>end</key>
 							<string>(?=\s*\()</string>
 							<key>patterns</key>
@@ -1553,7 +1553,7 @@
 		<key>constant_placeholder</key>
 		<dict>
 			<key>match</key>
-			<string>(?i:(%(\([\p{Lower}_]+\))?#?0?\-?[ ]?\+?([0-9]*|\*)(\.([0-9]*|\*))?[hL]?[\p{Lower}%])|(\{([!\[\].:\w ]+)?\}))</string>
+			<string>(?i:(%(\([[:lower:]_]+\))?#?0?\-?[ ]?\+?([0-9]*|\*)(\.([0-9]*|\*))?[hL]?[[:lower:]%])|(\{([!\[\].:\w ]+)?\}))</string>
 			<key>name</key>
 			<string>constant.other.placeholder.python</string>
 		</dict>
@@ -1596,14 +1596,14 @@
 		<key>dotted_name</key>
 		<dict>
 			<key>begin</key>
-			<string>(?=(?:\.(?!\s+import)\s*)?[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*)</string>
+			<string>(?=(?:\.(?!\s+import)\s*)?[[:alpha:]_][[:alnum:]_]*(?:\s*\.\s*[[:alpha:]_][[:alnum:]_]*)*)</string>
 			<key>end</key>
-			<string>(?![\p{Alnum}_\.\s])|(?=(?&lt;!\.)\s+[^.])|$</string>
+			<string>(?![[:alnum:]_\.\s])|(?=(?&lt;!\.)\s+[^.])|$</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(\.)(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
+					<string>(\.)(?=[[:alpha:]_][[:alnum:]_]*)</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -1613,7 +1613,7 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>(?![\p{Alnum}_])</string>
+					<string>(?![[:alnum:]_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -1640,9 +1640,9 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>(?&lt;!\.)(?=[\p{Alpha}_][\p{Alnum}_]*)</string>
+					<string>(?&lt;!\.)(?=[[:alpha:]_][[:alnum:]_]*)</string>
 					<key>end</key>
-					<string>(?![\p{Alnum}_])</string>
+					<string>(?![[:alnum:]_])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -1735,18 +1735,18 @@
 								Memory | Name | NotImplemented | OS | Overflow | Reference | Runtime |
 								Recursion | Standard | Syntax | System | Tab | Type | UnboundLocal |
 								Unicode(Encode | Decode | Translate)? | Value | VMS | Windows |
-								ZeroDivision | ([\p{Alpha}_][\p{Alnum}_]*))
+								ZeroDivision | ([[:alpha:]_][[:alnum:]_]*))
 							?Error
 							|
 							(
 								(Pending)?Deprecation | Bytes | Future | Import | Resource |
-								Runtime | Syntax | Unicode | User | [\p{Alpha}_][\p{Alnum}_]*)
+								Runtime | Syntax | Unicode | User | [[:alpha:]_][[:alnum:]_]*)
 							?Warning
 							|
 							SystemExit | Stop(Async)?Iteration | NotImplemented |
 							KeyboardInterrupt | GeneratorExit
 							|
-							([\p{Alpha}_][\p{Alnum}_]*)
+							([[:alpha:]_][[:alnum:]_]*)
 							?Exception
 						)
 						\b</string>
@@ -1866,14 +1866,14 @@
 		<key>generic_names</key>
 		<dict>
 			<key>match</key>
-			<string>[\p{Alpha}_][\p{Alnum}_]*</string>
+			<string>[[:alpha:]_][[:alnum:]_]*</string>
 			<key>name</key>
 			<string>meta.identifier.python</string>
 		</dict>
 		<key>generic_object_names</key>
 		<dict>
 			<key>match</key>
-			<string>(\.\b([\p{Alpha}_][\p{Alnum}_]*)\b(?!\(|\[)|\b([\p{Alpha}_][\p{Alnum}_]*)\b\.)</string>
+			<string>(\.\b([[:alpha:]_][[:alnum:]_]*)\b(?!\(|\[)|\b([[:alpha:]_][[:alnum:]_]*)\b\.)</string>
 		</dict>
 		<key>illegal_names</key>
 		<dict>
@@ -1893,7 +1893,7 @@
 		<key>keyword_arguments</key>
 		<dict>
 			<key>begin</key>
-			<string>\b([\p{Alpha}_][\p{Alnum}_]*)\s*(=)(?!=)</string>
+			<string>\b([[:alpha:]_][[:alnum:]_]*)\s*(=)(?!=)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -2013,7 +2013,7 @@
 					<array>
 						<dict>
 							<key>begin</key>
-							<string>(?=[\p{Alpha}_][\p{Alnum}_]*(?:\s*\.\s*[\p{Alpha}_][\p{Alnum}_]*)*\s*\()</string>
+							<string>(?=[[:alpha:]_][[:alnum:]_]*(?:\s*\.\s*[[:alpha:]_][[:alnum:]_]*)*\s*\()</string>
 							<key>end</key>
 							<string>(?=\s*\()</string>
 							<key>patterns</key>

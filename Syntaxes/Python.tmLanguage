@@ -2951,20 +2951,33 @@
 					<key>patterns</key>
 					<array>
 						<dict>
-							<key>include</key>
-							<string>#constant_placeholder</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_unicode_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>source.sql</string>
+							<key>captures</key>
+							<dict>
+								<key>0</key>
+								<dict>
+									<key>patterns</key>
+									<array>
+										<dict>
+											<key>include</key>
+											<string>#constant_placeholder</string>
+										</dict>
+										<dict>
+											<key>include</key>
+											<string>#escaped_unicode_char</string>
+										</dict>
+										<dict>
+											<key>include</key>
+											<string>#escaped_char</string>
+										</dict>
+										<dict>
+											<key>include</key>
+											<string>source.sql</string>
+										</dict>
+									</array>
+								</dict>
+							</dict>
+							<key>match</key>
+							<string>(\G|^)([^"\\]|\\.)*(?="|$)</string>
 						</dict>
 					</array>
 				</dict>
@@ -3875,20 +3888,33 @@
 					<key>patterns</key>
 					<array>
 						<dict>
-							<key>include</key>
-							<string>#constant_placeholder</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_unicode_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>source.sql</string>
+							<key>captures</key>
+							<dict>
+								<key>0</key>
+								<dict>
+									<key>patterns</key>
+									<array>
+										<dict>
+											<key>include</key>
+											<string>#constant_placeholder</string>
+										</dict>
+										<dict>
+											<key>include</key>
+											<string>#escaped_unicode_char</string>
+										</dict>
+										<dict>
+											<key>include</key>
+											<string>#escaped_char</string>
+										</dict>
+										<dict>
+											<key>include</key>
+											<string>source.sql</string>
+										</dict>
+									</array>
+								</dict>
+							</dict>
+							<key>match</key>
+							<string>(\G|^)([^'\\]|\\.)*(?='|$)</string>
 						</dict>
 					</array>
 				</dict>

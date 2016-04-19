@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/bin/bash
+[[ -f "${TM_SUPPORT_PATH}/lib/bash_init.sh" ]] &amp;&amp; . "${TM_SUPPORT_PATH}/lib/bash_init.sh"
+
+. "$TM_SUPPORT_PATH/lib/webpreview.sh"
+html_header "Python Bundle Help" "Python"
+
+Markdown.pl &lt;&lt;'EOF'
+
+## Integrating a Python checker
+
+Python includes a rudimentary syntax checker but this can be improved by installing a secondary checker. Start by installing your checker in the usual way; for Pylint, for example:
+
+    pip install pylint
+
+In *Preferences*, select the *Variables* tab. If a `TM_PYCHECKER` variable is not already listed,
+add it, with the appropriate value (one of `pylint`, `pychecker`, `pyflakes`, `pep8`,
+`flake8`).
+
+The default keyboard shortcut to run the syntax checker is *Control-Shift-V* - open a `.py` file
+in TextMate, and try it.
+
+You should see the output in a new window (this example uses Pylint):
+
+    PyCheckMate 1.2 – Pylint 1.4.4
+	
+    No config file found, using default configuration
+
+Then all is well, and most likely the checker will have expressed some opinions about your Python
+code (or will exit with `0` if your code already conforms to its expectations).
+
+If you receive a message:
+
+    Please install PyChecker, PyFlakes, Pylint, PEP 8 or flake8
+    for more extensive code checking.
+
+That means that no checker wasn't found, which is likely an issue with command paths. Check where your checker program has been installed, using `which`, for example:
+
+    $ which pylint
+    /usr/local/bin/pylint
+
+The output given is the location of your checker, change the value of `TM_PYCHECKER` in preferences to the complete path and run the command again.
+EOF
+
+html_footer</string>
+	<key>input</key>
+	<string>none</string>
+	<key>inputFormat</key>
+	<string>text</string>
+	<key>name</key>
+	<string>Help</string>
+	<key>outputCaret</key>
+	<string>afterOutput</string>
+	<key>outputFormat</key>
+	<string>html</string>
+	<key>outputLocation</key>
+	<string>newWindow</string>
+	<key>scope</key>
+	<string>source.python</string>
+	<key>uuid</key>
+	<string>7D408009-B629-4DB7-84E4-EA8EAF24FDA9</string>
+	<key>version</key>
+	<integer>2</integer>
+</dict>
+</plist>

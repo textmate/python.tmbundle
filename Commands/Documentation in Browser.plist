@@ -7,7 +7,7 @@
 	<key>command</key>
 	<string>#!/bin/bash
 
-TPY=${TM_PYTHON:-python}
+TPY=${TM_PYTHON:-"/usr/bin/python"}
 
 echo '&lt;html&gt;&lt;body&gt;'
 "$TPY" "${TM_BUNDLE_SUPPORT}/browse_pydocs.py"

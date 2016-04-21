@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/bin/bash
+
+. "$TM_SUPPORT_PATH/lib/bash_init.sh"
+
+yapf_output=`"${TM_YAPF:-yapf}" --style="${TM_YAPF_STYLE:-pep8}" &lt; /dev/stdin`
+exit_status=$?
+
+if [ $exit_status -ne 0 ]; then
+  exit_show_tool_tip "$yapf_output"
+fi
+
+echo "$yapf_output"</string>
+	<key>input</key>
+	<string>selection</string>
+	<key>inputFormat</key>
+	<string>text</string>
+	<key>keyEquivalent</key>
+	<string>^H</string>
+	<key>name</key>
+	<string>Reformat Document</string>
+	<key>outputCaret</key>
+	<string>interpolateByChar</string>
+	<key>outputFormat</key>
+	<string>text</string>
+	<key>outputLocation</key>
+	<string>replaceInput</string>
+	<key>requiredCommands</key>
+	<array>
+		<dict>
+			<key>command</key>
+			<string>yapf</string>
+			<key>locations</key>
+			<array>
+				<string>$HOME/.pyenv/shims/yapf</string>
+				<string>/usr/local/bin/yapf</string>
+			</array>
+		</dict>
+	</array>
+	<key>scope</key>
+	<string>source.python</string>
+	<key>uuid</key>
+	<string>CA6F6269-AD9D-46DB-A9A1-7A9987C4E6EA</string>
+	<key>version</key>
+	<integer>2</integer>
+</dict>
+</plist>

@@ -1388,7 +1388,7 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#comments</string>
+					<string>#comment</string>
 				</dict>
 			</array>
 		</dict>

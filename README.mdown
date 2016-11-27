@@ -1,6 +1,61 @@
 # Installation
 
-You can install this bundle in TextMate by opening the preferences and going to the bundles tab. After installation it will be automatically updated for you.
+Install this bundle in TextMate:
+
+1.  select *TextMate* > *Preferences*
+1.  select the *Bundles* tab
+1.  find and tick the *Python* bundle in the list
+
+You should now see it in *Bundles* > *Python*.
+
+After installation it will be automatically updated for you.
+
+## Integrating a Python checker
+
+Install your checker in the usual way; for Pylint, for example::\
+
+    pip install pylint
+
+In *Preferences*, select the *Variables* tab. If a ``TM_PYCHECKER`` variable is not already listed,
+add it, with the appropriate value (one of ``pylint``, ``pychecker``, ``pyflakes``, ``pep8``,
+``flake8``).
+
+The default keyboard shortcut to run the syntax checker is *Control-Shift-V* - open a ``.py`` file
+in TextMate, and try it.
+
+You should see the output in a new window (this example uses Pylint):
+
+    PyCheckMate 1.2 – Pylint 1.4.4
+
+    No config file found, using default configuration
+
+Then all is well, and most likely the checker will have expressed some opinions about your Python
+code (or will exit with ``0`` if your code already conforms to its expectations).
+
+If you receive a message:
+
+    Please install PyChecker, PyFlakes, Pylint, PEP 8 or flake8
+    for more extensive code checking.
+
+That means that no checker wasn't found, which is likely an issue with command paths - TextMate
+needs be looking for it on the right paths.
+
+Check where your checker program has been installed, using ``which``, for example:
+
+    $ which pylint
+    /usr/local/bin/pylint
+
+The output will tell you where it can be found; in this case, in ``/usr/local/bin``.
+
+1. select *TextMate* > *Preferences*
+1. select the *Variables* tab
+1. find and check that a ``PATH`` variable exists, and that it contains the appropriate path (if
+   the path to the checker were ``/usr/local/bin/pylint`` as above, then the variable would need to
+   contain ``/usr/local/bin``). An actual example in this case might be
+   ``$PATH:/opt/local/bin:/usr/local/bin:/usr/texbin``, which includes other paths.
+
+... and try running the checker again.
+
 
 # General
 

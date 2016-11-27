@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>import code; code.interact(local=locals())</string>
+	<key>name</key>
+	<string>interact</string>
+	<key>scope</key>
+	<string>source.python</string>
+	<key>tabTrigger</key>
+	<string>interact</string>
+	<key>uuid</key>
+	<string>78CDBA56-81F0-4A8B-941D-F20B1562C6BA</string>
+</dict>
+</plist>

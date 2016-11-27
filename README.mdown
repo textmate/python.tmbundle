@@ -2,6 +2,8 @@
 
 You can install this bundle in TextMate by opening the preferences and going to the bundles tab. After installation it will be automatically updated for you.
 
+To install directly from the github repo, download the archive from the **[Download Zip](https://github.com/textmate/python.tmbundle/archive/master.zip)** button at the right side of the page. Extract the archive and rename the folder to `python.tmbundle`. From there you can drag-and-drop the bundle onto the TextMate icon or simply double-click it.
+
 # General
 
 * [Bundle Styleguide](http://kb.textmate.org/bundle_styleguide) — _before you make changes_

@@ -281,7 +281,7 @@
 					<key>contentName</key>
 					<string>meta.class.inheritance.python</string>
 					<key>end</key>
-					<string>(?=\)|:)</string>
+					<string>(?=\)\s*\:)</string>
 					<key>patterns</key>
 					<array>
 						<dict>

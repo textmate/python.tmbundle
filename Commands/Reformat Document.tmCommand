@@ -3,22 +3,20 @@
 <plist version="1.0">
 <dict>
 	<key>beforeRunningCommand</key>
-	<string>nop</string>
+	<string>saveModifiedFiles</string>
 	<key>command</key>
-	<string>#!/bin/bash
+	<string>#!/usr/bin/env ruby18
 
-. "$TM_SUPPORT_PATH/lib/bash_init.sh"
+# -- Imports -------------------------------------------------------------------
 
-yapf_output=`"${TM_YAPF:-yapf}" --style="${TM_YAPF_STYLE:-pep8}" &lt; /dev/stdin`
-exit_status=$?
+require ENV['TM_BUNDLE_SUPPORT'] + '/lib/yapf'
 
-if [ $exit_status -ne 0 ]; then
-  exit_show_tool_tip "$yapf_output"
-fi
+# -- Main ----------------------------------------------------------------------
 
-echo "$yapf_output"</string>
+YAPF.reformat
+</string>
 	<key>input</key>
-	<string>selection</string>
+	<string>document</string>
 	<key>inputFormat</key>
 	<string>text</string>
 	<key>keyEquivalent</key>
@@ -26,11 +24,11 @@ echo "$yapf_output"</string>
 	<key>name</key>
 	<string>Reformat Document</string>
 	<key>outputCaret</key>
-	<string>interpolateByChar</string>
+	<string>heuristic</string>
 	<key>outputFormat</key>
 	<string>text</string>
 	<key>outputLocation</key>
-	<string>replaceInput</string>
+	<string>discard</string>
 	<key>requiredCommands</key>
 	<array>
 		<dict>

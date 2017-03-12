@@ -17,7 +17,7 @@
 		<string>gypi</string>
 	</array>
 	<key>firstLineMatch</key>
-	<string>^#!/.*\bpython\b</string>
+	<string>^#!/.*\bpython[\d\.]*\b</string>
 	<key>keyEquivalent</key>
 	<string>^~P</string>
 	<key>name</key>

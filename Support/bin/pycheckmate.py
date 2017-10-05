@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 # encoding: utf-8
 #
 # PyCheckMate, a PyChecker output beautifier for TextMate.

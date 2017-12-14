@@ -13,8 +13,8 @@
 # - Install PyChecker or PyFlakes for more extensive checking. If both are
 #   installed, PyChecker will be used.
 # - TM_PYCHECKER may be set to control which checker is used. Set it to just
-#   "pychecker", "pyflakes", "pep8", "flake8", or "pylint", or "frosted" to
-#   locate these programs in the default python bin directory or to a full
+#   "pychecker", "pyflakes", "pycodestyle", "flake8", or "pylint", or "frosted"
+#   to locate these programs in the default python bin directory or to a full
 #   path if the checker program is installed elsewhere.
 # - If for some reason you want to use the built-in sytax check when either
 #   pychecker or pyflakes are installed, you may set TM_PYCHECKER to
@@ -49,7 +49,7 @@ else:
 PYCHECKER_URL = "http://pychecker.sourceforge.net/"
 PYFLAKES_URL = "http://divmod.org/projects/pyflakes"
 PYLINT_URL = "http://www.logilab.org/857"
-PEP8_URL = "http://pypi.python.org/pypi/pep8"
+PYCODESTYLE_URL = "https://pypi.python.org/pypi/pycodestyle"
 FLAKE8_URL = "http://pypi.python.org/pypi/flake8/"
 
 # patterns to match output of checker programs
@@ -261,7 +261,7 @@ def check_syntax(script_path):
             print('<span class="stderr">%s%s</span><br>' % (pad, line))
 
 def find_checker_program():
-    checkers = ["pychecker", "pyflakes", "pylint", "pep8", "flake8"]
+    checkers = ["pychecker", "pyflakes", "pylint", "pycodestyle", "flake8"]
     tm_pychecker = os.getenv("TM_PYCHECKER")
 
     opts = list(filter(None, os.getenv('TM_PYCHECKER_OPTIONS', '').split()))
@@ -319,12 +319,12 @@ def find_checker_program():
             if status is None and not output:
                 return (checker, opts, "PyFlakes")
 
-        elif basename == "pep8":
+        elif basename == "pycodestyle":
             p = os.popen('"%s" --version 2>/dev/null' % (checker))
             version = p.readline().strip()
             status = p.close()
             if status is None and version:
-                version = "PEP 8 %s" % version
+                version = "pycodestyle %s" % version
                 global PYCHECKER_RE
                 PYCHECKER_RE = re.compile(r"^(.*?\.pyc?):(\d+):(?:\d+:)?\s+(.*)$")
                 return (checker, opts, version)
@@ -393,11 +393,11 @@ def main(script_path):
         pychecker_url = href_format % (PYCHECKER_URL, "PyChecker")
         pyflakes_url  = href_format % (PYFLAKES_URL, "PyFlakes")
         pylint_url  = href_format % (PYLINT_URL, "Pylint")
-        pep8_url = href_format % (PEP8_URL, "PEP 8")
+        pycodestyle_url = href_format % (PYCODESTYLE_URL, "pycodestyle")
         flake8_url = href_format % (FLAKE8_URL, "flake8")
         warning_string = \
             "<p>Please install %s, %s, %s, %s or %s for more extensive code checking." \
-            "</p><br>" % (pychecker_url, pyflakes_url, pylint_url, pep8_url, flake8_url)
+            "</p><br>" % (pychecker_url, pyflakes_url, pylint_url, pycodestyle_url, flake8_url)
 
     basepath = os.getenv("TM_PROJECT_DIRECTORY")
     if basepath:

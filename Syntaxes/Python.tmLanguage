@@ -2876,51 +2876,6 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>(""")(?=\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER))</string>
-					<key>beginCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.string.begin.python</string>
-						</dict>
-					</dict>
-					<key>comment</key>
-					<string>double quoted string</string>
-					<key>end</key>
-					<string>"""</string>
-					<key>endCaptures</key>
-					<dict>
-						<key>0</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.string.end.python</string>
-						</dict>
-					</dict>
-					<key>name</key>
-					<string>string.quoted.double.block.sql.python</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#constant_placeholder</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_unicode_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>source.sql</string>
-						</dict>
-					</array>
-				</dict>
-				<dict>
-					<key>begin</key>
 					<string>(")(?=\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER))</string>
 					<key>beginCaptures</key>
 					<dict>
@@ -3010,16 +2965,50 @@
 					<key>patterns</key>
 					<array>
 						<dict>
-							<key>include</key>
-							<string>#constant_placeholder</string>
+							<key>begin</key>
+							<string>(?=(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER))</string>
+							<key>end</key>
+							<string>(?=""")</string>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#constant_placeholder</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#escaped_unicode_char</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#escaped_char</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>source.sql</string>
+								</dict>
+							</array>
 						</dict>
 						<dict>
-							<key>include</key>
-							<string>#escaped_unicode_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_char</string>
+							<key>begin</key>
+							<string>(?=\S)</string>
+							<key>end</key>
+							<string>(?=""")</string>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#constant_placeholder</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#escaped_unicode_char</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#escaped_char</string>
+								</dict>
+							</array>
 						</dict>
 					</array>
 				</dict>
@@ -3813,51 +3802,6 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>(''')(?=\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER))</string>
-					<key>beginCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.string.begin.python</string>
-						</dict>
-					</dict>
-					<key>comment</key>
-					<string>single quoted string</string>
-					<key>end</key>
-					<string>'''</string>
-					<key>endCaptures</key>
-					<dict>
-						<key>0</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.string.end.python</string>
-						</dict>
-					</dict>
-					<key>name</key>
-					<string>string.quoted.single.block.python</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#constant_placeholder</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_unicode_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>source.sql</string>
-						</dict>
-					</array>
-				</dict>
-				<dict>
-					<key>begin</key>
 					<string>(')(?=\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER))</string>
 					<key>beginCaptures</key>
 					<dict>
@@ -3947,16 +3891,50 @@
 					<key>patterns</key>
 					<array>
 						<dict>
-							<key>include</key>
-							<string>#constant_placeholder</string>
+							<key>begin</key>
+							<string>(?=(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER))</string>
+							<key>end</key>
+							<string>(?=''')</string>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#constant_placeholder</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#escaped_unicode_char</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#escaped_char</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>source.sql</string>
+								</dict>
+							</array>
 						</dict>
 						<dict>
-							<key>include</key>
-							<string>#escaped_unicode_char</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#escaped_char</string>
+							<key>begin</key>
+							<string>(?=\S)</string>
+							<key>end</key>
+							<string>(?=''')</string>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#constant_placeholder</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#escaped_unicode_char</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#escaped_char</string>
+								</dict>
+							</array>
 						</dict>
 					</array>
 				</dict>

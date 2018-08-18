@@ -15,7 +15,7 @@
 # Find all files that end with "Test.py" and run 
 # them.
 
-find . -name "*Test.py" -exec "${TM_PYTHON:-python}" '{}' \;|pre</string>
+find . -name "*Test.py" -exec "${TM_PYTHON:-python2}" '{}' \;|pre</string>
 	<key>fileCaptureRegister</key>
 	<string>1</string>
 	<key>input</key>

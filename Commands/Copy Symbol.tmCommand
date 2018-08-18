@@ -7,7 +7,7 @@
 	<key>bundleUUID</key>
 	<string>E3BADC20-6B0E-11D9-9DC9-000D93589AF6</string>
 	<key>command</key>
-	<string>#!/usr/bin/env python
+	<string>#!/usr/bin/env python2
 import sys
 import re
 import os

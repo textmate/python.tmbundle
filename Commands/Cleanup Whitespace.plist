@@ -7,7 +7,7 @@
 	<key>command</key>
 	<string>#!/bin/bash
 
-"${TM_PYTHON:-python}" "${TM_BUNDLE_SUPPORT}/cleanup_whitespace.py"</string>
+"${TM_PYTHON:-python2}" "${TM_BUNDLE_SUPPORT}/cleanup_whitespace.py"</string>
 	<key>input</key>
 	<string>selection</string>
 	<key>inputFormat</key>

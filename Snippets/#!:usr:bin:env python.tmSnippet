@@ -3,10 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>#!/usr/bin/env python
+	<string>#!/usr/bin/env python2
 </string>
 	<key>name</key>
-	<string>#!/usr/bin/env python</string>
+	<string>#!/usr/bin/env python2</string>
 	<key>scope</key>
 	<string>L:dyn.caret.begin.document</string>
 	<key>tabTrigger</key>

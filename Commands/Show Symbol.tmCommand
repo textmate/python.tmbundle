@@ -34,7 +34,7 @@ print symbol</string>
 	<key>input</key>
 	<string>document</string>
 	<key>keyEquivalent</key>
-	<string>^~p</string>
+	<string>^~c</string>
 	<key>name</key>
 	<string>Show Symbol</string>
 	<key>output</key>

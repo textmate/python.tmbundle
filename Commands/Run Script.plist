@@ -38,7 +38,7 @@ TextMate::Executor.run(ENV["TM_PYTHON"] || "python", "-u", ENV["TM_FILEPATH"], :
       display_name = ENV["TM_DISPLAYNAME"]
       "#{htmlize(indent)}&lt;a class=\"near\" href=\"txmt://open?line=#{line + url}\"&gt;" +
         (method ? "method #{CGI::escapeHTML method}" : "&lt;em&gt;at top level&lt;/em&gt;") +
-        "&lt;/a&gt; in &lt;strong&gt;#{CGI::escapeHTML display_name}&lt;/strong&gt; at line #{line}&lt;br/&gt;\n"
+        "&lt;/a&gt; in &lt;strong&gt;#{CGI::escapeHTML(File.basename(file))}&lt;/strong&gt; at line #{line}&lt;br/&gt;\n"
     end
   end
 end</string>

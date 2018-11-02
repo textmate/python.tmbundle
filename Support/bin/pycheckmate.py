@@ -155,8 +155,13 @@ class MyPopen(object):
             self._stderr_buf = ""
 
     def _run_child(self, cmd):
-        if isinstance(cmd, basestring):
-            cmd = ['/bin/sh', '-c', cmd]
+        if sys.version_info < (3, 0):
+            if isinstance(cmd, basestring):
+                cmd = ['/bin/sh', '-c', cmd]
+        else:
+            if isinstance(cmd, str):
+                cmd = ['/bin/sh', '-c', cmd]
+
         for i in range(3, self.MAXFD):
             try:
                 os.close(i)
@@ -182,8 +187,14 @@ class MyPopen(object):
         """Returns (stdout, stderr) from child."""
         bufs = {self._stdout:self._stdout_buf, self._stderr:self._stderr_buf}
         fds, dummy, dummy = select(bufs.keys(), [], [], timeout)
-        for fd in fds:
-            bufs[fd] += os.read(fd, 4096)
+
+        if sys.version_info < (3, 0):
+            for fd in fds:
+                bufs[fd] += os.read(fd, 4096)
+        else:
+            for fd in fds:
+                bufs[fd] += os.read(fd, 4096).decode('UTF-8')
+
         self._stdout_buf = ""
         self._stderr_buf = ""
         stdout_lines = bufs[self._stdout].splitlines()
@@ -253,7 +264,7 @@ def find_checker_program():
     checkers = ["pychecker", "pyflakes", "pylint", "pep8", "flake8"]
     tm_pychecker = os.getenv("TM_PYCHECKER")
 
-    opts = filter(None, os.getenv('TM_PYCHECKER_OPTIONS', '').split())
+    opts = list(filter(None, os.getenv('TM_PYCHECKER_OPTIONS', '').split()))
 
     if tm_pychecker == "builtin":
         return ('', None, "Syntax check only")

@@ -154,7 +154,7 @@ class MyPopen(object):
             if isinstance(cmd, basestring):
                 cmd = ['/bin/sh', '-c', cmd]
         else:
-            if isinstance(cmd, basestring):
+            if isinstance(cmd, str):
                 cmd = ['/bin/sh', '-c', cmd]
 
         for i in range(3, self.MAXFD):

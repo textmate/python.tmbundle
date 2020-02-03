@@ -1967,21 +1967,21 @@
 								\b(
 									__(?:
 									abs | add | aenter | aexit | aiter | and | anext | await | bool |
-									bytes | call | ceil | cmp | coerce | complex | contains | copy |
-									deepcopy | del | delattr | delete | delitem | delslice | dir | div |
-									divmod | enter | eq | exit | float | floor | floordiv | format | ge |
-									get | getattr | getattribute | getinitargs | getitem | getnewargs |
-									getnewargs_ex | getslice | getstate | gt | hash | hex | iadd | iand |
-									idiv | idivmod | ifloordiv | ilshift | imatmul | imod | imul | index |
-									init | instancecheck | int | invert | iop | ior | ipow | irshift |
-									isub | iter | itruediv | ixor | le | len | length_hint | long |
-									lshift | lt | matmul | missing | mod | mul | ne | neg | new | next |
-									nonzero | oct | op | or | pos | pow | prepare | radd | rand | rcmp |
-									rdiv | rdivmod | reduce | reduce_ex | repr | reversed | rfloordiv |
+									bytes | call | ceil | cmp | class_getitem | coerce | complex | contains |
+									copy | deepcopy | del | delattr | delete | delitem | delslice | dir | div |
+									divmod | enter | eq | execute | exit | float | floor | floordiv | format |
+									fspath | ge | get | getattr | getattribute | getinitargs | getitem |
+									getnewargs | getnewargs_ex | getslice | getstate | gt | hash | hex | iadd |
+									iand | idiv | idivmod | ifloordiv | ilshift | imatmul | imod | imul | index |
+									init | init_subclass | instancecheck | int | invert | iop | ior | ipow |
+									irshift | isub | iter | itruediv | ixor | le | len | length_hint | long |
+									lshift | lt | main | matmul | missing | mod | mro_entries | mul | ne | neg |
+									new | next | nonzero | oct | op | or | pos | pow | prepare | radd | rand |
+									rcmp | rdiv | rdivmod | reduce | reduce_ex | repr | reversed | rfloordiv |
 									rlshift | rmatmul | rmod | rmul | rop | ror | round | rpow | rrshift |
-									rshift | rsub | rtruediv | rxor | set | setattr | setitem | setslice |
-									setstate | sizeof | str | sub | subclasscheck | truediv | trunc |
-									unicode | xor)
+									rshift | rsub | rtruediv | rxor | set | set_name | setattr | setitem |
+									setslice | setstate | sizeof | str | sub | subclasscheck | subclasshook |
+									truediv | trunc | unicode | xor)
 								__)
 								\s*(?=(\())</string>
 					<key>beginCaptures</key>
@@ -2075,22 +2075,22 @@
 						(def|\.)?
 						\s*\b(
 							__(?:
-								abs | add | aenter | aexit | aiter | and | anext | await | bool |
-								bytes | call | ceil | cmp | coerce | complex | contains | copy |
-								deepcopy | del | delattr | delete | delitem | delslice | dir | div |
-								divmod | enter | eq | exit | float | floor | floordiv | format | ge |
-								get | getattr | getattribute | getinitargs | getitem | getnewargs |
-								getnewargs_ex | getslice | getstate | gt | hash | hex | iadd | iand |
-								idiv | idivmod | ifloordiv | ilshift | imatmul | imod | imul | index |
-								init | instancecheck | int | invert | iop | ior | ipow | irshift |
-								isub | iter | itruediv | ixor | le | len | length_hint | long |
-								lshift | lt | matmul | missing | mod | mul | ne | neg | new | next |
-								nonzero | oct | op | or | pos | pow | prepare | radd | rand | rcmp |
-								rdiv | rdivmod | reduce | reduce_ex | repr | reversed | rfloordiv |
-								rlshift | rmatmul | rmod | rmul | rop | ror | round | rpow | rrshift |
-								rshift | rsub | rtruediv | rxor | set | setattr | setitem | setslice |
-								setstate | sizeof | str | sub | subclasscheck | truediv | trunc |
-								unicode | xor)
+							abs | add | aenter | aexit | aiter | and | anext | await | bool |
+							bytes | call | ceil | cmp | class_getitem | coerce | complex | contains |
+							copy | deepcopy | del | delattr | delete | delitem | delslice | dir | div |
+							divmod | enter | eq | execute | exit | float | floor | floordiv | format |
+							fspath | ge | get | getattr | getattribute | getinitargs | getitem |
+							getnewargs | getnewargs_ex | getslice | getstate | gt | hash | hex | iadd |
+							iand | idiv | idivmod | ifloordiv | ilshift | imatmul | imod | imul | index |
+							init | init_subclass | instancecheck | int | invert | iop | ior | ipow |
+							irshift | isub | iter | itruediv | ixor | le | len | length_hint | long |
+							lshift | lt | main | matmul | missing | mod | mro_entries | mul | ne | neg |
+							new | next | nonzero | oct | op | or | pos | pow | prepare | radd | rand |
+							rcmp | rdiv | rdivmod | reduce | reduce_ex | repr | reversed | rfloordiv |
+							rlshift | rmatmul | rmod | rmul | rop | ror | round | rpow | rrshift |
+							rshift | rsub | rtruediv | rxor | set | set_name | setattr | setitem |
+							setslice | setstate | sizeof | str | sub | subclasscheck | subclasshook |
+							truediv | trunc | unicode | xor)
 						__)
 						\b</string>
 		</dict>
@@ -2111,10 +2111,11 @@
 						(\.)?
 						\b(
 							__(?:
-							all | annotations | bases | class | closure | code | debug |
-							defaults | dict | doc | file | func | globals | kwdefaults |
-							members | metaclass | methods | module | mro | name | qualname |
-							self | slots | subclasses | version | weakref)
+							all | annotations | bases | cached | class | closure | code | debug |
+							defaults | dict | doc | file | func | future | globals | kwdefaults |
+							loader | members | metaclass | methods | module | mro | name | origin |
+							package | path | qualname | self | slots | spec | subclasses | version |
+							weakref | wrapped)
 						__) \b</string>
 		</dict>
 		<key>regular_expressions</key>

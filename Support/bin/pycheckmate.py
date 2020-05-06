@@ -26,7 +26,7 @@ import os
 import re
 import sys
 import traceback
-from cgi import escape
+from html import escape
 from select import select
 
 __version__ = "1.2"

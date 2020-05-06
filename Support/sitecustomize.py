@@ -36,7 +36,7 @@ import codecs
 
 from os import environ, path, fdopen, popen
 from traceback import extract_tb
-from cgi import escape
+from html import escape
 
 try:
   from urllib import quote

@@ -26,7 +26,12 @@ import os
 import re
 import sys
 import traceback
-from cgi import escape
+
+if sys.version_info[0] < 3:
+    from cgi import escape
+else:
+    from html import escape
+
 from select import select
 
 __version__ = "1.2"

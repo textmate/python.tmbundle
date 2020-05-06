@@ -36,7 +36,11 @@ import codecs
 
 from os import environ, path, fdopen, popen
 from traceback import extract_tb
-from cgi import escape
+
+if sys.version_info[0] < 3:
+    from cgi import escape
+else:
+    from html import escape
 
 try:
   from urllib import quote

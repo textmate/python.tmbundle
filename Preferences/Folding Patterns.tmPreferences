@@ -9,7 +9,7 @@
 	<key>settings</key>
 	<dict>
 		<key>foldingIndentedBlockStart</key>
-		<string>^\s*(class|def|for|while|if|elif|else|with|try|finally|except)\b.*:\s*(#.*)?$</string>
+		<string>^\s*(class|def|async|for|while|if|elif|else|with|try|finally|except)\b.*(:|,|\->|\\)\s*(#.*)?$</string>
 	</dict>
 	<key>uuid</key>
 	<string>4A5DB35F-D647-4357-9D9B-57313710B95B</string>

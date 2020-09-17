@@ -7,7 +7,7 @@
 	<key>command</key>
 	<string>#!/bin/bash
 
-TPY=${TM_PYTHON:-python}
+TPY=${TM_PYTHON:-"/usr/bin/python"}
 
 echo '&lt;html&gt;&lt;body&gt;'
 "$TPY" "${TM_BUNDLE_SUPPORT}/browse_pydocs.py"
@@ -17,7 +17,7 @@ echo '&lt;/body&gt;&lt;/html&gt;'</string>
 	<key>inputFormat</key>
 	<string>text</string>
 	<key>keyEquivalent</key>
-	<string>^H</string>
+	<string>~@h</string>
 	<key>name</key>
 	<string>Documentation in Browser</string>
 	<key>outputCaret</key>

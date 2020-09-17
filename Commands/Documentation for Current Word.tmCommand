@@ -16,7 +16,7 @@ export TM_FIRST_LINE="$first_line"
 export PYTHONPATH="$TM_BUNDLE_SUPPORT/DocMate"
 export PYTHONPATH="$TM_SUPPORT_PATH/lib:$PYTHONPATH"
 
-/usr/bin/env python -S - &lt;&lt;PYTHON
+/usr/bin/python -S - &lt;&lt;PYTHON
 # coding: UTF-8
 import sys
 from sys import exit

@@ -11,7 +11,7 @@
 	<key>command</key>
 	<string>#!/bin/bash
 
-TPY=${TM_PYTHON:-python}
+TPY=${TM_PYTHON:-"/usr/bin/python"}
 
 "$TPY" "$TM_BUNDLE_SUPPORT/bin/pycheckmate.py" "$TM_FILEPATH"</string>
 	<key>fileCaptureRegister</key>

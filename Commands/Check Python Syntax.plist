@@ -25,7 +25,7 @@ TPY=${TM_PYTHON:-python}
 	<key>lineCaptureRegister</key>
 	<string>2</string>
 	<key>name</key>
-	<string>Validate Syntax (PyCheckMate)</string>
+	<string>Validate Syntax</string>
 	<key>outputCaret</key>
 	<string>afterOutput</string>
 	<key>outputFormat</key>

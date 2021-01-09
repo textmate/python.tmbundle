@@ -2933,7 +2933,7 @@
 								</dict>
 							</dict>
 							<key>match</key>
-							<string>(\G|^)([^"\\]|\\.)*(?="|$)</string>
+							<string>(\G|^)([^"\\]|\\(.|\n))*(?="|$)</string>
 						</dict>
 					</array>
 				</dict>
@@ -3859,7 +3859,7 @@
 								</dict>
 							</dict>
 							<key>match</key>
-							<string>(\G|^)([^'\\]|\\.)*(?='|$)</string>
+							<string>(\G|^)([^'\\]|\\(.|\n))*(?='|$)</string>
 						</dict>
 					</array>
 				</dict>

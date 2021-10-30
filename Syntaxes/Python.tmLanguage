@@ -570,7 +570,7 @@
 			<string>(?x) \b(
 						async | await | break | continue | elif | else | except | finally | for |
 						if | pass | raise | return | try | while | with |
-						(yield(?:\s+from)?)
+						(yield(?:\s+from)?) | match | case
 					)\b
 					</string>
 			<key>name</key>

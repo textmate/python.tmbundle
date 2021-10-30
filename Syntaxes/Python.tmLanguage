@@ -1878,11 +1878,11 @@
 		<key>illegal_names</key>
 		<dict>
 			<key>comment</key>
-			<string>from Lib/keyword.py, in kwlist. `async` and `await` not keywords until Python 3.7 (according to PEP-0492)</string>
+			<string>from Lib/keyword.py, in kwlist.</string>
 			<key>match</key>
 			<string>(?x)
 				      \b (
-				        False | None | True | and | as | assert | break | class | continue | def |
+				        False | None | True | and | as | assert | async | await | break | class | continue | def |
 				        del | elif | else | except | exec | finally | for | from | global | if |
 				        import | in | is | lambda | nonlocal | not | or | pass | print | raise |
 				        return | try | while | with | yield | __debug__ )

@@ -16,7 +16,7 @@
 #   "pychecker", "pyflakes", "pycodestyle", "flake8", or "pylint", or "frosted"
 #   to locate these programs in the default python bin directory or to a full
 #   path if the checker program is installed elsewhere.
-# - If for some reason you want to use the built-in sytax check when either
+# - If for some reason you want to use the built-in syntax check when either
 #   pychecker or pyflakes are installed, you may set TM_PYCHECKER to
 #   "builtin".
 
@@ -123,7 +123,7 @@ class MyPopen(object):
     return no additional output. At that point drain() should be called to
     return the last bit of output.
 
-    As a simplication, readlines() can be called until it returns (None, None)
+    As a simplification, readlines() can be called until it returns (None, None)
     """
 
     try:

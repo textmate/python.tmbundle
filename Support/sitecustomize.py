@@ -6,7 +6,7 @@ This file monkey-patches sys.excepthook to intercept any unhandled
 exceptions, format the exception in fancy html, and write them to
 a file handle (for instance, sys.stderr).
 
-Also, sys.stdout and sys.stder are wrapped in a utf-8 codec writer.
+Also, sys.stdout and sys.stderr are wrapped in a utf-8 codec writer.
 
 """
 
